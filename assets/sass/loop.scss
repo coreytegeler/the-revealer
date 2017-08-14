@@ -1,0 +1,135 @@
+.loop {
+	background-color: rgba(255,255,255,0.2);
+	.max {
+		max-width: $desktopWidth;
+	}
+	article {
+		margin: 0;
+		&:nth-child(odd) {
+			
+		}
+		&:nth-child(even) {
+			
+		}
+		a {
+			text-decoration: none;
+		}
+		.image {
+			flex: 1;
+			margin: 2em;
+			display: table;
+			background: $gold;
+			img {
+				width: 100%;
+				height: auto;
+				display: table;
+				margin: 0 auto;
+				filter: grayscale(1);
+				mix-blend-mode: multiply;
+			}
+			.missing {
+				width: 70%;
+				height: 100%;
+				display: flex;
+				margin: 0 auto;
+				svg {
+					fill: black;
+					width: 1em;
+					height: auto;
+					margin: auto;
+				}
+			}
+		}
+		.info {
+			padding: 2em;
+			flex: 1;
+			.title {
+				// width: calc(100% - .5em);
+				// padding: .25em;
+				text-align: center;
+				flex: 1;
+				h1 {
+					width: 100%;
+					font-size: 3em;
+					text-align: center;
+					margin: 0;
+				}
+			}
+			.meta {
+				display: table;
+				margin: auto;
+				padding: .25em;
+				span {
+					text-align: center;
+					opacity: 0.5;
+					padding: 0 1em 0 0;
+					&:last-child {
+						padding: 0;
+					}
+				}
+			}
+		}
+		.more {
+			display: table;
+			margin-top: 1em;
+			text-decoration: none;
+			opacity: .5;
+			&::after {
+				content: '>';
+				margin-left: .25em;
+			}
+		}
+		&.small {
+			width: 50%;
+			float: left;
+			.image {
+				width: calc(100% - 4em);
+				padding-bottom: 0;
+			}
+			.info {
+				width: calc(100% - 4em);
+				h1 {
+					@include mediumText;
+				}
+			}
+		}
+		&.large {
+			width: 100%;
+			display: flex;
+			.image {
+				width: calc(50% - 4em);
+			}
+			.info {
+				width: calc(50% - 4em);
+			}
+			
+		}
+	}
+	&.posts {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		// article {
+		// 	display: block;
+		// 	.title {
+		// 		width: 100%;
+		// 		h2 {
+		// 			width: 100%;
+		// 			text-align: center;
+		// 			font-size: 2em;
+		// 		}
+		// 	}
+		// 	.image {
+		// 		width: 100%;
+		// 		margin: 0;
+		// 		.missing {
+		// 			min-height: 20em;
+		// 		}
+		// 	}
+		// 	.text {
+		// 		width: 100%;
+		// 		margin: 0;
+		// 	}
+		// }
+	}
+}

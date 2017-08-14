@@ -1,0 +1,115 @@
+.single {
+	header {
+		
+	}
+	article {
+		.top {
+			width: 100%;
+			background-color: $medium;
+			display: flex;
+			.info {
+				width: calc(50% - 2em);
+				padding: 1em;
+				flex: 1;
+				.title {
+					// width: calc(100% - .5em);
+					// padding: .25em;
+					text-align: center;
+					flex: 1;
+					h1 {
+						width: 100%;
+						font-size: 3em;
+						text-align: center;
+						margin: 0;
+					}
+				}
+				.meta {
+					display: table;
+					margin: auto;
+					padding: .25em;
+					span {
+						text-align: center;
+						opacity: 0.5;
+						padding: 0 1em 0 0;
+						&:last-child {
+							padding: 0;
+						}
+					}
+				}
+			}
+			.image {
+				flex: 1;
+				img {
+					width: 100%;
+					display: table;
+				}
+			}
+		}
+		.text {
+			padding: 2em;
+			p {
+
+			}
+			a {
+				text-decoration: none;
+				background-color: $medium;
+				&:hover {
+					background-color: $gold;
+				}
+			}
+			blockquote {
+				font-family: 'Cardo';
+				@include largeText;
+				font-style: italic;
+				* {
+					color: black;
+					font-weight: normal;
+					font-style: normal;
+					text-decoration: none;
+					font-size: 1em;
+					line-height: 1.2em;
+				}
+			}
+			.wp-caption {
+				a {
+					display: table;
+				}
+				max-width: 100%;
+				img {
+					width: calc(100% - 1em);
+					height: auto;
+					display: table;
+				}
+				.wp-caption-text {
+					padding: .5em;
+					opacity: 0.8;
+					background: $medium;
+					@include xSmallText;
+				}
+			}
+			img {
+				border: .5em solid $medium;
+			}
+			img, div {
+				&.aligncenter {
+					clear: both;
+			    display: block;
+			    margin: 1em auto;
+				}
+				&.alignleft {
+					float: left;
+					margin: 1em 1em 1em 0;
+				}
+				&.alignright {
+					float: right;
+					margin: 1em 0 1em 1em;
+				}
+			}
+		}
+	}
+}
+.bar {
+	.solid {
+		width: 0;
+	}
+}

@@ -1,0 +1,447 @@
+/*
+Theme Name: La Casita Verde
+Author: Corey Tegeler
+Author URI: http://coreytegeler.com
+Version: 1.1
+*/
+@import "https://fonts.googleapis.com/css?family=Raleway:600,600i,700,700i,800,800i,900,900i";
+html, body {
+  background-color: #f8f2e1;
+  margin: 0;
+  font-family: Helvetica, sans-serif;
+  font-weight: 600;
+  color: black;
+  font-size: 21px;
+  line-height: 1.3em; }
+  @media (max-width: 768px) {
+    html, body {
+      font-size: 15px; } }
+
+header, h1, h2, h3, h4 {
+  font-weight: 900;
+  margin: 0; }
+
+main {
+  width: 100%;
+  display: table; }
+
+h1 {
+  font-size: 3em;
+  line-height: 1.2em;
+  display: table;
+  margin: auto;
+  padding: 0; }
+
+h2 {
+  font-size: 2em;
+  line-height: 1.2em; }
+
+h3 {
+  font-size: 1.3em;
+  line-height: 1.3em; }
+
+em, strong {
+  font-weight: 800; }
+
+ul, ol {
+  padding: 0;
+  margin: 0 0 .5em 0; }
+  ul li, ol li {
+    margin: 0;
+    padding: .5em 0 0 0;
+    list-style: none; }
+
+p {
+  margin: 0 0 1em 0; }
+  p:last-of-type {
+    margin: 0; }
+
+a, a:visited {
+  color: #2b1010; }
+  a:hover, a:visited:hover {
+    color: #33eb74 !important; }
+
+.content {
+  line-height: 1.8em; }
+
+header {
+  display: flex;
+  padding: 2em 0; }
+  header .inner {
+    width: calc(100% - 4em);
+    max-width: 50em;
+    height: 14em;
+    display: table;
+    margin: auto;
+    padding: 0 2em;
+    position: relative; }
+    header .inner .wrap {
+      display: table;
+      margin: auto;
+      padding: 0; }
+    header .inner a.logo {
+      width: 10em;
+      height: 10em;
+      display: block;
+      float: left; }
+      header .inner a.logo svg {
+        width: 100%;
+        height: 100%; }
+        header .inner a.logo svg, header .inner a.logo svg * {
+          fill: #33eb74; }
+      header .inner a.logo:hover svg, header .inner a.logo:hover svg * {
+        fill: #2b1010; }
+    header .inner nav, header .inner ul {
+      height: 10em;
+      display: flex;
+      flex-direction: column-reverse;
+      float: left; }
+      header .inner nav a, header .inner nav li, header .inner ul a, header .inner ul li {
+        display: table;
+        text-decoration: none;
+        color: #2b1010; }
+  header a.logotext {
+    height: 2em;
+    display: table;
+    margin: 0 auto;
+    text-align: center;
+    text-decoration: none;
+    color: #33eb74; }
+    header a.logotext h1 {
+      line-height: 1em; }
+    header a.logotext:hover h1 {
+      color: #2b1010; }
+  header .pagetitle {
+    width: 100%; }
+    header .pagetitle h2 {
+      display: table;
+      margin: auto; }
+  header .sign {
+    position: absolute;
+    right: 2em;
+    top: 2em;
+    width: 6em;
+    height: 6em; }
+    header .sign a {
+      display: table;
+      transform: rotate(4deg);
+      transition: transform 200ms ease-in-out; }
+      header .sign a svg {
+        width: 100%; }
+      header .sign a:hover {
+        transform: rotate(3deg); }
+  header.hover a.logo svg, header.hover a.logo svg * {
+    fill: #2b1010 !important; }
+  header.hover a.logotext {
+    color: #2b1010 !important; }
+
+.row {
+  display: flex;
+  margin: 0 auto 2em auto; }
+  .row:last-of-type {
+    margin: auto; }
+  .row .cell {
+    width: 100%; }
+  .row .text {
+    width: calc(100% - 4em);
+    max-width: 30em;
+    display: table;
+    padding: 0 2em;
+    margin: auto; }
+  .row ul.table {
+    width: 100%;
+    padding: 0;
+    margin: 1em 0 .5em 0;
+    border: solid black;
+    border-width: .15em .15em 0 .15em;
+    display: table; }
+    .row ul.table li {
+      padding: .7em;
+      border-bottom: .15em solid black; }
+  .row.halves {
+    width: calc(100% - 4em);
+    max-width: 50em;
+    padding: 0 2em; }
+    .row.halves .cell {
+      width: 50%;
+      float: left; }
+  .row.thirds {
+    width: calc(100% - 4em);
+    max-width: 50em;
+    padding: 0 2em; }
+    .row.thirds h2 {
+      text-align: right;
+      float: right;
+      border-top: .225em solid;
+      padding-top: .25em;
+      margin-top: .225em; }
+    .row.thirds .text {
+      display: block;
+      margin: 0; }
+    .row.thirds .one {
+      width: calc(100%/3); }
+    .row.thirds .two {
+      width: calc(100%/1.5); }
+    .row.thirds .full {
+      width: 100%; }
+      .row.thirds .full .text {
+        max-width: 100%;
+        display: table;
+        margin: auto;
+        text-align: center; }
+
+.vine {
+  width: 100%;
+  height: 2em;
+  display: table;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  display: none; }
+  .vine:last-of-type {
+    display: none; }
+
+.blocks {
+  width: 96vw;
+  padding: 0 2vw 3em 2vw;
+  display: table; }
+  .blocks .block {
+    width: 50%;
+    height: 40vw;
+    display: flex;
+    float: left;
+    position: relative;
+    overflow: hidden; }
+    .blocks .block .title {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #f8f2e1;
+      transition: transform 100ms ease-in-out; }
+      .blocks .block .title .center {
+        width: 95%;
+        display: table;
+        margin: auto; }
+      .blocks .block .title h1, .blocks .block .title h2 {
+        text-align: center; }
+    .blocks .block a {
+      position: absolute;
+      left: 2vw;
+      top: 2vw; }
+    .blocks .block a {
+      width: calc(100% - 4vw);
+      height: 36vw;
+      filter: saturate(100%);
+      mix-blend-mode: darken;
+      background-color: #33eb74;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover; }
+      .blocks .block a:hover {
+        background-color: transparent; }
+        .blocks .block a:hover .title {
+          color: #33eb74; }
+
+#address {
+  position: relative;
+  border: solid #2b1010;
+  border-width: 1vw 0; }
+  #address h1 {
+    width: calc(100% - 1em);
+    padding: .5em;
+    color: #2b1010; }
+
+#map {
+  height: 30em; }
+
+.carousel {
+  width: 100%;
+  min-height: 80vh;
+  display: table;
+  margin: auto;
+  padding: 0;
+  position: relative;
+  overflow: visible;
+  content: '80vh';
+  overflow-y: hidden; }
+  .carousel[data-direction="left"] .slide.current {
+    transform: translateX(0.25em); }
+  .carousel[data-direction="left"] .arrow.left {
+    transform: translateX(-0.25em); }
+  .carousel[data-direction="right"] .slide.current {
+    transform: translateX(-0.25em); }
+  .carousel[data-direction="right"] .arrow.right {
+    transform: translateX(0.25em); }
+  .carousel .slides {
+    height: 80vh;
+    position: absolute;
+    left: 0;
+    top: 0; }
+    .carousel .slides .slide {
+      width: auto;
+      height: 100%;
+      position: relative;
+      float: left;
+      transition: transform 200ms ease-in-out; }
+      .carousel .slides .slide .image {
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain; }
+      .carousel .slides .slide .caption {
+        width: calc(100% - 2em);
+        position: absolute;
+        top: 100%;
+        padding: 1em;
+        display: table;
+        margin: auto;
+        font-size: 1em;
+        line-height: 1.2em; }
+        .carousel .slides .slide .caption .inner {
+          width: 100%;
+          max-width: 768px;
+          display: table;
+          margin: auto; }
+  .carousel .arrow {
+    width: 25%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    z-index: 100;
+    transition: transform 200ms ease-in-out; }
+    .carousel .arrow:hover {
+      cursor: pointer; }
+    .carousel .arrow.left {
+      left: 0; }
+    .carousel .arrow.right {
+      right: 0; }
+    .carousel .arrow svg {
+      width: auto;
+      height: 10em;
+      position: absolute;
+      top: calc(40vh - 5em); }
+    .carousel .arrow.left svg {
+      left: 2vw; }
+    .carousel .arrow.right svg {
+      right: 2vw; }
+
+footer {
+  width: calc(100% - 2em);
+  padding: 2em 1em;
+  margin-top: 6em;
+  background-color: #2b1010;
+  color: #33eb74;
+  font-weight: 900; }
+  footer .inner {
+    display: table;
+    margin: .25em auto 0 auto;
+    font-size: 2em;
+    line-height: 1.2em; }
+    footer .inner .cell {
+      float: left;
+      margin: 0 .25em .25em .25em; }
+      footer .inner .cell a {
+        text-decoration: none; }
+      footer .inner .cell .icon {
+        float: left;
+        position: relative;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain; }
+        footer .inner .cell .icon a {
+          padding: 0 .25em; }
+          footer .inner .cell .icon a svg {
+            width: auto;
+            height: 1em; }
+
+body.home footer {
+  margin-top: 0 !important; }
+
+body.art .row.text {
+  width: calc(100% - 2em);
+  padding: 1em; }
+  body.art .row.text p, body.art .row.text h2 {
+    width: 100%;
+    text-align: center; }
+
+body.project .title {
+  max-width: 1024px;
+  display: table;
+  margin: auto;
+  padding: .255em 0; }
+  body.project .title h1 {
+    padding: .255em 0 .5em 0;
+    margin: .255em; }
+
+body .graph svg {
+  width: 100%;
+  height: 50vh; }
+  body .graph svg .area {
+    fill: transparent; }
+  body .graph svg .graph {
+    clip-path: url(#clip); }
+  body .graph svg .line {
+    fill: none;
+    stroke: #2b1010;
+    stroke-width: 1.5px; }
+  body .graph svg .dot {
+    fill: #33eb74;
+    stroke: #2b1010;
+    stroke-width: 1.5px;
+    transition: all 100ms ease-in-out; }
+    body .graph svg .dot:hover {
+      cursor: pointer;
+      transform: scale(1.2);
+      transform-origin: center; }
+
+@media (max-width: 768px) {
+  .row {
+    display: block; }
+    .row .cell {
+      width: 100% !important;
+      display: table !important;
+      margin-bottom: 2em; }
+      .row .cell h2 {
+        width: 100%;
+        float: none;
+        text-align: left;
+        margin-bottom: .5em; }
+      .row .cell .text {
+        width: 100%;
+        max-width: 100%;
+        padding: 0; }
+
+  .blocks .block {
+    width: 100%;
+    height: 50vw; }
+    .blocks .block:not(:last-of-type) {
+      margin-bottom: 2vw; }
+    .blocks .block a {
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0; }
+    .blocks .block.bg a {
+      width: 100%;
+      height: 100%; }
+    .blocks .block.border a {
+      width: 100%;
+      height: 100%; }
+
+  .carousel {
+    min-height: 50vh;
+    content: '50vh'; }
+    .carousel .slides {
+      height: 50vh; }
+
+  #address h1 {
+    width: calc(100% - .5em);
+    padding: .25em; } }
+
+/*# sourceMappingURL=prestyle.css.map */
