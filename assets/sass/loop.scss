@@ -1,135 +1,168 @@
 .loop {
-	background-color: rgba(255,255,255,0.2);
+  width: calc(100% - 3em);
+  margin: 3em 0 3em 3em;
+	// background: $medium;
 	.max {
 		max-width: $desktopWidth;
 	}
 	article {
-		margin: 0;
+		transition-duration: 0ms;
+		a {
+			// max-height: 30vw;
+			text-decoration: none;
+	    display: block;
+	    overflow: hidden;
+			&:hover {
+				
+			}
+		}
+		.image {
+			margin: auto;
+			display: table;
+			background: $gold;
+			img {
+				width: auto;
+				max-width: 100%;
+				height: auto;
+				margin: 0 auto;
+				display: none;
+			}
+			&.loaded {
+				background: transparent;
+				img {
+					display: table;
+				}
+			}
+		}
+		.missing {
+			width: 100%;
+			height: 100%;
+			margin: 0 auto;
+			background: $dark;
+			a {
+				width: calc(100% - 4em);
+				height: 7em;
+				padding: 2em;
+				display: flex;
+				svg {
+					fill: $gold;
+					width: auto;
+					height: 100%;
+					margin: auto;
+				}
+			}
+		}
+		.info {
+			width: 100%;
+			.title {
+				padding: .5em 0;
+				h2 {
+					width: 100%;
+					text-align: left;
+					margin: 0;
+					span {
+						opacity: .2;
+					}
+				}
+			}
+		}
+		.excerpt {
+			width: 100%;
+			opacity: .5;
+			.more {
+				display: table;
+				margin-top: 1em;
+				text-decoration: none;
+				opacity: .5;
+				color: $light;
+				&::after {
+					content: '>';
+					margin-left: .25em;
+				}
+			}
+		}
+		.meta {
+			padding: 0;
+			line-height: 0;
+			span {
+				text-align: center;
+				opacity: 0.5;
+				padding: 0 1em 0 0;
+				@include xSmallText;
+				font-family: 'Quattrocento';
+				&:last-child {
+					padding: 0;
+				}
+			}
+		}
 		&:nth-child(odd) {
 			
 		}
 		&:nth-child(even) {
 			
 		}
-		a {
-			text-decoration: none;
-		}
-		.image {
-			flex: 1;
-			margin: 2em;
-			display: table;
-			background: $gold;
-			img {
-				width: 100%;
-				height: auto;
-				display: table;
-				margin: 0 auto;
-				filter: grayscale(1);
-				mix-blend-mode: multiply;
-			}
-			.missing {
-				width: 70%;
-				height: 100%;
-				display: flex;
-				margin: 0 auto;
-				svg {
-					fill: black;
-					width: 1em;
-					height: auto;
+	}
+	&.large {
+		width: calc(100% - 4em);
+		margin: 0;
+		padding: 1em 2em;
+		// background: $medium;
+		article {
+			width: 100%;
+			margin: 0;
+			.image {
+				a {
+					display: table;
 					margin: auto;
 				}
 			}
-		}
-		.info {
-			padding: 2em;
-			flex: 1;
-			.title {
-				// width: calc(100% - .5em);
-				// padding: .25em;
-				text-align: center;
-				flex: 1;
-				h1 {
+			.info {
+				width: 100%;
+				.title {
 					width: 100%;
-					font-size: 3em;
-					text-align: center;
-					margin: 0;
+					a {
+						display: table;
+						margin: auto;
+						h2 {
+							width: 100%;
+							@include largeText;
+							text-align: center;
+						}
+					}
 				}
+			}
+			.excerpt {
+				width: 80%;
+				max-width: 25em;
+				display: table;
+				margin: auto;
 			}
 			.meta {
 				display: table;
 				margin: auto;
-				padding: .25em;
-				span {
-					text-align: center;
-					opacity: 0.5;
-					padding: 0 1em 0 0;
-					&:last-child {
-						padding: 0;
-					}
-				}
 			}
 		}
-		.more {
-			display: table;
-			margin-top: 1em;
-			text-decoration: none;
-			opacity: .5;
-			&::after {
-				content: '>';
-				margin-left: .25em;
-			}
+	}
+	&.medium {
+		article {
+			width: calc(100%/2 - 3em);
+			// padding: 1em;
+			margin: 0 0 3em 0;
+			// background: $medium;
 		}
-		&.small {
-			width: 50%;
-			float: left;
+	}
+	&.small {
+		article {
+			width: calc(100%/3 - 3em);
+			// padding: .5em;
+			margin: 0 0 3em 0;
+			// background: $medium;
 			.image {
-				width: calc(100% - 4em);
-				padding-bottom: 0;
+				display: none;
 			}
-			.info {
-				width: calc(100% - 4em);
-				h1 {
-					@include mediumText;
-				}
-			}
-		}
-		&.large {
-			width: 100%;
-			display: flex;
-			.image {
-				width: calc(50% - 4em);
-			}
-			.info {
-				width: calc(50% - 4em);
-			}
-			
 		}
 	}
 	&.posts {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		// article {
-		// 	display: block;
-		// 	.title {
-		// 		width: 100%;
-		// 		h2 {
-		// 			width: 100%;
-		// 			text-align: center;
-		// 			font-size: 2em;
-		// 		}
-		// 	}
-		// 	.image {
-		// 		width: 100%;
-		// 		margin: 0;
-		// 		.missing {
-		// 			min-height: 20em;
-		// 		}
-		// 	}
-		// 	.text {
-		// 		width: 100%;
-		// 		margin: 0;
-		// 	}
-		// }
+		
 	}
 }

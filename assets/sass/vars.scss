@@ -1,9 +1,10 @@
 $gold: #f4ba37;
 // $dark: #336666;
+$dark: #212727;
 $dark: black;
-$medium: rgba(100,0,0,.1);
-// $medium: #e6c7a1;
-$light: wheat;
+$medium: rgba($gold, .2);
+$light: #feffab;
+
 @mixin baseText {
 	font-size: 21px;
 	line-height: 1.3em;
@@ -20,13 +21,16 @@ $light: wheat;
 	line-height: 1.2em;
 }
 @mixin mediumText {
-	font-size: 1.3em;
-	line-height: 1.3em;
+	font-size: 1.2em;
+	line-height: 1.2em;
 }
 @mixin largeText {
 	font-size: 2em;
-	line-height: 1.2em;
+	line-height: 1em;
 }
+
+$sideWidth: 30%;
+
 $phoneWidth: 480px;
 $tabletWidth: 768px;
 $laptopWidth: 1024px;

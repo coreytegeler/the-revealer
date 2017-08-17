@@ -12,13 +12,13 @@ html, body {
 	font-family: 'Karla', Helvetica, Arial, sans-serif;
 	@include baseText;
 	color: $dark;
-	background: $gold;
+	background: white;
 	::selection {
 		background: $medium;
 	}
 }
 a {
-	color: black;
+	color: $dark;
 }
 p {
 	margin: 0 0 1em 0;
@@ -28,30 +28,34 @@ p {
 }
 h1 {
 	@include largeText;
+	font-weight: 900;
+	// font-family: 'Clarendon';
+	text-transform: lowercase;
 	margin: 0;
-	// font-weight: normal;
 }
 h2 {
 	@include mediumText;
+	font-weight: 900;
+	// font-family: 'Clarendon';
+	text-transform: lowercase;
 	margin: 0;
-	// font-weight: normal;
 }
 h3 {
 	@include smallText;
+	font-weight: normal;
 	margin: 0;
-	// font-weight: normal;
 }
 h4 {
 	@include xSmallText;
+	font-weight: normal;
 	margin: 0;
-	// font-weight: normal;
 }
 .max {
-	width: calc(100% - 1em);
+	width: calc(100%);
 	max-width: $maxWidth;
 	display: block;
 	margin: auto;
-	padding: 0 .5em;
+	// padding: 0 .5em;
 }
 .bar {
 	width: 100%;
@@ -75,6 +79,15 @@ h4 {
 		margin-top: 2em;
 	}
 }
+#wrapper {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+}
+main {
+	padding: 0 0 2em $sideWidth;
+	width: calc(100% - #{$sideWidth});
+}
 // cubic-bezier(0.86, 0, 0.07, 1)
 // .conceal {
 // 	opacity: 1;
@@ -84,6 +97,7 @@ h4 {
 // 		opacity: .02;
 //   }
 // }
-@import 'single';
+@import 'side';
 @import 'nav';
+@import 'single';
 @import 'loop';

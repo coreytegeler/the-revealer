@@ -18,17 +18,22 @@
 </head>
 <body <?php echo body_class( $page_slug ) ?>>
 <?php
-echo '<header>';
-	echo '<div class="max">';
-		echo '<div class="wrap">';
+echo '<div id="wrapper">';
+	echo '<aside>';
+		echo '<div id="logo">';
 			$logoSvg = get_template_directory_uri() . '/assets/images/logo.svg';
 			$home_url = get_site_url();
 			echo '<a href="' . $home_url . '">';
 				echo file_get_contents( $logoSvg );
 			echo '</a>';
-			get_template_part( 'snippets/nav' );
 		echo '</div>';
-	echo '</div>';
-echo '</header>';
-echo '<div class="bar top"><div class="solid"></div></div>';
+		if( is_single() ) {
+			get_template_part( 'snippets/single-header' );
+		}
+
+	echo '</aside>';
+	echo '<main>';
+		get_template_part( 'snippets/nav' );
+		// echo '<h1>a review of religion & media</h1>';
+	// echo '<div class="bar top"><div class="solid"></div></div>';
 ?>

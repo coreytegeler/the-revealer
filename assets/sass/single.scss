@@ -1,50 +1,86 @@
 .single {
-	header {
-		
-	}
-	article {
-		.top {
-			width: 100%;
-			background-color: $medium;
-			display: flex;
+	aside {
+		header {
+			width: calc(100% - 1em);
+			padding: 0 0 1em 1em;
 			.info {
-				width: calc(50% - 2em);
-				padding: 1em;
-				flex: 1;
+				width: 100%;
 				.title {
-					// width: calc(100% - .5em);
-					// padding: .25em;
-					text-align: center;
-					flex: 1;
+					padding: 0 0 1em 0;
 					h1 {
 						width: 100%;
-						font-size: 3em;
 						text-align: center;
 						margin: 0;
+						span {
+							opacity: .2;
+						}
 					}
 				}
-				.meta {
+				.author {
 					display: table;
 					margin: auto;
-					padding: .25em;
-					span {
+					text-decoration: none;
+				}
+				.meta {
+					padding: .5em 0 0 0;
+					display: table;
+					margin: auto;
+					div {
 						text-align: center;
 						opacity: 0.5;
-						padding: 0 1em 0 0;
+						padding: 0;
+						@include xSmallText;
 						&:last-child {
 							padding: 0;
 						}
 					}
 				}
+				.excerpt {
+					width: calc(100% - 2em);
+					padding: 1em;
+					opacity: .5;
+					.more {
+						display: table;
+						margin-top: 1em;
+						text-decoration: none;
+						opacity: .5;
+						color: $light;
+						&::after {
+							content: '>';
+							margin-left: .25em;
+						}
+					}
+				}
 			}
-			.image {
-				flex: 1;
-				img {
-					width: 100%;
+			.images {
+				width: 100%;
+				display: table;
+				.image {
+					width: calc(25% - .5em);
+					margin-bottom: .5em;
+					height: auto;
 					display: table;
+					float: left;
+					transition-duration: 0ms !important;
+					background: $gold;
+					img {
+						width: 100%;
+						height: auto;
+						display: none;
+						filter: grayscale(1);
+					}
+					&.loaded {
+						background: transparent;
+						img {
+							display: table;
+						}
+					}
 				}
 			}
 		}
+	}
+	article {
+		max-width: 30em;
 		.text {
 			padding: 2em;
 			p {
@@ -57,16 +93,19 @@
 					background-color: $gold;
 				}
 			}
-			blockquote {
+			blockquote, {
 				font-family: 'Cardo';
-				@include largeText;
 				font-style: italic;
+				@include mediumText;
 				* {
+					font-family: 'Cardo';
+					@include largeText;
+					font-style: italic;
 					color: black;
 					font-weight: normal;
 					font-style: normal;
 					text-decoration: none;
-					font-size: 1em;
+					font-size: inherit;
 					line-height: 1.2em;
 				}
 			}
@@ -76,19 +115,21 @@
 				}
 				max-width: 100%;
 				img {
-					width: calc(100% - 1em);
+					width: 100%;
 					height: auto;
 					display: table;
 				}
 				.wp-caption-text {
-					padding: .5em;
+					padding: .5em 0 0 0;
 					opacity: 0.8;
-					background: $medium;
+					// background: $medium;
 					@include xSmallText;
 				}
 			}
 			img {
-				border: .5em solid $medium;
+				width: 50%;
+				height: auto;
+				// border: .5em solid $medium;
 			}
 			img, div {
 				&.aligncenter {

@@ -1,53 +1,40 @@
-header, footer {
-	padding: 2em 0;
-	background: $gold;
-	svg {
-		width: 100%;
-		height: auto;
-		display: table;
-	}
-}
-header {
-
-}
-footer {
-	transform: rotateZ(180deg) rotateY(180deg)
-}
 nav {
-  font-family: Clarendon;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+	width: calc(100% - 3em);
+	display: flex;
+  padding: 0 1em 0 2em;
+  align-content: flex-end;
+  flex-direction: column-reverse;
   ul {
   	width: 100%;
-  	padding: 0;
+  	padding: 0 0 .25em 0;
   	margin: 0;
   	display: flex;
 	  flex-direction: row;
 	  flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
+    border-bottom: .25em solid $dark;
 		li {
 			float: left;
-			padding: 0 .5em;
-			margin: 0 auto;
+			padding: 0;
+			margin: 0;
 			list-style: none;
 			a {
 		    text-decoration: none;
-		    font-family: Clarendon;
-		    font-weight: 500;
+		    font-weight: 100;
 		    font-size: 1.4em;
 		    font-style: normal;
 		    text-transform: lowercase;
 		    text-align: center;
+		    font-family: Clarendon;
 			}
-			&:first-child {
-				padding-left: 0;
-				margin-left: 0;
-			}
-			&:last-child {
-				padding-right: 0; 
-				margin-right: 0;
-			}
+			// &:first-child {
+			// 	padding-left: 0;
+			// 	margin-left: 0;
+			// }
+			// &:last-child {
+			// 	padding-right: 0; 
+			// 	margin-right: 0;
+			// }
 		}
 		&.sub {
     	margin-top: .5em;

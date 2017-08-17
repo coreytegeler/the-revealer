@@ -7,12 +7,14 @@ add_action( 'wp_enqueue_scripts', 'revealer_enqueue' );
 wp_register_script( 'jquery', get_template_directory_uri() . '/assets/js/jquery-3.2.1.min.js' );
 wp_register_script( 'imagesloaded', get_template_directory_uri() . '/assets/js/imagesloaded.js' );
 wp_register_script( 'transit', get_template_directory_uri() . '/assets/js/transit.js' );
+wp_register_script( 'masonry', get_template_directory_uri() . '/assets/js/masonry.pkgd.min.js' );
 wp_register_script( 'carousel', get_template_directory_uri() . '/assets/js/carousel.js' );
 wp_register_script( 'main', get_template_directory_uri() . '/assets/js/main.js' );
 
 wp_enqueue_script( 'jquery' );
 wp_enqueue_script( 'imagesloaded' );
 wp_enqueue_script( 'transit' );
+wp_enqueue_script( 'masonry' );
 wp_enqueue_script( 'carousel' );
 wp_enqueue_script( 'main' );
 
