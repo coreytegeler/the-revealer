@@ -1,6 +1,6 @@
 jQuery(function($) {
   return $(function() {
-    var $body, $footer, $header, $logo, $nav, $side, $window, fixGrids, fixSide, gatherArticleImages, sizeImages, trackScroll;
+    var $body, $footer, $header, $logo, $nav, $side, $window, fixGrids, fixSide, gatherArticleImages, loadImage, sizeImages, trackScroll;
     $window = $(window);
     $body = $('body');
     $side = $('aside');
@@ -10,7 +10,7 @@ jQuery(function($) {
     $footer = $('footer');
     sizeImages = function() {
       return $('.image.load').each(function() {
-        var $image, $img, $parent, imageHeight, imageWidth, natHeight, natWidth, ratio, src;
+        var $image, $img, $parent, image, imageHeight, imageWidth, natHeight, natWidth, ratio, src;
         $image = $(this);
         $img = $image.find('img');
         $image.removeClass('load').addClass('loading');
@@ -21,25 +21,51 @@ jQuery(function($) {
         }
         natWidth = $img.attr('data-width');
         natHeight = $img.attr('data-height');
-        src = $img.data('src');
-        ratio = natWidth / natHeight;
-        imageWidth = $image.innerWidth();
-        imageHeight = imageWidth / ratio;
-        $image.css({
-          width: imageWidth,
-          height: imageHeight
-        });
-        $image.imagesLoaded().progress(function() {
-          $image.removeClass('loading').addClass('loaded');
-          if ($img.parents('aside').length) {
-            return fixSide();
-          } else {
-            $image.attr('style', '');
-            return fixGrids();
-          }
-        });
-        return $img.attr('src', src);
+        if (natWidth && natHeight) {
+          ratio = natWidth / natHeight;
+          imageWidth = $image.innerWidth();
+          imageHeight = imageWidth / ratio;
+          $image.css({
+            width: imageWidth,
+            height: imageHeight
+          });
+          return loadImage($image);
+        } else {
+          src = $img.attr('src');
+          image = new Image();
+          image.onload = function(e) {
+            var img;
+            img = e.target;
+            src = img.src;
+            natWidth = img.naturalWidth;
+            natHeight = img.naturalHeight;
+            ratio = natWidth / natHeight;
+            imageWidth = $image.innerWidth();
+            imageHeight = imageWidth / ratio;
+            $image.css({
+              width: imageWidth,
+              height: imageHeight
+            });
+            return loadImage($image);
+          };
+          return image.src = src;
+        }
       });
+    };
+    loadImage = function($image) {
+      var $img, src;
+      $img = $image.find('img');
+      src = $img.data('src');
+      $image.imagesLoaded().progress(function() {
+        $image.removeClass('loading').addClass('loaded');
+        if ($img.parents('aside').length) {
+          return fixSide();
+        } else {
+          $image.attr('style', '');
+          return fixGrids();
+        }
+      });
+      return $img.attr('src', src);
     };
     fixGrids = function($grids, $cells) {
       if (!$grids) {
@@ -111,6 +137,7 @@ jQuery(function($) {
     };
     gatherArticleImages = function() {
       var $article, $images, img, imgs, j, len, results, src, thumb;
+      return;
       if ($body.is('.single')) {
         $images = $side.find('.images');
         $article = $('article');

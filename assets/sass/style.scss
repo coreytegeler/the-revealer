@@ -30,14 +30,14 @@ h1 {
 	@include largeText;
 	font-weight: 900;
 	// font-family: 'Clarendon';
-	text-transform: lowercase;
+	// text-transform: lowercase;
 	margin: 0;
 }
 h2 {
 	@include mediumText;
 	font-weight: 900;
 	// font-family: 'Clarendon';
-	text-transform: lowercase;
+	// text-transform: lowercase;
 	margin: 0;
 }
 h3 {

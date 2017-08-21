@@ -20,23 +20,43 @@ jQuery ($) ->
 					$image = $img.parents('.image')
 				natWidth = $img.attr('data-width')
 				natHeight = $img.attr('data-height')
-				src = $img.data('src')
-				ratio = natWidth/natHeight
-				imageWidth = $image.innerWidth()
-				imageHeight = imageWidth/ratio
-				
-				$image.css
-					width: imageWidth,
-					height: imageHeight
 
-				$image.imagesLoaded().progress () ->
-					$image.removeClass('loading').addClass('loaded')
-					if $img.parents('aside').length
-						fixSide()
-					else
-						$image.attr('style','')
-						fixGrids()
-				$img.attr('src', src)
+				if natWidth && natHeight
+					ratio = natWidth/natHeight
+					imageWidth = $image.innerWidth()
+					imageHeight = imageWidth/ratio
+					$image.css
+						width: imageWidth,
+						height: imageHeight
+					loadImage($image)
+				else
+					src = $img.attr('src')
+					image = new Image()
+					image.onload = (e) ->
+						img = e.target
+						src = img.src
+						natWidth = img.naturalWidth
+						natHeight = img.naturalHeight
+						ratio = natWidth/natHeight
+						imageWidth = $image.innerWidth()
+						imageHeight = imageWidth/ratio
+						$image.css
+							width: imageWidth,
+							height: imageHeight
+						loadImage($image)
+					image.src = src
+
+		loadImage = ($image) ->		
+			$img = $image.find('img')
+			src = $img.data('src')
+			$image.imagesLoaded().progress () ->
+				$image.removeClass('loading').addClass('loaded')
+				if $img.parents('aside').length
+					fixSide()
+				else
+					$image.attr('style','')
+					fixGrids()
+			$img.attr('src', src)
 
 
 		fixGrids = ($grids, $cells) ->
@@ -100,6 +120,7 @@ jQuery ($) ->
 			fixSide()
 
 		gatherArticleImages = () ->
+			return
 			if $body.is('.single')
 				$images = $side.find('.images')
 				$article = $('article')

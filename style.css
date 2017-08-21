@@ -60,14 +60,12 @@ h1 {
   font-size: 2em;
   line-height: 1em;
   font-weight: 900;
-  text-transform: lowercase;
   margin: 0; }
 
 h2 {
   font-size: 1.2em;
   line-height: 1.2em;
   font-weight: 900;
-  text-transform: lowercase;
   margin: 0; }
 
 h3 {
@@ -142,50 +140,47 @@ aside {
     transform: rotateZ(180deg) rotateY(180deg); }
 
 nav {
-  width: calc(100% - 3em);
+  width: calc(100% - 2em);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 0 1em 0 2em;
+  padding: 0 1em;
   -ms-flex-line-pack: end;
   align-content: flex-end;
   -webkit-box-orient: vertical;
   -webkit-box-direction: reverse;
   -ms-flex-direction: column-reverse;
   flex-direction: column-reverse; }
-  nav ul {
-    width: 100%;
-    padding: 0 0 .25em 0;
-    margin: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
+  nav .rows {
     border-bottom: 0.25em solid black; }
-    nav ul li {
-      float: left;
-      padding: 0;
+    nav .rows ul {
+      width: 100%;
+      padding: 0 0 .5em 0;
       margin: 0;
-      list-style: none; }
-      nav ul li a {
-        text-decoration: none;
-        font-weight: 100;
-        font-size: 1.4em;
-        font-style: normal;
-        text-transform: lowercase;
-        text-align: center;
-        font-family: Clarendon; }
-    nav ul.sub {
-      margin-top: .5em; }
-      nav ul.sub li a {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+      flex-direction: row;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between; }
+      nav .rows ul li {
+        float: left;
+        padding: 0;
+        margin: 0;
+        list-style: none; }
+        nav .rows ul li a {
+          text-decoration: none;
+          font-weight: 700;
+          font-size: 1.4em;
+          font-style: normal;
+          text-align: center; }
+      nav .rows ul.sub li a {
         font-size: 1em; }
 
 .single aside header {
@@ -198,28 +193,33 @@ nav {
       .single aside header .info .title h1 {
         width: 100%;
         text-align: center;
-        margin: 0; }
+        margin: 0;
+        text-transform: none; }
         .single aside header .info .title h1 span {
           opacity: .2; }
-    .single aside header .info .author {
-      display: table;
-      margin: auto;
-      text-decoration: none; }
     .single aside header .info .meta {
-      padding: .5em 0 0 0;
+      width: calc(100% - 2em);
+      padding: .5em 1em;
       display: table;
       margin: auto; }
-      .single aside header .info .meta div {
-        text-align: center;
-        opacity: 0.5;
-        padding: 0;
-        font-size: .8em;
-        line-height: 1.2em; }
-        .single aside header .info .meta div:last-child {
-          padding: 0; }
+      .single aside header .info .meta .row {
+        width: 100%;
+        display: table;
+        padding: 0 0 .25em 0; }
+        .single aside header .info .meta .row div {
+          width: calc(50% - .25em);
+          float: left;
+          font-size: .8em;
+          line-height: 1.2em; }
+          .single aside header .info .meta .row div:first-child {
+            padding-right: .25em;
+            text-align: left; }
+          .single aside header .info .meta .row div:last-child {
+            padding-left: .25em;
+            text-align: right; }
     .single aside header .info .excerpt {
       width: calc(100% - 2em);
-      padding: 1em;
+      padding: .5em 1em;
       opacity: .5; }
       .single aside header .info .excerpt .more {
         display: table;
@@ -232,6 +232,7 @@ nav {
           margin-left: .25em; }
   .single aside header .images {
     width: 100%;
+    padding: .5em 0;
     display: table; }
     .single aside header .images .image {
       width: calc(25% - .5em);
@@ -252,6 +253,13 @@ nav {
         background: transparent; }
         .single aside header .images .image.loaded img {
           display: table; }
+
+.single .alert {
+  width: calc(100% - 4em);
+  padding: 1em;
+  margin: 0 1em;
+  text-align: center;
+  background: rgba(255, 0, 0, 0.2); }
 
 .single article {
   max-width: 30em; }

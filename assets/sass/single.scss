@@ -11,33 +11,39 @@
 						width: 100%;
 						text-align: center;
 						margin: 0;
+						text-transform: none;
 						span {
 							opacity: .2;
 						}
 					}
 				}
-				.author {
-					display: table;
-					margin: auto;
-					text-decoration: none;
-				}
 				.meta {
-					padding: .5em 0 0 0;
+					width: calc(100% - 2em);
+					padding: .5em 1em;
 					display: table;
 					margin: auto;
-					div {
-						text-align: center;
-						opacity: 0.5;
-						padding: 0;
-						@include xSmallText;
-						&:last-child {
-							padding: 0;
+					.row {
+						width: 100%;
+						display: table;
+						padding: 0 0 .25em 0;
+						div {
+							width: calc(50% - .25em);
+							float: left;
+							@include xSmallText;
+							&:first-child {
+								padding-right: .25em;
+								text-align: left;
+							}
+							&:last-child {
+								padding-left: .25em;
+								text-align: right;
+							}
 						}
 					}
 				}
 				.excerpt {
 					width: calc(100% - 2em);
-					padding: 1em;
+					padding: .5em 1em;
 					opacity: .5;
 					.more {
 						display: table;
@@ -54,6 +60,7 @@
 			}
 			.images {
 				width: 100%;
+				padding: .5em 0;
 				display: table;
 				.image {
 					width: calc(25% - .5em);
@@ -78,6 +85,13 @@
 				}
 			}
 		}
+	}
+	.alert {
+		width: calc(100% - 4em);
+		padding: 1em;
+		margin: 0 1em;
+		text-align: center; 
+		background: rgba(red, .2);
 	}
 	article {
 		max-width: 30em;
