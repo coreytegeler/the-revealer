@@ -1,12 +1,14 @@
 jQuery(function($) {
   return $(function() {
-    var $body, $footer, $header, $logo, $nav, $side, $window, fixGrids, fixSide, gatherArticleImages, loadImage, sizeImages, trackScroll;
+    var $body, $footer, $header, $logo, $main, $nav, $side, $window, $wrapper, fixGrids, fixSide, gatherArticleImages, loadImage, sizeImages, trackScroll;
     $window = $(window);
     $body = $('body');
+    $wrapper = $('#wrapper');
     $side = $('aside');
     $header = $('header');
     $logo = $('#logo');
     $nav = $('nav');
+    $main = $('main');
     $footer = $('footer');
     sizeImages = function() {
       return $('.image.load').each(function() {
@@ -102,36 +104,31 @@ jQuery(function($) {
       }
     };
     trackScroll = function() {
-      var $readable, headerHeight, pageBottom, pageEnd, pageHeight, pageTop, progress, winHeight, winScroll, winWidth;
+      var $readable, pageBottom, pageEnd, pageHeight, pageTop, winHeight, winScroll;
       $readable = $('.readable');
       if (!$readable.length) {
         return;
       }
-      winWidth = $window.innerWidth();
       winHeight = $window.innerHeight();
       winScroll = $window.scrollTop();
-      headerHeight = $header.innerHeight();
-      pageHeight = $readable.innerHeight();
-      pageTop = $readable.position().top;
+      pageHeight = $main.innerHeight();
+      pageTop = $main.position().top;
       pageBottom = pageTop + pageHeight;
       pageEnd = pageBottom - winHeight;
-      progress = (winScroll - headerHeight) * winWidth / pageEnd;
-      $('.bar').each(function(i, bar) {
-        var $bar, headerOpacity, topY;
+      $('.progbar').each(function(i, bar) {
+        var $bar, barWidth, progress;
         $bar = $(this);
-        $bar.find('.solid').css({
+        barWidth = $(bar).innerWidth();
+        progress = winScroll * barWidth / pageEnd;
+        if (winScroll >= pageEnd) {
+          $wrapper.addClass('bottom');
+          progress = barWidth;
+        } else {
+          $wrapper.removeClass('bottom');
+        }
+        return $bar.find('.solid').css({
           width: progress
         });
-        headerHeight = $header.innerHeight();
-        headerOpacity = winScroll * 1 / headerHeight;
-        if ($bar.is('.top')) {
-          topY = $bar.position().top;
-          if (topY < winScroll) {
-            return $bar.addClass('fixed');
-          } else {
-            return $bar.removeClass('fixed');
-          }
-        }
       });
       return fixSide();
     };

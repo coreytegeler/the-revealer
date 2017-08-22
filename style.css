@@ -105,39 +105,45 @@ h4 {
     margin-top: 2em; }
 
 #wrapper {
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row; }
-
-main {
-  padding: 0 0 2em 30%;
-  width: calc(100% - 30%); }
-
-aside {
-  width: 30%;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  overflow-y: hidden; }
-  aside #logo a {
-    display: table;
-    padding: 1em 0 1em 0;
-    margin: 0 0 2em 1em;
-    border-bottom: .25em solid black; }
-    aside #logo a svg {
-      width: 100%;
-      height: auto;
+  width: 100%; }
+  #wrapper main {
+    padding: 0 0 0 30%;
+    width: calc(100% - 30%); }
+  #wrapper aside {
+    width: 30%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-y: hidden; }
+    #wrapper aside #logo a {
       display: table;
-      fill: black; }
-  aside footer {
-    -webkit-transform: rotateZ(180deg) rotateY(180deg);
-    transform: rotateZ(180deg) rotateY(180deg); }
+      padding: 1em 0 1em 0;
+      margin: 0 0 2em 1em;
+      border-bottom: .25em solid black; }
+      #wrapper aside #logo a svg {
+        width: 100%;
+        height: auto;
+        display: table;
+        fill: black; }
+    #wrapper aside footer {
+      -webkit-transform: rotateZ(180deg) rotateY(180deg);
+      transform: rotateZ(180deg) rotateY(180deg); }
+  #wrapper.bottom {
+    position: relative; }
+    #wrapper.bottom aside {
+      height: 100vh;
+      position: absolute;
+      top: auto;
+      bottom: 0; }
+
+footer {
+  width: 100%;
+  height: 15em;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  clear: both; }
 
 nav {
   width: calc(100% - 2em);
@@ -217,6 +223,24 @@ nav {
           .single aside header .info .meta .row div:last-child {
             padding-left: .25em;
             text-align: right; }
+        .single aside header .info .meta .row.progress {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex; }
+          .single aside header .info .meta .row.progress div {
+            width: auto; }
+            .single aside header .info .meta .row.progress div.progbar {
+              -webkit-box-flex: 1;
+              -ms-flex: 1;
+              flex: 1;
+              -webkit-transform: translateY(0.15em);
+              transform: translateY(0.15em);
+              border: solid rgba(0, 0, 0, 0.5);
+              border-width: 0 1px 1px 1px;
+              padding: 0 !important; }
+              .single aside header .info .meta .row.progress div.progbar .solid {
+                padding: 0;
+                height: 100%; }
     .single aside header .info .excerpt {
       width: calc(100% - 2em);
       padding: .5em 1em;
@@ -313,8 +337,18 @@ nav {
       float: right;
       margin: 1em 0 1em 1em; }
 
-.bar .solid {
-  width: 0; }
+.progbar {
+  width: 100%;
+  height: 1em;
+  position: relative;
+  padding: 0; }
+  .progbar .solid {
+    width: 0;
+    height: 1em;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: black; }
 
 .loop {
   width: calc(100% - 3em);

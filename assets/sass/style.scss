@@ -81,12 +81,55 @@ h4 {
 }
 #wrapper {
 	width: 100%;
-	display: flex;
-	flex-direction: row;
+	// display: flex;
+	// flex-direction: row;
+	main {
+		padding: 0 0 0 $sideWidth;
+		width: calc(100% - #{$sideWidth});
+	}
+	aside {
+		width: $sideWidth;
+		height: 100%;
+		position: fixed;
+		left: 0;
+		top: 0;
+		overflow-y: hidden;
+		#logo {
+			a {
+				display: table;
+				padding: 1em 0 1em 0;
+		    margin: 0 0 2em 1em;
+		    border-bottom: .25em solid black;
+				svg {
+					width: 100%;
+					height: auto;
+					display: table;
+					fill: $dark;
+				}
+			}
+		}
+		header {
+
+		}
+		footer {
+			transform: rotateZ(180deg) rotateY(180deg)
+		}
+	}
+	&.bottom {
+		position: relative;
+		aside {
+			height: 100vh;
+			position: absolute;
+			top: auto;
+			bottom: 0;
+		}
+	}
 }
-main {
-	padding: 0 0 2em $sideWidth;
-	width: calc(100% - #{$sideWidth});
+footer {
+	width: 100%;
+  height: 15em;
+  flex: 1;
+  clear: both;
 }
 // cubic-bezier(0.86, 0, 0.07, 1)
 // .conceal {
@@ -97,7 +140,6 @@ main {
 // 		opacity: .02;
 //   }
 // }
-@import 'side';
 @import 'nav';
 @import 'single';
 @import 'loop';

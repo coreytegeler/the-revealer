@@ -39,6 +39,23 @@
 								text-align: right;
 							}
 						}
+						&.progress {
+							display: flex;
+							div {
+								width: auto;
+								&.progbar {
+									flex: 1;
+									transform: translateY(.15em);
+									border: solid rgba(black, .5);
+									border-width: 0 1px 1px 1px;
+									padding: 0 !important;
+									.solid {
+										padding: 0;
+										height: 100%;
+									}
+								}
+							}
+						}
 					}
 				}
 				.excerpt {
@@ -163,8 +180,17 @@
 		}
 	}
 }
-.bar {
+.progbar {
+	width: 100%;
+	height: 1em;
+	position: relative;
+	padding: 0;
 	.solid {
 		width: 0;
+		height: 1em;
+		position: absolute;
+		left: 0;
+		top: 0;
+		background: black;
 	}
 }

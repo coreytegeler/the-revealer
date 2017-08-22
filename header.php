@@ -18,7 +18,7 @@
 </head>
 <body <?php echo body_class( $page_slug ) ?>>
 <?php
-echo '<div id="wrapper">';
+echo '<div id="wrapper" class="fixed">';
 	echo '<aside>';
 		echo '<div id="logo">';
 			$logoSvg = get_template_directory_uri() . '/assets/images/logo.svg';

@@ -2,10 +2,12 @@ jQuery ($) ->
 	$ -> 
 		$window = $(window)
 		$body = $('body')
+		$wrapper = $('#wrapper')
 		$side = $('aside')
 		$header = $('header')
 		$logo = $('#logo')
 		$nav = $('nav')
+		$main = $('main')
 		$footer = $('footer')
 		
 
@@ -92,30 +94,26 @@ jQuery ($) ->
 			$readable = $('.readable')
 			if !$readable.length
 				return
-			winWidth = $window.innerWidth()
 			winHeight = $window.innerHeight()
 			winScroll = $window.scrollTop()
-			headerHeight = $header.innerHeight()
-			pageHeight = $readable.innerHeight()
-			pageTop = $readable.position().top
+			pageHeight = $main.innerHeight()
+			pageTop = $main.position().top
 			pageBottom = pageTop + pageHeight
 			pageEnd = pageBottom - winHeight
-			progress = (winScroll - headerHeight) * winWidth / pageEnd
-			# opacity = (winScroll * 100 / pageEnd)/100
-			$('.bar').each (i, bar) ->
+			$('.progbar').each (i, bar) ->
 				$bar = $(this)
+				barWidth = $(bar).innerWidth()
+				progress = winScroll * barWidth / pageEnd
+
+				if winScroll >= pageEnd
+					$wrapper.addClass('bottom')
+					progress = barWidth
+				else
+					$wrapper.removeClass('bottom')
+
 				$bar.find('.solid').css
 					width: progress
 
-				headerHeight = $header.innerHeight()
-				headerOpacity = winScroll * 1 / headerHeight
-
-				if $bar.is('.top')
-					topY = $bar.position().top
-					if topY < winScroll
-						$bar.addClass('fixed')
-					else
-						$bar.removeClass('fixed')
 			
 			fixSide()
 
