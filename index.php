@@ -1,7 +1,7 @@
 <?php
 get_header();
 $cat_param = get_query_var( 'category' );
-$year_param = get_query_var( 'year' );
+$year_param = get_query_var( 'y' );
 $column_param = get_query_var( 'column' );
 $tag_param = get_query_var( 'tag' );
 $posts_args = array(
@@ -12,7 +12,7 @@ if( isset( $cat_param ) ) {
 	$posts_args['category_name'] = $cat_param;
 }
 if( isset( $year_param ) ) {
-	$posts_args['y'] = $year_param;
+	$posts_args['year'] = $year_param;
 }
 if( isset( $column_param ) ) {
 	$posts_args['column'] = $column_param;
