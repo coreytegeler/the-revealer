@@ -4,15 +4,15 @@ Author: Corey Tegeler
 Author URI: http://coreytegeler.com
 Version: 1.1
 */
-@import 'https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i&subset=latin-ext';
-@import 'https://fonts.googleapis.com/css?family=Cardo:400,400i,700&subset=greek,greek-ext,latin-ext';
-@import 'https://fonts.googleapis.com/css?family=Quattrocento:400,700&subset=latin-ext';
 @import 'vars';
 html, body {
-	font-family: 'Karla', Helvetica, Arial, sans-serif;
+	@include sansSerifText;
 	@include baseText;
 	color: $dark;
-	background: white;
+	background: $light;
+	overflow-x: hidden;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	::selection {
 		background: $medium;
 	}
@@ -28,16 +28,12 @@ p {
 }
 h1 {
 	@include largeText;
-	font-weight: 900;
-	// font-family: 'Clarendon';
-	// text-transform: lowercase;
+	font-weight: normal;
 	margin: 0;
 }
 h2 {
 	@include mediumText;
-	font-weight: 900;
-	// font-family: 'Clarendon';
-	// text-transform: lowercase;
+	font-weight: normal;
 	margin: 0;
 }
 h3 {
@@ -50,12 +46,15 @@ h4 {
 	font-weight: normal;
 	margin: 0;
 }
+em, i {
+	@include italicText;
+}
 .max {
-	width: calc(100%);
+	width: 100%;
 	max-width: $maxWidth;
 	display: block;
 	margin: auto;
-	// padding: 0 .5em;
+	padding: 0;
 }
 .bar {
 	width: 100%;
@@ -67,7 +66,7 @@ h4 {
 		position: absolute;
 		left: 0;
 		top: 0;
-		background: black;
+		background: $dark;
 	}
 	&.fixed .solid {
 		position: fixed;
@@ -79,13 +78,31 @@ h4 {
 		margin-top: 2em;
 	}
 }
+#gradient {
+	width: 100%;
+	height: 100vh;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-image: url(images/gradient.svg);
+	background-repeat: repeat-x;
+	background-size: auto 100%;
+	// svg {
+	// 	width: 100%;
+	// 	height: 100%;
+	// }
+}
 #wrapper {
 	width: 100%;
-	// display: flex;
-	// flex-direction: row;
+	position: relative;
 	main {
-		padding: 0 0 0 $sideWidth;
-		width: calc(100% - #{$sideWidth});
+		padding: 0 1em 4em calc(#{$sideWidth} + 2em);
+		width: calc(100% - #{$sideWidth} - 3em);
+		.readable {
+			width: 100%;
+			min-height: 100vh;
+			display: block;
+		}
 	}
 	aside {
 		width: $sideWidth;
@@ -93,26 +110,116 @@ h4 {
 		position: fixed;
 		left: 0;
 		top: 0;
-		overflow-y: hidden;
+		display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+    z-index: 999;
 		#logo {
-			a {
-				display: table;
-				padding: 1em 0 1em 0;
-		    margin: 0 0 2em 1em;
-		    border-bottom: .25em solid black;
+			width: calc(100% - 1em);
+			margin: 0 0 0 1em;
+			a.svg {
+				width: 100%;
+				display: block;
+				padding: 1em 0;
+		    border-bottom: .25em solid $dark;
+		    text-decoration: none;
 				svg {
 					width: 100%;
 					height: auto;
 					display: table;
 					fill: $dark;
 				}
+				&:hover {
+					svg {
+						fill: $gold;
+					}
+				}
+				.tagline {
+					width: 100%;
+					text-align: center;
+				}
 			}
 		}
-		header {
-
+		.content {
+			// flex: 1;
+			margin: 0 0 1em 1em;
+			padding: 0 0 1em 0;
+			border-bottom: .25em solid $dark;
 		}
-		footer {
-			transform: rotateZ(180deg) rotateY(180deg)
+		#filters {
+			margin: .25em 0 1em 0;
+			flex: 1;
+			.filter {
+				border-bottom: 1px solid $medium;
+				.toggle {
+					width: 100%;
+					padding: .5em 0;
+					user-select: none;
+					text-transform: lowercase;
+					&:hover {
+						cursor: pointer;
+						color: $gold;
+					}
+				}
+				.list {
+					// height: 0;
+					// opacity: 0;
+					overflow: hidden;
+					color: $medium;
+					border-top: 1px solid $medium;
+					transition: height 300ms ease, opacity 100ms 30ms ease;
+					padding-left: .5em;
+					&.show {
+						opacity: 1;
+					}
+				}
+			}
+		}
+		.list {
+			display: flex;
+			flex-wrap: wrap;
+			h4 {
+				font-weight: 900;
+				display: inline;
+				margin-right: .5em;
+				&::after {
+					content: ' ';
+				}
+			}
+			ul {
+				display: table;
+				margin: .5em 0;
+				padding: 0;
+				li {
+					display: inline-block;
+					a {
+						text-decoration: none;
+						opacity: .75;
+						@include xSmallText;
+						&:hover {
+							color: $medium;
+						}
+					}
+					&::after {
+						content: ',';
+						margin-right: .3em;
+					}
+					&:last-of-type::after {
+						display: none;
+					}
+					&.empty {
+						opacity: .5;
+					}
+					.list {
+
+					}
+					&.selected {
+						a {
+							border-bottom: 1px solid $medium;
+						}
+					}
+				}
+			}
 		}
 	}
 	&.bottom {
@@ -124,12 +231,67 @@ h4 {
 			bottom: 0;
 		}
 	}
+	ul.nested.top {
+		max-width: $lineWidth;
+		padding: 2em 0 0 0;
+		margin: 0;
+		li {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			h2 {
+				margin: 0 0 .5em 0;
+		    display: table;
+		  }
+			.sub {
+				padding: 0 0 1.5em 2em;
+				margin: 0;
+				li {
+					padding: 0 0 1em 0;
+				}
+				a {
+					display: inline;
+				}
+				span {
+					&.title {
+						@include serifText;
+						font-weight: 900;
+					}
+					&.body {
+						@include xSmallText;
+					}
+				}
+			}
+			.links {
+				a {
+					margin-right: .5em;
+					@include xSmallText;
+					text-decoration: none;
+					color: $medium;
+					&:hover {
+						color: $dark;
+					}
+				}
+			}
+		}
+	}
 }
-footer {
-	width: 100%;
-  height: 15em;
-  flex: 1;
-  clear: both;
+#alert {
+	width: calc(100% - 1em);
+	padding: .5em;
+	// margin: 0 0 0 1em;
+	text-align: center; 
+	background: pink;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 1200;
+	.inner {
+		@include xSmallText;
+	}
+	&:hover {
+		cursor: pointer;
+	}
 }
 // cubic-bezier(0.86, 0, 0.07, 1)
 // .conceal {
@@ -141,5 +303,8 @@ footer {
 //   }
 // }
 @import 'nav';
-@import 'single';
 @import 'loop';
+@import 'single';
+@import 'about';
+@import 'contributors';
+@import 'footer';

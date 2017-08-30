@@ -1,25 +1,30 @@
 .single {
 	aside {
 		header {
-			width: calc(100% - 1em);
-			padding: 0 0 1em 1em;
+			width: 100%;
 			.info {
 				width: 100%;
 				.title {
-					padding: 0 0 1em 0;
+					padding: 1em 0;
+					@include serifText;
+					h2 {
+						color: $medium;
+						@include sansSerifText;
+					}
 					h1 {
 						width: 100%;
-						text-align: center;
+						text-align: left;
 						margin: 0;
 						text-transform: none;
+						line-height: 1.3em;
 						span {
 							opacity: .2;
 						}
 					}
 				}
 				.meta {
-					width: calc(100% - 2em);
-					padding: .5em 1em;
+					width: 100%;
+					padding: .5em 0;
 					display: table;
 					margin: auto;
 					.row {
@@ -39,15 +44,23 @@
 								text-align: right;
 							}
 						}
+						a {
+							text-decoration: none;
+							border-bottom: 1px solid $medium;
+							&:hover {
+								color: $medium;
+							}
+						}
 						&.progress {
 							display: flex;
 							div {
 								width: auto;
 								&.progbar {
+									margin-left: 1em;
 									flex: 1;
 									transform: translateY(.15em);
-									border: solid rgba(black, .5);
-									border-width: 0 1px 1px 1px;
+									// border: solid rgba($dark, .5);
+									// border-width: 0 1px 1px 1px;
 									padding: 0 !important;
 									.solid {
 										padding: 0;
@@ -59,84 +72,98 @@
 					}
 				}
 				.excerpt {
-					width: calc(100% - 2em);
-					padding: .5em 1em;
-					opacity: .5;
-					.more {
-						display: table;
-						margin-top: 1em;
-						text-decoration: none;
+					width: 100%;
+					padding: .5em 0;
+					.inner {
 						opacity: .5;
-						color: $light;
-						&::after {
-							content: '>';
-							margin-left: .25em;
-						}
+						@include xSmallText;
 					}
 				}
 			}
 			.images {
-				width: 100%;
 				padding: .5em 0;
-				display: table;
-				.image {
-					width: calc(25% - .5em);
-					margin-bottom: .5em;
-					height: auto;
-					display: table;
-					float: left;
-					transition-duration: 0ms !important;
-					background: $gold;
-					img {
-						width: 100%;
-						height: auto;
-						display: none;
-						filter: grayscale(1);
-					}
-					&.loaded {
-						background: transparent;
-						img {
-							display: table;
-						}
+			}
+			.tags {
+				padding: 0;
+				ul {
+					li {
+						// border-bottom: 1px solid $medium;
+						// @include xSmallText;
+						font-style: italic;
 					}
 				}
 			}
 		}
 	}
-	.alert {
-		width: calc(100% - 4em);
-		padding: 1em;
-		margin: 0 1em;
-		text-align: center; 
-		background: rgba(red, .2);
-	}
 	article {
-		max-width: 30em;
+		max-width: $lineWidth;
+		padding: 0;
+		opacity: 0;
+		&.show {
+			opacity: 1;
+		}
 		.text {
-			padding: 2em;
-			p {
-
+			* {
+				color: $dark !important;
 			}
-			a {
-				text-decoration: none;
-				background-color: $medium;
-				&:hover {
-					background-color: $gold;
+			p {
+				a {
+					text-decoration: none;
+					border-bottom: .1em solid $gold;
+					color: $dark;
+					&:hover {
+						background-color: $gold;
+						// border-bottom-color: transparent;
+					}
+					&.ftn {
+						width: 1em;
+						height: 1em;
+						display: inline-block;
+						border: 1px solid $medium;
+						border-radius: 50%;
+						color: $medium !important;
+						text-align: center;
+						padding: .2em;
+						&.super {
+					    transform: translateY(-.5em);
+					    @include xxSmallText;
+					    line-height: 1em;
+						}
+						&.ref {
+							@include xSmallText;
+							line-height: 1em;
+						}
+						&:focus {
+							outline: none;
+							background-color: $gold;
+						}
+					}
+				}
+			}
+			.image {
+				background: $gold;
+				img {
+					opacity: 0 !important;
+				}
+				&.loaded {
+					background: transparent;
+					img {
+						opacity: 1 !important;
+					}
 				}
 			}
 			blockquote, {
-				font-family: 'Cardo';
 				font-style: italic;
 				@include mediumText;
+				@include italicText;
 				* {
 					font-family: 'Cardo';
-					@include largeText;
-					font-style: italic;
-					color: black;
+					@include italicText;
+					color: $dark;
 					font-weight: normal;
 					font-style: normal;
 					text-decoration: none;
-					font-size: inherit;
+					font-size: 1em;
 					line-height: 1.2em;
 				}
 			}
@@ -174,7 +201,17 @@
 				}
 				&.alignright {
 					float: right;
-					margin: 1em 0 1em 1em;
+			    // margin: 1em 0 1em -2em;
+			    &.wp-caption {
+	    	    // transform: translateX(2.95em);
+			    }
+				}
+				img.alignright {
+					// transform: translateX(0px);
+					margin: 0;
+					display: table;
+					// padding: 1em 0 1em 1em;
+					// margin-right: -2em;
 				}
 			}
 		}
@@ -185,12 +222,13 @@
 	height: 1em;
 	position: relative;
 	padding: 0;
+	background: $medium;
 	.solid {
 		width: 0;
 		height: 1em;
 		position: absolute;
 		left: 0;
 		top: 0;
-		background: black;
+		background: $medium;
 	}
 }

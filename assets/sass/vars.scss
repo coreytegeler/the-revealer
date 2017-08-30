@@ -1,11 +1,14 @@
 $gold: #f4ba37;
-// $dark: #336666;
-$dark: #212727;
+$dark: #336666;
 $dark: black;
-$medium: rgba($gold, .2);
-// $medium: #212727;
-$light: #feffab;
+$medium: rgba($dark, .4);
+// $light: #d7e1e1;
+$light: #fff;
 
+@import 'https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i&subset=latin-ext';
+@import 'https://fonts.googleapis.com/css?family=Cardo:400,400i,700&subset=greek,greek-ext,latin-ext';
+@import 'https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700&subset=latin-ext';
+@import 'https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&subset=cyrillic,cyrillic-ext,latin-ext';
 @mixin baseText {
 	font-size: 21px;
 	line-height: 1.3em;
@@ -13,13 +16,17 @@ $light: #feffab;
 		font-size: 15px;
 	}
 }
+@mixin xxSmallText {
+	font-size: .5em;
+	line-height: 1.2em;
+}
 @mixin xSmallText {
 	font-size: .8em;
 	line-height: 1.2em;
 }
 @mixin smallText {
 	font-size: 1em;
-	line-height: 1.2em;
+	line-height: 1.3em;
 }
 @mixin mediumText {
 	font-size: 1.2em;
@@ -30,7 +37,23 @@ $light: #feffab;
 	line-height: 1em;
 }
 
+$serif: 'Lora', 'Baskerville', times, serif;
+$sansSerif: 'Karla', Helvetica, Arial, sans-serif;
+@mixin serifText {
+	font-family: $serif;
+	line-height: 1.4em;
+}
+@mixin sansSerifText {
+	font-family: $sansSerif;
+}
+@mixin italicText {
+	font-family: $serif;
+	font-style: italic;
+	line-height: 1.4em;
+}
+
 $sideWidth: 30%;
+$lineWidth: 30em;
 
 $phoneWidth: 480px;
 $tabletWidth: 768px;

@@ -10,6 +10,13 @@ $posts_args = array(
 	'cat' => $cat_id
 );
 query_posts( $posts_args );
-get_template_part( 'snippets/loop' );
+echo '<div class="loop categories medium grid">';
+	if ( have_posts() ) {
+		while ( have_posts() ) {
+			the_post();
+			get_template_part( 'parts/article', array( 'size' => 'medium' ) );
+		}
+	}
+echo '</div>';
 get_footer();
 ?>

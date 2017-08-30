@@ -1,0 +1,21 @@
+body.about {
+	ul.nested.top {
+		ul.sub {
+			span {
+				&.years {
+					@include xSmallText;
+					opacity: 0.5;
+					&::before {
+						content: ' (';
+					}
+					&::after {
+						content: ')';
+					}
+				}
+			}
+		}
+		.links {
+			margin-top: .25em;
+		}
+	}
+}

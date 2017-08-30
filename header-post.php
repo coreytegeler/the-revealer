@@ -7,13 +7,20 @@ $link = '/tag/' . $slug;
 $id = $post->ID;
 $date = get_the_date();
 $categories = get_the_category();
+$column = get_the_terms( $post, 'columns' )[0];
 $author = get_field( 'author' );
 $content = $post->post_content;
 $excerpt = wp_strip_all_tags( get_the_excerpt() );
+$tags = get_the_tags();
 echo '<header role="contentinfo">';
 	echo '<div class="info">';
 		echo '<div class="title">';
-			echo '<h1>' . $title . '</h1>';
+			if( $column ) {
+				echo '<div class="column"><h2>' . $column->name . '</h2></div> ';
+			}
+			echo '<h1>';
+				echo $title;
+			echo '</h1>';
 		echo '</div>';
 		echo '<div class="meta">';
 			if( $author ) {
@@ -45,19 +52,36 @@ echo '<header role="contentinfo">';
 			echo '</div>';
 		echo '</div>';
 		echo '<div class="excerpt">';
-			echo $excerpt;
+			echo '<div class="inner">';
+				echo $excerpt;
+			echo '</div>';
 		echo '</div>';
 	echo '</div>';
-	echo '<div class="images grid">';
+	echo '<div class="images loop grid xsmall">';
 		$regex = '/src="([^"]*)"/';
 		preg_match_all( $regex, $content, $matches );
 		$images = $matches[0];
 		foreach( $images as $image ):
-			// echo $image;
-			echo '<div class="image cell load">';
-				echo '<img '.$image.'" alt="'.$title.'" title="'.$title.'"/>';
+			echo '<div class="image inline cell load transport">';
+				echo '<div class="image load">';
+					echo '<img '.$image.'" alt="'.$title.'" title="'.$title.'"/>';
+				echo '</div>';
 		   echo '</div>';
 		endforeach;
 	echo '</div>';
+	echo '<div class="tags list">';
+		echo '<ul>';
+			if( $tags ) {
+				foreach ( $tags as $tag ) {
+					$url = add_query_arg( 'tag', $tag->slug, $page_url );
+					echo '<li>';
+						echo '<a href="/' . $url . '" class="year"><em>' . $tag->name . '</em></a>';
+					echo '</li>';
+					$year--;
+				}
+			}
+		echo '</ul>';
+	echo '</div>';
+
 echo '</header>';
 ?>

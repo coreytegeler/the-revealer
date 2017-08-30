@@ -20,7 +20,7 @@ wp_enqueue_script( 'main' );
 
 show_admin_bar( false );
 add_theme_support( 'post-thumbnails', array( 'post', 'page' ) ); 
-add_image_size( 'thumb', 500, 350, true );
+add_image_size( 'thumb', 800, 500, true );
 
 function get_word_count() {
   $content = get_post_field( 'post_content', $post->ID );
@@ -43,13 +43,23 @@ function get_read_time() {
 
 function is_archived() {
   $this_date = get_the_date();
-  if( strtotime( $this_date ) < strtotime( 'now' ) ) {
+  $archive_date = new DateTime('08/01/2017');
+  if( is_single() && strtotime( $this_date ) < strtotime( '08/01/2017' ) ) {
     return true;
   } else {
     return false;
   }
 }
 
+function add_query_vars( $vars ){
+  $vars[] .= 'category';
+  $vars[] .= 'y';
+  $vars[] .= 'year';
+  $vars[] .= 'tag';
+  $vars[] .= 'column';
+  return $vars;
+}
+add_filter( 'query_vars', 'add_query_vars' );
 
 function register_contributors() {
   register_post_type( 'contributor',
@@ -68,10 +78,35 @@ function register_contributors() {
 }
 add_action( 'init', 'register_contributors' );
 
+function register_columns() {
+  register_taxonomy( 'columns', array('post'), array(
+    'hierarchical' => true,
+    'labels' => array(
+      'name' => _x( 'Columns', 'taxonomy general name' ),
+      'singular_name' => _x( 'Column', 'taxonomy singular name' ),
+      'search_items' =>  __( 'Search Columns' ),
+      'all_items' => __( 'All Columns' ),
+      'parent_item' => __( 'Parent Column' ),
+      'parent_item_colon' => __( 'Parent Column:' ),
+      'edit_item' => __( 'Edit Column' ), 
+      'update_item' => __( 'Update Column' ),
+      'add_new_item' => __( 'Add New Column' ),
+      'new_item_name' => __( 'New Column Name' ),
+      'menu_name' => __( 'Columns' ),
+    ),
+    'show_ui' => true,
+    'show_admin_column' => true,
+    'query_var' => true,
+    'rewrite' => array( 'slug' => 'column' ),
+  ));
+}
+add_action( 'init', 'register_columns' );
+
 function register_nav() {
   register_nav_menu( 'navigation', __( 'Navigation' ) );
 }
 add_action( 'init', 'register_nav' );
 
 flush_rewrite_rules( false );
+// flush_rewrite_rules();
 ?>

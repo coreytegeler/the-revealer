@@ -1,6 +1,6 @@
 jQuery(function($) {
   return $(function() {
-    var $body, $footer, $header, $logo, $main, $nav, $side, $window, $wrapper, fixGrids, fixSide, gatherArticleImages, loadImage, sizeImages, trackScroll;
+    var $alert, $body, $footer, $header, $logo, $main, $nav, $navLinks, $side, $window, $wrapper, closeAlert, fixGrids, fixHeader, fixSide, loadImage, scrollToItem, setupArticle, siteUrl, sizeImages, toggleFilterList, trackScroll;
     $window = $(window);
     $body = $('body');
     $wrapper = $('#wrapper');
@@ -8,8 +8,11 @@ jQuery(function($) {
     $header = $('header');
     $logo = $('#logo');
     $nav = $('nav');
+    $navLinks = $nav.find('.links');
     $main = $('main');
     $footer = $('footer');
+    $alert = $('#alert');
+    siteUrl = $body.attr('data-site-url');
     sizeImages = function() {
       return $('.image.load').each(function() {
         var $image, $img, $parent, image, imageHeight, imageWidth, natHeight, natWidth, ratio, src;
@@ -61,11 +64,17 @@ jQuery(function($) {
       $image.imagesLoaded().progress(function() {
         $image.removeClass('loading').addClass('loaded');
         if ($img.parents('aside').length) {
-          return fixSide();
+          fixSide();
         } else {
           $image.attr('style', '');
-          return fixGrids();
+          fixGrids();
         }
+        return setTimeout(function() {
+          var $grid;
+          if ($grid = $image.parents('.grid')) {
+            return $grid.masonry();
+          }
+        });
       });
       return $img.attr('src', src);
     };
@@ -79,6 +88,9 @@ jQuery(function($) {
         if ($cells) {
           $grid.masonry().append($cells).masonry('appended', $cells);
         }
+        if ($grid.is('.discovery')) {
+          $grid.scatter();
+        }
         $first = $grid.find('.cell:eq(0)');
         if (!$first.length) {
           return;
@@ -87,10 +99,11 @@ jQuery(function($) {
         gutter = parseInt($first.css('marginBottom'));
         return $grid.masonry({
           itemSelector: '.cell',
-          columnWidth: columnWidth,
+          columnWidth: $first[0],
           gutter: gutter,
           transitionDuration: 0,
-          percentPosition: true
+          percentPosition: true,
+          fitWidth: true
         });
       });
     };
@@ -104,7 +117,7 @@ jQuery(function($) {
       }
     };
     trackScroll = function() {
-      var $readable, pageBottom, pageEnd, pageHeight, pageTop, winHeight, winScroll;
+      var $readable, alertHeight, isBottom, linksHeight, linksTop, navBottom, pageBottom, pageEnd, pageHeight, pageTop, top, winHeight, winScroll;
       $readable = $('.readable');
       if (!$readable.length) {
         return;
@@ -115,63 +128,181 @@ jQuery(function($) {
       pageTop = $main.position().top;
       pageBottom = pageTop + pageHeight;
       pageEnd = pageBottom - winHeight;
+      isBottom = winScroll >= pageEnd;
+      if (alertHeight = $alert.innerHeight()) {
+        pageTop = alertHeight;
+      } else {
+        pageTop = 0;
+      }
       $('.progbar').each(function(i, bar) {
         var $bar, barWidth, progress;
         $bar = $(this);
         barWidth = $(bar).innerWidth();
         progress = winScroll * barWidth / pageEnd;
-        if (winScroll >= pageEnd) {
-          $wrapper.addClass('bottom');
+        if (isBottom) {
           progress = barWidth;
-        } else {
-          $wrapper.removeClass('bottom');
         }
         return $bar.find('.solid').css({
           width: progress
         });
       });
+      navBottom = $nav.offset().top + $nav.innerHeight();
+      linksHeight = $navLinks.innerHeight();
+      linksTop = navBottom - linksHeight;
+      if (isBottom) {
+        $wrapper.addClass('bottom');
+        $navLinks.css({
+          y: pageEnd - winScroll
+        });
+      } else {
+        $navLinks.css({
+          y: 0
+        });
+        if ($alert.length) {
+          top = alertHeight;
+          winScroll += alertHeight;
+        } else {
+          top = 0;
+        }
+        $wrapper.removeClass('bottom');
+        if (winScroll >= linksTop && winScroll >= pageTop) {
+          $navLinks.addClass('fixed');
+        } else {
+          $navLinks.removeClass('fixed');
+          top = 0;
+        }
+        $navLinks.css({
+          top: top
+        });
+      }
       return fixSide();
     };
-    gatherArticleImages = function() {
-      var $article, $images, img, imgs, j, len, results, src, thumb;
-      return;
-      if ($body.is('.single')) {
-        $images = $side.find('.images');
-        $article = $('article');
-        imgs = $article.find('.content img');
-        results = [];
-        for (j = 0, len = imgs.length; j < len; j++) {
-          img = imgs[j];
-          src = img.src;
-          thumb = new Image();
-          thumb.onload = function(e) {
-            var $image, $img, natHeight, natWidth;
-            img = e.target;
-            src = img.src;
-            $img = $(img);
-            natWidth = img.naturalWidth;
-            natHeight = img.naturalHeight;
-            $img = $('<img/>').attr('src', src).attr('data-width', natWidth).attr('data-height', natHeight);
-            $image = $('<div class="image"></div>').append($img).addClass('load').addClass('cell');
-            fixGrids($images, $image);
-            return sizeImages();
-          };
-          results.push(thumb.src = src);
+    toggleFilterList = function() {
+      var $filter, $list, $toggle, height;
+      $toggle = $(this);
+      $filter = $toggle.parents('.filter');
+      $list = $filter.find('.list');
+      $list.toggleClass('show');
+      if ($list.is('.show')) {
+        height = $list[0].scrollHeight;
+      } else {
+        height = 0;
+      }
+      return $list.css({
+        height: height
+      });
+    };
+    setupArticle = function() {
+      var $article, $images, $link, href, img, imgs, j, k, len, len1, link, links, replace;
+      if (!$body.is('.single-post')) {
+        return;
+      }
+      $article = $('article');
+      $images = $side.find('.images');
+      imgs = $article.find('.content img');
+      for (j = 0, len = imgs.length; j < len; j++) {
+        img = imgs[j];
+        $(img).wrap('<div class="image load"></div>');
+        loadImage($(img).parents('.image'));
+      }
+      links = $article.find('a');
+      for (k = 0, len1 = links.length; k < len1; k++) {
+        link = links[k];
+        $link = $(link);
+        href = $link.attr('href');
+        if (href.includes('#_ftn')) {
+          replace = $link.text().replace('[', '').replace(']', '');
+          $link.text(replace);
+          if (href.includes('#_ftnref')) {
+            $link.addClass('ref ftn transport');
+          } else {
+            $link.addClass('super ftn transport');
+          }
+        } else if (!href.includes(siteUrl)) {
+          $link.attr('target', '_blank');
         }
-        return results;
+      }
+      return $article.addClass('show');
+    };
+    scrollToItem = function(e) {
+      var $image, $img, $inline, $item, $readable, href, navBottom, scrollTop, src;
+      $item = $(this);
+      navBottom = $nav.offset().top + $nav.innerHeight();
+      if ($item.is('.ftn')) {
+        e.preventDefault();
+        href = $item.attr('href').replace('#', '');
+        $inline = $('a').filter('[name="' + href + '"]');
+      } else {
+        $image = $item.find('.image');
+        $img = $image.find('img');
+        src = $img.attr('src');
+        if ($readable = $('.readable')) {
+          $inline = $readable.find('img').filter('[src="' + src + '"]');
+        }
+      }
+      if ($inline.length) {
+        scrollTop = $inline.offset().top - navBottom;
+        return $('html,body').animate({
+          scrollTop: scrollTop
+        }, function() {
+          return $inline.focus();
+        });
       }
     };
+    fixHeader = function() {
+      var alertHeight;
+      $nav.css({
+        height: Math.ceil($logo.innerHeight())
+      });
+      if (!$alert) {
+        return;
+      }
+      alertHeight = $alert.innerHeight();
+      $wrapper.css({
+        paddingTop: alertHeight
+      });
+      return $side.css({
+        paddingTop: alertHeight,
+        height: $window.innerHeight() - alertHeight
+      });
+    };
+    closeAlert = function() {
+      $alert.remove();
+      fixHeader();
+      return trackScroll();
+    };
+    $.fn.scatter = function() {
+      var $cells, $grid;
+      $grid = $(this);
+      $cells = $grid.find('.cell');
+      return $cells.filter(':not(.scattered)').each(function(i, cell) {
+        var $cell, $wrap, max, min, padding, x, y;
+        $cell = $(this);
+        $wrap = $cell.find('.wrap');
+        padding = parseInt($wrap.css('padding'));
+        max = padding * .8;
+        min = -max;
+        x = Math.random() * (max - min) + min;
+        y = Math.random() * (max - min) + min;
+        $wrap.css({
+          x: x,
+          y: y
+        });
+        return $cell.addClass('scattered');
+      });
+    };
+    $('body').on('click', '.transport', scrollToItem);
+    $('body').on('click', '#filters .toggle', toggleFilterList);
+    $('body').on('click', '#alert', closeAlert);
     $window.on('resize', function() {
-      trackScroll();
       fixGrids();
       sizeImages();
-      return $nav.css({
-        height: $logo.innerHeight()
-      });
+      fixHeader();
+      return trackScroll();
     }).resize();
     $window.on('scroll', function() {
       return trackScroll();
     });
-    return gatherArticleImages();
+    return setupArticle();
   });
 });

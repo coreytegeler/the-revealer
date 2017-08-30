@@ -1,0 +1,45 @@
+#discover {
+	width: 100%;
+  min-height: 100vh;
+  flex: 1;
+  clear: both;
+  background-color: $gold;
+  border-top: .25em solid $dark;
+  .inner {
+  	width: calc(100% - 4em);
+  	padding: 2em;
+	}
+}
+footer {
+	width: 100%;
+	padding: 1em 0;
+  margin: 0 0 2em 0;
+  border-top: .25em solid $dark;
+  .social {
+  	display: table;
+  	margin: auto;
+  	padding: 0 2em;
+  	a {
+  		text-decoration: none;
+  		display: inline;
+    	svg {
+				width: auto;
+				height: 1em;
+				fill: $dark;
+			}
+			&:hover {
+				svg {
+					fill: $gold;
+				}
+			}
+		}
+  }
+	.note {			
+		opacity: 0.5;
+		display: table;
+		margin: auto;
+		padding: 1em 1em 0 1em;
+		text-align: center;
+		@include xSmallText;
+	}
+}
