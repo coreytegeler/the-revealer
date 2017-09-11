@@ -1,0 +1,137 @@
+nav {
+	width: 100%;
+	height: auto;
+	display: flex;
+  margin: 0;
+  padding: .75em 0 .25em 0;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 400;
+	transform: 0ms !important;
+	background: $light;
+	box-shadow: 0 0 .25em .5em $light;
+	@include desktop {
+		// width: calc(100% - #{$mobSideWidth} - 3em);
+		// left: calc(#{$mobSideWidth} + 2em;);
+	}
+  &.mobile {
+  	display: none;
+  }
+  #logo {
+		display: flex;
+		align-content: center;
+		padding: 0 0 0 1em;
+		a.svg {
+			display: table;
+			margin: auto;
+	    text-decoration: none;
+			svg {
+				width: calc(#{$sideWidth} - 1em);
+				@include tablet {
+					width: calc(#{$mobSideWidth} - 1em);
+				}
+				height: auto;
+				padding: .5em 0;
+				// display: inline;
+				fill: $dark;
+			}
+		}
+		.about {
+			display: inline;
+			margin-bottom: 1em;
+		}
+		em {
+    	font-size: inherit;
+    	line-height: inherit;
+    }
+	}
+	.tagline {
+		display: inline;
+		@include xMediumText;
+		text-decoration: none;
+    font-style: normal;
+    // text-transform: lowercase;
+    // font-family: 'Clarendon';
+	}
+  .inner {
+  	width: calc(100% - #{$sideWidth} - 1em);
+  	// position: relative;
+		@include tablet {
+			width: calc(100% - #{$mobSideWidth} - 3em);
+		}
+    padding: .5em 1em .5em 0;
+  	display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    .row {
+    	width: 100%;
+    	display: flex;
+	    align-items: flex-end;
+	    flex-direction: row;
+	    .links {
+	  		display: flex;
+	  		flex: 1;
+		    flex-direction: row-reverse;
+				.link {
+					float: right;
+					display: inline;
+					padding: 0;
+					margin: 0 0 0 .5em;
+					list-style: none;
+					a {
+				    text-decoration: none;
+				    font-style: normal;
+				    text-transform: lowercase;
+				    text-align: center;
+				    font-family: 'Clarendon';
+				    &:hover {
+				    	// color: $medium;
+				    }
+					}
+					em {
+						font-family: 'Clarendon';
+						font-style: normal;
+					}
+				}
+			}
+		  &.break {
+		  	flex-direction: column;
+		  	.tagline, .links {
+		  		display: table;
+		  		margin: auto;
+		  	}
+		  }
+		  &.navigation {
+		  	
+		  }
+		  &.filters {
+				// display: none;
+				.filter {
+					.toggle {
+						width: 100%;
+						user-select: none;
+						text-transform: lowercase;
+						font-family: Clarendon;
+						@include xSmallText;
+						&:hover {
+							cursor: pointer;
+							color: $medium;
+						}
+					}
+					.list {
+						height: 0;
+						opacity: 0;
+						overflow: hidden;
+						color: $medium;
+						transition: height 300ms ease, opacity 100ms 30ms ease;
+						padding-left: .5em;
+						&.show {
+							opacity: 1;
+						}
+					}
+				}
+			}
+		}
+	}
+}

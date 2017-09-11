@@ -1,17 +1,20 @@
 jQuery(function($) {
   return $(function() {
-    var $alert, $body, $footer, $header, $logo, $main, $nav, $navLinks, $side, $window, $wrapper, closeAlert, fixGrids, fixHeader, fixSide, loadImage, scrollToItem, setupArticle, siteUrl, sizeImages, toggleFilterList, trackScroll;
+    var $body, $footer, $header, $logo, $main, $mainNav, $mainNavInner, $mobileNav, $mobileNavInner, $navs, $side, $topBar, $window, $wrapper, closeTopBar, fixGrids, fixHeader, fixSide, isMobile, loadImage, queryMore, reveal, setupArticle, siteUrl, sizeImages, toggleFilterList, trackScroll, transport;
     $window = $(window);
     $body = $('body');
     $wrapper = $('#wrapper');
     $side = $('aside');
     $header = $('header');
     $logo = $('#logo');
-    $nav = $('nav');
-    $navLinks = $nav.find('.links');
+    $navs = $('nav');
+    $mainNav = $('nav.main');
+    $mainNavInner = $mainNav.find('.inner');
+    $mobileNav = $('nav.mobile');
+    $mobileNavInner = $mobileNav.find('.inner');
     $main = $('main');
     $footer = $('footer');
-    $alert = $('#alert');
+    $topBar = $('#top_bar');
     siteUrl = $body.attr('data-site-url');
     sizeImages = function() {
       return $('.image.load').each(function() {
@@ -36,7 +39,11 @@ jQuery(function($) {
           });
           return loadImage($image);
         } else {
-          src = $img.attr('src');
+          if ($img.length) {
+            src = $img.attr('src');
+          } else {
+            src = $image.attr('data-src');
+          }
           image = new Image();
           image.onload = function(e) {
             var img;
@@ -47,10 +54,12 @@ jQuery(function($) {
             ratio = natWidth / natHeight;
             imageWidth = $image.innerWidth();
             imageHeight = imageWidth / ratio;
-            $image.css({
-              width: imageWidth,
-              height: imageHeight
-            });
+            if ($img.length) {
+              $image.css({
+                width: imageWidth,
+                height: imageHeight
+              });
+            }
             return loadImage($image);
           };
           return image.src = src;
@@ -60,14 +69,21 @@ jQuery(function($) {
     loadImage = function($image) {
       var $img, src;
       $img = $image.find('img');
-      src = $img.data('src');
-      $image.imagesLoaded().progress(function() {
+      src = $img.attr('data-src');
+      if (!$img.length) {
+        src = $image.attr('data-src');
+      }
+      $image.imagesLoaded({
+        background: true
+      }, function() {
         $image.removeClass('loading').addClass('loaded');
-        if ($img.parents('aside').length) {
-          fixSide();
-        } else {
-          $image.attr('style', '');
-          fixGrids();
+        if ($img.length) {
+          if ($img.parents('aside').length) {
+            fixSide();
+          } else {
+            $image.attr('style', '');
+            fixGrids();
+          }
         }
         return setTimeout(function() {
           var $grid;
@@ -76,7 +92,13 @@ jQuery(function($) {
           }
         });
       });
-      return $img.attr('src', src);
+      if ($img.length) {
+        return $img.attr('src', src);
+      } else {
+        return $image.css({
+          backgroundImage: 'url(' + src + ')'
+        });
+      }
     };
     fixGrids = function($grids, $cells) {
       if (!$grids) {
@@ -109,6 +131,9 @@ jQuery(function($) {
     };
     fixSide = function() {
       var sideHeight, sideScrollHeight, winScroll;
+      if (!$side.length) {
+        return;
+      }
       winScroll = $window.scrollTop();
       sideHeight = $side.innerHeight();
       sideScrollHeight = $side[0].scrollHeight;
@@ -117,24 +142,50 @@ jQuery(function($) {
       }
     };
     trackScroll = function() {
-      var $readable, alertHeight, isBottom, linksHeight, linksTop, navBottom, pageBottom, pageEnd, pageHeight, pageTop, top, winHeight, winScroll;
+      var $readable, isBottom, nearBottom, pageBottom, pageEnd, pageHeight, pageTop, scrollHeight, topBarHeight, winHeight, winScroll;
       $readable = $('.readable');
       if (!$readable.length) {
         return;
       }
       winHeight = $window.innerHeight();
       winScroll = $window.scrollTop();
+      scrollHeight = $body[0].scrollHeight;
       pageHeight = $main.innerHeight();
       pageTop = $main.position().top;
       pageBottom = pageTop + pageHeight;
       pageEnd = pageBottom - winHeight;
       isBottom = winScroll >= pageEnd;
-      if (alertHeight = $alert.innerHeight()) {
-        pageTop = alertHeight;
+      if (topBarHeight = $topBar.innerHeight()) {
+        pageTop = topBarHeight;
       } else {
         pageTop = 0;
       }
-      $('.progbar').each(function(i, bar) {
+      $navs.each(function(i, nav) {
+        var $nav, innerHeight, innerTop, navBottom, top;
+        $nav = $(nav);
+        $mainNavInner = $nav.find('.inner');
+        navBottom = $nav.offset().top + $nav.innerHeight();
+        innerHeight = $mainNavInner.innerHeight();
+        innerTop = navBottom - innerHeight;
+        if (isBottom) {
+          $wrapper.addClass('bottom');
+          return $mainNav.css({
+            y: pageEnd - winScroll
+          });
+        } else {
+          $mainNav.css({
+            y: 0
+          });
+          if ($topBar.length) {
+            top = topBarHeight;
+            winScroll += topBarHeight;
+          } else {
+            top = 0;
+          }
+          return $wrapper.removeClass('bottom');
+        }
+      });
+      $('.prog_bar').each(function(i, bar) {
         var $bar, barWidth, progress;
         $bar = $(this);
         barWidth = $(bar).innerWidth();
@@ -146,34 +197,9 @@ jQuery(function($) {
           width: progress
         });
       });
-      navBottom = $nav.offset().top + $nav.innerHeight();
-      linksHeight = $navLinks.innerHeight();
-      linksTop = navBottom - linksHeight;
-      if (isBottom) {
-        $wrapper.addClass('bottom');
-        $navLinks.css({
-          y: pageEnd - winScroll
-        });
-      } else {
-        $navLinks.css({
-          y: 0
-        });
-        if ($alert.length) {
-          top = alertHeight;
-          winScroll += alertHeight;
-        } else {
-          top = 0;
-        }
-        $wrapper.removeClass('bottom');
-        if (winScroll >= linksTop && winScroll >= pageTop) {
-          $navLinks.addClass('fixed');
-        } else {
-          $navLinks.removeClass('fixed');
-          top = 0;
-        }
-        $navLinks.css({
-          top: top
-        });
+      nearBottom = winScroll + winHeight >= scrollHeight - winHeight * 2;
+      if ($readable.is('#discover') && nearBottom) {
+        queryMore();
       }
       return fixSide();
     };
@@ -224,52 +250,128 @@ jQuery(function($) {
       }
       return $article.addClass('show');
     };
-    scrollToItem = function(e) {
-      var $image, $img, $inline, $item, $readable, href, navBottom, scrollTop, src;
-      $item = $(this);
-      navBottom = $nav.offset().top + $nav.innerHeight();
-      if ($item.is('.ftn')) {
+    reveal = function() {
+      return $('.reveal').each(function(i, elem) {
+        var delay;
+        delay = (Math.random() * (50 - 20) + 20) + (i * 20);
+        return setTimeout(function() {
+          return $(elem).addClass('show');
+        }, delay);
+      });
+    };
+    transport = function(e) {
+      var $button, $image, $img, $inline, $nav, $readable, hasOffset, href, navBottom, scrollTo, scrollTop, src;
+      $button = $(this);
+      if (isMobile()) {
+        $nav = $mobileNav;
+      } else {
+        $nav = $mainNav;
+      }
+      scrollTop = $('html,body').scrollTop();
+      navBottom = $nav.innerHeight();
+      if ($button.is('.top')) {
+        scrollTo = 0;
+      } else if ($button.is('.ftn')) {
         e.preventDefault();
-        href = $item.attr('href').replace('#', '');
+        href = $button.attr('href').replace('#', '');
         $inline = $('a').filter('[name="' + href + '"]');
       } else {
-        $image = $item.find('.image');
+        $image = $button.find('.image');
         $img = $image.find('img');
         src = $img.attr('src');
         if ($readable = $('.readable')) {
           $inline = $readable.find('img').filter('[src="' + src + '"]');
         }
       }
-      if ($inline.length) {
-        scrollTop = $inline.offset().top - navBottom;
+      hasOffset = $inline && $inline.length;
+      if (hasOffset) {
+        scrollTo = $inline.offset().top - scrollTop - navBottom * 2;
+      }
+      if (!isNaN(scrollTo)) {
         return $('html,body').animate({
-          scrollTop: scrollTop
+          scrollTop: scrollTo
         }, function() {
-          return $inline.focus();
+          if (hasOffset) {
+            return $inline.focus();
+          }
         });
       }
     };
     fixHeader = function() {
-      var alertHeight;
-      $nav.css({
-        height: Math.ceil($logo.innerHeight())
-      });
-      if (!$alert) {
-        return;
+      var linksHeight, linksWidth, taglineHeight, taglineWidth, topHeight;
+      if (isMobile()) {
+        return $mobileNav.css({
+          height: Math.ceil($mobileNavInner.innerHeight())
+        });
+      } else {
+        topHeight = Math.ceil($mainNav.innerHeight());
+        $wrapper.css({
+          paddingTop: topHeight
+        });
+        $side.css({
+          height: $window.innerHeight() - topHeight,
+          top: topHeight
+        });
+        taglineHeight = $mainNavInner.find('.tagline').innerHeight();
+        linksHeight = $mainNavInner.find('.links').innerHeight();
+        taglineWidth = $mainNavInner.find('.tagline').innerWidth();
+        return linksWidth = $mainNavInner.find('.links').innerWidth();
       }
-      alertHeight = $alert.innerHeight();
-      $wrapper.css({
-        paddingTop: alertHeight
-      });
-      return $side.css({
-        paddingTop: alertHeight,
-        height: $window.innerHeight() - alertHeight
-      });
     };
-    closeAlert = function() {
-      $alert.remove();
+    closeTopBar = function() {
+      $topBar.remove();
       fixHeader();
       return trackScroll();
+    };
+    isMobile = function() {
+      return parseInt($('#isMobile').css('content').replace(/['"]+/g, ''));
+    };
+    queryMore = function() {
+      var $cell, $grid, i;
+      $grid = $('.discover.grid');
+      if (!$grid.is('.querying')) {
+        i = 0;
+        while (i < 15) {
+          $cell = $('<div class="cell discover reveal empty"><div class="wrap"><div class="circle"></div></div></div>');
+          $grid.append($cell);
+          $grid.masonry('appended', $cell);
+          $grid.masonry();
+          i++;
+        }
+        $grid.scatter();
+        reveal();
+        $grid.addClass('querying');
+        return $.ajax({
+          url: wp_api.ajax_url,
+          type: 'POST',
+          data: {
+            action: 'api_query',
+            orderby: 'rand',
+            post_type: 'post',
+            posts_per_page: 15,
+            meta_query: {
+              key: '_thumbnail_id',
+              compare: 'EXISTS'
+            }
+          },
+          success: function(data, status, jqXHR) {
+            var $empties;
+            $grid.removeClass('querying');
+            $empties = $grid.find('.empty.cell');
+            return $(data).each(function(i, cell) {
+              var $empty, $inner;
+              $inner = $(cell).find('.wrap').html();
+              $empty = $empties.eq(i);
+              $empty.removeClass('empty');
+              $empty.find('.wrap').html($inner);
+              return sizeImages();
+            });
+          },
+          error: function(jqXHR, status, error) {
+            return console.log(jqXHR.responseJSON);
+          }
+        });
+      }
     };
     $.fn.scatter = function() {
       var $cells, $grid;
@@ -280,7 +382,7 @@ jQuery(function($) {
         $cell = $(this);
         $wrap = $cell.find('.wrap');
         padding = parseInt($wrap.css('padding'));
-        max = padding * .8;
+        max = padding;
         min = -max;
         x = Math.random() * (max - min) + min;
         y = Math.random() * (max - min) + min;
@@ -291,9 +393,34 @@ jQuery(function($) {
         return $cell.addClass('scattered');
       });
     };
-    $('body').on('click', '.transport', scrollToItem);
+    $('.glisten').each(function(ri, html) {
+      var $html, characters;
+      ri++;
+      $html = $(html);
+      characters = $html.text().split('');
+      $html.empty();
+      $(characters).each(function(ci, html) {
+        var $span;
+        $span = $('<span>' + html + '</span>');
+        return $html.append($span);
+      });
+      return setTimeout(function() {
+        return $html.find('span').each(function(si, span) {
+          si++;
+          return setTimeout(function() {
+            return $(span).addClass('animate');
+          }, si * 50);
+        });
+      }, 500 * ri);
+    });
+    $('#logo svg path').each(function(i, path) {
+      return setTimeout(function() {
+        return $(path).addClass('animate');
+      }, i * 50);
+    });
+    $('body').on('click', '.transport', transport);
     $('body').on('click', '#filters .toggle', toggleFilterList);
-    $('body').on('click', '#alert', closeAlert);
+    $('body').on('click', '#top_bar', closeTopBar);
     $window.on('resize', function() {
       fixGrids();
       sizeImages();
@@ -303,6 +430,7 @@ jQuery(function($) {
     $window.on('scroll', function() {
       return trackScroll();
     });
-    return setupArticle();
+    setupArticle();
+    return reveal();
   });
 });

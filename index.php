@@ -4,6 +4,7 @@ $cat_param = get_query_var( 'category' );
 $year_param = get_query_var( 'y' );
 $column_param = get_query_var( 'column' );
 $tag_param = get_query_var( 'tag' );
+$paged_param = get_query_var( 'paged' );
 $posts_args = array(
 	'post_type' => 'post'
 );
@@ -20,43 +21,18 @@ if( isset( $column_param ) ) {
 if( isset( $tag_param ) ) {
 	$posts_args['tag'] = $tag_param;
 }
+if( isset( $paged_param ) ) {
+	$posts_args['paged'] = $paged_param;
+}
 
 $featured_amount = 0;
 $medium_amount = 4;
 $small_amount = 15;
 echo '<div class="readable">';
-
-	// echo '<div class="loop posts large featured">';
-	// 	$featured_args = array(
-	// 		'posts_per_page' => $featured_amount
-	// 	);
-	// 	query_posts( $featured_args );
-	// 	if ( have_posts() ) {
-	// 		while ( have_posts() ) {
-	// 			the_post();
-	// 			get_template_part( 'parts/post', array( 'size', 'featured' ) );
-	// 		}
-	// 	}
-	// echo '</div>';
-
-	// echo '<div class="loop posts medium grid">';
-	// 	$medium_args = array_merge( $posts_args, array(
-	// 			'posts_per_page' => $medium_amount,
-	// 			'offset' => $featured_amount
-	// 	) );
-	// 	query_posts( $medium_args );
-	// 	if ( have_posts() ) {
-	// 		while ( have_posts() ) {
-	// 			the_post();
-	// 			get_template_part( 'parts/post' );
-	// 		}
-	// 	}
-	// echo '</div>';
-
 	echo '<div class="loop posts small grid">';
 		$small_args = array_merge( $posts_args, array(
-				'posts_per_page' => $small_amount
-				// 'offset' => $featured_amount + $medium_amount
+			'posts_per_page' => $small_amount
+			// 'offset' => $featured_amount + $medium_amount
 		) );
 		query_posts( $small_args );
 		if ( have_posts() ) {
@@ -65,7 +41,9 @@ echo '<div class="readable">';
 				get_template_part( 'parts/post' );
 			}
 		}
+		wp_reset_query();
 	echo '</div>';
+	get_template_part( 'parts/pagination' );
 echo '</div>';
 get_footer();
 ?>

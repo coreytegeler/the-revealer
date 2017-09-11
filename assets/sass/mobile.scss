@@ -1,0 +1,130 @@
+@include tablet {
+	body, html {
+		#wrapper {
+			aside {
+				width: calc(100% - 2em);
+				height: auto !important;
+				position: static !important;
+				padding: 0 1em;
+				nav.mobile {
+					display: block;
+					.links {
+						.logo {
+							display: none;
+							a.svg {
+								svg {
+									width: auto;
+									height: 1em;
+									display: table;
+									margin: auto;
+								}
+							}
+						}
+						ul {
+							display: flex;
+							flex-wrap: wrap;
+							li {
+								margin: auto;
+								float: left;
+								text-align: center;
+								&:first-child {
+									width: 100%;
+									margin: 0;
+							    padding: 0 0 .5em 0;
+								}
+								&:nth-child(2) {
+									margin-left: 0; 
+								}
+								&:last-child {
+									margin-right: 0; 
+								}
+							}
+						}
+						&.fixed {
+							width: calc(100% - 2em);
+							left: 1em;
+							.tagline {
+								display: none;
+							}
+							.logo {
+								display: block;
+							}
+						}
+					}
+				}
+				.content {
+					margin: 0;
+					padding: 0;
+					#filters {
+						margin: 0 0 1em 0;
+						.filter {
+							.list {
+								height: 0;
+							}
+						}
+					}
+				}
+			}
+			main {
+				width: calc(100% - 2em);
+				padding: 0 1em;
+				nav {
+					display: none;
+				}
+				.nested {
+					display: table;
+					margin: auto !important;
+				}
+			}
+		}
+		&.single-post {
+			aside header {
+				.info {
+					clear: both;
+					.title {
+						h1 {
+							text-align: center;
+						}
+					}
+					.excerpt, .meta, .tags {
+						max-width: $lineWidth;
+						display: table;
+						margin-left: auto;
+						margin-right: auto;
+					}
+					.images {
+						display: none;
+					}
+				}
+			}
+			main {
+				article {
+					margin: auto;
+					padding-top: 2em;
+					.wp-caption {
+						width: 100% !important;
+						float: none !important;
+						.wp-caption-text {
+							text-align: center;
+						}
+					}
+					.image {
+						width: 100%;
+						display: table;
+						padding: 1em 0;
+						img {
+							width: auto !important;
+							max-width: 100% !important;
+							display: table !important;
+							margin: auto !important;
+							float: none !important;
+						}
+					}
+				}
+			}
+		}
+	}
+	#isMobile {
+		content: '1';
+	}
+}

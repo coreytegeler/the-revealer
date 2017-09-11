@@ -1,21 +1,35 @@
 body.about {
-	ul.nested.top {
-		ul.sub {
-			span {
-				&.years {
-					@include xSmallText;
-					opacity: 0.5;
-					&::before {
-						content: ' (';
-					}
-					&::after {
-						content: ')';
+	// main {
+	// 	width: 100%;
+	// 	padding-left: 0; 
+	// 	padding-right: 0;
+	// }
+	nav {
+	
+	}
+	#wrapper {
+		main {
+			ul.nested.parent {
+				display: table;
+				margin: auto;
+				ul.child {
+					span {
+						&.years {
+							@include xSmallText;
+							opacity: 0.5;
+							&::before {
+								content: ' (';
+							}
+							&::after {
+								content: ')';
+							}
+						}
 					}
 				}
+				.links {
+					margin-top: .25em;
+				}
 			}
-		}
-		.links {
-			margin-top: .25em;
 		}
 	}
 }

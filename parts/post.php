@@ -11,6 +11,7 @@ $date = get_the_date();
 $author = get_field( 'author' );
 $i = $wp_query->current_post;
 $missing_url = get_template_directory_uri() . '/assets/images/question.svg';
+$missing_svg = file_get_contents( $missing_url );
 $column = get_the_terms( $post, 'columns' )[0];
 echo '<article class="cell" role="article" style="' . $style . '">';
 	echo '<div class="wrap">';
@@ -18,8 +19,6 @@ echo '<article class="cell" role="article" style="' . $style . '">';
 			echo '<div class="' . ( $thumb ? 'image load' : 'missing') . '">';
 				if ( $thumb ) {
 					echo '<img data-src="'.$thumb_url.'" data-width="'.$thumb_width.'" data-height="'.$thumb_height.'"/>';
-				} else {
-					echo '<object data="' . $missing_url . '" alt="' . $title . '" type="image/svg+xml">' . $title . '</object>';
 				}
 			echo '</div>';
 			echo '<div class="title">';

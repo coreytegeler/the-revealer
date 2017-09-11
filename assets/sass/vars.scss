@@ -1,19 +1,20 @@
-$gold: #f4ba37;
+$gold: #fecf0c;
 $dark: #336666;
-$dark: black;
-$medium: rgba($dark, .4);
-// $light: #d7e1e1;
-$light: #fff;
+$dark: #1a172e;
+$medium: #89879d;
+$light: #f4f2f3;
+// $light: #fff;
 
 @import 'https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i&subset=latin-ext';
 @import 'https://fonts.googleapis.com/css?family=Cardo:400,400i,700&subset=greek,greek-ext,latin-ext';
 @import 'https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700&subset=latin-ext';
 @import 'https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&subset=cyrillic,cyrillic-ext,latin-ext';
+@import 'https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600,600i,700,700i';
 @mixin baseText {
 	font-size: 21px;
 	line-height: 1.3em;
 	@include tablet {
-		font-size: 15px;
+		font-size: 18px;
 	}
 }
 @mixin xxSmallText {
@@ -32,16 +33,22 @@ $light: #fff;
 	font-size: 1.2em;
 	line-height: 1.2em;
 }
+@mixin xMediumText {
+  font-size: 1.3em;
+  line-height: 1.4em;
+}
 @mixin largeText {
 	font-size: 2em;
-	line-height: 1em;
+	line-height: 1.2em;
+	@include tablet {
+		font-size: 3em;
+	}
 }
 
-$serif: 'Lora', 'Baskerville', times, serif;
+$serif: 'Crimson Text', 'Lora', 'Baskerville', times, serif;
 $sansSerif: 'Karla', Helvetica, Arial, sans-serif;
 @mixin serifText {
 	font-family: $serif;
-	line-height: 1.4em;
 }
 @mixin sansSerifText {
 	font-family: $sansSerif;
@@ -49,10 +56,10 @@ $sansSerif: 'Karla', Helvetica, Arial, sans-serif;
 @mixin italicText {
 	font-family: $serif;
 	font-style: italic;
-	line-height: 1.4em;
 }
 
-$sideWidth: 30%;
+$sideWidth: 25vw;
+$mobSideWidth: 35vw;
 $lineWidth: 30em;
 
 $phoneWidth: 480px;
@@ -91,7 +98,60 @@ $maxWidth: 950px;
   100% {opacity: .02;}
 }
 
-@keyframes reveal {
-  0% {opacity: .02;}
-  100% {opacity: 1;}
+// @keyframes reveal {
+//   0% {opacity: .02;}
+//   100% {opacity: 1;}
+// }
+
+@keyframes glisten {
+  0% {
+  	opacity: 0.25;
+  }
+  25% {
+  	opacity: .75;
+  }
+  50% {
+  	opacity: .25;
+  }
+  75% {
+  	opacity: .75;
+  }
+  100% {
+  	opacity: 0.25;
+  }
 }
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-.5em);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes glistenBounce {
+  0% {
+  	opacity: 0.5;
+  	transform: translateY(0);
+  }
+  25% {
+  	opacity: .75;
+  }
+  50% {
+  	opacity: .5;
+  	transform: translateY(-.5em);
+  }
+  75% {
+  	opacity: .75;
+  }
+  100% {
+  	opacity: 0.5;
+  	transform: translateY(0);
+  }
+}
+
+

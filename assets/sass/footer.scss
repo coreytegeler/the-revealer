@@ -1,20 +1,23 @@
 #discover {
-	width: 100%;
-  min-height: 100vh;
-  flex: 1;
-  clear: both;
-  background-color: $gold;
-  border-top: .25em solid $dark;
-  .inner {
-  	width: calc(100% - 4em);
-  	padding: 2em;
-	}
+  #searchform {
+    position: absolute;
+    top: calc(100% - 1.25em);
+    left: 0;
+    form {
+      max-width: $lineWidth;
+      input {
+        background: $light;
+        &:focus {
+          outline-color: $light;
+        }
+      }
+    }
+  }
 }
 footer {
 	width: 100%;
 	padding: 1em 0;
-  margin: 0 0 2em 0;
-  border-top: .25em solid $dark;
+  margin: 4em 0 2em 0;
   .social {
   	display: table;
   	margin: auto;
