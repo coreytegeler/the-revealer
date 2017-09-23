@@ -1,9 +1,52 @@
 jQuery(function($) {
-  var fixCarouselHeight, resizeCarousel, setupCarousel, transitionEnd;
+  var $carousels, closeCarousel, createCarousel, fixCarouselHeight, openCarousel, resizeCarousel, setupCarousel, transitionEnd;
   transitionEnd = 'transitionend webkitTransitionEnd oTransitionEnd';
+  $carousels = $('.carousel');
+  createCarousel = function() {
+    var $article, $carousel, $imgs, $slides;
+    $article = $('article.readable');
+    $carousel = $('.carousel');
+    $slides = $carousel.find('.slides');
+    if ($article.length) {
+      $imgs = $article.find('img');
+      $imgs.each(function(i, img) {
+        var $img, $slide, $wrap;
+        $img = $(img).clone();
+        $slide = $('<div class="slide"></div>');
+        $wrap = $('<div class="wrap"></div>');
+        $wrap.append($img);
+        $slide.append($wrap);
+        return $slides.append($slide);
+      });
+      return setupCarousel();
+    }
+  };
+  openCarousel = function(e) {
+    var $carousel, $this, href, isImage, src;
+    $carousel = $('.carousel');
+    $this = $(this);
+    if (href = $this.attr('href')) {
+      if ($this.find('img').length) {
+        isImage = true;
+      }
+    } else if (src = $this.attr('src')) {
+      isImage = true;
+    } else {
+      isImage = false;
+    }
+    console.log($carousel);
+    $carousel.addClass('show');
+    if (isImage) {
+      return e.preventDefault();
+    }
+  };
+  closeCarousel = function(e) {
+    var $carousel;
+    $carousel = $(this).parents('.carousel');
+    return $carousel.removeClass('show');
+  };
   resizeCarousel = function() {
-    var $carousels, windowWidth;
-    $carousels = $('.carousel');
+    var windowWidth;
     windowWidth = $(window).innerWidth();
     return $carousels.each(function() {
       var $carousel, $currentSlide, $slides, $slidesWrapper, currentIndex, left, slidesLength;
@@ -54,7 +97,7 @@ jQuery(function($) {
   };
   fixCarouselHeight = function($slide) {
     var $caption, $carousel, captionHeight, height, minHeight;
-    $carousel = $slide.parents('.carousel');
+    $carousel = $slide.parents('#carousel');
     $caption = $slide.find('.caption');
     captionHeight = $caption.innerHeight();
     minHeight = $carousel.css('content').replace(/['"]+/g, '');
@@ -64,31 +107,31 @@ jQuery(function($) {
     }, 200, 'out');
   };
   setupCarousel = function() {
-    $('.carousel').each(function(i, carousel) {
+    $('#carousel').each(function(i, carousel) {
       $(this).find('.slide:first-child').addClass('current');
       return $(carousel).imagesLoaded(function() {
         return $(carousel).addClass('loaded');
       });
     });
-    $('body').on('mouseenter', '.carousel.loaded .arrow:not(.no)', function() {
+    $('body').on('mouseenter', '#carousel.loaded .arrow:not(.no)', function() {
       var $arrow, $carousel, direction;
       $arrow = $(this);
       direction = $arrow.attr('data-direction');
-      $carousel = $arrow.parents('.carousel');
+      $carousel = $arrow.parents('#carousel');
       return $carousel.attr('data-direction', direction);
     });
-    $('body').on('mouseleave', '.carousel.loaded .arrow', function() {
+    $('body').on('mouseleave', '#carousel.loaded .arrow', function() {
       var $arrow, $carousel;
       $arrow = $(this);
-      $carousel = $arrow.parents('.carousel');
+      $carousel = $arrow.parents('#carousel');
       return $carousel.attr('data-direction', '');
     });
-    $('body').on('click', '.carousel.loaded .arrow:not(.no)', function() {
+    $('body').on('click', '#carousel.loaded .arrow:not(.no)', function() {
       var $arrow, $carousel, $currentSlide, $firstSlide, $lastSlide, $nextSlide, $slidesWrapper, currentIndex, delay, direction, left, windowWidth;
       $arrow = $(this);
       direction = $arrow.attr('data-direction');
       windowWidth = $(window).innerWidth();
-      $carousel = $arrow.parents('.carousel');
+      $carousel = $arrow.parents('#carousel');
       $slidesWrapper = $carousel.find('.slides');
       $currentSlide = $carousel.find('.slide.current');
       currentIndex = $currentSlide.index();
@@ -157,8 +200,12 @@ jQuery(function($) {
     });
     return resizeCarousel();
   };
+  $('body').on('click', 'article.readable a, article.readable img', openCarousel);
+  $('body').on('click', '#carousel .close', closeCarousel);
   $(function() {
-    return setupCarousel();
+    if ($carousels.length) {
+      return createCarousel();
+    }
   });
   return $(window).resize(function() {
     return setupCarousel();

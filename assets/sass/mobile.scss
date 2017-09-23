@@ -1,57 +1,37 @@
 @include tablet {
 	body, html {
+		header {
+			.inner {
+				display: block;
+				padding: .5em 0;
+				#logo {
+					width: calc(100% - 2em);
+					padding: 0 1em;
+					svg {
+						width: 50%;
+						display: table;
+						padding: 0;
+						margin: auto;
+					}
+				}
+				.rows {
+					width: calc(100% - 2em);
+					padding: 0 1em;
+					.row {
+						width: auto;
+						display: table;
+						margin: auto;
+						text-align: center;
+					}
+				}
+			}
+		}
 		#wrapper {
 			aside {
 				width: calc(100% - 2em);
 				height: auto !important;
 				position: static !important;
 				padding: 0 1em;
-				nav.mobile {
-					display: block;
-					.links {
-						.logo {
-							display: none;
-							a.svg {
-								svg {
-									width: auto;
-									height: 1em;
-									display: table;
-									margin: auto;
-								}
-							}
-						}
-						ul {
-							display: flex;
-							flex-wrap: wrap;
-							li {
-								margin: auto;
-								float: left;
-								text-align: center;
-								&:first-child {
-									width: 100%;
-									margin: 0;
-							    padding: 0 0 .5em 0;
-								}
-								&:nth-child(2) {
-									margin-left: 0; 
-								}
-								&:last-child {
-									margin-right: 0; 
-								}
-							}
-						}
-						&.fixed {
-							width: calc(100% - 2em);
-							left: 1em;
-							.tagline {
-								display: none;
-							}
-							.logo {
-								display: block;
-							}
-						}
-					}
-				}
 				.content {
 					margin: 0;
 					padding: 0;
@@ -67,13 +47,31 @@
 			}
 			main {
 				width: calc(100% - 2em);
-				padding: 0 1em;
-				nav {
-					display: none;
+				margin: 0 1em;
+				.readable {
+					width: 100%;
+					padding-right: 0;
+					.pagination {
+						.paginate {
+							.text {
+								display: none;
+							}
+							.circle {
+								width: #{$gutter * .75};
+								height: #{$gutter * .75};
+							}
+						}
+					}
 				}
 				.nested {
 					display: table;
 					margin: auto !important;
+				}
+				.split {
+					section {
+						width: 100%;
+						padding: 0 0 2em 0;
+					}
 				}
 			}
 		}

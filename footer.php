@@ -34,8 +34,16 @@ if( $post->post_name != 'discover' ) {
 				echo '</a>';
 			}
 		echo '</div>';
-		
-		echo '<div class="note">The Revealer is published by the Center for Religion and Media at NYU</div>';
+		$crm_url = get_field( 'crm_url', 'option' );
+		echo '<div class="note">';
+			echo '<form class="newsletter">';
+				echo '<label>';
+					echo 'Subscribe to our monthly newsletter';
+					echo '<input type="text" placeholder=""/>';
+				echo '</label>';
+			echo '</form>';
+		echo '</div>';
+		echo '<div class="note">The Revealer is published by the <a target="_blank" href="' . $crm_url . '">Center for Religion and Media at NYU</a></div>';
 		echo '<div class="note">Copyright © 2017 The Revealer All Rights Reserved.</div>';
 	echo '</footer>';
 }

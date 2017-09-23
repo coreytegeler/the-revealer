@@ -11,10 +11,12 @@ html, body {
 	color: $dark;
 	background: $light;
 	overflow-x: hidden;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	::selection {
-		background: $medium;
+		background: rgba($gold,.5);
 	}
 }
 a {
@@ -35,7 +37,7 @@ h1 {
 	margin: 0;
 }
 h2 {
-	@include mediumText;
+	@include xMediumText;
 	font-weight: normal;
 	margin: 0;
 }
@@ -103,39 +105,39 @@ input {
 #wrapper {
 	width: 100%;
 	position: relative;
+	// box-shadow: inset 0 15em 30em -15em $gold;
+	// margin-top: 1em;
 	main {
-		padding: .5em 1em 4em calc(#{$sideWidth} + 2em);
-		width: calc(100% - #{$sideWidth} - 3em);
+		width: calc(100% - #{$sideWidth} - #{$gutter*2});
+		margin: 0 $gutter #{$gutter*2} calc(#{$sideWidth} + #{$gutter});
 		@include tablet {
-			padding: 0 1em 4em calc(#{$mobSideWidth} + 2em);
-			width: calc(100% - #{$mobSideWidth} - 3em);
+			width: calc(100% - #{$mobSideWidth} - #{$gutter*2.5});
+			margin: 0 #{$gutter} #{$gutter*2} calc(#{$mobSideWidth} + #{$gutter});
 		}
 		.readable {
 			width: 100%;
 			min-height: 100vh;
-			padding-top: 1em;
+			padding: $gutter 0 0 0;
 			display: block;
 		}
 	}
 	.nested.parent {
 		max-width: $lineWidth;
-		padding: 2em 0 0 0;
+		padding: $gutter 0 0 0;
 		margin: 0;
 		li {
 			list-style: none;
 			padding: 0;
 			margin: 0;
-			h2 {
+			h1, h2 {
 				width: 100%;
 				margin: 0 0 .5em 0;
 		    display: table;
-		    text-transform: lowercase;
 		    @include serifText;
 		    text-align: center;
 		  }
 			.child {
 				display: table;
-				// padding: 0 0 1.5em 2em;
 				padding: 0 0 1.5em 0;
 				margin: auto;
 				li {
@@ -143,6 +145,11 @@ input {
 				}
 				a {
 					display: inline;
+				}
+				p {
+					display: inline;
+					font-size: inherit; 
+					line-height: inherit;	
 				}
 				span {
 					&.title {
@@ -217,32 +224,19 @@ input {
 	top: 0;
 	z-index: 1200;
 }
-.transport.top {
-	// width: 2em;
-	// height: 2em;
-	position: fixed;
-	right: 1em;
-	bottom: 1em;
-	padding: .5em;
-	z-index: 500;
-	transition: transform 200ms ease-in-out;
-	&:hover {
-		cursor: pointer;
-		transform: scale(1.1);
-	}
-	.circle {
-		width: 2em;
-		height: 2em;
-		display: flex;
-		background: $gold;
-		border-radius: 50%;
-		box-shadow: 0 0 .25em .5em $gold;
-		span {
-			display: table;
-			margin: auto;
-			@include xSmallText;
-			line-height: 0;
-			font-family: 'Clarendon';
+.stats {
+	width: 100%;
+  align-content: center;
+  margin: 0 auto 2em auto;
+  text-align: right;
+	h1 {
+    width: calc(100% - .5em);
+		padding-right: .5em;
+		text-align: center;
+		@include serifText;
+		&.title {
+			font-family: Clarendon;
+			text-transform: lowercase;
 		}
 	}
 }
@@ -253,33 +247,87 @@ input {
 		opacity: 1;
 	}
 }
+.circle {
+	width: #{$gutter*.75};
+  height: #{$gutter*.75};
+  border-radius: 50%;
+  background: $light;
+  box-shadow: 0 0 .25em .25em $gold;
+  display: flex;
+  span {
+		display: table;
+		margin: auto;
+	}
+	svg {
+		width: 75%;
+		height: 75%;
+    display: table;
+    margin: auto;
+    fill: $medium;
+	}
+}
+.split {
+	width: 100%;
+	display: table;
+	section {
+		width: 100%;
+		float: left;
+		display: table;
+		.title {
+			font-weight: bold;
+			color: $medium;
+			em {
+				@include serifText;
+				@include mediumText;
+			}
+			a {
+				text-decoration: none;
+				color: $medium;
+				transition: text-shadow 500ms $ease;
+				&:hover {
+					text-shadow: 0 0 1em $gold;
+				}
+			}
+		}
+		&:nth-of-type(odd) {
+			padding-right: 2em;
+		}
+		&:nth-of-type(even) {
+			padding-left: 2em;
+		}
+	}
+	&.one_one {
+		section {
+			width: calc(50% - 2em);
+		}
+	}
+	&.one_two {
+		section:first-child {
+			width: calc(33.333% - 2em);
+		}
+		section:last-child {
+			width: calc(66.666% - 2em);
+		}
+	}
+}
 #isMobile {
 	display: none;
 	content: '0';
 }
-// 	padding: .5em;
-// 	// margin: 0 0 0 1em;
-// 	text-align: center; 
-// 	background: pink;
-// 	.inner {
-// 		@include xSmallText;
-// 	}
-// 	&:hover {
-// 		cursor: pointer;
-// 	}
-// }
 body.full {
 	#wrapper {
 		main {
-	    padding: 0 1em 4em 1em;
-	    width: calc(100% - 2em);
+	    width: calc(100% - #{$gutter*2});
+	    margin: .5em $gutter 4em $gutter;
 		}
 	}
 	.max {
 		max-width: #{$maxWidth * 2};
 	}
 }
-
+::-webkit-scrollbar {
+    width: 0px;
+}
 
 
 // cubic-bezier(0.86, 0, 0.07, 1)
@@ -294,10 +342,12 @@ body.full {
 @import 'header';
 @import 'side';
 @import 'loop';
+@import 'home';
 @import 'single';
 @import 'about';
 @import 'search';
 @import 'discover';
 @import 'contributors';
 @import 'footer';
+@import 'carousel';
 @import 'mobile';

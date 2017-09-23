@@ -1,8 +1,30 @@
 body.discover {
-	// background-color: $gold;
-	nav {
-		background-color: $gold;
-		box-shadow: 0 0 .25em .5em $gold;
+	background-color: $gold;
+	header {
+    .inner {
+      .tagline {
+        color: $dark;
+        opacity: .5;
+      }
+      #logo {
+        a.svg:hover {
+          svg {
+            fill: $dark;
+            opacity: .5;
+          }
+        }
+      }
+      nav {
+        .link a:hover {
+          color: $dark;
+          opacity: .5;
+        }
+      }
+      .bar.bg .solid {
+        background-color: $gold;
+        box-shadow: 0 0 .25em .5em $gold;
+      }
+    }
 	}
 	#wrapper {
 		main {
@@ -11,6 +33,9 @@ body.discover {
 			padding-right: 0;
 		}
 	}
+  #discover {
+    z-index: 300;
+  }
 }
 #discover {
 	box-shadow: 0 0 .25em .5em $gold;
@@ -20,9 +45,93 @@ body.discover {
   clear: both;
   background-color: $gold;
   position: relative;
+  z-index: 500;
   .loop {
-    margin: 0;
+    width: calc(100% + 10em);
+    margin: 0 0 0 -5em;
     padding: 0;
+    .cell {
+      width: calc(100%/6 - .1em);
+      margin: 0 !important;
+      @include tablet {
+        width: calc(100%/4 - .1em);
+        .wrap {
+          padding: 80px;
+        }
+      }
+      .wrap {
+        display: table;
+        padding: 80px 0;
+        margin: auto;
+        text-align: center; 
+        pointer-events: none;
+        // mix-blend-mode: darken;
+        a {
+          overflow: visible;
+          font-weight: 100;
+          text-decoration: none;
+          display: table;
+          position: relative;
+          pointer-events: all;
+          .image, .circle {
+            transition: transform 500ms $ease, box-shadow 800ms $ease;
+          }
+          .title {
+            transition: transform 800ms $ease;
+          }
+          &:focus {
+            outline-color: $light;
+          }
+          &:hover {
+            .image, .circle {
+              transform: scale(1.05);
+              box-shadow: 0 0 2em 1em $light;
+            }
+            .title {
+              transform: scale(1.05);
+            }
+          }
+        }
+        .image {
+          width: 5em;
+          height: 5em;
+          border-radius: 50%;
+          box-shadow: 0 0 .25em .25em $light;
+          // box-shadow: inset 0 0 .25em .5em $gold;
+          background-position: center;
+          background-size: cover;
+          &.load, &.loading {
+            background-image: none !important;
+            background-color: $light;
+          }
+          &.loaded {
+            // background-color: $gold; 
+          }
+        }
+        .title {
+          font-family: 'Clarendon';
+          text-transform: lowercase;
+          position: relative;
+          z-index: 10;
+        }
+        .circle {
+          width: 4em;
+          height: 4em;
+          position: absolute;
+          left: calc(50% - 2em);
+          top: calc(50% - 2em);
+          z-index: 1;
+        }
+      }
+      &.thumb {
+        .wrap {
+          padding: 80px;
+        }
+      }
+      &.category {
+        // width: calc(40% - .1em);
+      }
+    }
   }
   h1, h2, h3 {
 		span {
@@ -35,8 +144,9 @@ body.discover {
   	}
 	}
   .inner {
-  	width: calc(100% - 4em);
-  	padding: 2em;
+    width: 100%;
+  	// width: calc(100% - 4em);
+  	// padding: 2em;
   	.center {
   		display: table;
   		margin: auto;

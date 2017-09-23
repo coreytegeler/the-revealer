@@ -6,16 +6,16 @@
 		max-width: $desktopWidth;
 	}
 	.cell {
-		// transition-duration: 0ms;
+		float: left;
 		a.link_wrap {
 			text-decoration: none;
 	    display: block;
-	    overflow: hidden;
 			.image {
 				width: 100%;
-				margin: 0 auto .5em auto;
-				display: table;
+				margin: 0;
+				display: block;
 				background: $medium;
+				transition: box-shadow 500ms $ease;
 				img {
 					width: 100%;
 					max-width: 100%;
@@ -47,7 +47,30 @@
 					pointer-events: none;
 				}
 			}
+			&:hover {
+				// color: $medium;
+				.image {
+					box-shadow: 0 0 5em 0 $gold;
+					img {
+					}
+					// mix-blend-mode: darken;
+					// img {
+						// filter: grayscale(1);
+					// }
+				}
+				svg, object {
+					fill: $medium;
+				}
+			}
+		}
+		.secondary {
+			padding: .5em 0 0 0;
 			.title {
+				.column {
+					h3 {
+						color: $medium;
+					}
+				}
 				h2 {
 					width: 100%;
 					text-align: left;
@@ -55,55 +78,35 @@
 					// font-weight: 100;
 					@include serifText;
 				}
-				.column {
-					h3 {
-						color: $medium;
-					}
-				}
 			}
-			&:hover {
+			.meta {
 				color: $medium;
-				.image {
-					mix-blend-mode: darken;
-					img {
-						filter: grayscale(1);
-					}
-				}
-				svg, object {
-					fill: $medium;
-				}
-			}
-		}
-		.excerpt {
-			width: 100%;
-			color: $medium;
-			padding-top: .25em;
-			@include xSmallText;
-			.more {
-				display: table;
-				margin-top: 1em;
-				text-decoration: none;
-				&::after {
-					content: '>';
-					margin-left: .25em;
-				}
-			}
-		}
-		.meta {
-			padding-top: .5em;
-			line-height: 0;
-			@include xSmallText;
-			span {
-				padding: 0 1em 0 0;
-				font-weight: 100;
-				color: $medium;
+				@include xSmallText;
 				a {
-					text-decoration: none;
-					display: inline;
 					color: $medium;
+					display: inline;
+					font-size: inherit;
+					text-decoration: none;
 				}
-				&:last-child {
-					padding: 0;
+				.date {
+					opacity: .5;
+				}
+			}
+			.excerpt {
+				width: 100%;
+				color: $medium;
+				padding-top: .25em;
+				font-style: italic;
+				@include serifText;
+				@include xSmallText;
+				.more {
+					display: table;
+					margin-top: 1em;
+					text-decoration: none;
+					&::after {
+						content: '>';
+						margin-left: .25em;
+					}
 				}
 			}
 		}
@@ -124,7 +127,7 @@
 				}
 			}
 		}
-		&.post {
+		&.article {
 		}
 		&.category {
 			.info {
@@ -145,37 +148,31 @@
 		// background: $medium;
 		.cell {
 			width: 100%;
-			margin: 0;
-			.image {
-				a {
-					display: table;
-					margin: auto;
-				}
-			}
-			.info {
-				width: 100%;
-				.title {
-					width: 100%;
+			margin: 0 0 2em 0;
+			a.link_wrap {
+				.image {
 					a {
 						display: table;
 						margin: auto;
-						h2 {
-							width: 100%;
-							@include largeText;
-							text-align: center;
+					}
+				}
+				.title {
+					width: 100%;
+					h2 {
+						width: 100%;
+						text-align: left;
+					}
+				}
+				&:hover {
+					.image {
+						img {
+							// box-shadow: 0 10em 10em -10em $gold;
 						}
 					}
 				}
 			}
 			.excerpt {
-				width: 80%;
 				max-width: 25em;
-				display: table;
-				margin: auto;
-			}
-			.meta {
-				display: table;
-				margin: auto;
 			}
 		}
 	}
@@ -255,82 +252,6 @@
 			}
 		}
 	}
-	&.discover {
-		width: 100%;
-		padding: 0;
-		.inner {
-			padding-left: 0;
-			padding-right: 0;
-		}
-		.cell {
-			width: calc(20% - .1em);
-			margin: 0 !important;
-			@include tablet {
-				width: calc(100%/4 - .1em);
-				.wrap {
-					padding: 80px;
-				}
-			}
-			.wrap {
-				display: table;
-				padding: 80px 0;
-				margin: auto;
-				text-align: center; 
-				// mix-blend-mode: darken;
-				a {
-			  	overflow: visible;
-			  	font-weight: 100;
-			  	text-decoration: none;
-			  	display: table;
-			  	position: relative;
-			  	&:focus {
-						outline-color: $light;
-			  	}
-			  }
-		  	.image {
-		  		width: 5em;
-					height: 5em;
-					border-radius: 50%;
-					box-shadow: 0 0 .25em .25em $light;
-					// box-shadow: inset 0 0 .25em .5em $gold;
-					background-position: center;
-					background-size: cover;
-					&.load, &.loading {
-						background-image: none !important;
-						background-color: $light;
-					}
-					&.loaded {
-						// background-color: $gold;	
-					}
-		  	}
-		  	.title {
-		  		font-family: 'Clarendon';
-		  		text-transform: lowercase;
-		  		position: relative;
-		  		z-index: 10;
-		  	}
-		  	.circle {
-		  		width: 4em;
-					height: 4em;
-					border-radius: 50%;
-					background: $light;
-					box-shadow: 0 0 .25em .25em $light;
-					position: absolute;
-					left: calc(50% - 2em);
-					top: calc(50% - 2em);
-					z-index: 1;
-		  	}
-			}
-			&.thumb {
-				.wrap {
-					padding: 80px;
-				}
-			}
-			&.category {
-				// width: calc(40% - .1em);
-			}
-	  }
-	}
 }
 .pagination {
 	width: 100%;
@@ -340,35 +261,80 @@
 		width: 50%;
 		height: 2em;
 		float: left;
+		position: relative;
 		a {
-			width: 2em;
-			height: 2em;
-			border-radius: 50%;
-			background: $light;
-			box-shadow: 0 0 .25em .25em $gold;
-			display: flex;
 			text-decoration: none;
+			.text {
+				width: auto;
+				height: 2em;
+				position: absolute;
+				top: 0;
+				display: flex;
+				align-items: center;
+				transition: transform 500ms $ease;
+				em {
+					display: table-cell;
+					vertical-align: middle;
+					opacity: $medium;
+					@include serifText;
+				}
+			}
+			.circle {
+				width: #{$gutter * .75};
+				height: #{$gutter * .75};
+				display: flex;
+				border-radius: 50%;
+				background: $light;
+				box-shadow: 0 0 .25em .25em $gold;
+				transition: transform 500ms $ease, box-shadow 800ms $ease;
+			}
 			svg {
 				width: auto;
-				height: 1.5em;
+				height: 75%;
 		    display: table;
 		    margin: auto;
 		    fill: $medium;
+			}
+			&:hover {
+				.circle {
+					transform: scale(1.05);
+	        box-shadow: 0 0 2em 1em $gold;
+	      }
 			}
 		}
 		&.prev {
 			a {
 				float: left;
+				.text {
+					left: 0;
+					padding-left: 2.75em;
+					text-align: left;
+				}
 				svg {
 					transform: translateX(-.1em);
+				}
+				&:hover {
+					.text {
+						transform: translateX(.25em);
+					}
 				}
 			}
 		}
 		&.next {
 			a {
 				float: right;
+				.text {
+					right: 0;
+					padding-right: 2.75em;
+					text-align: right;
+				}
 				svg {
 					transform: translateX(.1em);
+				}
+				&:hover {
+					.text {
+						transform: translateX(-.25em);
+					}
 				}
 			}
 		}

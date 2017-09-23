@@ -6,21 +6,18 @@ jQuery ($) ->
 		$side = $('aside')
 		$header = $('header')
 		$logo = $('#logo')
-		$navs = $('nav')
-		$mainNav = $('nav.main')
-		$mainNavInner = $mainNav.find('.inner')
-		$mobileNav = $('nav.mobile')
-		$mobileNavInner = $mobileNav.find('.inner')
+		$headers = $('header')
+		$header = $('header.main')
+		$nav = $header.find('nav')
 		$main = $('main')
 		$footer = $('footer')
 		$topBar = $('#top_bar')
 		siteUrl = $body.attr('data-site-url')
 
 		sizeImages = () ->
-			$('.image.load').each () ->
-				$image = $(this)
+			$('.image.load').each (i, image) ->
+				$image = $(image)
 				$img = $image.find('img')
-				$image.removeClass('load').addClass('loading')
 				if $img.parents('article')
 					$parent = $img.parents('article')
 				else
@@ -34,6 +31,8 @@ jQuery ($) ->
 					$image.css
 						width: imageWidth,
 						height: imageHeight
+					loadImage($image)
+				else if $image.parents('.cell.discover').length
 					loadImage($image)
 				else
 					if $img.length
@@ -49,29 +48,44 @@ jQuery ($) ->
 						ratio = natWidth/natHeight
 						imageWidth = $image.innerWidth()
 						imageHeight = imageWidth/ratio
-						if $img.length
-							$image.css
-								width: imageWidth,
-								height: imageHeight
+						$image.css
+							width: imageWidth,
+							height: imageHeight
+						loadImage($image)
+					image.onerror = (e) ->
+						img = e.target
 						loadImage($image)
 					image.src = src
 
-		loadImage = ($image) ->		
+		loadImage = (image) ->
+			$image = $(image)
+			if !$image.is('.load')
+				return
+			$image.removeClass('load').addClass('loading')
 			$img = $image.find('img')
 			src = $img.attr('data-src')
 			if !$img.length
 				src = $image.attr('data-src')
-			$image.imagesLoaded {background: true}, () ->
-				$image.removeClass('loading').addClass('loaded')
-				if $img.length
-					if $img.parents('aside').length
-						fixSide()
-					else
-						$image.attr('style','')
-						fixGrids()
-				setTimeout () ->
-					if $grid = $image.parents('.grid')
-						$grid.masonry()
+			$image.imagesLoaded {background: true}
+				.done (instance) ->
+					$image.removeClass('loading').addClass('loaded')
+					if $img.length
+						if $img.parents('aside').length
+							fixSide()
+						else
+							$image.attr('style','')
+							fixGrids()
+					setTimeout () ->
+						if $grid = $image.parents('.grid')
+							$grid.masonry()
+				.fail (instance) ->
+					$(instance.elements).each () ->
+						$cell = $(this).parents('.cell')
+						if $cell.length
+							$cell.remove()
+						else
+							$(this).remove()
+					fixGrids()
 			if $img.length
 				$img.attr('src', src)
 			else
@@ -88,7 +102,7 @@ jQuery ($) ->
 					$grid.masonry()
 						.append($cells)
 						.masonry('appended', $cells)
-				if $grid.is('.discovery')
+				if $grid.is('.discover')
 					$grid.scatter()
 				$first = $grid.find('.cell:eq(0)')
 				if !$first.length
@@ -103,16 +117,23 @@ jQuery ($) ->
 					percentPosition: true,
 					fitWidth: true
 
-		fixSide = () ->
+		fixSide = (e) ->
+			return
 			if !$side.length
 				return
+			winHeight = $window.innerHeight()
 			winScroll = $window.scrollTop()
+			pageHeight = $main.innerHeight()
+			pageTop = $main.position().top
+			pageBottom = pageTop + pageHeight
+			pageEnd = pageBottom - winHeight
+			isBottom = (winScroll >= pageEnd)
+
 			sideHeight = $side.innerHeight()
 			sideScrollHeight = $side[0].scrollHeight
-			if sideScrollHeight > sideHeight
-				$side.scrollTop(winScroll)
+			sideScroll = $side.scrollTop()
 
-		trackScroll = () ->
+		trackScroll = (e) ->
 			$readable = $('.readable')
 			if !$readable.length
 				return
@@ -129,19 +150,19 @@ jQuery ($) ->
 				pageTop = topBarHeight
 			else
 				pageTop = 0
-
-			$navs.each (i, nav) ->
-				$nav = $(nav)
-				$mainNavInner = $nav.find('.inner')
-				navBottom = $nav.offset().top + $nav.innerHeight()
-				innerHeight = $mainNavInner.innerHeight()
-				innerTop = navBottom - innerHeight
+				
+			$headers.each (i, header) ->
+				$header = $(header)
+				$nav = $header.find('nav')
+				headerBottom = $header.offset().top + $header.innerHeight()
+				innerHeight = $nav.outerHeight()
 				if isBottom
+					sideScroll = $side.scrollTop()
 					$wrapper.addClass('bottom')
-					$mainNav.css
+					$header.css
 						y: pageEnd - winScroll
 				else
-					$mainNav.css
+					$header.css
 						y: 0
 					if $topBar.length
 						top = topBarHeight
@@ -149,24 +170,34 @@ jQuery ($) ->
 					else
 						top = 0
 					$wrapper.removeClass('bottom')
+				# PROGRESS BAR
+				$header.find('.bar').each (i, bar) ->
+					$bar = $(this)
+					if $bar.is('.prog')
+						barWidth = $(bar).innerWidth()
+						progress = winScroll * barWidth / pageEnd
+						$bar.find('.solid').css
+							width: progress
+					# else if $bar.is('.bg')
+					# 	opacity = winScroll * 1 / 20
+					# 	$bar.css
+					# 		opacity: opacity
 
-			# PROGRESS BAR
-			$('.prog_bar').each (i, bar) ->
-				$bar = $(this)
-				barWidth = $(bar).innerWidth()
-				progress = winScroll * barWidth / pageEnd
-				if isBottom
-					progress = barWidth
-				$bar.find('.solid').css
-					width: progress
-
+			if $side.length
+				sideTop = $side.position().top
+				sideHeight = $side.innerHeight()
+				sideBottom = sideTop + sideHeight
+				sideScroll = $side.scrollTop()
+				sideEnd = sideBottom - $side.innerHeight()
+				scrollPast = winScroll - pageEnd
+				notSideBottom = sideScroll < $side[0].scrollHeight - sideHeight
+				if notSideBottom
+					$side.scrollTop(scrollPast)
 
 			nearBottom = winScroll + winHeight >= scrollHeight - winHeight * 2
 			if $readable.is('#discover') && nearBottom
 				queryMore()
-
-			
-			fixSide()
+			fixSide(e)
 
 		toggleFilterList = () ->
 			$toggle = $(this)
@@ -188,13 +219,13 @@ jQuery ($) ->
 			$article = $('article')
 
 			# wraps inline images to load before showing
-			$images = $side.find('.images')
-			imgs = $article.find('.content img')
-			for img in imgs
-				$(img).wrap('<div class="image load"></div>')
-				loadImage($(img).parents('.image'))
+			inlineImgs = $article.find('.content img')
+			for inlineImg in inlineImgs
+				$(inlineImg).wrap('<div class="image load"></div>')
+		
+			sizeImages()
 
-			links = $article.find('a')
+			links = $article.find('a[href]')
 			for link in links
 				$link = $(link)
 				href = $link.attr('href')	
@@ -222,12 +253,9 @@ jQuery ($) ->
 
 		transport = (e) ->
 			$button = $(this)
-			if isMobile()
-				$nav = $mobileNav
-			else
-				$nav = $mainNav
+			$header = $header
 			scrollTop = $('html,body').scrollTop()
-			navBottom = $nav.innerHeight()
+			headerBottom = $header.innerHeight()
 			if $button.is('.top')
 				scrollTo = 0
 			else if $button.is('.ftn')
@@ -244,7 +272,7 @@ jQuery ($) ->
 			hasOffset = $inline && $inline.length
 			
 			if hasOffset
-				scrollTo = $inline.offset().top - scrollTop - navBottom*2
+				scrollTo = $inline.offset().top - scrollTop - headerBottom*2
 
 			if !isNaN(scrollTo)
 				$('html,body').animate
@@ -255,25 +283,21 @@ jQuery ($) ->
 
 
 		fixHeader = () ->
-			if isMobile()
-				$mobileNav.css
-					height: Math.ceil($mobileNavInner.innerHeight())
-			else
-				topHeight = Math.ceil($mainNav.innerHeight())
-				$wrapper.css
-					paddingTop: topHeight
-				$side.css
-					height: $window.innerHeight() - topHeight,
-					top: topHeight
-				taglineHeight = $mainNavInner.find('.tagline').innerHeight()
-				linksHeight = $mainNavInner.find('.links').innerHeight()
-				taglineWidth = $mainNavInner.find('.tagline').innerWidth()
-				linksWidth = $mainNavInner.find('.links').innerWidth()
-				# console.log taglineWidth + linksWidth, $mainNav.innerWidth()
+			topHeight = Math.ceil($header.outerHeight())
+			$wrapper.css
+				paddingTop: topHeight
+			$side.css
+				height: $window.innerHeight() - topHeight,
+				top: topHeight
+			taglineHeight = $nav.find('.tagline').innerHeight()
+			linksHeight = $nav.find('.links').innerHeight()
+			taglineWidth = $nav.find('.tagline').innerWidth()
+			linksWidth = $nav.find('.links').innerWidth()
+				# console.log taglineWidth + linksWidth, $header.innerWidth()
 				# if linksHeight >= taglineHeight - 5 && linksHeight <= taglineHeight + 5
-				# 	$mainNavInner.removeClass('break')
+				# 	$nav.removeClass('break')
 				# else
-				# 	$mainNavInner.addClass('break')
+				# 	$nav.addClass('break')
 			# if !$topBar
 				# return
 			# topBarHeight = $topBar.innerHeight()
@@ -410,8 +434,8 @@ jQuery ($) ->
 		.resize()
 
 
-		$window.on 'scroll', () ->
-			trackScroll()
+		$window.on 'scroll', (e) ->
+			trackScroll(e)
 
 		setupArticle()
 		reveal()

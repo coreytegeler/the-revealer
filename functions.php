@@ -1,7 +1,8 @@
 <?php
 show_admin_bar( false );
-add_theme_support( 'post-thumbnails', array( 'post', 'page' ) ); 
+add_theme_support( 'post-thumbnails', array( 'post', 'page', 'event' ) ); 
 add_image_size( 'thumb', 800, 500, true );
+add_image_size( 'small', 1000, 1000, false );
 
 wp_register_script( 'jquery', get_template_directory_uri() . '/assets/js/jquery-3.2.1.min.js' );
 wp_register_script( 'imagesloaded', get_template_directory_uri() . '/assets/js/imagesloaded.js' );
@@ -74,14 +75,12 @@ function add_query_vars( $vars ){
 }
 add_filter( 'query_vars', 'add_query_vars' );
 
-
-
-function register_contributors() {
-  register_post_type( 'contributor',
+function register_writers() {
+  register_post_type( 'writer',
     array(
       'labels' => array(
-        'name' => __( 'Contributors' ),
-        'singular_name' => __( 'Contributor' )
+        'name' => __( 'Writers' ),
+        'singular_name' => __( 'Writer' )
       ),
       'menu_position' => 5,
       'menu_icon' => 'dashicons-admin-users',
@@ -91,7 +90,24 @@ function register_contributors() {
     )
   );
 }
-add_action( 'init', 'register_contributors' );
+add_action( 'init', 'register_writers' );
+
+function register_events() {
+  register_post_type( 'event',
+    array(
+      'labels' => array(
+        'name' => __( 'Events' ),
+        'singular_name' => __( 'Event' )
+      ),
+      'menu_position' => 5,
+      'menu_icon' => 'dashicons-calendar-alt',
+      'public' => true,
+      'has_archive' => true,
+      'supports' => array('title', 'thumbnail')
+    )
+  );
+}
+add_action( 'init', 'register_events' );
 
 function register_columns() {
   register_taxonomy( 'columns', array('post'), array(
@@ -116,6 +132,35 @@ function register_columns() {
   ));
 }
 add_action( 'init', 'register_columns' );
+
+function register_issues() {
+  register_taxonomy( 'issues', array('post'), array(
+    'hierarchical' => true,
+    'labels' => array(
+      'name' => _x( 'Issues', 'taxonomy general name' ),
+      'singular_name' => _x( 'Issue', 'taxonomy singular name' ),
+      'search_items' =>  __( 'Search Issues' ),
+      'all_items' => __( 'All Issues' ),
+      'parent_item' => __( 'Parent Issue' ),
+      'parent_item_colon' => __( 'Parent Issue:' ),
+      'edit_item' => __( 'Edit Issue' ), 
+      'update_item' => __( 'Update Issue' ),
+      'add_new_item' => __( 'Add New Issue' ),
+      'new_item_name' => __( 'New Issue Name' ),
+      'menu_name' => __( 'Issues' ),
+    ),
+    'show_ui' => true,
+    'show_admin_issue' => true,
+    'query_var' => true,
+    'rewrite' => array( 'slug' => 'issue' ),
+  ));
+}
+add_action( 'init', 'register_issues' );
+
+
+if( function_exists('acf_add_options_page') ) {
+  acf_add_options_page(); 
+}
 
 function register_nav() {
   register_nav_menu( 'navigation', __( 'Navigation' ) );

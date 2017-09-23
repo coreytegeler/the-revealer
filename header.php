@@ -2,13 +2,15 @@
 <html <?php language_attributes(); ?> class="no-js no-svg">
 <head>
 <?php
+global $post;
 $page_type = $post->post_type;
 $page_slug = $post->post_name;
-$full_pages = array( 'home', 'about', 'search', 'discover' );
+// echo $page_type;
+$full_pages = array( 'home', 'about', 'search', 'discover', 'events' );
 if( is_home() ) {
 	$page_slug = 'home';
 	$body_style = 'full';
-} else if( in_array( $page_slug, $full_pages ) ) {
+} else if( in_array( $page_slug, $full_pages ) || is_search() ) {
 	$body_style = 'full';
 } else {
 	$page_slug = $post->post_name;
@@ -42,9 +44,9 @@ if( is_search() || $page_slug == 'search' ) {
 	// echo '</div>';
 // }
 get_template_part( 'parts/header' );
-echo '<div id="wrapper" class="fixed">';
+echo '<div id="wrapper">';
 	wp_reset_query();
-	if( !in_array( $page_slug, $full_pages ) ) {
+	if( !in_array( $page_slug, $full_pages ) && !is_search() ) {
 		get_template_part( 'parts/side' );
 	}
 	echo '<main>';

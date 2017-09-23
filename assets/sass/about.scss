@@ -10,8 +10,8 @@ body.about {
 	#wrapper {
 		main {
 			ul.nested.parent {
-				display: table;
-				margin: auto;
+				width: 50%;
+				float: left;
 				ul.child {
 					span {
 						&.years {

@@ -1,27 +1,24 @@
 jQuery(function($) {
   return $(function() {
-    var $body, $footer, $header, $logo, $main, $mainNav, $mainNavInner, $mobileNav, $mobileNavInner, $navs, $side, $topBar, $window, $wrapper, closeTopBar, fixGrids, fixHeader, fixSide, isMobile, loadImage, queryMore, reveal, setupArticle, siteUrl, sizeImages, toggleFilterList, trackScroll, transport;
+    var $body, $footer, $header, $headers, $logo, $main, $nav, $side, $topBar, $window, $wrapper, closeTopBar, fixGrids, fixHeader, fixSide, isMobile, loadImage, queryMore, reveal, setupArticle, siteUrl, sizeImages, toggleFilterList, trackScroll, transport;
     $window = $(window);
     $body = $('body');
     $wrapper = $('#wrapper');
     $side = $('aside');
     $header = $('header');
     $logo = $('#logo');
-    $navs = $('nav');
-    $mainNav = $('nav.main');
-    $mainNavInner = $mainNav.find('.inner');
-    $mobileNav = $('nav.mobile');
-    $mobileNavInner = $mobileNav.find('.inner');
+    $headers = $('header');
+    $header = $('header.main');
+    $nav = $header.find('nav');
     $main = $('main');
     $footer = $('footer');
     $topBar = $('#top_bar');
     siteUrl = $body.attr('data-site-url');
     sizeImages = function() {
-      return $('.image.load').each(function() {
-        var $image, $img, $parent, image, imageHeight, imageWidth, natHeight, natWidth, ratio, src;
-        $image = $(this);
+      return $('.image.load').each(function(i, image) {
+        var $image, $img, $parent, imageHeight, imageWidth, natHeight, natWidth, ratio, src;
+        $image = $(image);
         $img = $image.find('img');
-        $image.removeClass('load').addClass('loading');
         if ($img.parents('article')) {
           $parent = $img.parents('article');
         } else {
@@ -37,6 +34,8 @@ jQuery(function($) {
             width: imageWidth,
             height: imageHeight
           });
+          return loadImage($image);
+        } else if ($image.parents('.cell.discover').length) {
           return loadImage($image);
         } else {
           if ($img.length) {
@@ -54,20 +53,28 @@ jQuery(function($) {
             ratio = natWidth / natHeight;
             imageWidth = $image.innerWidth();
             imageHeight = imageWidth / ratio;
-            if ($img.length) {
-              $image.css({
-                width: imageWidth,
-                height: imageHeight
-              });
-            }
+            $image.css({
+              width: imageWidth,
+              height: imageHeight
+            });
+            return loadImage($image);
+          };
+          image.onerror = function(e) {
+            var img;
+            img = e.target;
             return loadImage($image);
           };
           return image.src = src;
         }
       });
     };
-    loadImage = function($image) {
-      var $img, src;
+    loadImage = function(image) {
+      var $image, $img, src;
+      $image = $(image);
+      if (!$image.is('.load')) {
+        return;
+      }
+      $image.removeClass('load').addClass('loading');
       $img = $image.find('img');
       src = $img.attr('data-src');
       if (!$img.length) {
@@ -75,7 +82,7 @@ jQuery(function($) {
       }
       $image.imagesLoaded({
         background: true
-      }, function() {
+      }).done(function(instance) {
         $image.removeClass('loading').addClass('loaded');
         if ($img.length) {
           if ($img.parents('aside').length) {
@@ -91,6 +98,17 @@ jQuery(function($) {
             return $grid.masonry();
           }
         });
+      }).fail(function(instance) {
+        $(instance.elements).each(function() {
+          var $cell;
+          $cell = $(this).parents('.cell');
+          if ($cell.length) {
+            return $cell.remove();
+          } else {
+            return $(this).remove();
+          }
+        });
+        return fixGrids();
       });
       if ($img.length) {
         return $img.attr('src', src);
@@ -110,7 +128,7 @@ jQuery(function($) {
         if ($cells) {
           $grid.masonry().append($cells).masonry('appended', $cells);
         }
-        if ($grid.is('.discovery')) {
+        if ($grid.is('.discover')) {
           $grid.scatter();
         }
         $first = $grid.find('.cell:eq(0)');
@@ -129,20 +147,25 @@ jQuery(function($) {
         });
       });
     };
-    fixSide = function() {
-      var sideHeight, sideScrollHeight, winScroll;
+    fixSide = function(e) {
+      var isBottom, pageBottom, pageEnd, pageHeight, pageTop, sideHeight, sideScroll, sideScrollHeight, winHeight, winScroll;
+      return;
       if (!$side.length) {
         return;
       }
+      winHeight = $window.innerHeight();
       winScroll = $window.scrollTop();
+      pageHeight = $main.innerHeight();
+      pageTop = $main.position().top;
+      pageBottom = pageTop + pageHeight;
+      pageEnd = pageBottom - winHeight;
+      isBottom = winScroll >= pageEnd;
       sideHeight = $side.innerHeight();
       sideScrollHeight = $side[0].scrollHeight;
-      if (sideScrollHeight > sideHeight) {
-        return $side.scrollTop(winScroll);
-      }
+      return sideScroll = $side.scrollTop();
     };
-    trackScroll = function() {
-      var $readable, isBottom, nearBottom, pageBottom, pageEnd, pageHeight, pageTop, scrollHeight, topBarHeight, winHeight, winScroll;
+    trackScroll = function(e) {
+      var $readable, isBottom, nearBottom, notSideBottom, pageBottom, pageEnd, pageHeight, pageTop, scrollHeight, scrollPast, sideBottom, sideEnd, sideHeight, sideScroll, sideTop, topBarHeight, winHeight, winScroll;
       $readable = $('.readable');
       if (!$readable.length) {
         return;
@@ -160,20 +183,20 @@ jQuery(function($) {
       } else {
         pageTop = 0;
       }
-      $navs.each(function(i, nav) {
-        var $nav, innerHeight, innerTop, navBottom, top;
-        $nav = $(nav);
-        $mainNavInner = $nav.find('.inner');
-        navBottom = $nav.offset().top + $nav.innerHeight();
-        innerHeight = $mainNavInner.innerHeight();
-        innerTop = navBottom - innerHeight;
+      $headers.each(function(i, header) {
+        var headerBottom, innerHeight, sideScroll, top;
+        $header = $(header);
+        $nav = $header.find('nav');
+        headerBottom = $header.offset().top + $header.innerHeight();
+        innerHeight = $nav.outerHeight();
         if (isBottom) {
+          sideScroll = $side.scrollTop();
           $wrapper.addClass('bottom');
-          return $mainNav.css({
+          $header.css({
             y: pageEnd - winScroll
           });
         } else {
-          $mainNav.css({
+          $header.css({
             y: 0
           });
           if ($topBar.length) {
@@ -182,26 +205,37 @@ jQuery(function($) {
           } else {
             top = 0;
           }
-          return $wrapper.removeClass('bottom');
+          $wrapper.removeClass('bottom');
         }
-      });
-      $('.prog_bar').each(function(i, bar) {
-        var $bar, barWidth, progress;
-        $bar = $(this);
-        barWidth = $(bar).innerWidth();
-        progress = winScroll * barWidth / pageEnd;
-        if (isBottom) {
-          progress = barWidth;
-        }
-        return $bar.find('.solid').css({
-          width: progress
+        return $header.find('.bar').each(function(i, bar) {
+          var $bar, barWidth, progress;
+          $bar = $(this);
+          if ($bar.is('.prog')) {
+            barWidth = $(bar).innerWidth();
+            progress = winScroll * barWidth / pageEnd;
+            return $bar.find('.solid').css({
+              width: progress
+            });
+          }
         });
       });
+      if ($side.length) {
+        sideTop = $side.position().top;
+        sideHeight = $side.innerHeight();
+        sideBottom = sideTop + sideHeight;
+        sideScroll = $side.scrollTop();
+        sideEnd = sideBottom - $side.innerHeight();
+        scrollPast = winScroll - pageEnd;
+        notSideBottom = sideScroll < $side[0].scrollHeight - sideHeight;
+        if (notSideBottom) {
+          $side.scrollTop(scrollPast);
+        }
+      }
       nearBottom = winScroll + winHeight >= scrollHeight - winHeight * 2;
       if ($readable.is('#discover') && nearBottom) {
         queryMore();
       }
-      return fixSide();
+      return fixSide(e);
     };
     toggleFilterList = function() {
       var $filter, $list, $toggle, height;
@@ -219,19 +253,18 @@ jQuery(function($) {
       });
     };
     setupArticle = function() {
-      var $article, $images, $link, href, img, imgs, j, k, len, len1, link, links, replace;
+      var $article, $link, href, inlineImg, inlineImgs, j, k, len, len1, link, links, replace;
       if (!$body.is('.single-post')) {
         return;
       }
       $article = $('article');
-      $images = $side.find('.images');
-      imgs = $article.find('.content img');
-      for (j = 0, len = imgs.length; j < len; j++) {
-        img = imgs[j];
-        $(img).wrap('<div class="image load"></div>');
-        loadImage($(img).parents('.image'));
+      inlineImgs = $article.find('.content img');
+      for (j = 0, len = inlineImgs.length; j < len; j++) {
+        inlineImg = inlineImgs[j];
+        $(inlineImg).wrap('<div class="image load"></div>');
       }
-      links = $article.find('a');
+      sizeImages();
+      links = $article.find('a[href]');
       for (k = 0, len1 = links.length; k < len1; k++) {
         link = links[k];
         $link = $(link);
@@ -260,15 +293,11 @@ jQuery(function($) {
       });
     };
     transport = function(e) {
-      var $button, $image, $img, $inline, $nav, $readable, hasOffset, href, navBottom, scrollTo, scrollTop, src;
+      var $button, $image, $img, $inline, $readable, hasOffset, headerBottom, href, scrollTo, scrollTop, src;
       $button = $(this);
-      if (isMobile()) {
-        $nav = $mobileNav;
-      } else {
-        $nav = $mainNav;
-      }
+      $header = $header;
       scrollTop = $('html,body').scrollTop();
-      navBottom = $nav.innerHeight();
+      headerBottom = $header.innerHeight();
       if ($button.is('.top')) {
         scrollTo = 0;
       } else if ($button.is('.ftn')) {
@@ -285,7 +314,7 @@ jQuery(function($) {
       }
       hasOffset = $inline && $inline.length;
       if (hasOffset) {
-        scrollTo = $inline.offset().top - scrollTop - navBottom * 2;
+        scrollTo = $inline.offset().top - scrollTop - headerBottom * 2;
       }
       if (!isNaN(scrollTo)) {
         return $('html,body').animate({
@@ -299,24 +328,18 @@ jQuery(function($) {
     };
     fixHeader = function() {
       var linksHeight, linksWidth, taglineHeight, taglineWidth, topHeight;
-      if (isMobile()) {
-        return $mobileNav.css({
-          height: Math.ceil($mobileNavInner.innerHeight())
-        });
-      } else {
-        topHeight = Math.ceil($mainNav.innerHeight());
-        $wrapper.css({
-          paddingTop: topHeight
-        });
-        $side.css({
-          height: $window.innerHeight() - topHeight,
-          top: topHeight
-        });
-        taglineHeight = $mainNavInner.find('.tagline').innerHeight();
-        linksHeight = $mainNavInner.find('.links').innerHeight();
-        taglineWidth = $mainNavInner.find('.tagline').innerWidth();
-        return linksWidth = $mainNavInner.find('.links').innerWidth();
-      }
+      topHeight = Math.ceil($header.outerHeight());
+      $wrapper.css({
+        paddingTop: topHeight
+      });
+      $side.css({
+        height: $window.innerHeight() - topHeight,
+        top: topHeight
+      });
+      taglineHeight = $nav.find('.tagline').innerHeight();
+      linksHeight = $nav.find('.links').innerHeight();
+      taglineWidth = $nav.find('.tagline').innerWidth();
+      return linksWidth = $nav.find('.links').innerWidth();
     };
     closeTopBar = function() {
       $topBar.remove();
@@ -427,8 +450,8 @@ jQuery(function($) {
       fixHeader();
       return trackScroll();
     }).resize();
-    $window.on('scroll', function() {
-      return trackScroll();
+    $window.on('scroll', function(e) {
+      return trackScroll(e);
     });
     setupArticle();
     return reveal();

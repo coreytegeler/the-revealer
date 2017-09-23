@@ -6,6 +6,8 @@ global $post;
 // );
 // $rand_cats = get_categories(  $rand_cat_args );
 
+print_r( $already_used );
+
 $rand_post_args = array(
 	'post_type' => 'post',
 	'posts_per_page' => 15,

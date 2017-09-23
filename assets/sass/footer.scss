@@ -1,7 +1,7 @@
 #discover {
   #searchform {
     position: absolute;
-    top: calc(100% - 1.25em);
+    top: calc(100% - 2.5em);
     left: 0;
     form {
       max-width: $lineWidth;
@@ -38,11 +38,27 @@ footer {
 		}
   }
 	.note {			
-		opacity: 0.5;
+		color: $medium;
 		display: table;
 		margin: auto;
 		padding: 1em 1em 0 1em;
 		text-align: center;
 		@include xSmallText;
+    a {
+      text-decoration: none;
+      border-bottom: 1px solid $medium;
+    }
 	}
+  form.newsletter {
+    label {
+      color: $dark;
+      input {
+        margin-left: 1em;
+        background: $light;
+        border: none;
+        border-radius: 0;
+        box-shadow: 0px 0px .5em .05em $gold;
+      }
+    }
+  }
 }

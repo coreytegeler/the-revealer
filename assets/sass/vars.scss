@@ -1,9 +1,11 @@
 $gold: #fecf0c;
-$dark: #336666;
+// $teal: #46cbca;
 $dark: #1a172e;
+$dark: rgba(#1a172e, .9);
 $medium: #89879d;
-$light: #f4f2f3;
-// $light: #fff;
+$light: #f3f1f3;
+
+$ease: cubic-bezier(0.19, 1, 0.22, 1);
 
 @import 'https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i&subset=latin-ext';
 @import 'https://fonts.googleapis.com/css?family=Cardo:400,400i,700&subset=greek,greek-ext,latin-ext';
@@ -34,33 +36,36 @@ $light: #f4f2f3;
 	line-height: 1.2em;
 }
 @mixin xMediumText {
-  font-size: 1.3em;
-  line-height: 1.4em;
+  font-size: 1.5em;
+  line-height: 1.1em;
 }
 @mixin largeText {
 	font-size: 2em;
-	line-height: 1.2em;
-	@include tablet {
-		font-size: 3em;
-	}
+	line-height: 1.1em;
+}
+@mixin xLargeText {
+  font-size: 2.3em;
+  line-height: 1.1em;
 }
 
 $serif: 'Crimson Text', 'Lora', 'Baskerville', times, serif;
 $sansSerif: 'Karla', Helvetica, Arial, sans-serif;
 @mixin serifText {
 	font-family: $serif;
+  font-weight: normal;
 }
 @mixin sansSerifText {
 	font-family: $sansSerif;
 }
 @mixin italicText {
-	font-family: $serif;
+	// font-family: $serif;
 	font-style: italic;
 }
 
 $sideWidth: 25vw;
 $mobSideWidth: 35vw;
 $lineWidth: 30em;
+$gutter: 2em;
 
 $phoneWidth: 480px;
 $tabletWidth: 768px;

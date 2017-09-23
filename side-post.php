@@ -13,7 +13,10 @@ $author = get_field( 'author' );
 $content = $post->post_content;
 $excerpt = wp_strip_all_tags( get_the_excerpt() );
 $tags = get_the_tags();
-echo '<header role="contentinfo">';
+$images_regex = '/src="([^"]*)"/';
+preg_match_all( $images_regex, $content, $matches );
+$images = $matches[0];
+echo '<div id="about" role="contentinfo">';
 	echo '<div class="info">';
 		echo '<div class="title">';
 			if( $column ) {
@@ -26,17 +29,18 @@ echo '<header role="contentinfo">';
 		echo '<div class="meta">';
 			if( $author ) {
 				echo '<div class="row author">';
-					echo '<div>Author</div>';
-					echo '<div><a href="/' . $author . '">' . $author . '</a></div>';
+					echo '<div class="label">Author</div>';
+					echo '<div class="value"><a href="/' . $author . '">' . $author . '</a></div>';
 				echo '</div>';
 			}
 			echo '<div class="row date">';
-				echo '<div>Published</div><div>' . $date . '</div>';
+				echo '<div class="label">Published</div>';
+				echo '<div class="value">' . $date . '</div>';
 			echo '</div>';
 			if( $categories && $cat_length = sizeof( $categories ) ) {
 				echo '<div class="row category">';
-					echo '<div>Category</div>';
-					echo '<div>';
+					echo '<div class="label">Category</div>';
+					echo '<div class="value">';
 						foreach ($categories as $i => $category) {
 							$cat_url = get_category_link( $category->cat_ID );
 							echo '<a href="' . $cat_url . '">' . $category->name . '</a>';
@@ -47,12 +51,6 @@ echo '<header role="contentinfo">';
 					echo '</div>';
 				echo '</div>';
 			}
-			echo '<div class="row time">';
-				echo '<div>Reading time</div><div>' . get_read_time() . '</div>';
-			echo '</div>';
-			// echo '<div class="row progress">';
-			// 	echo '<div>Progress</div><div class="progbar"><div class="solid"></div></div>';
-			// echo '</div>';
 		echo '</div>';
 		// echo '<div class="excerpt">';
 		// 	echo '<p>' . $excerpt . '</p>';
@@ -68,16 +66,13 @@ echo '<header role="contentinfo">';
 		}
 	echo '</div>';
 	echo '<div class="images loop grid xsmall">';
-		$regex = '/src="([^"]*)"/';
-		preg_match_all( $regex, $content, $matches );
-		$images = $matches[0];
 		if( sizeof( $images ) ) {
 			foreach( $images as $image ) {
-				echo '<div class="image inline cell load transport">';
+				echo '<div class="cell transport">';
 					echo '<div class="image load">';
 						echo '<img '.$image.'" alt="'.$title.'" title="'.$title.'"/>';
 					echo '</div>';
-			   echo '</div>';
+		  	echo '</div>';
 			}
 		}
 	echo '</div>';

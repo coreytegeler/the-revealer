@@ -7,7 +7,10 @@ echo '<div id="searchform">';
 		} else {
 			$placeholder = 'Seeking something?';
 		}
-	  echo '<input type="search" id="searchbox" name="s" placeholder="' . $placeholder . '" required>';
+		echo '<label for="search">';
+			echo '<em>Search</em>';
+		  echo '<input type="search" id="searchbox" name="s" placeholder="' . $placeholder . '" required>';
+	  echo '</label>';
 	echo '</form>';
 echo '</div>';
 ?>

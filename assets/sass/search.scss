@@ -1,28 +1,13 @@
 body.search {
 	.search_header {
 		width: 100%;
-		display: flex;
-    margin: auto;
-    flex-direction: row;
-    .text {
-			width: 50%;
-			float: left;
-	    display: flex;
-	    align-content: center;
-	    flex-direction: row;
-	    margin: auto;
-	    text-align: right;
-			h1 {
-		    width: calc(100% - .5em);
-				float: left;
-				padding-right: .5em;
-				text-align: left;
-				@include serifText;
-			}
-		}
+		max-width: $lineWidth;
+		margin: auto;
+		// display: flex;
+    // flex-direction: row;
 		#searchform {
-			width: 50%;
-			float: left;
+			width: 100%;
+			margin: 0 0 2em 0;
 		}
 	}
 	.loop {
@@ -35,6 +20,11 @@ body.search {
 		width: 100%;
 		display: table;
 		margin: auto;
+		label {
+			em {
+				opacity: 0;
+			}
+		}
 		input {
 			border: 0;
 			background: $light;

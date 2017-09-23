@@ -1,0 +1,102 @@
+#carousel {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 800;
+	margin: auto;
+	padding: 0;
+	overflow: visible;
+	background: $light;
+	display: none;
+	&.show {
+		display: table;
+	}
+	&[data-direction="left"] .slides {
+		left: .25em;
+	}
+	&[data-direction="right"] .slides {
+		left: -.25em;
+	}
+	.slides {
+		height: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
+		transition: left 200ms $ease;
+		.slide {
+			width: 100vw;
+			height: 100%;
+			position: relative;
+			float: left;
+			display: flex;
+	    align-items: center;
+	    flex-direction: column;
+	    .wrap {
+	    	width: 100%;
+				height: 100%;
+				display: flex;
+		    align-items: center;
+		    flex-direction: column;
+				img {
+					width: auto;
+					height: auto;
+					max-width: 100%;
+					max-height: 100%;
+			    display: table;
+			    margin: auto
+				}
+			}
+			&.current {
+				
+			}	
+		}
+	}
+	.arrow {
+		width: 10%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		font-family: Helvetica, Arial, sans-serif;
+		font-weight: bold;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		z-index: 600;
+		&.left {
+			left: 0;
+			&:hover {
+				cursor: w-resize;
+			}
+		}
+		&.right {
+			right: 0;
+			&:hover {
+				cursor: e-resize;
+			}
+		}
+	}
+	.close_padding {
+		position: absolute;
+		right: 0;
+		top: 0;
+		padding: $gutter;
+		display: table;
+		z-index: 600;
+		opacity: .4;
+		transition: opacity 600ms $ease;
+		.close.circle {
+			background-color: rgba($light,.9);
+			svg {
+				
+			}
+			&:hover {
+				cursor: pointer;
+			}
+		}
+		&:hover {
+			opacity: 1;
+		}
+	}
+}
