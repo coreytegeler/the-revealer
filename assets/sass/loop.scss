@@ -48,15 +48,8 @@
 				}
 			}
 			&:hover {
-				// color: $medium;
 				.image {
-					box-shadow: 0 0 5em 0 $gold;
-					img {
-					}
-					// mix-blend-mode: darken;
-					// img {
-						// filter: grayscale(1);
-					// }
+					@include lightHoverShadow($gold);
 				}
 				svg, object {
 					fill: $medium;
@@ -66,9 +59,18 @@
 		.secondary {
 			padding: .5em 0 0 0;
 			.title {
-				.column {
-					h3 {
-						color: $medium;
+				transition: color 500ms $ease;
+				.label {
+					@include xSmallText;
+					font-weight: $regular;
+					color: $medium;
+					&.category {
+						font-weight: $regular;
+						@include xSmallText;
+					}
+					&.column {
+						font-weight: $black;
+						@include smallText;
 					}
 				}
 				h2 {
@@ -95,7 +97,7 @@
 			.excerpt {
 				width: 100%;
 				color: $medium;
-				padding-top: .25em;
+				padding-top: .5em;
 				font-style: italic;
 				@include serifText;
 				@include xSmallText;
@@ -113,7 +115,7 @@
 		&.category {
 			&.no_thumb {
 				.title a h2 {
-					font-weight: 900 !important;
+					font-weight: $black !important;
 					@include mediumText;
 				}
 			}
@@ -141,6 +143,17 @@
 		&.contributor {
 			a {
 				text-decoration: none;
+			}
+		}
+		&.hover {
+			.title {
+				color: $medium;
+			}
+			.image {
+				box-shadow: 0 0 5em 0 $gold;
+			}
+			svg, object {
+				fill: $medium;
 			}
 		}
 	}
@@ -255,18 +268,18 @@
 }
 .pagination {
 	width: 100%;
-	padding: 0 0 1em 0;
+	padding: 2em 0 4em 0;
 	display: table;
 	.paginate {
 		width: 50%;
-		height: 2em;
+		height: 1.5em;
 		float: left;
 		position: relative;
 		a {
 			text-decoration: none;
 			.text {
 				width: auto;
-				height: 2em;
+				height: 1.5em;
 				position: absolute;
 				top: 0;
 				display: flex;
@@ -280,13 +293,7 @@
 				}
 			}
 			.circle {
-				width: #{$gutter * .75};
-				height: #{$gutter * .75};
 				display: flex;
-				border-radius: 50%;
-				background: $light;
-				box-shadow: 0 0 .25em .25em $gold;
-				transition: transform 500ms $ease, box-shadow 800ms $ease;
 			}
 			svg {
 				width: auto;
@@ -298,7 +305,7 @@
 			&:hover {
 				.circle {
 					transform: scale(1.05);
-	        box-shadow: 0 0 2em 1em $gold;
+	        @include hoverShadow($light);
 	      }
 			}
 		}
@@ -338,5 +345,40 @@
 				}
 			}
 		}
+	}
+}
+@include tablet {
+	.loop {
+		&.medium {
+			.cell {
+				width: calc(100%/2 - .5em);
+				margin-bottom: 1em;
+			}
+		}
+	}
+}
+@include phone {
+	.loop {
+		&.large {
+
+		}
+		&.medium {
+			.cell {
+				width: 100%;
+				margin-bottom: 4em;
+			}
+		}
+		&.small {
+			
+		}
+		&.xsmall {
+			
+		}
+		&.xxsmall {
+			
+		}
+	}
+	.pagination {
+		// padding: 2em 0;
 	}
 }

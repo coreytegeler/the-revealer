@@ -5,24 +5,27 @@
 global $post;
 $page_type = $post->post_type;
 $page_slug = $post->post_name;
-// echo $page_type;
-$full_pages = array( 'home', 'about', 'search', 'discover', 'events' );
+$split_pages = array( 'article', 'articles', 'search' );
 if( is_home() ) {
 	$page_slug = 'home';
-	$body_style = 'full';
-} else if( in_array( $page_slug, $full_pages ) || is_search() ) {
-	$body_style = 'full';
+	$wrapper_style = 'full';
+} else if( in_array( $page_slug, $split_pages ) ) {
+	$wrapper_style = 'split';
+} else if( $page_type == 'post' ) {
+	$page_slug = 'article';
+	$wrapper_style = 'split';
 } else {
 	$page_slug = $post->post_name;
-	$body_style = 'split';
+	$wrapper_style = 'full';
 }
 if( is_search() || $page_slug == 'search' ) {
 	$page_slug = 'search';
+	$wrapper_style = 'full';
 }
 ?>
 	<title>
 		<?php
-		bloginfo('name');
+		bloginfo( 'name' );
 		if( !is_home() ) {
 			echo ' — ';
 			wp_title('', true);
@@ -34,19 +37,12 @@ if( is_search() || $page_slug == 'search' ) {
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<?php wp_head(); ?>
 </head>
-<body <?php body_class( array( $page_slug, $page_type, $body_style ) ) ?> data-site-url="<?php echo get_site_url() ?>">
+<body <?php body_class( array( $page_slug, $page_type ) ) ?> data-site-url="<?php echo get_site_url() ?>">
 <?php
-// if( $page_type == 'post' ) {
-	// echo '<div id="top_bar">';
-		// if( is_archived() ) {
-		// 	echo '<div id="alert"><div class="inner">This is an archived post, missing media and broken links are expected. Please help by reporting any issues to <a href="#">admin@therevealer.org</a></div></div>';
-		// }
-	// echo '</div>';
-// }
 get_template_part( 'parts/header' );
-echo '<div id="wrapper">';
+echo '<div id="wrapper" class="' . $wrapper_style . '">';
 	wp_reset_query();
-	if( !in_array( $page_slug, $full_pages ) && !is_search() ) {
+	if( $wrapper_style == 'split' ) {
 		get_template_part( 'parts/side' );
 	}
 	echo '<main>';

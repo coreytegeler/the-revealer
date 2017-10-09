@@ -33,28 +33,25 @@ p {
 }
 h1 {
 	@include largeText;
-	font-weight: normal;
 	margin: 0;
 }
 h2 {
 	@include xMediumText;
-	font-weight: normal;
 	margin: 0;
 }
 h3 {
 	@include smallText;
-	font-weight: normal;
 	margin: 0;
 }
 h4 {
 	@include xSmallText;
-	font-weight: normal;
 	margin: 0;
 }
 em, i {
-	@include italicText;
+	font-style: italic;
 }
 input {
+	@include sansSerifText;
 	&:focus {
 		outline-color: $gold;
 	}
@@ -88,42 +85,37 @@ input {
 		margin-top: 2em;
 	}
 }
-#gradient {
-	width: 100%;
-	height: 100vh;
-	position: absolute;
-	left: 0;
-	top: 0;
-	background-image: url(images/gradient.svg);
-	background-repeat: repeat-x;
-	background-size: auto 100%;
-	// svg {
-	// 	width: 100%;
-	// 	height: 100%;
-	// }
-}
 #wrapper {
 	width: 100%;
 	position: relative;
-	// box-shadow: inset 0 15em 30em -15em $gold;
-	// margin-top: 1em;
+	// display: flex;
+  // flex-direction: row;
 	main {
-		width: calc(100% - #{$sideWidth} - #{$gutter*2});
-		margin: 0 $gutter #{$gutter*2} calc(#{$sideWidth} + #{$gutter});
-		@include tablet {
-			width: calc(100% - #{$mobSideWidth} - #{$gutter*2.5});
-			margin: 0 #{$gutter} #{$gutter*2} calc(#{$mobSideWidth} + #{$gutter});
-		}
 		.readable {
 			width: 100%;
 			min-height: 100vh;
-			padding: $gutter 0 0 0;
+			padding: 2em 0 0 0;
 			display: block;
+		}
+	}
+	&.full {
+		main {
+	    width: calc(100% - 4em);
+	    margin: .5em 2em 4em 2em;
+		}
+		.max {
+			max-width: #{$maxWidth * 2};
+		}
+	}
+	&.split {
+		main {
+			width: calc(100% - #{$sideWidth} - 4em);
+			margin: 0 2em 4em calc(#{$sideWidth} + 2em);
 		}
 	}
 	.nested.parent {
 		max-width: $lineWidth;
-		padding: $gutter 0 0 0;
+		padding: 2em 0 0 0;
 		margin: 0;
 		li {
 			list-style: none;
@@ -217,13 +209,6 @@ input {
 		}
 	}
 }
-#top_bar {
-	width: calc(100% - 2em);
-	position: fixed;
-	left: 1em;
-	top: 0;
-	z-index: 1200;
-}
 .stats {
 	width: 100%;
   align-content: center;
@@ -248,12 +233,13 @@ input {
 	}
 }
 .circle {
-	width: #{$gutter*.75};
-  height: #{$gutter*.75};
+	width: 1.5em;
+  height: 1.5em;
   border-radius: 50%;
   background: $light;
-  box-shadow: 0 0 .25em .25em $gold;
   display: flex;
+  transition: transform 500ms $ease, box-shadow 800ms $ease;
+  @include circleShadow($gold);
   span {
 		display: table;
 		margin: auto;
@@ -266,7 +252,7 @@ input {
     fill: $medium;
 	}
 }
-.split {
+.split_box {
 	width: 100%;
 	display: table;
 	section {
@@ -274,7 +260,7 @@ input {
 		float: left;
 		display: table;
 		.title {
-			font-weight: bold;
+			font-weight: $bold;
 			color: $medium;
 			em {
 				@include serifText;
@@ -283,10 +269,6 @@ input {
 			a {
 				text-decoration: none;
 				color: $medium;
-				transition: text-shadow 500ms $ease;
-				&:hover {
-					text-shadow: 0 0 1em $gold;
-				}
 			}
 		}
 		&:nth-of-type(odd) {
@@ -314,17 +296,6 @@ input {
 	display: none;
 	content: '0';
 }
-body.full {
-	#wrapper {
-		main {
-	    width: calc(100% - #{$gutter*2});
-	    margin: .5em $gutter 4em $gutter;
-		}
-	}
-	.max {
-		max-width: #{$maxWidth * 2};
-	}
-}
 ::-webkit-scrollbar {
     width: 0px;
 }
@@ -343,11 +314,10 @@ body.full {
 @import 'side';
 @import 'loop';
 @import 'home';
-@import 'single';
+@import 'article';
 @import 'about';
 @import 'search';
 @import 'discover';
-@import 'contributors';
 @import 'footer';
 @import 'carousel';
 @import 'mobile';

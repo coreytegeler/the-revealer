@@ -1,20 +1,17 @@
+///////////////////////////////////////////////////////////////
+///////////////////////////COLORS//////////////////////////////
+///////////////////////////////////////////////////////////////
 $gold: #fecf0c;
-// $teal: #46cbca;
-$dark: #1a172e;
 $dark: rgba(#1a172e, .9);
-$medium: #89879d;
+$medium: rgba(#1a172e, .6);
 $light: #f3f1f3;
 
-$ease: cubic-bezier(0.19, 1, 0.22, 1);
-
-@import 'https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i&subset=latin-ext';
-@import 'https://fonts.googleapis.com/css?family=Cardo:400,400i,700&subset=greek,greek-ext,latin-ext';
-@import 'https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700&subset=latin-ext';
-@import 'https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&subset=cyrillic,cyrillic-ext,latin-ext';
-@import 'https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600,600i,700,700i';
+///////////////////////////////////////////////////////////////
+///////////////////////TEXT SIZE///////////////////////////////
+///////////////////////////////////////////////////////////////
 @mixin baseText {
-	font-size: 21px;
-	line-height: 1.3em;
+	font-size: 20px;
+	line-height: 1.4em;
 	@include tablet {
 		font-size: 18px;
 	}
@@ -38,34 +35,49 @@ $ease: cubic-bezier(0.19, 1, 0.22, 1);
 @mixin xMediumText {
   font-size: 1.5em;
   line-height: 1.1em;
+  @include phone {
+    font-size: 1.2em;
+  }
 }
 @mixin largeText {
 	font-size: 2em;
 	line-height: 1.1em;
+  @include phone {
+    font-size: 1.5em;
+  }
 }
 @mixin xLargeText {
   font-size: 2.3em;
   line-height: 1.1em;
+  @include phone {
+    font-size: 2em;
+  }
 }
-
-$serif: 'Crimson Text', 'Lora', 'Baskerville', times, serif;
-$sansSerif: 'Karla', Helvetica, Arial, sans-serif;
+///////////////////////////////////////////////////////////////
+///////////////////////////FONTS///////////////////////////////
+///////////////////////////////////////////////////////////////
+$regular: 400;
+$bold: 600;
+$black: 800;
+@import 'https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i&subset=latin-ext';
+@import 'https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600,600i,700,700i';
+@import 'https://fonts.googleapis.com/css?family=Work+Sans:100,400,500,600,700,800,900';
+$serif: 'Crimson Text', 'Baskerville', times, serif;
+$sansSerif: 'Work Sans', Helvetica, Arial, sans-serif;
 @mixin serifText {
 	font-family: $serif;
   font-weight: normal;
 }
 @mixin sansSerifText {
 	font-family: $sansSerif;
+  font-weight: 400;
 }
-@mixin italicText {
-	// font-family: $serif;
-	font-style: italic;
-}
-
-$sideWidth: 25vw;
+///////////////////////////////////////////////////////////////
+////////////////////////BREAK POINTS///////////////////////////
+///////////////////////////////////////////////////////////////
+$sideWidth: 18em;
 $mobSideWidth: 35vw;
 $lineWidth: 30em;
-$gutter: 2em;
 
 $phoneWidth: 480px;
 $tabletWidth: 768px;
@@ -97,16 +109,17 @@ $maxWidth: 950px;
   }
 }
 
+
+///////////////////////////////////////////////////////////////
+///////////////////////////ANIMATION///////////////////////////
+///////////////////////////////////////////////////////////////
+$ease: cubic-bezier(0.19, 1, 0.22, 1);
+
 @keyframes conceal {
   0% {opacity: 1;}
   7% {opacity: .8;}
   100% {opacity: .02;}
 }
-
-// @keyframes reveal {
-//   0% {opacity: .02;}
-//   100% {opacity: 1;}
-// }
 
 @keyframes glisten {
   0% {
@@ -157,6 +170,21 @@ $maxWidth: 950px;
   	opacity: 0.5;
   	transform: translateY(0);
   }
+}
+///////////////////////////////////////////////////////////////
+///////////////////////////SHADOWS/////////////////////////////
+///////////////////////////////////////////////////////////////
+@mixin boxShadow($color) {
+  box-shadow: 0 0 .25em .5em $color;
+}
+@mixin circleShadow($color) {
+  box-shadow: 0 0 .5em .25em $color;
+}
+@mixin hoverShadow($color) {
+  box-shadow: 0 0 2em 1em $color;
+}
+@mixin lightHoverShadow($color) {
+  box-shadow: 0 0 5em 0 $color;
 }
 
 

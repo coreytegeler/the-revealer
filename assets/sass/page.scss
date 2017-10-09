@@ -85,10 +85,11 @@
 			.tags {
 				padding: 0;
 				ul {
+					line-height: 1em;
 					li {
-						// border-bottom: 1px solid $medium;
 						@include serifText;
 						font-style: italic;
+						line-height: 1em;
 					}
 				}
 			}
@@ -97,8 +98,8 @@
 	#wrapper {
 		main {
 			article.readable {
-				width: calc(100% - #{$gutter});
-				padding: $gutter $gutter 0 0;
+				width: calc(100% - 4em);
+				padding: 2em 2em 0 2em;
 				opacity: 0;
 				&.show {
 					opacity: 1;
@@ -241,11 +242,9 @@
 				}
 			}
 			.transport.top {
-				width: #{$gutter*.75};
-				height: #{$gutter*.75};
 				position: fixed;
-				right: $gutter;
-				bottom: $gutter;
+				right: 2em;
+				bottom: 2em;
 				z-index: 700;
 				transition: transform 200ms ease-in-out;
 				display: flex;
@@ -280,13 +279,14 @@
 				article.readable {
 					width: 100%;
 					padding-right: 0;
+					padding-left: 0;
 					.max {
 						margin: auto;
 					}
 				}
 				.transport.top {
-					right: .5em;
-					bottom: .5em;
+					right: 1em;
+					bottom: 1em;
 				}
 			}
 		}

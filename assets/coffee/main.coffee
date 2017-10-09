@@ -11,7 +11,7 @@ jQuery ($) ->
 		$nav = $header.find('nav')
 		$main = $('main')
 		$footer = $('footer')
-		$topBar = $('#top_bar')
+		$alert = $('#alert')
 		siteUrl = $body.attr('data-site-url')
 
 		sizeImages = () ->
@@ -118,7 +118,6 @@ jQuery ($) ->
 					fitWidth: true
 
 		fixSide = (e) ->
-			return
 			if !$side.length
 				return
 			winHeight = $window.innerHeight()
@@ -146,8 +145,8 @@ jQuery ($) ->
 			pageEnd = pageBottom - winHeight
 			isBottom = (winScroll >= pageEnd)
 
-			if topBarHeight = $topBar.innerHeight()
-				pageTop = topBarHeight
+			if alertHeight = $alert.innerHeight()
+				pageTop = alertHeight
 			else
 				pageTop = 0
 				
@@ -164,9 +163,9 @@ jQuery ($) ->
 				else
 					$header.css
 						y: 0
-					if $topBar.length
-						top = topBarHeight
-						winScroll += topBarHeight
+					if $alert.length
+						top = alertHeight
+						winScroll += alertHeight
 					else
 						top = 0
 					$wrapper.removeClass('bottom')
@@ -281,6 +280,9 @@ jQuery ($) ->
 					if hasOffset
 						$inline.focus()
 
+		hoverCell = () ->
+			$cell = $(this).parents('.cell')
+			$cell.toggleClass('hover')
 
 		fixHeader = () ->
 			topHeight = Math.ceil($header.outerHeight())
@@ -298,20 +300,23 @@ jQuery ($) ->
 				# 	$nav.removeClass('break')
 				# else
 				# 	$nav.addClass('break')
-			# if !$topBar
+			# if !$alert
 				# return
-			# topBarHeight = $topBar.innerHeight()
+			# alertHeight = $alert.innerHeight()
 
 			# $wrapper.css
-				# paddingTop: topBarHeight
+				# paddingTop: alertHeight
 			# $side.css
-			# 	paddingTop: topBarHeight
-			# 	height: $window.innerHeight() - topBarHeight
+			# 	paddingTop: alertHeight
+			# 	height: $window.innerHeight() - alertHeight
 
-		closeTopBar = () ->
-			$topBar.remove()
-			fixHeader()
-			trackScroll()
+		closeAlert = () ->
+			$alert.transition
+				height: 0
+			, 900, () ->
+				$alert.remove()
+				fixHeader()
+				trackScroll()
 
 		isMobile = () ->
 			return parseInt($('#isMobile').css('content').replace(/['"]+/g, ''))
@@ -423,7 +428,8 @@ jQuery ($) ->
 
 		$('body').on('click', '.transport', transport)
 		$('body').on('click', '#filters .toggle', toggleFilterList)
-		$('body').on('click', '#top_bar', closeTopBar)
+		$('body').on('click', '#alert .close', closeAlert)
+		$('body').on('hover', '.cell .link_wrap', hoverCell)
 		# $('.single article .super').on 'click', scrollToFootnote
 
 		$window.on 'resize', () ->

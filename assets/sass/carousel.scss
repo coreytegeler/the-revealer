@@ -59,7 +59,6 @@
 		position: absolute;
 		top: 0;
 		font-family: Helvetica, Arial, sans-serif;
-		font-weight: bold;
 		background-size: contain;
 		background-repeat: no-repeat;
 		background-position: center;
@@ -81,7 +80,7 @@
 		position: absolute;
 		right: 0;
 		top: 0;
-		padding: $gutter;
+		padding: 1em;
 		display: table;
 		z-index: 600;
 		opacity: .4;

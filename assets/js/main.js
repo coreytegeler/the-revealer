@@ -1,6 +1,6 @@
 jQuery(function($) {
   return $(function() {
-    var $body, $footer, $header, $headers, $logo, $main, $nav, $side, $topBar, $window, $wrapper, closeTopBar, fixGrids, fixHeader, fixSide, isMobile, loadImage, queryMore, reveal, setupArticle, siteUrl, sizeImages, toggleFilterList, trackScroll, transport;
+    var $alert, $body, $footer, $header, $headers, $logo, $main, $nav, $side, $window, $wrapper, closeAlert, fixGrids, fixHeader, fixSide, hoverCell, isMobile, loadImage, queryMore, reveal, setupArticle, siteUrl, sizeImages, toggleFilterList, trackScroll, transport;
     $window = $(window);
     $body = $('body');
     $wrapper = $('#wrapper');
@@ -12,7 +12,7 @@ jQuery(function($) {
     $nav = $header.find('nav');
     $main = $('main');
     $footer = $('footer');
-    $topBar = $('#top_bar');
+    $alert = $('#alert');
     siteUrl = $body.attr('data-site-url');
     sizeImages = function() {
       return $('.image.load').each(function(i, image) {
@@ -149,7 +149,6 @@ jQuery(function($) {
     };
     fixSide = function(e) {
       var isBottom, pageBottom, pageEnd, pageHeight, pageTop, sideHeight, sideScroll, sideScrollHeight, winHeight, winScroll;
-      return;
       if (!$side.length) {
         return;
       }
@@ -165,7 +164,7 @@ jQuery(function($) {
       return sideScroll = $side.scrollTop();
     };
     trackScroll = function(e) {
-      var $readable, isBottom, nearBottom, notSideBottom, pageBottom, pageEnd, pageHeight, pageTop, scrollHeight, scrollPast, sideBottom, sideEnd, sideHeight, sideScroll, sideTop, topBarHeight, winHeight, winScroll;
+      var $readable, alertHeight, isBottom, nearBottom, notSideBottom, pageBottom, pageEnd, pageHeight, pageTop, scrollHeight, scrollPast, sideBottom, sideEnd, sideHeight, sideScroll, sideTop, winHeight, winScroll;
       $readable = $('.readable');
       if (!$readable.length) {
         return;
@@ -178,8 +177,8 @@ jQuery(function($) {
       pageBottom = pageTop + pageHeight;
       pageEnd = pageBottom - winHeight;
       isBottom = winScroll >= pageEnd;
-      if (topBarHeight = $topBar.innerHeight()) {
-        pageTop = topBarHeight;
+      if (alertHeight = $alert.innerHeight()) {
+        pageTop = alertHeight;
       } else {
         pageTop = 0;
       }
@@ -199,9 +198,9 @@ jQuery(function($) {
           $header.css({
             y: 0
           });
-          if ($topBar.length) {
-            top = topBarHeight;
-            winScroll += topBarHeight;
+          if ($alert.length) {
+            top = alertHeight;
+            winScroll += alertHeight;
           } else {
             top = 0;
           }
@@ -326,6 +325,11 @@ jQuery(function($) {
         });
       }
     };
+    hoverCell = function() {
+      var $cell;
+      $cell = $(this).parents('.cell');
+      return $cell.toggleClass('hover');
+    };
     fixHeader = function() {
       var linksHeight, linksWidth, taglineHeight, taglineWidth, topHeight;
       topHeight = Math.ceil($header.outerHeight());
@@ -341,10 +345,14 @@ jQuery(function($) {
       taglineWidth = $nav.find('.tagline').innerWidth();
       return linksWidth = $nav.find('.links').innerWidth();
     };
-    closeTopBar = function() {
-      $topBar.remove();
-      fixHeader();
-      return trackScroll();
+    closeAlert = function() {
+      return $alert.transition({
+        height: 0
+      }, 900, function() {
+        $alert.remove();
+        fixHeader();
+        return trackScroll();
+      });
     };
     isMobile = function() {
       return parseInt($('#isMobile').css('content').replace(/['"]+/g, ''));
@@ -443,7 +451,8 @@ jQuery(function($) {
     });
     $('body').on('click', '.transport', transport);
     $('body').on('click', '#filters .toggle', toggleFilterList);
-    $('body').on('click', '#top_bar', closeTopBar);
+    $('body').on('click', '#alert .close', closeAlert);
+    $('body').on('hover', '.cell .link_wrap', hoverCell);
     $window.on('resize', function() {
       fixGrids();
       sizeImages();

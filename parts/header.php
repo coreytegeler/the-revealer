@@ -1,6 +1,17 @@
 <?php
-// global $post;
+global $post;
+$page_type = $post->post_type;
 echo '<header class="main">';
+	if( $page_type == 'post' && is_archived() ) {
+		echo '<div id="alert" role="alert">';
+			echo '<div class="message"><span>This is an archived post, missing media and broken links are expected. Please help by reporting any issues to&nbsp;<a href="#">admin@therevealer.org</a></span></div>';
+			echo '<div class="close">';
+				$x_svg_url = get_template_directory_uri() . '/assets/images/x.svg';
+				$x_svg = file_get_contents( $x_svg_url );
+				echo '<div class="circle">' . $x_svg . '</div>';
+			echo '</div>';
+		echo '</div>';
+	}
 	echo '<div class="inner">';
 		echo '<div id="logo">';
 			$logo_svg = get_template_directory_uri() . '/assets/images/logo.svg';

@@ -1,53 +1,10 @@
-@include tablet {
-	body, html {
-		header {
-			.inner {
-				display: block;
-				padding: .5em 0;
-				#logo {
-					width: calc(100% - 2em);
-					padding: 0 1em;
-					svg {
-						width: 50%;
-						display: table;
-						padding: 0;
-						margin: auto;
-					}
-				}
-				.rows {
-					width: calc(100% - 2em);
-					padding: 0 1em;
-					.row {
-						width: auto;
-						display: table;
-						margin: auto;
-						text-align: center;
-					}
-				}
-			}
-		}
-		#wrapper {
-			aside {
-				width: calc(100% - 2em);
-				height: auto !important;
-				position: static !important;
-				padding: 0 1em;
-				.content {
-					margin: 0;
-					padding: 0;
-					#filters {
-						margin: 0 0 1em 0;
-						.filter {
-							.list {
-								height: 0;
-							}
-						}
-					}
-				}
-			}
+body, html {
+	@include tablet {
+		#wrapper, #wrapper.split, #wrapper.full {
+			display: block;
 			main {
 				width: calc(100% - 2em);
-				margin: 0 1em;
+				margin: 0 1em 2em 1em;
 				.readable {
 					width: 100%;
 					padding-right: 0;
@@ -57,8 +14,8 @@
 								display: none;
 							}
 							.circle {
-								width: #{$gutter * .75};
-								height: #{$gutter * .75};
+								width: 1.5em;
+								height: 1.5em;
 							}
 						}
 					}
@@ -67,7 +24,7 @@
 					display: table;
 					margin: auto !important;
 				}
-				.split {
+				.split_box {
 					section {
 						width: 100%;
 						padding: 0 0 2em 0;
@@ -121,8 +78,16 @@
 				}
 			}
 		}
+		#isMobile {
+			content: '1';
+		}
 	}
-	#isMobile {
-		content: '1';
+	@include phone {
+		#wrapper, #wrapper.split, #wrapper.full {
+			main {
+				width: calc(100% - 1em);
+		    margin: .5em .5em 4em .5em;
+			}
+		}
 	}
 }

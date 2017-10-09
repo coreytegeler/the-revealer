@@ -40,12 +40,19 @@ if( $articles_page ) {
 
 // print_r( $current_issue );
 echo '<div class="readable">';
-	echo '<div class="split one_one">';
+	echo '<div class="split_box one_one">';
 		echo '<section id="cover">';
 			echo '<h1 class="title">Read our current issue&mdash;<strong>' . $current_issue->name  . '</strong>.</h1>';
 			$issue_date = get_field( 'date', $current_issue );
 			echo '<h2 class="date">Published on ' . $issue_date . '</h2>';
 			echo '<div class="circle"></div>';
+			echo '<div class="newsletter">';
+			echo '<h2>' . get_field( 'newsletter_title', 'option' ) . '</h2>';
+				echo '<form>';
+					echo '<input type="text" placeholder="Enter your email"/>';
+					echo '<input type="submit" value="Subscribe"/>';
+				echo '</form>';
+			echo '</div>';
 		echo '</section>';
 		echo '<section>';
 			$features_args = array_merge( $issue_args, array(
@@ -83,7 +90,7 @@ echo '<div class="readable">';
 		echo '</div>';
 	}
 
-	echo '<div class="split one_one">';
+	echo '<div class="split_box one_one">';
 
 		echo '<section>';
 			$col_args = array(

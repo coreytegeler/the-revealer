@@ -11,7 +11,6 @@ echo '<div class="readable">';
 				echo '<h1>Here are the results for <em>' . get_search_query() . '</em>.</h1>';
 			echo '</div>';
 		echo '</div>';
-		echo '</div>';
 		echo '<div class="loop posts small grid">';
 			wp_parse_str( $query_string, $search_args );
 			$search_args['posts_per_page'] = $tagged_amount;
@@ -26,5 +25,6 @@ echo '<div class="readable">';
 		echo '</div>';
 	echo '</div>';
 echo '</div>';
+get_template_part( 'parts/pagination' );
 get_footer();
 ?>

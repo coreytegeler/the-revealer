@@ -3,7 +3,6 @@ global $post;
 $title = $post->post_title;
 $thumb = get_the_post_thumbnail_url( $post );
 $slug = $post->post_name;
-$link = '/tag/' . $slug;
 $id = $post->ID;
 $date = get_the_date();
 $categories = get_the_category();
@@ -80,11 +79,14 @@ echo '<div id="about" role="contentinfo">';
 		echo '<ul>';
 			if( $tags ) {
 				foreach ( $tags as $tag ) {
-					$url = add_query_arg( 'tag', $tag->slug, $page_url );
-					echo '<li>';
-						echo '<a href="/' . $url . '" class="year"><em>' . $tag->name . '</em></a>';
-					echo '</li>';
-					$year--;
+					$tag_name = $tag->name;
+					if( $tag_name ) {
+						$tag_name_url = urlencode( $tag_name );
+						$url = add_query_arg( 's', $tag_name_url, $page_url );
+						echo '<li class="tag">';
+							echo '<a href="/' . $url . '">' . $tag->name . '</a>';
+						echo '</li>';
+					}
 				}
 			}
 		echo '</ul>';

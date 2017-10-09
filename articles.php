@@ -3,10 +3,10 @@
 Template Name: Articles
 */
 get_header();
-$cat_param = get_query_var( 'category' );
-$year_param = get_query_var( 'y' );
-$column_param = get_query_var( 'column' );
-$paged = get_query_var( 'paged' );
+$cat_param = $_GET['category'];
+$year_param = $_GET['y'];
+$column_param = $_GET['column'];
+$paged = $_GET['paged'];
 $articles_args = array(
 	'post_type' => 'post',
 	'paged' => $paged,
@@ -27,9 +27,11 @@ if( sizeof( $column_param ) ) {
 	  'terms' => $column_param,
   );
 }
-if( sizeof( $tax_query ) > 1 ) {
+
+if( sizeof( $tax_query ) ) {
 	$articles_args['tax_query'] = $tax_query;
 }
+
 
 echo '<div class="readable">';
 	echo '<div class="loop articles medium grid">';

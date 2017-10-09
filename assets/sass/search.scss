@@ -1,13 +1,24 @@
 body.search {
 	.search_header {
 		width: 100%;
-		max-width: $lineWidth;
+		max-width: 40em;
 		margin: auto;
-		// display: flex;
-    // flex-direction: row;
+		.text {
+			h1 {
+				text-align: center;
+				em {
+					@include serifText;
+					@include mediumText;
+					font-weight: $black;
+					&:focus {
+						outline: none;
+					}
+				}
+			}
+		}
 		#searchform {
 			width: 100%;
-			margin: 0 0 2em 0;
+			padding: 0 0 2em 0;
 		}
 	}
 	.loop {
@@ -15,7 +26,8 @@ body.search {
 	}
 }
 #searchform {
-	width: 100%;
+	width: calc(100% - 4em);
+	padding: 0 2em;
 	form {
 		width: 100%;
 		display: table;
@@ -26,19 +38,28 @@ body.search {
 			}
 		}
 		input {
-			border: 0;
-			background: $light;
-			padding: 0;
-			outline-color: $gold;
-			padding: .25em .25em .35em .25em;
-			box-shadow: 0px 0px .5em .05em $gold;
 			&#searchbox {
 				width: 100%;
 				margin: 0;
 				// border-bottom: .125em solid $gold;
 				text-align: center;
+				border: 0;
+				background: $light;
+				padding: 0;
+				outline-color: $gold;
+				padding: .25em .25em .35em .25em;
+				box-shadow: 0px 0px .5em .05em $gold;
+				// overflow: visible;
 				@include serifText;
 				@include largeText;
+				line-height: 1.3em;
+			}
+		}
+	}
+	@include phone {
+		form {
+			input#searchbox {
+				@include mediumText;
 			}
 		}
 	}

@@ -13,7 +13,7 @@ $i = $wp_query->current_post;
 $missing_url = get_template_directory_uri() . '/assets/images/question.svg';
 $missing_svg = file_get_contents( $missing_url );
 $column = get_the_terms( $post, 'columns' )[0];
-
+$categories = get_the_category();
 echo '<article class="cell" role="article" style="' . $style . '">';
 	echo '<div class="wrap">';
 		echo '<div class="primary">';
@@ -29,7 +29,16 @@ echo '<article class="cell" role="article" style="' . $style . '">';
 			echo '<a class="link_wrap" href="' . $permalink . '">';
 				echo '<div class="title">';
 					if( $column ) {
-						echo '<div class="column"><h3>' . $column->name . '</h3></div> ';
+						echo '<div class="column label">' . $column->name . '</div> ';
+					} else if( $categories ) {
+						echo '<div class="category label">';
+							foreach( $categories as $i => $category ) {
+								echo $category->name;
+								if( $i < sizeof( $categories ) - 1 ) {
+									echo ', ';
+								}
+							}
+						echo '</div> ';
 					}
 					echo '<h2>' . $title . '</h2>';
 				echo '</div>';
