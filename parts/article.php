@@ -1,5 +1,6 @@
 <?php
 $title = $post->post_title;
+$article_id = $post->ID;
 $thumb_id = get_post_thumbnail_id();
 $thumb = wp_get_attachment_image_src( $thumb_id, 'thumb' );
 $thumb_url = $thumb[0];
@@ -14,7 +15,7 @@ $missing_url = get_template_directory_uri() . '/assets/images/question.svg';
 $missing_svg = file_get_contents( $missing_url );
 $column = get_the_terms( $post, 'columns' )[0];
 $categories = get_the_category();
-echo '<article class="cell" role="article" style="' . $style . '">';
+echo '<article class="cell" role="article" style="' . $style . '" data-id="' . $article_id . '">';
 	echo '<div class="wrap">';
 		echo '<div class="primary">';
 			echo '<a class="link_wrap" href="' . $permalink . '">';
@@ -31,9 +32,13 @@ echo '<article class="cell" role="article" style="' . $style . '">';
 					if( $column ) {
 						echo '<div class="column label">' . $column->name . '</div> ';
 					} else if( $categories ) {
-						echo '<div class="category label">';
-							foreach( $categories as $i => $category ) {
-								echo $category->name;
+						echo '<div class="categories label">';
+							foreach( $categories as $i => $cat ) {
+								$cat_name = get_field( 'singular', $cat );
+								if( !sizeof( $cat_name ) ) {
+									$cat_name = $cat->name;
+								}
+								echo '<span class="' . $cat->slug . '">' . $cat_name . '</span>';
 								if( $i < sizeof( $categories ) - 1 ) {
 									echo ', ';
 								}

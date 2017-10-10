@@ -13,7 +13,7 @@ $events_args = array(
 );
 
 echo '<div class="readable">';
-	echo '<div class="loop events medium grid">';
+	echo '<div class="loop events medium masonry">';
 		query_posts( $events_args );
 		if ( have_posts() ) {
 			while ( have_posts() ) {

@@ -34,13 +34,17 @@ if( sizeof( $tax_query ) ) {
 
 
 echo '<div class="readable">';
-	echo '<div class="loop articles medium grid">';
+	echo '<div class="loop articles medium masonry">';
 		query_posts( $articles_args );
 		if ( have_posts() ) {
 			while ( have_posts() ) {
 				the_post();
 				get_template_part( 'parts/article' );
 			}
+		} else {
+			echo '<div id="empty">';
+				echo 'Sorry, this are no articles.';
+			echo '</div>';
 		}
 		wp_reset_query();
 	echo '</div>';

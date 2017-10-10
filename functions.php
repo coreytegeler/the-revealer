@@ -29,7 +29,6 @@ add_action( 'wp_enqueue_scripts', 'revealer_enqueue' );
 
 function api_query() {
   get_template_part( 'parts/discover' );
-  // $rand_posts = get_posts( $rand_post_args );
   die();
 }
 add_action( 'wp_ajax_nopriv_api_query', 'api_query' );
@@ -166,6 +165,40 @@ function register_nav() {
   register_nav_menu( 'navigation', __( 'Navigation' ) );
 }
 add_action( 'init', 'register_nav' );
+
+function add_custom_tax_filters() {
+  global $typenow;
+  $taxonomies = array( 'columns', 'issues' );
+  if( $typenow == 'post' ){
+    foreach( $taxonomies as $tax_slug ) {
+      $tax_obj = get_taxonomy( $tax_slug );
+      $tax_name = $tax_obj->labels->name;
+      $terms = get_terms( $tax_slug );
+      if( $tax_slug == 'issues' ) {
+        usort( $terms, function($a, $b) {
+          $a_date = get_field( 'date', $a );
+          $b_date = get_field( 'date', $b );
+          $a_datetime = new DateTime( $a_date );
+          $b_datetime = new DateTime( $b_date );
+          if( $a_datetime == $b_datetime ) {
+            return 0;
+          }
+          return $a_datetime > $b_datetime ? -1 : 1;
+        });
+      }
+
+      if( count( $terms ) > 0 ) {
+        echo "<select name='$tax_slug' id='$tax_slug' class='postform' style='max-width:150px;'>";
+        echo "<option value=''>Show All $tax_name</option>";
+        foreach ( $terms as $term ) { 
+          echo '<option value='. $term->slug, $_GET[$tax_slug] == $term->slug ? ' selected="selected"' : '','>' . $term->name . '</option>'; 
+        }
+        echo "</select>";
+      }
+    }
+  }
+}
+add_action( 'restrict_manage_posts', 'add_custom_tax_filters' );
 
 flush_rewrite_rules( false );
 // flush_rewrite_rules();

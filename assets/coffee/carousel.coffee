@@ -1,5 +1,5 @@
 jQuery ($) ->
-  
+  $body = $('body')
   transitionEnd = 'transitionend webkitTransitionEnd oTransitionEnd'
   $carousels = $('.carousel')
 
@@ -16,6 +16,8 @@ jQuery ($) ->
         $wrap.append($img)
         $slide.append($wrap)
         $slides.append($slide)
+      if $imgs.length > 1
+        $carousel.addClass('slidable')
       setupCarousel()
 
   openCarousel = (e) ->
@@ -31,7 +33,6 @@ jQuery ($) ->
     else
       isImage = false
 
-    console.log $carousel
     $carousel.addClass('show')
     if isImage
       e.preventDefault()
@@ -93,74 +94,80 @@ jQuery ($) ->
       $(carousel).imagesLoaded ->
         $(carousel).addClass 'loaded'
 
-    $('body').on 'mouseenter', '#carousel.loaded .arrow:not(.no)', ->
+    $('body').on 'mouseenter', '#carousel.loaded.slidable .arrow:not(.no)', ->
       $arrow = $(this)
       direction = $arrow.attr('data-direction')
       $carousel = $arrow.parents('#carousel')
       $carousel.attr('data-direction', direction)
 
-    $('body').on 'mouseleave', '#carousel.loaded .arrow', ->
+    $('body').on 'mouseleave', '#carousel.loaded.slidable .arrow', ->
       $arrow = $(this)
       $carousel = $arrow.parents('#carousel')
       $carousel.attr('data-direction', '')
 
-    $('body').on 'click', '#carousel.loaded .arrow:not(.no)', ->
+    $('body').on 'click', '#carousel.loaded.slidable .arrow:not(.no)', ->
       $arrow = $(this)
-      direction = $arrow.attr('data-direction')
-      windowWidth = $(window).innerWidth()
       $carousel = $arrow.parents('#carousel')
-      $slidesWrapper = $carousel.find('.slides')
-      $currentSlide = $carousel.find('.slide.current')
-      currentIndex = $currentSlide.index()
-      $firstSlide = $carousel.find('.slide').first()
-      $lastSlide = $carousel.find('.slide').last()
-      left = parseInt($slidesWrapper.css('left'))
-      $slidesWrapper.removeClass 'static'
+      direction = $arrow.attr('data-direction')
+      $carousel.slide(direction)
+    resizeCarousel()
+
+  $.fn.slide = (direction) ->
+    console.log '!!!!!!'
+    $carousel = $(this)
+    $arrow = $carousel.find('.arrow.'+direction)
+    windowWidth = $(window).innerWidth()
+    $slidesWrapper = $carousel.find('.slides')
+    $currentSlide = $carousel.find('.slide.current')
+    currentIndex = $currentSlide.index()
+    $firstSlide = $carousel.find('.slide').first()
+    $lastSlide = $carousel.find('.slide').last()
+    left = parseInt($slidesWrapper.css('left'))
+    $slidesWrapper.removeClass 'static'
+    switch direction
+      when 'left'
+        $nextSlide = $currentSlide.prev('.slide')
+        left += windowWidth
+      when 'right'
+        $nextSlide = $currentSlide.next('.slide')
+        left -= windowWidth
+    if !$nextSlide.length
       switch direction
         when 'left'
-          $nextSlide = $currentSlide.prev('.slide')
+          $lastSlide.insertBefore $firstSlide
+          $nextSlide = $lastSlide
+          $slidesWrapper.addClass 'static'
+          currentIndex = $currentSlide.index()
+          left = -1 * currentIndex * windowWidth
+          $slidesWrapper.css x: left
           left += windowWidth
         when 'right'
-          $nextSlide = $currentSlide.next('.slide')
+          $firstSlide.insertAfter $lastSlide
+          $nextSlide = $firstSlide
+          $slidesWrapper.addClass 'static'
+          currentIndex = $currentSlide.index()
+          left = -1 * currentIndex * windowWidth
+          $slidesWrapper.css x: left
           left -= windowWidth
-      if !$nextSlide.length
+      delay = 100
+    else
+      delay = 0
+    fixCarouselHeight($nextSlide)
+    setTimeout (->
+      $slidesWrapper.removeClass 'static'
+      $arrow.addClass 'no'
+      $slidesWrapper.stop()
+      $currentSlide.removeClass 'current'
+      $nextSlide.addClass 'current'
+      $slidesWrapper.transition { x: left }, ->
         switch direction
           when 'left'
             $lastSlide.insertBefore $firstSlide
-            $nextSlide = $lastSlide
-            $slidesWrapper.addClass 'static'
-            currentIndex = $currentSlide.index()
-            left = -1 * currentIndex * windowWidth
-            $slidesWrapper.css x: left
-            left += windowWidth
           when 'right'
             $firstSlide.insertAfter $lastSlide
-            $nextSlide = $firstSlide
-            $slidesWrapper.addClass 'static'
-            currentIndex = $currentSlide.index()
-            left = -1 * currentIndex * windowWidth
-            $slidesWrapper.css x: left
-            left -= windowWidth
-        delay = 100
-      else
-        delay = 0
-      fixCarouselHeight($nextSlide)
-      setTimeout (->
-        $slidesWrapper.removeClass 'static'
-        $arrow.addClass 'no'
-        $slidesWrapper.stop()
-        $currentSlide.removeClass 'current'
-        $nextSlide.addClass 'current'
-        $slidesWrapper.transition { x: left }, ->
-          switch direction
-            when 'left'
-              $lastSlide.insertBefore $firstSlide
-            when 'right'
-              $firstSlide.insertAfter $lastSlide
-          resizeCarousel()
-          $arrow.removeClass 'no'
-      ), delay
-    resizeCarousel()
+        resizeCarousel()
+        $arrow.removeClass 'no'
+    ), delay
 
 
   $('body').on('click', 'article.readable a, article.readable img', openCarousel)

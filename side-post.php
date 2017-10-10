@@ -19,7 +19,7 @@ echo '<div id="about" role="contentinfo">';
 	echo '<div class="info">';
 		echo '<div class="title">';
 			if( $column ) {
-				echo '<div class="column"><h2>' . $column->name . '</h2></div> ';
+				echo '<h2 class="label column">' . $column->name . '</h2>';
 			}
 			echo '<h1>';
 				echo $title;
@@ -64,7 +64,7 @@ echo '<div id="about" role="contentinfo">';
 			echo '</div>';
 		}
 	echo '</div>';
-	echo '<div class="images loop grid xsmall">';
+	echo '<div class="images loop masonry xsmall">';
 		if( sizeof( $images ) ) {
 			foreach( $images as $image ) {
 				echo '<div class="cell transport">';

@@ -1,7 +1,7 @@
 <?php
 get_header();
 echo '<div class="readable">';
-	echo '<div class="loop categories medium grid">';
+	echo '<div class="loop categories medium masonry">';
 		echo '<div class="max">';
 			$categories = get_categories( array(
 			    'orderby' => 'name',

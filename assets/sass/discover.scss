@@ -1,6 +1,11 @@
 body.discover {
 	background-color: $gold;
 	header {
+    background-color: rgba($gold,.95);
+    @include boxShadow(rgba($gold,.95));
+    .bar {
+      display: none;
+    }
     .inner {
       .tagline {
         color: $dark;
@@ -35,12 +40,12 @@ body.discover {
 	}
   #discover {
     z-index: 300;
+    min-height: 100vh;
   }
 }
 #discover {
 	@include boxShadow($gold);
 	width: 100%;
-  min-height: 100vh;
   flex: 1;
   clear: both;
   background-color: $gold;
@@ -50,15 +55,17 @@ body.discover {
     width: calc(100% + 10em);
     margin: 0 0 0 -5em;
     padding: 0;
+    display: table;
     .cell {
+      display: block;
       width: calc(100%/6 - .1em);
-      margin: 0 !important;
-      @include tablet {
-        width: calc(100%/4 - .1em);
-        .wrap {
-          padding: 80px;
-        }
-      }
+      margin-bottom: 0;
+      // @include tablet {
+      //   width: calc(100%/4);
+      //   .wrap {
+      //     padding: 80px;
+      //   }
+      // }
       .wrap {
         display: table;
         padding: 1em 0;
@@ -67,6 +74,8 @@ body.discover {
         pointer-events: none;
         // mix-blend-mode: darken;
         a {
+          width: 5em;
+          height: 5em;
           overflow: visible;
           font-weight: $regular;
           text-decoration: none;
@@ -115,22 +124,20 @@ body.discover {
           z-index: 10;
         }
         .circle {
-          width: 4em;
-          height: 4em;
-          position: absolute;
-          left: calc(50% - 2em);
-          top: calc(50% - 2em);
+          width: 5em;
+          height: 5em;
+          // position: absolute;
+          // left: calc(50% - 2em);
+          // top: calc(50% - 2em);
           z-index: 1;
           @include circleShadow($light);
         }
       }
-      &.thumb {
-        .wrap {
-          padding: 80px;
-        }
-      }
       &.category {
-        // width: calc(40% - .1em);
+        // width: calc(40%);
+      }
+      &:nth-child(12n+1),&:nth-child(12n+2), &:nth-child(12n+3), &:nth-child(12n+4), &:nth-child(12n+5), &:nth-child(12n+6) {
+        transform: translateX(calc(100vw/12));
       }
     }
   }
@@ -155,7 +162,7 @@ body.discover {
 	}
   .header {
     width: 100%;
-    padding: 2em 0;
+    padding: 1em 0;
     position: relative;
     .wrap {
       display: table;
@@ -168,7 +175,9 @@ body.discover {
       }
       h1 {
         @include serifText;
-        // text-transform: lowercase;
+        span {
+          font-style: italic;
+        }
       }
       .dash {
         width: 50%;
@@ -188,5 +197,12 @@ body.discover {
     //   top: calc(50% - 1.5em);
     //   z-index: 1;
     // }
+  }
+}
+footer {
+  #discover {
+    .loop {
+      padding: 2em 0;
+    }
   }
 }

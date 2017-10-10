@@ -61,15 +61,14 @@
 			.title {
 				transition: color 500ms $ease;
 				.label {
-					@include xSmallText;
-					font-weight: $regular;
-					color: $medium;
+					// font-weight: $regular;
+					// color: $medium;
 					&.category {
-						font-weight: $regular;
+						// font-weight: $regular;
 						@include xSmallText;
 					}
 					&.column {
-						font-weight: $black;
+						// font-weight: $black;
 						@include smallText;
 					}
 				}
@@ -222,8 +221,6 @@
 		width: 100%;
 		display: table;
 		.cell {
-			width: calc(20% - .1em);
-			margin-bottom: .5em;
 			height: auto;
 			display: table;
 			float: left;
@@ -253,14 +250,33 @@
 	}
 	&.xsmall {
 		.cell {
-			width: calc(20% - .1em);
+			width: calc(20% - 1em);
+			margin-bottom: 1em;
 		}
 	}
 	&.xxsmall {
 		.cell {
-			width: calc(10% - .1em);
+			width: calc(10% - .5em);
+			margin-bottom: .5em;
 			.image {
 				img {
+				}
+			}
+		}
+	}
+	&.grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+		.cell {
+
+		}
+		&.xsmall {
+			.cell {
+				width: calc(20% - 1em);
+				margin-right: calc(1em + 1em/4);
+				&:nth-child(5n+5) {
+					margin-right: 0;
 				}
 			}
 		}

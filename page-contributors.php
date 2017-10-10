@@ -28,7 +28,7 @@ echo '<div class="readable">';
 							echo '<span class="title"><em>' . $name . '</em></span> ';
 							echo '<span class="body">' . $content . '</span>';
 						
-							echo '<div class="loop posts xxsmall grid">';
+							echo '<div class="loop posts xxsmall masonry">';
 								$posts_args = array(
 									'post_type' => 'post',
 									'posts_per_page' => 3,

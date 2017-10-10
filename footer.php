@@ -10,7 +10,7 @@ if( $post->post_name != 'discover' ) {
 					$discover_url = get_permalink( get_page_by_path( 'discover' ) );
 					echo '<a href="' . $discover_url . '">';
 						echo '<h1 class="glisten">';
-							echo 'Discover&nbsp;more';
+							echo 'Discover&nbsp;&nbsp;more';
 						echo '</h1>';
 						echo '<div class="dash"></div>';
 					echo '</a>';

@@ -11,7 +11,7 @@ echo '<div class="readable">';
 				echo '<h1>Here are the results for <em>' . get_search_query() . '</em>.</h1>';
 			echo '</div>';
 		echo '</div>';
-		echo '<div class="loop posts small grid">';
+		echo '<div class="loop posts small masonry">';
 			wp_parse_str( $query_string, $search_args );
 			$search_args['posts_per_page'] = $tagged_amount;
 			$search_query = new WP_Query( $search_args );

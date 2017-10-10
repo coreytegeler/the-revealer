@@ -18,6 +18,9 @@ html, body {
 	::selection {
 		background: rgba($gold,.5);
 	}
+	&.noscroll {
+		overflow: hidden;
+	}
 }
 a {
 	color: $dark;
@@ -83,6 +86,20 @@ input {
 	}
 	&.bottom {
 		margin-top: 2em;
+	}
+}
+.label {
+	&.column {
+		@include serifText;
+		font-style: italic;
+		font-weight: $black;
+	}
+	&.categories {
+		@include sansSerifText;
+		font-weight: $bold;
+		.feature {
+			font-weight: $black;
+		}
 	}
 }
 #wrapper {
@@ -252,25 +269,13 @@ input {
     fill: $medium;
 	}
 }
-.split_box {
+.sections {
 	width: 100%;
 	display: table;
 	section {
 		width: 100%;
 		float: left;
 		display: table;
-		.title {
-			font-weight: $bold;
-			color: $medium;
-			em {
-				@include serifText;
-				@include mediumText;
-			}
-			a {
-				text-decoration: none;
-				color: $medium;
-			}
-		}
 		&:nth-of-type(odd) {
 			padding-right: 2em;
 		}

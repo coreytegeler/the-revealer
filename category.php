@@ -10,7 +10,7 @@ $posts_args = array(
 	'cat' => $cat_id
 );
 query_posts( $posts_args );
-echo '<div class="loop categories medium grid">';
+echo '<div class="loop categories medium masonry">';
 	if ( have_posts() ) {
 		while ( have_posts() ) {
 			the_post();

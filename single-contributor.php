@@ -6,7 +6,7 @@ echo '<div class="contributor readable">';
 			'posts_per_page' => 10,
 			'tag' => $post->post_name
 		);
-		echo '<div class="loop posts medium grid">';
+		echo '<div class="loop posts medium masonry">';
 			query_posts( $posts_args );
 			if ( have_posts() ) {
 				while ( have_posts() ) {

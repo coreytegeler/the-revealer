@@ -6,35 +6,9 @@ body.home {
 			}
 		}
 	}
-	.loop#recent_column {
-		padding-top: 1em;
-		.column {
-			display: none;
-		}
-	}
-	.loop#featured_tag {
-		padding-top: 1em;
-		.cell {
-			width: calc(100%/2 - 1em);
-			// width: 100%;
-			margin: 0 0 2em 0;
-			.wrap {
-				display: flex;
-				.primary, .secondary {
-					width: calc(50% - 1em);
-				}
-				.primary {
-					padding: 0 .5em 0 0;
-				}
-				.secondary {
-					padding: 0 0 0 .5em;	
-				}
-			}
-		}
-	}
 	#cover {
 		position: relative;
-		.title {
+		.header {
 			position: relative;
 			z-index: 100;
 			strong {
@@ -60,7 +34,7 @@ body.home {
 			border-radius: 50%;
 		}
 		.newsletter {
-			padding-top: 4em;
+			padding: 4em 0;
 			h2 {
 				width: 100%;
 				max-width: 15em;
@@ -125,6 +99,45 @@ body.home {
 						span {
 							opacity: .5;
 						}
+					}
+				}
+			}
+		}
+	}
+	section {
+		padding: 2em 0;
+		.header {
+			font-weight: $bold;
+			color: $medium;
+			em {
+				@include serifText;
+				@include mediumText;
+			}
+			a {
+				text-decoration: none;
+				color: $medium;
+				&:hover {
+					color: $dark;
+				}
+			}
+		}
+		.loop {
+			padding-top: 1em;
+			&#recent_column {
+				.column {
+					display: none;
+				}
+			}
+			&#featured_tag {
+				.cell {
+					width: calc(100%/2 - 1em);
+					margin: 0 0 2em 0;
+				}
+			}
+			&#past_issue {
+				article {
+					h4 {
+						font-weight: $regular;
 					}
 				}
 			}

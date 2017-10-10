@@ -93,9 +93,9 @@ jQuery(function($) {
           }
         }
         return setTimeout(function() {
-          var $grid;
-          if ($grid = $image.parents('.grid')) {
-            return $grid.masonry();
+          var $masonry;
+          if ($masonry = $image.parents('.masonry')) {
+            return $masonry.masonry();
           }
         });
       }).fail(function(instance) {
@@ -118,33 +118,39 @@ jQuery(function($) {
         });
       }
     };
-    fixGrids = function($grids, $cells) {
-      if (!$grids) {
-        $grids = $('.grid');
+    fixGrids = function($loops, $cells) {
+      if (!$loops) {
+        $loops = $('.loop');
       }
-      return $grids.each(function() {
-        var $first, $grid, columnWidth, gutter;
-        $grid = $(this);
+      return $loops.each(function() {
+        var $first, $loop, columnWidth, gutter, isMasonry;
+        $loop = $(this);
+        isMasonry = $loop.is('.masonry');
         if ($cells) {
-          $grid.masonry().append($cells).masonry('appended', $cells);
+          if (isMasonry) {
+            $loop.masonry();
+          }
+          $loop.append($cells);
+          if (isMasonry) {
+            $loop.masonry('appended', $cells);
+          }
         }
-        if ($grid.is('.discover')) {
-          $grid.scatter();
-        }
-        $first = $grid.find('.cell:eq(0)');
+        $first = $loop.find('.cell:eq(0)');
         if (!$first.length) {
           return;
         }
         columnWidth = parseInt($first.css('width'));
         gutter = parseInt($first.css('marginBottom'));
-        return $grid.masonry({
-          itemSelector: '.cell',
-          columnWidth: $first[0],
-          gutter: gutter,
-          transitionDuration: 0,
-          percentPosition: true,
-          fitWidth: true
-        });
+        if (isMasonry) {
+          return $loop.masonry({
+            itemSelector: '.cell',
+            columnWidth: $first[0],
+            gutter: gutter,
+            transitionDuration: 0,
+            percentPosition: true,
+            fitWidth: true
+          });
+        }
       });
     };
     fixSide = function(e) {
@@ -292,11 +298,11 @@ jQuery(function($) {
       });
     };
     transport = function(e) {
-      var $button, $image, $img, $inline, $readable, hasOffset, headerBottom, href, scrollTo, scrollTop, src;
+      var $button, $image, $img, $inline, $readable, hasOffset, headerHeight, href, scrollTo, scrollTop, src;
       $button = $(this);
       $header = $header;
       scrollTop = $('html,body').scrollTop();
-      headerBottom = $header.innerHeight();
+      headerHeight = $header.innerHeight();
       if ($button.is('.top')) {
         scrollTo = 0;
       } else if ($button.is('.ftn')) {
@@ -313,7 +319,7 @@ jQuery(function($) {
       }
       hasOffset = $inline && $inline.length;
       if (hasOffset) {
-        scrollTo = $inline.offset().top - scrollTop - headerBottom * 2;
+        scrollTo = $inline.offset().top - headerHeight - 10;
       }
       if (!isNaN(scrollTo)) {
         return $('html,body').animate({
@@ -357,44 +363,49 @@ jQuery(function($) {
     isMobile = function() {
       return parseInt($('#isMobile').css('content').replace(/['"]+/g, ''));
     };
+    window.discovered = [];
     queryMore = function() {
-      var $cell, $grid, i;
-      $grid = $('.discover.grid');
-      if (!$grid.is('.querying')) {
+      var $cell, $loop, i;
+      $loop = $('.discover.loop');
+      if (!$loop.is('.querying')) {
+        if (!discovered.length) {
+          $loop.find('.cell').each(function(i, cell) {
+            var $cell, id;
+            $cell = $(cell);
+            id = $cell.attr('data-id');
+            return discovered.push(id);
+          });
+        }
         i = 0;
         while (i < 15) {
-          $cell = $('<div class="cell discover reveal empty"><div class="wrap"><div class="circle"></div></div></div>');
-          $grid.append($cell);
-          $grid.masonry('appended', $cell);
-          $grid.masonry();
+          $cell = $('<div class="cell discover reveal thumb show empty"><div class="wrap"><div class="circle"></div></div></div>');
+          $loop.append($cell);
           i++;
         }
-        $grid.scatter();
         reveal();
-        $grid.addClass('querying');
+        $loop.addClass('querying');
         return $.ajax({
           url: wp_api.ajax_url,
           type: 'POST',
           data: {
             action: 'api_query',
-            orderby: 'rand',
-            post_type: 'post',
-            posts_per_page: 15,
-            meta_query: {
-              key: '_thumbnail_id',
-              compare: 'EXISTS'
-            }
+            discovered: discovered
           },
-          success: function(data, status, jqXHR) {
+          success: function(cells, status, jqXHR) {
             var $empties;
-            $grid.removeClass('querying');
-            $empties = $grid.find('.empty.cell');
-            return $(data).each(function(i, cell) {
-              var $empty, $inner;
-              $inner = $(cell).find('.wrap').html();
-              $empty = $empties.eq(i);
-              $empty.removeClass('empty');
-              $empty.find('.wrap').html($inner);
+            $loop.removeClass('querying');
+            $empties = $loop.find('.empty.cell');
+            return $empties.each(function(i, empty) {
+              var $empty, $inner, id;
+              $empty = $(empty);
+              $cell = $(cells).eq(i);
+              id = $cell.attr('data-id');
+              discovered.push(id);
+              if ($cell.length) {
+                $inner = $cell.find('.wrap').html();
+                $empty.removeClass('empty');
+                $empty.find('.wrap').html($inner);
+              }
               return sizeImages();
             });
           },
@@ -405,9 +416,9 @@ jQuery(function($) {
       }
     };
     $.fn.scatter = function() {
-      var $cells, $grid;
-      $grid = $(this);
-      $cells = $grid.find('.cell');
+      var $cells, $masonry;
+      $masonry = $(this);
+      $cells = $masonry.find('.cell');
       return $cells.filter(':not(.scattered)').each(function(i, cell) {
         var $cell, $wrap, max, min, padding, x, y;
         $cell = $(this);
