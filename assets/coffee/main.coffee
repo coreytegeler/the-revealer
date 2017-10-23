@@ -150,24 +150,14 @@ jQuery ($) ->
 				$side.css
 					y: mainRemain
 
-			sideTop = $side.position().top
-			sideHeight = $side.innerHeight()
-			sideScroll = $side.scrollTop()
-			sideScrollHeight = $side[0].scrollHeight
-			sideScrolled = sideHeight + sideScroll
-			sideRemain = sideScrollHeight - sideScrolled
-			scrollDiff = sideRemain - mainRemain
-			nextSideScroll = scrollDiff
-
-			# if !lastSideScroll
-			# 	lastSideScroll = sideScroll
-			# if lastSideScroll > nextSideScroll
-			# 	console.log 'up'
-			# else
-			# 	console.log 'down'
-			# if scrollDiff >= 0
-			# 	$side.scrollTop(nextSideScroll)
-			# lastSideScroll = nextSideScroll
+			# sideTop = $side.position().top
+			# sideHeight = $side.innerHeight()
+			# sideScroll = $side.scrollTop()
+			# sideScrollHeight = $side[0].scrollHeight
+			# sideScrolled = sideHeight + sideScroll
+			# sideRemain = sideScrollHeight - sideScrolled
+			# scrollDiff = sideRemain - mainRemain
+			# nextSideScroll = scrollDiff
 
 		trackScroll = (e) ->
 			$readable = $('.readable')
@@ -261,7 +251,9 @@ jQuery ($) ->
 			inlineImgs = $article.find('.content img')
 			for inlineImg in inlineImgs
 				$inlineImg = $(inlineImg)
+				$inlineImg.wrap('<div class="image load"></div>')
 				currentSrc = $inlineImg[0].currentSrc
+				$inlineImg.attr('data-src', currentSrc)
 				pseudo = new Image()
 				pseudo.onload = (e) ->
 					img = e.target
@@ -321,7 +313,7 @@ jQuery ($) ->
 				$img = $image.find('img')
 				src = $img.attr('src')
 				if $readable = $('.readable')
-					$inline = $readable.find('img').filter('[src="'+src+'"]')
+					$inline = $readable.find('img').filter('[data-src="'+src+'"]')
 			hasOffset = $inline && $inline.length
 			
 			if hasOffset

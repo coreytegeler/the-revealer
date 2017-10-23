@@ -1,5 +1,6 @@
 <?php
 get_header();
+global $post;
 $home_url = get_site_url();
 $issues = get_terms( array(
   'taxonomy' => 'issues',
@@ -73,19 +74,11 @@ echo '<div class="readable">';
 							echo '</div>';
 						echo '</article>';
 					}
-					wp_reset_query();
 				echo '</div>';
 			}
-
-
-
-
+			wp_reset_query();
 			echo '<div class="newsletter">';
 				get_template_part( 'parts/newsletter' );
-			// 	echo '<form>';
-			// 		echo '<input type="text" placeholder="Enter your email"/>';
-			// 		echo '<input type="submit" value="Subscribe"/>';
-			// 	echo '</form>';
 			echo '</div>';
 		echo '</section>';
 		echo '<section>';
@@ -94,7 +87,6 @@ echo '<div class="readable">';
 				'category_name' => 'features'
 			) );
 			$features_query = new WP_Query( $features_args );
-
 			if ( $features_query->have_posts() ) {
 				echo '<div class="loop articles large masonry">';
 					while ( $features_query->have_posts() ) {
@@ -102,9 +94,9 @@ echo '<div class="readable">';
 						get_template_part( 'parts/article' );
 						$already_used[] = get_the_ID();
 					}
-					wp_reset_query();
 				echo '</div>';
 			}
+			wp_reset_query();
 		echo '</section>';	
 	echo '</div>';
 
@@ -120,9 +112,9 @@ echo '<div class="readable">';
 				get_template_part( 'parts/article' );
 				$already_used[] = get_the_ID();
 			}
-			wp_reset_query();
 		echo '</div>';
 	}
+	wp_reset_query();
 
 	echo '<div class="sections one_one">';
 
@@ -164,9 +156,9 @@ echo '<div class="readable">';
 						get_template_part( 'parts/article' );
 						$already_used[] = get_the_ID();
 					}
-					wp_reset_query();
 				echo '</div>';
 			}
+			wp_reset_query();
 			echo '<h2 class="header">More columns from The Revealer</h2>';
 			$columns = get_terms( array(
 				'taxonomy' => 'columns',
@@ -215,8 +207,8 @@ echo '<div class="readable">';
 						get_template_part( 'parts/article' );
 						$already_used[] = get_the_ID();
 					}
-					wp_reset_query();
 				}
+				wp_reset_query();
 			echo '</div>';
 		echo '</section>';
 
@@ -285,10 +277,10 @@ echo '<div class="readable">';
 					echo '</article>';
 					$already_used[] = get_the_ID();
 				}
-				wp_reset_query();
 			echo '</div>';
 		echo '</section>';
 	}
+	wp_reset_query();
 
 	get_template_part( 'parts/pagination' );
 

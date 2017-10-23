@@ -2,8 +2,16 @@
 $cat_param = $_GET['category'];
 $year_param = $_GET['y'];
 $col_param = $_GET['column'];
+if( $cat_id = get_query_var( 'cat' ) ) {
+	$cat_param = get_category( $cat_id, false )->slug;
+}
 
-$page_url = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$articles_page = get_page_by_path( 'articles' );
+if( $articles_page ) {
+	$page_url = get_permalink( $articles_page );
+} else {
+	$page_url = get_site_url() . '/articles/';
+}
 
 if( $cat_param ) {
 	$page_url = add_query_arg( 'category', $cat_param, $page_url );

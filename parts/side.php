@@ -5,7 +5,7 @@ echo '<aside>';
 	$page_slug = $post->post_name;
 	if( is_home() ) {
 		$page_type = 'home';
-	} else if( $page_slug == 'articles' ) {
+	} else if( $page_slug == 'articles' || is_category() ) {
 		$page_type = 'articles';
 	}
 	$page_types = array( 'home', 'articles', 'post', 'contributor' );

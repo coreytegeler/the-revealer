@@ -11,7 +11,7 @@ if( is_home() ) {
 	$wrapper_style = 'full';
 } else if( in_array( $page_slug, $split_pages ) ) {
 	$wrapper_style = 'split';
-} else if( $page_type == 'post' ) {
+} else if( $page_type == 'post' && !is_tag() ) {
 	$page_slug = 'article';
 	$wrapper_style = 'split';
 } else {

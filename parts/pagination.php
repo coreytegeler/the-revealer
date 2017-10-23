@@ -1,6 +1,6 @@
 <?php
 	global $post;
-
+	global $pagename;
 	$paged = get_query_var( 'paged' );
 	if(!$paged) {
 		$paged = 1;
@@ -10,7 +10,7 @@
 	$prev_svg = file_get_contents( $prev_svg_url );
 	$next_svg = file_get_contents( $next_svg_url );
 	echo '<div class="pagination">';
-		if( is_home() && $post->post_name == 'home' ) {
+		if( is_home() && !$pagename ) {
 			echo '<div class="paginate prev"></div>';
 			echo '<div class="paginate next">';
 				$articles_page = get_page_by_path( 'articles' );

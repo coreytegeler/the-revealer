@@ -1,31 +1,34 @@
 <?php
 global $post;
+global $pagename;
 echo '</main>';
 if( is_single() ) {
 	get_template_part( 'parts/popup' );
 }
 echo '</div>';
 if( $post->post_name != 'discover' ) {
-	echo '<div id="discover" class="bottom">';
-		echo '<div class="inner">';
-			echo '<div class="header">';
-				echo '<div class="wrap">';
-					$discover_url = get_permalink( get_page_by_path( 'discover' ) );
-					echo '<a href="' . $discover_url . '">';
-						echo '<h2 class="glisten">';
-							echo 'Discover&nbsp;&nbsp;more';
-						echo '</h2>';
-					echo '</a>';
+	if( !is_404() ) {
+		echo '<div id="discover" class="bottom">';
+			echo '<div class="inner">';
+				echo '<div class="header">';
+					echo '<div class="wrap">';
+						$discover_url = get_permalink( get_page_by_path( 'discover' ) );
+						echo '<a href="' . $discover_url . '">';
+							echo '<h2 class="glisten">';
+								echo 'Discover&nbsp;&nbsp;more';
+							echo '</h2>';
+						echo '</a>';
+					echo '</div>';
+					// echo '<div class="circle"></div>';
 				echo '</div>';
-				// echo '<div class="circle"></div>';
-			echo '</div>';
-			echo '<div class="loop discover xsmall grid">';
-				get_template_part( 'parts/discover' );
-			echo '</div>';
-			get_search_form();
+				echo '<div class="loop discover xsmall grid">';
+					get_template_part( 'parts/discover' );
+				echo '</div>';
+				get_search_form();
+				echo '</div>';
 			echo '</div>';
 		echo '</div>';
-	echo '</div>';
+	}
 	echo '<footer>';
 		$crm_url = get_field( 'crm_url', 'option' );
 		echo '<div class="note newsletter">';

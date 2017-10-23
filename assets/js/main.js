@@ -171,7 +171,7 @@ jQuery(function($) {
     sideScroll = null;
     lastSideScroll = null;
     fixSide = function(e) {
-      var isBottom, mainRemain, nextSideScroll, pageBottom, pageEnd, pageHeight, pageTop, scrollDiff, sideHeight, sideRemain, sideScrollHeight, sideScrolled, sideTop, winHeight, winScroll;
+      var isBottom, mainRemain, pageBottom, pageEnd, pageHeight, pageTop, winHeight, winScroll;
       if (!$side.length) {
         return;
       }
@@ -184,22 +184,14 @@ jQuery(function($) {
       isBottom = winScroll >= pageEnd;
       mainRemain = pageEnd - winScroll;
       if (mainRemain > 0) {
-        $side.css({
+        return $side.css({
           y: 0
         });
       } else {
-        $side.css({
+        return $side.css({
           y: mainRemain
         });
       }
-      sideTop = $side.position().top;
-      sideHeight = $side.innerHeight();
-      sideScroll = $side.scrollTop();
-      sideScrollHeight = $side[0].scrollHeight;
-      sideScrolled = sideHeight + sideScroll;
-      sideRemain = sideScrollHeight - sideScrolled;
-      scrollDiff = sideRemain - mainRemain;
-      return nextSideScroll = scrollDiff;
     };
     trackScroll = function(e) {
       var $readable, alertHeight, belowThresh, isBottom, pageBottom, pageEnd, pageHeight, pageTop, scrollHeight, winHeight, winScroll;
@@ -295,7 +287,9 @@ jQuery(function($) {
       for (j = 0, len = inlineImgs.length; j < len; j++) {
         inlineImg = inlineImgs[j];
         $inlineImg = $(inlineImg);
+        $inlineImg.wrap('<div class="image load"></div>');
         currentSrc = $inlineImg[0].currentSrc;
+        $inlineImg.attr('data-src', currentSrc);
         pseudo = new Image();
         pseudo.onload = function(e) {
           var $cell, $cellImage, $thumb, imageHeight, imageWidth, img;
@@ -359,7 +353,7 @@ jQuery(function($) {
         $img = $image.find('img');
         src = $img.attr('src');
         if ($readable = $('.readable')) {
-          $inline = $readable.find('img').filter('[src="' + src + '"]');
+          $inline = $readable.find('img').filter('[data-src="' + src + '"]');
         }
       }
       hasOffset = $inline && $inline.length;

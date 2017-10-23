@@ -1,9 +1,13 @@
 <?php
 global $post;
 	
+$count = 17;
+if( is_404() ) {
+	$count = 30;
+}
 $rand_post_args = array(
 	'post_type' => 'post',
-	'posts_per_page' => 17,
+	'posts_per_page' => $count,
 	'orderby' => 'rand',
 	'meta_query' => array(
 		array(

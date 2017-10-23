@@ -54,6 +54,7 @@
 							transition: opacity 500ms $ease, height 500ms $ease;
 							overflow: hidden;
 							position: relative;
+							padding: .25em 0;
 							.cell.transport {
 								margin-bottom: .25em;
 								.image {
