@@ -11,13 +11,25 @@ jQuery(function($) {
     if ($article.length) {
       $imgs = $article.find('img');
       $imgs.each(function(i, img) {
-        var $img, $slide, $wrap;
-        $img = $(img).clone();
+        var $newImg, $slide, $wrap, fullImg, fullImgSrc, imgExt, imgSrc, imgSrcEnd;
+        $newImg = $(img).clone();
         $slide = $('<div class="slide"></div>');
         $wrap = $('<div class="wrap"></div>');
-        $wrap.append($img);
+        $wrap.append($newImg);
         $slide.append($wrap);
-        return $slides.append($slide);
+        $slides.append($slide);
+        imgSrc = $newImg.attr('src');
+        imgSrcEnd = imgSrc.substring(imgSrc.lastIndexOf('-') + 1);
+        if (!isNaN(parseInt(imgSrcEnd))) {
+          imgExt = imgSrc.substring(imgSrc.lastIndexOf('.') + 1);
+          fullImgSrc = imgSrc.replace('-' + imgSrcEnd, '') + '.' + imgExt;
+          fullImg = new Image;
+          fullImg.onload = function(e) {
+            $(img).attr('data-full', fullImgSrc);
+            return $newImg.attr('src', fullImgSrc);
+          };
+          return fullImg.src = fullImgSrc;
+        }
       });
       if ($imgs.length > 1) {
         $carousel.addClass('slidable');
@@ -26,21 +38,32 @@ jQuery(function($) {
     }
   };
   openCarousel = function(e) {
-    var $carousel, $this, href, isImage, src;
+    var $carousel, $img, $this, $thisSlide, $thisSlideImg, fullSrc, href, isImage, src;
     $carousel = $('.carousel');
     $this = $(this);
-    if (href = $this.attr('href')) {
-      if ($this.find('img').length) {
+    href = $this.attr('href');
+    src = $this.attr('src');
+    if (href) {
+      $img = $this.find('img');
+      if ($img.length) {
         isImage = true;
       }
-    } else if (src = $this.attr('src')) {
+    } else if (src) {
+      $img = $this;
       isImage = true;
     } else {
       isImage = false;
     }
-    $carousel.addClass('show');
     if (isImage) {
-      return e.preventDefault();
+      if (fullSrc = $img.attr('data-full')) {
+        src = fullSrc;
+      }
+      if ($thisSlideImg = $carousel.find('img[src="' + src + '"]')) {
+        $thisSlide = $thisSlideImg.parents('.slide');
+        $carousel.slide(null, $thisSlide);
+        $carousel.addClass('show');
+        return e.preventDefault();
+      }
     }
   };
   closeCarousel = function(e) {
@@ -138,9 +161,8 @@ jQuery(function($) {
     });
     return resizeCarousel();
   };
-  $.fn.slide = function(direction) {
+  $.fn.slide = function(direction, go) {
     var $arrow, $carousel, $currentSlide, $firstSlide, $lastSlide, $nextSlide, $slidesWrapper, currentIndex, delay, left, windowWidth;
-    console.log('!!!!!!');
     $carousel = $(this);
     $arrow = $carousel.find('.arrow.' + direction);
     windowWidth = $(window).innerWidth();
@@ -159,6 +181,15 @@ jQuery(function($) {
       case 'right':
         $nextSlide = $currentSlide.next('.slide');
         left -= windowWidth;
+        break;
+      default:
+        $nextSlide = $(go);
+        if ($currentSlide < $nextSlide) {
+          direction = 'left';
+        }
+        if ($currentSlide > $nextSlide) {
+          direction = 'right';
+        }
     }
     if (!$nextSlide.length) {
       switch (direction) {
@@ -183,6 +214,9 @@ jQuery(function($) {
             x: left
           });
           left -= windowWidth;
+          break;
+        default:
+          return;
       }
       delay = 100;
     } else {

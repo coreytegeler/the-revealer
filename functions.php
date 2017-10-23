@@ -70,6 +70,7 @@ function add_query_vars( $vars ){
   $vars[] .= 'year';
   $vars[] .= 'tag';
   $vars[] .= 'column';
+  // $vars[] .= 'page';
   return $vars;
 }
 add_filter( 'query_vars', 'add_query_vars' );

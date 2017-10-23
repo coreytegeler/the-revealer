@@ -52,10 +52,7 @@ echo '<header class="main">';
 			// 	get_template_part( 'parts/filters' );
 			// echo '</div>';
 		echo '</div>';
-		echo '<div class="bg bar"><div class="solid"></div></div>';
-		if( is_single() ) {
-			echo '<div class="prog bar"><div class="solid"></div></div>';
-		}
+		echo '<div class="goldbar"><div class="solid"></div></div>';
 	echo '</div>';
 echo '</header>';
 	// if( is_archive() ) {

@@ -10,7 +10,7 @@ $issues = get_terms( array(
 $current_issue = $issues[0];
 $current_issue_id = $current_issue->term_id;
 
-$issue_args = array(
+$current_issue_args = array(
 	'post_type' => 'post',
 	'orderby' => 'date',
   'order' => 'asc',
@@ -44,16 +44,52 @@ echo '<div class="readable">';
 			$issue_date = get_field( 'date', $current_issue );
 			echo '<h2 class="date">Published on ' . $issue_date . '</h2>';
 			echo '<div class="circle"></div>';
+			$current_issue_query = new WP_Query( 
+				array_merge( $current_issue_args, array(
+					'posts_per_page' => -1
+				) )
+			);
+			if ( $current_issue_query->have_posts() ) {
+				echo '<div class="loop issues xxsmall masonry">';
+					while ( $current_issue_query->have_posts() ) {
+						$current_issue_query->the_post();
+						$article_id = get_the_ID();
+						$thumb_id = get_post_thumbnail_id();
+						$thumb = wp_get_attachment_image_src( $thumb_id, 'thumb' );
+						$thumb_url = $thumb[0];
+						$thumb_width = $thumb[1];
+						$thumb_height = $thumb[2];
+						echo '<article class="cell" role="article" style="' . $style . '" data-id="' . $article_id . '">';
+							echo '<div class="wrap">';
+								echo '<div class="primary">';
+									echo '<a class="link_wrap" href="' . $permalink . '">';
+										echo '<div class="' . ( $thumb ? 'image load' : 'missing') . '">';
+											if ( $thumb ) {
+												echo '<img data-src="'.$thumb_url.'" data-width="'.$thumb_width.'" data-height="'.$thumb_height.'"/>';
+											}
+										echo '</div>';
+									echo '</a>';
+								echo '</div>';
+							echo '</div>';
+						echo '</article>';
+					}
+					wp_reset_query();
+				echo '</div>';
+			}
+
+
+
+
 			echo '<div class="newsletter">';
-			echo '<h2>' . get_field( 'newsletter_title', 'option' ) . '</h2>';
-				echo '<form>';
-					echo '<input type="text" placeholder="Enter your email"/>';
-					echo '<input type="submit" value="Subscribe"/>';
-				echo '</form>';
+				get_template_part( 'parts/newsletter' );
+			// 	echo '<form>';
+			// 		echo '<input type="text" placeholder="Enter your email"/>';
+			// 		echo '<input type="submit" value="Subscribe"/>';
+			// 	echo '</form>';
 			echo '</div>';
 		echo '</section>';
 		echo '<section>';
-			$features_args = array_merge( $issue_args, array(
+			$features_args = array_merge( $current_issue_args, array(
 				'posts_per_page' => $features_amount,
 				'category_name' => 'features'
 			) );
@@ -72,7 +108,7 @@ echo '<div class="readable">';
 		echo '</section>';	
 	echo '</div>';
 
-	$medium_args = array_merge( $issue_args, array(
+	$medium_args = array_merge( $current_issue_args, array(
 		'posts_per_page' => $medium_amount,
 		'post__not_in' => $already_used
 	) );

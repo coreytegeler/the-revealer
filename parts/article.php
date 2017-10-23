@@ -54,7 +54,7 @@ echo '<article class="cell" role="article" style="' . $style . '" data-id="' . $
 				}
 				echo '<span class="date">' . $date . '</span>';
 			echo '</div>';
-			echo '<div class="excerpt">';
+			echo '<div class="blurb">';
 				echo $excerpt;
 			echo '</div>';
 		echo '</div>';

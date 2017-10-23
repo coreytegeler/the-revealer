@@ -6,7 +6,11 @@ get_header();
 $cat_param = $_GET['category'];
 $year_param = $_GET['y'];
 $column_param = $_GET['column'];
-$paged = $_GET['paged'];
+// $paged = $_GET['page'];
+$paged = get_query_var( 'paged' );
+if( !$paged ) {
+	$paged = 1;
+}
 $articles_args = array(
 	'post_type' => 'post',
 	'paged' => $paged,
@@ -32,12 +36,11 @@ if( sizeof( $tax_query ) ) {
 	$articles_args['tax_query'] = $tax_query;
 }
 
-
+query_posts( $articles_args );
 echo '<div class="readable">';
 	echo '<div class="loop articles medium masonry">';
-		query_posts( $articles_args );
-		if ( have_posts() ) {
-			while ( have_posts() ) {
+		if ( $wp_query->have_posts() ) {
+			while ( $wp_query->have_posts() ) {
 				the_post();
 				get_template_part( 'parts/article' );
 			}
@@ -46,9 +49,9 @@ echo '<div class="readable">';
 				echo 'Sorry, this are no articles.';
 			echo '</div>';
 		}
-		wp_reset_query();
 	echo '</div>';
 echo '</div>';
 get_template_part( 'parts/pagination' );
+wp_reset_query();
 get_footer();
 ?>

@@ -15,11 +15,22 @@ html, body {
 	-webkit-overflow-scrolling: touch;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	visibility: visible;
 	::selection {
-		background: rgba($gold,.5);
+		background: $lightGold;
 	}
 	&.noscroll {
 		overflow: hidden;
+	}
+}
+body {
+	header, #wrapper, footer, #discover {
+		opacity: 0;
+	}
+	&.initd {
+		header, #wrapper, footer, #discover {
+			opacity: 1;
+		}
 	}
 }
 a {
@@ -30,8 +41,16 @@ a {
 }
 p {
 	margin: 0 0 1em 0;
+  word-break: break-word;
 	&:last-of-type {
 		margin: 0;
+	}
+	a {
+	text-decoration: none;
+	border-bottom: .1em solid $gold;
+		&:hover {
+			background-color: $gold;
+		}
 	}
 }
 h1 {
@@ -55,6 +74,7 @@ em, i {
 }
 input {
 	@include sansSerifText;
+	transition: box-shadow 900ms $ease;
 	&:focus {
 		outline-color: $gold;
 	}
@@ -108,6 +128,7 @@ input {
 	// display: flex;
   // flex-direction: row;
 	main {
+		position: relative;
 		.readable {
 			width: 100%;
 			min-height: 100vh;
@@ -118,7 +139,7 @@ input {
 	&.full {
 		main {
 	    width: calc(100% - 4em);
-	    margin: .5em 2em 4em 2em;
+	    padding: .5em 2em 4em 2em;
 		}
 		.max {
 			max-width: #{$maxWidth * 2};
@@ -127,7 +148,7 @@ input {
 	&.split {
 		main {
 			width: calc(100% - #{$sideWidth} - 4em);
-			margin: 0 2em 4em calc(#{$sideWidth} + 2em);
+			padding: 0 2em 4em calc(#{$sideWidth} + 2em);
 		}
 	}
 	.nested.parent {
@@ -160,21 +181,15 @@ input {
 					font-size: inherit; 
 					line-height: inherit;	
 				}
-				span {
-					&.title {
-						// @include serifText;
-						em {
-							font-family: 'Clarendon';
-							font-style: normal;
-							text-transform: lowercase;
-						}
-						&::after {
-							content: ' ';
-						}
+				.title {
+					@include sansSerifText;
+					font-weight: $black;
+					em {
+						font-style: normal;
 					}
-					&.body {
-						@include xSmallText;
-					}
+				}
+				.body {
+					@include xSmallText;
 				}
 			}
 			.links {
@@ -296,6 +311,32 @@ input {
 			width: calc(66.666% - 2em);
 		}
 	}
+	&.two_one {
+		section:first-child {
+			width: calc(66.666% - 2em);
+		}
+		section:last-child {
+			width: calc(33.333% - 2em);
+		}
+	}
+}
+.goldbar {
+	width: 100%;
+	height: 1px;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	padding: 0;
+	opacity: .98;
+	.solid {
+		width: calc(100% + .25em);
+		height: 1px;
+		position: absolute;
+    top: 0;
+		border-radius: .125em;
+		background: $gold;
+		box-shadow: 0 0 .25em .1em $gold;
+	}
 }
 #isMobile {
 	display: none;
@@ -321,8 +362,10 @@ input {
 @import 'home';
 @import 'article';
 @import 'about';
+@import 'issues';
 @import 'search';
 @import 'discover';
 @import 'footer';
+@import 'newsletter';
 @import 'carousel';
 @import 'mobile';

@@ -3,7 +3,7 @@
 		width: calc(#{$sideWidth} - 2em);
 		height: 100%;
 		padding-left: 2em;
-		position: fixed;
+		position: absolute;
 		left: 0;
 		top: 0;
 		display: flex;
@@ -67,7 +67,7 @@
 					color: $medium;
 					a {
 						text-decoration: none;
-						@include xSmallText;
+						// @include xSmallText;
 						color: $dark;
 						display: inline;
 						&:hover {
@@ -99,6 +99,9 @@
 					}
 				}
 			}
+		}
+		&.fixed {
+			position: fixed;
 		}
 		&.bottom {
 			position: relative;

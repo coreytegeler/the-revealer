@@ -4,14 +4,14 @@ body, html {
 			display: block;
 			main {
 				width: calc(100% - 2em);
-				margin: 0 1em 2em 1em;
+				padding: 0 1em 2em 1em;
 				.readable {
 					width: 100%;
 					padding-right: 0;
 					.pagination {
 						.paginate {
 							.text {
-								display: none;
+								
 							}
 							.circle {
 								width: 1.5em;
@@ -86,7 +86,10 @@ body, html {
 		#wrapper, #wrapper.split, #wrapper.full {
 			main {
 				width: calc(100% - 1em);
-		    margin: .5em .5em 4em .5em;
+		    padding: .5em .5em 4em .5em;
+		    .pagination .pafinate .text {
+		    	display: none;
+		    }
 			}
 		}
 	}

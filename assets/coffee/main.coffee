@@ -12,10 +12,14 @@ jQuery ($) ->
 		$main = $('main')
 		$footer = $('footer')
 		$alert = $('#alert')
+		$popup = $('#popup')
 		siteUrl = $body.attr('data-site-url')
-
-		sizeImages = () ->
-			$('.image.load').each (i, image) ->
+		sizeImages = (images) ->
+			if images
+				$images = $(images)
+			else
+				$images = $('.image.load')	
+			$images.each (i, image) ->
 				$image = $(image)
 				$img = $image.find('img')
 				if $img.parents('article')
@@ -48,6 +52,8 @@ jQuery ($) ->
 						ratio = natWidth/natHeight
 						imageWidth = $image.innerWidth()
 						imageHeight = imageWidth/ratio
+						$image.width(imageWidth)
+						$image.height(imageHeight)
 						$image.css
 							width: imageWidth,
 							height: imageHeight
@@ -56,6 +62,8 @@ jQuery ($) ->
 						img = e.target
 						loadImage($image)
 					image.src = src
+				if $masonry = $image.parents('.masonry')
+					$masonry.masonry()
 
 		loadImage = (image) ->
 			$image = $(image)
@@ -74,6 +82,8 @@ jQuery ($) ->
 							fixSide()
 						else
 							$image.attr('style','')
+							$image.width('')
+							$image.height('')
 							fixGrids()
 					setTimeout () ->
 						if $masonry = $image.parents('.masonry')
@@ -95,7 +105,7 @@ jQuery ($) ->
 
 		fixGrids = ($loops, $cells) ->
 			if !$loops
-				$loops = $('.loop')
+				$loops = $('.loop, .masonry')
 			$loops.each () ->
 				$loop = $(this)
 				isMasonry = $loop.is('.masonry')
@@ -118,21 +128,46 @@ jQuery ($) ->
 						transitionDuration: 0,
 						percentPosition: true,
 						fitWidth: true
+				sizeImages($loop.find('.image.load'))
 
+		sideScroll = null
+		lastSideScroll = null
 		fixSide = (e) ->
 			if !$side.length
 				return
 			winHeight = $window.innerHeight()
 			winScroll = $window.scrollTop()
-			pageHeight = $main.innerHeight()
+			pageHeight = $main.outerHeight()
 			pageTop = $main.position().top
 			pageBottom = pageTop + pageHeight
 			pageEnd = pageBottom - winHeight
 			isBottom = (winScroll >= pageEnd)
+			mainRemain = pageEnd - winScroll
+			if mainRemain > 0
+				$side.css
+					y: 0
+			else
+				$side.css
+					y: mainRemain
 
+			sideTop = $side.position().top
 			sideHeight = $side.innerHeight()
-			sideScrollHeight = $side[0].scrollHeight
 			sideScroll = $side.scrollTop()
+			sideScrollHeight = $side[0].scrollHeight
+			sideScrolled = sideHeight + sideScroll
+			sideRemain = sideScrollHeight - sideScrolled
+			scrollDiff = sideRemain - mainRemain
+			nextSideScroll = scrollDiff
+
+			# if !lastSideScroll
+			# 	lastSideScroll = sideScroll
+			# if lastSideScroll > nextSideScroll
+			# 	console.log 'up'
+			# else
+			# 	console.log 'down'
+			# if scrollDiff >= 0
+			# 	$side.scrollTop(nextSideScroll)
+			# lastSideScroll = nextSideScroll
 
 		trackScroll = (e) ->
 			$readable = $('.readable')
@@ -158,7 +193,6 @@ jQuery ($) ->
 				headerBottom = $header.offset().top + $header.innerHeight()
 				innerHeight = $nav.outerHeight()
 				if isBottom
-					sideScroll = $side.scrollTop()
 					$wrapper.addClass('bottom')
 					$header.css
 						y: pageEnd - winScroll
@@ -172,32 +206,33 @@ jQuery ($) ->
 						top = 0
 					$wrapper.removeClass('bottom')
 				# PROGRESS BAR
-				$header.find('.bar').each (i, bar) ->
-					$bar = $(this)
-					if $bar.is('.prog')
-						barWidth = $(bar).innerWidth()
-						progress = winScroll * barWidth / pageEnd
-						$bar.find('.solid').css
-							width: progress
-					# else if $bar.is('.bg')
-					# 	opacity = winScroll * 1 / 20
-					# 	$bar.css
-					# 		opacity: opacity
+				# $header.find('.bar').each (i, bar) ->
+				# 	$bar = $(this)
+				# 	if $bar.is('.prog')
+				# 		barWidth = $(bar).innerWidth()
+				# 		progress = winScroll * barWidth / pageEnd
+				# 		$bar.find('.solid').css
+				# 			width: progress
 
-			if $side.length
-				sideTop = $side.position().top
-				sideHeight = $side.innerHeight()
-				sideBottom = sideTop + sideHeight
-				sideScroll = $side.scrollTop()
-				sideEnd = sideBottom - $side.innerHeight()
-				scrollPast = winScroll - pageEnd
-				notSideBottom = sideScroll < $side[0].scrollHeight - sideHeight
-				if notSideBottom
-					$side.scrollTop(scrollPast)
+			if $readable.is('#discover')
+				if winScroll + winHeight >= scrollHeight - winHeight * 2
+					queryMore()
 
-			nearBottom = winScroll + winHeight >= scrollHeight - winHeight * 2
-			if $readable.is('#discover') && nearBottom
-				queryMore()
+			belowThresh = pageEnd/4 - winScroll <= 0
+			if $popup.length && !$popup.is('.stuck')
+				if winScroll - $popup.innerHeight() - $header.innerHeight() > pageEnd
+					$popup.addClass('show').removeClass('fixed').addClass('stuck')
+					$popup.transition
+						y: 0,
+					, 0
+				else if belowThresh && !$popup.is('.stuck, .fixed')
+					$popup.addClass('show').addClass('fixed')
+					$popup.transition
+						y: - $popup.innerHeight()
+					, 250
+				else if !$popup.is('.fixed')
+					$popup.removeClass('show')
+
 			fixSide(e)
 
 		toggleFilterList = () ->
@@ -220,17 +255,35 @@ jQuery ($) ->
 			$article = $('article')
 
 			# wraps inline images to load before showing
+			$sideImages = $side.find('.images')
+			$sideImages.masonry()
+			fixGrids($sideImages)
 			inlineImgs = $article.find('.content img')
 			for inlineImg in inlineImgs
-				$(inlineImg).wrap('<div class="image load"></div>')
-		
-			sizeImages()
+				$inlineImg = $(inlineImg)
+				currentSrc = $inlineImg[0].currentSrc
+				pseudo = new Image()
+				pseudo.onload = (e) ->
+					img = e.target
+					$cell = $('<div class="cell transport"><div class="image load"></div></div>')
+					imageWidth = img.naturalWidth
+					imageHeight = img.naturalHeight
+					$cell.find('.image').append(img)
+					$thumb = $cell.find('img')
+					$thumb.attr('data-width', imageWidth).attr('data-height', imageHeight)
+					fixGrids($sideImages, $cell)
+					$cellImage = $cell.find('.image')
+					sizeImages($cellImage)
+				pseudo.src = currentSrc
+				
+			$sideImages.removeClass('hide')
+			sizeImages($article.find('.content .image.load'))
 
 			links = $article.find('a[href]')
 			for link in links
 				$link = $(link)
 				href = $link.attr('href')	
-				# adds classes to inline citations and footnotes
+				# add classes to inline citations and footnotes
 				if href.includes('#_ftn')
 					replace = $link.text()
 						.replace('[','')
@@ -240,7 +293,7 @@ jQuery ($) ->
 						$link.addClass('ref ftn transport')
 					else
 						$link.addClass('super ftn transport')
-				# makes external links open in new tab
+				# open external links in new tab
 				else if !href.includes(siteUrl)
 					$link.attr('target', '_blank')
 			$article.addClass('show')
@@ -272,7 +325,7 @@ jQuery ($) ->
 			hasOffset = $inline && $inline.length
 			
 			if hasOffset
-				scrollTo = $inline.offset().top - headerHeight - 10
+				scrollTo = $inline.offset().top - headerHeight - 20
 
 			if !isNaN(scrollTo)
 				$('html,body').animate
@@ -288,36 +341,29 @@ jQuery ($) ->
 		fixHeader = () ->
 			topHeight = Math.ceil($header.outerHeight())
 			$wrapper.css
-				paddingTop: topHeight
+				marginTop: topHeight
+			$body.addClass('initd')
 			$side.css
 				height: $window.innerHeight() - topHeight,
 				top: topHeight
+			$side.addClass('fixed')
 			taglineHeight = $nav.find('.tagline').innerHeight()
 			linksHeight = $nav.find('.links').innerHeight()
 			taglineWidth = $nav.find('.tagline').innerWidth()
 			linksWidth = $nav.find('.links').innerWidth()
-				# console.log taglineWidth + linksWidth, $header.innerWidth()
-				# if linksHeight >= taglineHeight - 5 && linksHeight <= taglineHeight + 5
-				# 	$nav.removeClass('break')
-				# else
-				# 	$nav.addClass('break')
-			# if !$alert
-				# return
-			# alertHeight = $alert.innerHeight()
-
-			# $wrapper.css
-				# paddingTop: alertHeight
-			# $side.css
-			# 	paddingTop: alertHeight
-			# 	height: $window.innerHeight() - alertHeight
+			
 
 		closeAlert = () ->
-			$alert.transition
-				height: 0
-			, 900, () ->
-				$alert.remove()
-				fixHeader()
-				trackScroll()
+			$alert.remove()
+			fixHeader()
+			trackScroll()
+
+		closePopup = () ->
+			$popup.transition
+				y: $popup.innerHeight() 
+			, 500, () ->
+				$popup.removeClass('fixed')
+				$popup.addClass('stuck')
 
 		isMobile = () ->
 			return parseInt($('#isMobile').css('content').replace(/['"]+/g, ''))
@@ -358,9 +404,7 @@ jQuery ($) ->
 								$inner = $cell.find('.wrap').html()
 								$empty.removeClass('empty')
 								$empty.find('.wrap').html($inner)
-							# else
-								# $empty.remove()
-							sizeImages()
+							sizeImages($empty.find('.image.load'))
 
 					error: (jqXHR, status, error) ->
 						console.log jqXHR.responseJSON
@@ -435,6 +479,7 @@ jQuery ($) ->
 		$('body').on('click', '.transport', transport)
 		$('body').on('click', '#filters .toggle', toggleFilterList)
 		$('body').on('click', '#alert .close', closeAlert)
+		$('body').on('click', '#popup .close', closePopup)
 		$('body').on('hover', '.cell .link_wrap', hoverCell)
 		# $('.single article .super').on 'click', scrollToFootnote
 

@@ -9,25 +9,49 @@ body.about {
 	}
 	#wrapper {
 		main {
-			ul.nested.parent {
-				width: 50%;
-				float: left;
+			ul.parent {
+				width: 100%;
+				display: table;
+				max-width: 100%;
+				li.cell {
+					width: calc(50% - 1em);
+					float: left;
+					margin-bottom: 2em;
+				}
 				ul.child {
-					span {
-						&.years {
-							@include xSmallText;
-							opacity: 0.5;
-							&::before {
-								content: ' (';
-							}
-							&::after {
-								content: ')';
+					li {
+						width: 100%;
+						span {
+							&.years {
+								@include xSmallText;
+								opacity: 0.5;
+								&::before {
+									content: ' (';
+								}
+								&::after {
+									content: ')';
+								}
 							}
 						}
 					}
 				}
 				.links {
 					margin-top: .25em;
+				}
+				&.about {
+					max-width: $maxWidth;
+					display: table;
+					margin: auto;
+					.body {
+						@include mediumText;
+						@include serifText;
+					}
+					strong {
+						@include mediumText;
+						@include sansSerifText;
+						font-weight: $black;
+						font-size: 1em;
+					}
 				}
 			}
 		}

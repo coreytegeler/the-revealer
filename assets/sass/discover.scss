@@ -59,7 +59,7 @@ body.discover {
     .cell {
       display: block;
       width: calc(100%/6 - .1em);
-      margin-bottom: 0;
+      margin: 0;
       // @include tablet {
       //   width: calc(100%/4);
       //   .wrap {
@@ -162,8 +162,11 @@ body.discover {
 	}
   .header {
     width: 100%;
-    padding: 1em 0;
+    padding: 0;
     position: relative;
+    position: absolute;
+    left: 0;
+    bottom: 0em;
     .wrap {
       display: table;
       margin: auto;
@@ -173,10 +176,11 @@ body.discover {
         text-decoration: none;
         display: table;
       }
-      h1 {
+      h1, h2 {
         @include serifText;
         span {
           font-style: italic;
+          font-weight: $bold;
         }
       }
       .dash {
@@ -198,11 +202,22 @@ body.discover {
     //   z-index: 1;
     // }
   }
-}
-footer {
-  #discover {
-    .loop {
-      padding: 2em 0;
+  &.bottom {
+    padding: 3em 0; 
+    #searchform {
+      position: absolute;
+      top: calc(50% - 2.5em);
+      left: 0;
+      form {
+        max-width: $lineWidth;
+        input {
+          background: $light;
+          backface-visibility: hidden;
+          &:focus, &:hover {
+            @include hoverShadow($gold);
+          }
+        }
+      }
     }
   }
 }

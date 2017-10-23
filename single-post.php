@@ -11,6 +11,7 @@ echo '<article class="post readable">';
 
 	$title = $post->post_title;
 	$column = get_the_terms( $post, 'columns' )[0];
+
 	echo '<div class="max">';
 		echo '<div class="text">';
 			echo '<div class="excerpt">';

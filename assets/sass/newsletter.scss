@@ -1,0 +1,104 @@
+.newsletter {
+	form {
+		width: 100%;
+		.inputs {
+		  display: flex;
+		  flex-direction: row;
+		  input {
+		    margin: 0;
+		    text-align: center;
+		    border: 0;
+		    padding: .25em .25em .35em .25em;
+		    outline-color: $gold;
+		    line-height: 1.3em;
+		    @include lilShadow($gold);
+		    &[type="email"] {
+		      width: calc(100% - .5em);
+		      background: $light;
+		      border-radius: 1em 0 0 1em;
+		      @include serifText;
+		      @include mediumText;
+		      &.mce_inline_error {
+		      	background-color: rgba(red, .25);
+		      }
+		      &:focus {
+		      	outline: none;
+		      	@include lightHoverShadow($gold);
+		      }
+		    }
+		    &[type="submit"] {
+		      max-width: 7em;
+		      height: 100%;
+		      background: $gold;
+		      color: $medium;
+		      font-weight: 600;
+		      border-radius: 0 1em 1em 0;
+		      transition: text-shadow 500ms $ease;
+		      &:hover {
+		        color: $dark;
+		        cursor: pointer;
+		      }
+		    }
+		  }
+		}
+		.response, div.mce_inline_error, div.mce_inline_success {
+			display: none !important;
+		}
+	}
+	&#popup {
+		width: 100%;	
+		display: none;
+		z-index: 700;
+		background: rgba($light,.98);
+		.close {
+	    position: absolute;
+	    right: 0;
+	    bottom: 2em;
+	    display: none;
+	    z-index: 800;
+	    &:hover {
+	    	cursor: pointer;
+	    	@include hoverShadow($light);
+	    }
+		}
+		.inner {
+			width: calc(100% - 4em);
+			margin: 0 2em;
+			position: relative;
+			.goldbar {
+				top: 0;
+				bottom: auto;
+			}
+			form {
+				width: 100%;
+				padding: 1em 0;
+				display: table;
+				.inputs {
+			    justify-content: center;
+				}
+				label {
+					width: 100%;
+					display: block;
+					font-weight: $bold;
+					padding: 0 0 .5em 0;
+					text-align: center;
+				}
+			}
+		}
+		&.show {
+			display: block;
+		}
+		&.fixed {
+			position: fixed;
+			left: 0;
+			top: 100%;
+			.close {
+				display: flex;
+			}
+		}
+		&.stuck {
+			transform: none !important;
+			transition: none !important;
+		}
+	}
+}

@@ -10,12 +10,24 @@ jQuery ($) ->
     if $article.length
       $imgs = $article.find('img')
       $imgs.each (i, img) ->
-        $img = $(img).clone()
+        $newImg = $(img).clone()
         $slide = $('<div class="slide"></div>')
         $wrap = $('<div class="wrap"></div>')
-        $wrap.append($img)
+        $wrap.append($newImg)
         $slide.append($wrap)
         $slides.append($slide)
+        imgSrc = $newImg.attr('src')
+        imgSrcEnd = imgSrc.substring(imgSrc.lastIndexOf('-') + 1)
+        if !isNaN(parseInt(imgSrcEnd))
+          imgExt = imgSrc.substring(imgSrc.lastIndexOf('.') + 1)
+          fullImgSrc = imgSrc.replace('-'+imgSrcEnd, '') + '.' + imgExt
+          fullImg = new Image
+          fullImg.onload = (e) ->
+            $(img).attr('data-full', fullImgSrc)
+            # new Date().getTime()
+            $newImg.attr('src', fullImgSrc)
+          fullImg.src = fullImgSrc
+
       if $imgs.length > 1
         $carousel.addClass('slidable')
       setupCarousel()
@@ -23,19 +35,26 @@ jQuery ($) ->
   openCarousel = (e) ->
     $carousel = $('.carousel')
     $this = $(this)
-    if href = $this.attr('href')
-      # console.log 'href:', href
-      if $this.find('img').length
+    href = $this.attr('href')
+    src = $this.attr('src')
+    if href
+      $img = $this.find('img')
+      if $img.length
         isImage = true
-    else if src = $this.attr('src')
-      # console.log 'src:', src
+    else if src
+      $img = $this
       isImage = true
     else
       isImage = false
 
-    $carousel.addClass('show')
     if isImage
-      e.preventDefault()
+      if fullSrc = $img.attr('data-full')
+        src = fullSrc
+      if $thisSlideImg = $carousel.find('img[src="'+src+'"]')
+        $thisSlide = $thisSlideImg.parents('.slide')
+        $carousel.slide(null,$thisSlide)
+        $carousel.addClass('show')
+        e.preventDefault()
 
   closeCarousel = (e) ->
     $carousel = $(this).parents('.carousel')
@@ -112,8 +131,7 @@ jQuery ($) ->
       $carousel.slide(direction)
     resizeCarousel()
 
-  $.fn.slide = (direction) ->
-    console.log '!!!!!!'
+  $.fn.slide = (direction, go) ->
     $carousel = $(this)
     $arrow = $carousel.find('.arrow.'+direction)
     windowWidth = $(window).innerWidth()
@@ -131,6 +149,12 @@ jQuery ($) ->
       when 'right'
         $nextSlide = $currentSlide.next('.slide')
         left -= windowWidth
+      else
+        $nextSlide = $(go)
+        if $currentSlide < $nextSlide
+          direction = 'left'
+        if $currentSlide > $nextSlide
+          direction = 'right'
     if !$nextSlide.length
       switch direction
         when 'left'
@@ -149,6 +173,8 @@ jQuery ($) ->
           left = -1 * currentIndex * windowWidth
           $slidesWrapper.css x: left
           left -= windowWidth
+        else
+          return
       delay = 100
     else
       delay = 0

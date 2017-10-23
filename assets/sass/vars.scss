@@ -2,6 +2,7 @@
 ///////////////////////////COLORS//////////////////////////////
 ///////////////////////////////////////////////////////////////
 $gold: #fecf0c;
+$lightGold: #f8df93;
 $dark: rgba(#1a172e, .9);
 $medium: rgba(#1a172e, .6);
 $light: #f3f1f3;
@@ -30,7 +31,7 @@ $light: #f3f1f3;
 }
 @mixin mediumText {
 	font-size: 1.2em;
-	line-height: 1.2em;
+	line-height: 1.4em;
 }
 @mixin xMediumText {
   font-size: 1.5em;
@@ -123,19 +124,19 @@ $ease: cubic-bezier(0.19, 1, 0.22, 1);
 
 @keyframes glisten {
   0% {
-  	opacity: 0.25;
+  	opacity: 0.5;
   }
   25% {
-  	opacity: .75;
+  	opacity: 1;
   }
   50% {
-  	opacity: .25;
+  	opacity: .5;
   }
   75% {
-  	opacity: .75;
+  	opacity: 1;
   }
   100% {
-  	opacity: 0.25;
+  	opacity: 0.5;
   }
 }
 
@@ -174,6 +175,9 @@ $ease: cubic-bezier(0.19, 1, 0.22, 1);
 ///////////////////////////////////////////////////////////////
 ///////////////////////////SHADOWS/////////////////////////////
 ///////////////////////////////////////////////////////////////
+@mixin lilShadow($color) {
+  box-shadow: 0 0 .25em .05em $color;
+}
 @mixin boxShadow($color) {
   box-shadow: 0 0 .25em .5em $color;
 }
@@ -186,5 +190,3 @@ $ease: cubic-bezier(0.19, 1, 0.22, 1);
 @mixin lightHoverShadow($color) {
   box-shadow: 0 0 5em 0 $color;
 }
-
-

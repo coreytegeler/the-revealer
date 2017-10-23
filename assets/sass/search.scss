@@ -30,18 +30,22 @@ body.search {
 	padding: 0 2em;
 	form {
 		width: 100%;
+		height: 5em;
 		display: table;
 		margin: auto;
 		label {
 			em {
 				opacity: 0;
+				position: absolute;
+				left: -99999%;
 			}
 		}
 		input {
 			&#searchbox {
 				width: 100%;
+				height: 100%;
 				margin: 0;
-				// border-bottom: .125em solid $gold;
+				border-radius: 1em;
 				text-align: center;
 				border: 0;
 				background: $light;
@@ -49,10 +53,13 @@ body.search {
 				outline-color: $gold;
 				padding: .25em .25em .35em .25em;
 				box-shadow: 0px 0px .5em .05em $gold;
-				// overflow: visible;
+				@include xLargeText;
 				@include serifText;
-				@include largeText;
 				line-height: 1.3em;
+				&:focus {
+	      	outline: none;
+	      	@include lightHoverShadow($gold);
+	      }
 			}
 		}
 	}
