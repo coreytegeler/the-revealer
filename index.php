@@ -41,7 +41,8 @@ if( $articles_page ) {
 echo '<div class="readable">';
 	echo '<div class="sections one_one">';
 		echo '<section id="cover">';
-			echo '<h1 class="header">Read our current issue&mdash;<strong>' . $current_issue->name  . '</strong>.</h1>';
+			echo '<h1 class="lead">Read our current issue</h1>';
+			echo '<h1 class="title">' . $current_issue->name  . '</h1>';
 			$issue_date = get_field( 'date', $current_issue );
 			echo '<h2 class="date">Published on ' . $issue_date . '</h2>';
 			echo '<div class="circle"></div>';
@@ -115,6 +116,8 @@ echo '<div class="readable">';
 		echo '</div>';
 	}
 	wp_reset_query();
+
+	echo '<div class="goldbar"><div class="solid"></div></div>';
 
 	echo '<div class="sections one_one">';
 
@@ -222,7 +225,6 @@ echo '<div class="readable">';
 	) );
 	$past_issue = $past_issues[1];
 	$past_issue_id = $past_issue->term_id;
-
 	$past_issue_args = array(
 		'post_type' => 'post',
 		'orderby' => 'date',
@@ -235,13 +237,10 @@ echo '<div class="readable">';
 			)
 	  )
 	);
-
 	$past_issue_args = array_merge( $past_issue_args, array(
 		'post__not_in' => $already_used
 	) );
-
 	$past_issue_query = new WP_Query( $past_issue_args );
-
 	if ( $past_issue_query->have_posts() ) {
 		echo '<section>';
 			echo '<h2 class="header">Catch up on our last issue</h2>';

@@ -1,6 +1,6 @@
 jQuery(function($) {
   return $(function() {
-    var $alert, $body, $footer, $header, $headers, $logo, $main, $nav, $popup, $side, $window, $wrapper, closeAlert, closePopup, fixGrids, fixHeader, fixSide, hoverCell, isMobile, lastSideScroll, loadImage, queryMore, reveal, setupArticle, sideScroll, siteUrl, sizeImages, toggleFilterList, trackScroll, transport;
+    var $alert, $body, $footer, $header, $headers, $logo, $main, $nav, $popup, $side, $window, $wrapper, closeAlert, closePopup, fixGrids, fixHeader, fixSide, hoverCell, isMobile, lastSideScroll, loadImage, queryMore, reveal, setupArticle, shareWindow, sideScroll, siteUrl, sizeImages, toggleFilterList, trackScroll, transport;
     $window = $(window);
     $body = $('body');
     $wrapper = $('#wrapper');
@@ -275,20 +275,21 @@ jQuery(function($) {
       });
     };
     setupArticle = function() {
-      var $article, $inlineImg, $link, $sideImages, currentSrc, href, inlineImg, inlineImgs, j, k, len, len1, link, links, pseudo, replace;
+      var $article, $inlineImg, $link, $sideImages, currentSrc, hasImages, href, inlineImg, inlineImgs, j, k, len, len1, link, links, pseudo, replace;
       if (!$body.is('.single-post')) {
         return;
       }
       $article = $('article');
-      $sideImages = $side.find('.images');
+      $sideImages = $side.find('.images .loop');
       $sideImages.masonry();
       fixGrids($sideImages);
       inlineImgs = $article.find('.content img');
+      hasImages = false;
       for (j = 0, len = inlineImgs.length; j < len; j++) {
         inlineImg = inlineImgs[j];
         $inlineImg = $(inlineImg);
         $inlineImg.wrap('<div class="image load"></div>');
-        currentSrc = $inlineImg[0].currentSrc;
+        currentSrc = inlineImg.currentSrc;
         $inlineImg.attr('data-src', currentSrc);
         pseudo = new Image();
         pseudo.onload = function(e) {
@@ -302,11 +303,14 @@ jQuery(function($) {
           $thumb.attr('data-width', imageWidth).attr('data-height', imageHeight);
           fixGrids($sideImages, $cell);
           $cellImage = $cell.find('.image');
-          return sizeImages($cellImage);
+          sizeImages($cellImage);
+          return $sideImages.parents('.images').removeClass('hide');
+        };
+        pseudo.onerror = function(e) {
+          return console.log(e);
         };
         pseudo.src = currentSrc;
       }
-      $sideImages.removeClass('hide');
       sizeImages($article.find('.content .image.load'));
       links = $article.find('a[href]');
       for (k = 0, len1 = links.length; k < len1; k++) {
@@ -460,45 +464,37 @@ jQuery(function($) {
         });
       }
     };
-    $.fn.scatter = function() {
-      var $cells, $masonry;
-      $masonry = $(this);
-      $cells = $masonry.find('.cell');
-      return $cells.filter(':not(.scattered)').each(function(i, cell) {
-        var $cell, $wrap, max, min, padding, x, y;
-        $cell = $(this);
-        $wrap = $cell.find('.wrap');
-        padding = parseInt($wrap.css('padding'));
-        max = padding;
-        min = -max;
-        x = Math.random() * (max - min) + min;
-        y = Math.random() * (max - min) + min;
-        $wrap.css({
-          x: x,
-          y: y
-        });
-        return $cell.addClass('scattered');
-      });
+    shareWindow = function(e) {
+      var href;
+      e.preventDefault();
+      href = this.href;
+      return window.open(href, 'popup', 'width=600,height=600,scrollbars=no,resizable=no');
     };
-    $('.glisten').each(function(ri, html) {
-      var $html, characters;
-      ri++;
-      $html = $(html);
-      characters = $html.text().split('');
-      $html.empty();
-      $(characters).each(function(ci, html) {
-        var $span;
-        $span = $('<span>' + html + '</span>');
-        return $html.append($span);
-      });
-      return setTimeout(function() {
-        return $html.find('span').each(function(si, span) {
-          si++;
-          return setTimeout(function() {
-            return $(span).addClass('animate');
-          }, si * 50);
+    setTimeout(function() {
+      return $('.glisten').each(function(ri, wrap) {
+        var $spans, $wrap, characters;
+        ri++;
+        $wrap = $(wrap);
+        characters = $wrap.text().split('');
+        $wrap.empty();
+        $(characters).each(function(ci, html) {
+          var $span;
+          $span = $('<span>' + html + '</span>');
+          return $wrap.append($span);
         });
-      }, 500 * ri);
+        $spans = $wrap.find('span');
+        return setTimeout(function() {
+          return $spans.each(function(si, span) {
+            si++;
+            return setTimeout(function() {
+              $(span).addClass('animate');
+              if (si === $spans.length - 1) {
+                return $wrap.addClass('show');
+              }
+            }, si * 50);
+          });
+        }, 500 * ri);
+      }, 500);
     });
     $('#logo svg path').each(function(i, path) {
       return setTimeout(function() {
@@ -510,6 +506,7 @@ jQuery(function($) {
     $('body').on('click', '#alert .close', closeAlert);
     $('body').on('click', '#popup .close', closePopup);
     $('body').on('hover', '.cell .link_wrap', hoverCell);
+    $('body').on('click', 'aside .share a.window', shareWindow);
     $window.on('resize', function() {
       fixGrids();
       sizeImages();

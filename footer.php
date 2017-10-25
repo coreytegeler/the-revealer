@@ -14,7 +14,7 @@ if( $post->post_name != 'discover' ) {
 					echo '<div class="wrap">';
 						$discover_url = get_permalink( get_page_by_path( 'discover' ) );
 						echo '<a href="' . $discover_url . '">';
-							echo '<h2 class="glisten">';
+							echo '<h2 class="glisten bounce">';
 								echo 'Discover&nbsp;&nbsp;more';
 							echo '</h2>';
 						echo '</a>';

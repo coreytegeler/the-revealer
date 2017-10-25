@@ -33,10 +33,11 @@
 		      color: $medium;
 		      font-weight: 600;
 		      border-radius: 0 1em 1em 0;
-		      transition: text-shadow 500ms $ease;
+		      transition: box-shadow 500ms $ease;
 		      &:hover {
 		        color: $dark;
 		        cursor: pointer;
+		        @include lightHoverShadow($gold);
 		      }
 		    }
 		  }

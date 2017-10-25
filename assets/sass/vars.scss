@@ -6,6 +6,7 @@ $lightGold: #f8df93;
 $dark: rgba(#1a172e, .9);
 $medium: rgba(#1a172e, .6);
 $light: #f3f1f3;
+$light: white;
 
 ///////////////////////////////////////////////////////////////
 ///////////////////////TEXT SIZE///////////////////////////////
@@ -145,7 +146,7 @@ $ease: cubic-bezier(0.19, 1, 0.22, 1);
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-.5em);
+    transform: translateY(-.125em);
   }
   100% {
     transform: translateY(0);
@@ -158,14 +159,14 @@ $ease: cubic-bezier(0.19, 1, 0.22, 1);
   	transform: translateY(0);
   }
   25% {
-  	opacity: .75;
+  	opacity: 1;
   }
   50% {
   	opacity: .5;
-  	transform: translateY(-.5em);
+  	transform: translateY(-.125em);
   }
   75% {
-  	opacity: .75;
+  	opacity: 1;
   }
   100% {
   	opacity: 0.5;

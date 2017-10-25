@@ -201,6 +201,13 @@ function add_custom_tax_filters() {
 }
 add_action( 'restrict_manage_posts', 'add_custom_tax_filters' );
 
+function prefix_reset_metabox_positions(){
+  delete_user_meta( 1, 'meta-box-order_post' );
+  delete_user_meta( 1, 'meta-box-order_page' );
+  delete_user_meta( 1, 'meta-box-order_custom_post_type' );
+}
+add_action( 'admin_init', 'prefix_reset_metabox_positions' );
+
 flush_rewrite_rules( false );
 // flush_rewrite_rules();
 ?>

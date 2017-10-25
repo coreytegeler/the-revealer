@@ -5,10 +5,18 @@ body.issues {
 			a {
 				text-decoration: none;
 			}
-			h1 {
+			h1.title {
 				@include sansSerifText;
 				@include xLargeText;
 				font-weight: $black;
+			}
+			h2.date {
+				color: $medium;
+				font-weight: $regular;
+				text-align: right;
+				position: relative;
+				z-index: 100;
+				@include serifText;
 			}
 		}
 	}

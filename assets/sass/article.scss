@@ -8,7 +8,7 @@
 					padding: 0 0 1em 0;
 					@include serifText;
 					.label {
-						padding-bottom: .25em;
+						// padding-bottom: .25em;
 					}
 					h1 {
 						width: 100%;
@@ -28,19 +28,19 @@
 					.row {
 						width: 100%;
 						margin: 0 0 .25em 0;
+						padding: 0 0 .25em 0;
 						border-bottom: 1px solid rgba($medium,.05);
 						@include xSmallText;
 						&.split {
 							display: flex;
-							padding: 0 0 .25em 0;
 							.label {
-								padding-right: .25em;
+								padding-right: .5em;
 								text-align: left;
+								flex: 1;
 							}
 							.value {
-								padding-left: .25em;
 								text-align: right;
-								flex: 1;
+								flex-wrap: wrap;
 							}
 						}
 						a {
@@ -51,44 +51,48 @@
 							}
 						}
 						&.images {
-							transition: opacity 500ms $ease, height 500ms $ease;
+							transition: all 500ms $ease;
 							overflow: hidden;
 							position: relative;
-							padding: .25em 0;
-							.cell.transport {
-								margin-bottom: .25em;
-								.image {
-									img {
-										width: 100%;
+							padding: 0;
+							.value {
+								width: 100%;
+								.loop {
+									.cell.transport {
+										margin-bottom: .25em;
+										.image {
+											img {
+												width: 100%;
+												backface-visibility: hidden;
+											}
+										}
+										&:hover {
+											cursor: pointer;
+										}
 									}
-								}
-								&:hover {
-									cursor: pointer;
 								}
 							}
 							&.hide {
 								height: 0;
+								padding: 0;
+								margin: 0;
 								opacity: 0;
 							}
 						}
 						&.tags {
-							padding: 0;
-							ul {
-								padding: 0;
-								margin: 0;
-								li {
-									&.label {
-										color: $dark;
-										&::after {
-											content: '';
-										}
+							span {
+								&.label {
+									color: $dark;
+									padding: 0 .25em 0 0;
+									&::after {
+										content: '';
 									}
-									a {
-										font-style: italic;
-										color: $medium;
-										&:hover {
-											color: $dark;
-										}
+								}
+								a {
+									font-style: italic;
+									color: $medium;
+									&:hover {
+										color: $dark;
 									}
 								}
 							}
@@ -100,6 +104,10 @@
 	}
 	#wrapper {
 		padding-bottom: 2em;
+		.max {
+			max-width: $lineWidth;
+			margin: auto;
+		}
 		main {
 			article.readable {
 				width: calc(100% - 4em);
@@ -109,7 +117,6 @@
 					opacity: 1;
 				}
 				.max {
-					max-width: $lineWidth;
 					margin: 0;
 				}
 				.text {

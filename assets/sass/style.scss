@@ -17,7 +17,8 @@ html, body {
 	-moz-osx-font-smoothing: grayscale;
 	visibility: visible;
 	::selection {
-		background: $lightGold;
+		background: $gold;
+		opacity: 1;
 	}
 	&.noscroll {
 		overflow: hidden;
@@ -46,8 +47,8 @@ p {
 		margin: 0;
 	}
 	a {
-	text-decoration: none;
-	border-bottom: .1em solid $gold;
+		text-decoration: none;
+		border-bottom: 1px solid $medium;
 		&:hover {
 			background-color: $gold;
 		}
@@ -109,10 +110,11 @@ input {
 	}
 }
 .label {
+	color: $medium;
 	&.column {
 		@include serifText;
 		font-style: italic;
-		font-weight: $black;
+		font-weight: $regular;
 	}
 	&.categories {
 		@include sansSerifText;
@@ -163,8 +165,9 @@ input {
 				width: 100%;
 				margin: 0 0 .5em 0;
 		    display: table;
-		    @include serifText;
 		    text-align: center;
+		    text-transform: uppercase;
+		    font-weight: $regular;
 		  }
 			.child {
 				display: table;
@@ -229,15 +232,26 @@ input {
 	}
 }
 .bounce {
+	opacity: 0;
+	transition: opacity 1000ms $ease;
 	.animate {
 		animation: {
 			name: bounce;
-			duration: 2000ms;
+			duration: 3000ms;
 		}
 	}
-	&.glisten {
-		.animate {
-			animation-name: glistenBounce;
+	&.show {
+		opacity: .5;
+	}
+	&:hover {
+		opacity: 1;	
+	}
+}
+.bounce.glisten {
+	.animate {
+		animation: {
+			name: glistenBounce;
+			duration: 3000ms;
 		}
 	}
 }

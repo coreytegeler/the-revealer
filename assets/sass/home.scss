@@ -1,155 +1,168 @@
 body.home {
-	.loop {
-		.cell {
-			.date {
-				display: none;
-			}
-		}
-	}
-	#cover {
-		position: relative;
-		.header {
+	main {
+		.goldbar {
 			position: relative;
-			z-index: 100;
-			strong {
-				color: $dark;
-				// text-shadow: 0 0 1em $gold;
-			}
-		}
-		.date {
-			color: $medium;
-			// padding-top: 1em;
-			text-align: right;
-			position: relative;
-			z-index: 100;
-		}
-		.circle {
-			width: calc(5vw + 2em);
-			height: calc(5vw + 2em);
-			position: absolute;
-			left: 40%;
-			top: 25%;
-			z-index: 0;
-			background: $gold;
-			border-radius: 50%;
-		}
-		.newsletter {
-			padding: 4em 0;
-			form {
-				width: 100%;
-				max-width: 25em;
-				label {
-					width: 100%;
-					max-width: 15em;
-					margin: 0 0 .5em 0;
-					display: table;
-					@include sansSerifText;
-					@include xMediumText;
-					font-weight: $black;
-				}
-				.inputs {
-					float: right;
-				}
-			}
-		}
-	}
-	.columns {
-		width: 100%;
-		.column {
-			width: 100%;
-			display: table;
-			a {
-				padding: .5em 0;
-				text-decoration: none;
-				border-bottom: 1px solid $medium;
-				h1 {
-					padding: 0;
-					transition: text-shadow 500ms $ease;
-					span {
-						color: $medium;
-						@include serifText;
-					}
-				}
-				&:hover {
-					h1 {
-						color: $medium;
-						span {
-							opacity: .5;
-						}
-					}
-				}
-			}
-		}
-	}
-	section {
-		padding: 2em 0;
-		.header {
-			font-weight: $bold;
-			color: $medium;
-			em {
-				@include serifText;
-				@include mediumText;
-			}
-			a {
-				text-decoration: none;
-				color: $medium;
-				&:hover {
-					color: $dark;
-				}
-			}
 		}
 		.loop {
-			padding-top: 1em;
-			&#recent_column {
-				.column {
+			.cell {
+				.date {
 					display: none;
 				}
 			}
-			&#featured_tag {
-				.cell {
-					width: calc(100%/2 - 1em);
-					margin: 0 0 2em 0;
+		}
+		#cover {
+			position: relative;
+			h1 {
+				position: relative;
+				z-index: 100;
+				font-weight: $black;
+				&.lead {
+					color: $medium;
+					@include serifText;
+					font-style: italic;
+				}
+				&.title {
+					color: $dark;
 				}
 			}
-			&#past_issue {
-				article {
-					h4 {
-						@include serifText;
+			h2 {
+				&.date {
+					color: $medium;
+					font-weight: $regular;
+					text-align: right;
+					position: relative;
+					z-index: 100;
+					@include serifText;
+				}
+			}
+			.circle {
+				width: calc(5vw + 2em);
+				height: calc(5vw + 2em);
+				position: absolute;
+				left: 40%;
+				top: 25%;
+				z-index: 0;
+				background: $gold;
+				border-radius: 50%;
+			}
+			.newsletter {
+				padding: 4em 0;
+				form {
+					width: 100%;
+					max-width: 25em;
+					label {
+						width: 100%;
+						max-width: 15em;
+						margin: 0 0 .5em 0;
+						display: table;
+						@include sansSerifText;
+						@include xMediumText;
 						font-weight: $black;
 					}
+					.inputs {
+						float: right;
+					}
 				}
 			}
 		}
-	}
-	@include desktop {
-		.loop {
-			&#featured_tag {
-				.cell {
-					.wrap {
-						display: block;
-						.primary, .secondary {
-							width: 100%;
-							padding: 0;
+		.columns {
+			width: 100%;
+			.column {
+				width: 100%;
+				display: table;
+				a {
+					padding: .5em 0;
+					text-decoration: none;
+					border-bottom: 1px solid $medium;
+					h1 {
+						padding: 0;
+						transition: text-shadow 500ms $ease;
+						span {
+							color: $medium;
+							@include serifText;
 						}
-						.secondary {
-							padding: .5em 0 0 0;	
+					}
+					&:hover {
+						h1 {
+							color: $medium;
+							span {
+								opacity: .5;
+							}
 						}
 					}
 				}
 			}
 		}
-	}
-	@include tablet {
-		.loop {
-			&#featured_tag {
-				.cell {
-					.wrap {
-						display: block;
-						.primary {
-							width: 100%;
+		section {
+			padding: 2em 0;
+			.header {
+				font-weight: $regular;
+				color: $medium;
+				em {
+					@include serifText;
+					@include mediumText;
+				}
+				a {
+					text-decoration: none;
+					color: $medium;
+					&:hover {
+						color: $dark;
+					}
+				}
+			}
+			.loop {
+				padding-top: 1em;
+				&#recent_column {
+					.column {
+						display: none;
+					}
+				}
+				&#featured_tag {
+					.cell {
+						width: calc(100%/2 - 1em);
+						margin: 0 0 2em 0;
+					}
+				}
+				&#past_issue {
+					article {
+						h4 {
+							@include serifText;
+							font-weight: $black;
 						}
-						.secondary {
-							width: 100%;
+					}
+				}
+			}
+		}
+		@include desktop {
+			.loop {
+				&#featured_tag {
+					.cell {
+						.wrap {
+							display: block;
+							.primary, .secondary {
+								width: 100%;
+								padding: 0;
+							}
+							.secondary {
+								padding: .5em 0 0 0;	
+							}
+						}
+					}
+				}
+			}
+		}
+		@include tablet {
+			.loop {
+				&#featured_tag {
+					.cell {
+						.wrap {
+							display: block;
+							.primary {
+								width: 100%;
+							}
+							.secondary {
+								width: 100%;
+							}
 						}
 					}
 				}

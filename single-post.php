@@ -6,12 +6,9 @@ echo '<article class="post readable">';
 	$content = apply_filters( 'the_content', $content );
 	$content = str_replace( ']]>', ']]&gt;', $content );
 	$stripped_content = strip_tags( $content );
-
 	$excerpt = wp_strip_all_tags( get_the_excerpt() );
-
 	$title = $post->post_title;
 	$column = get_the_terms( $post, 'columns' )[0];
-
 	echo '<div class="max">';
 		echo '<div class="text">';
 			echo '<div class="excerpt">';

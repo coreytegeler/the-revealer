@@ -180,14 +180,8 @@ body.discover, body.error404 {
         @include serifText;
         span {
           font-style: italic;
-          font-weight: $bold;
+          font-weight: $regular;
         }
-      }
-      .dash {
-        width: 50%;
-        height: .1em;
-        display: table;
-        margin: .5em auto 0 auto;
       }
     }
     // .circle {

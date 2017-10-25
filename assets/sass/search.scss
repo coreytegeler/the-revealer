@@ -1,11 +1,11 @@
 body.search, body.tag {
 	.search_header {
 		width: 100%;
-		max-width: 40em;
 		margin: auto;
 		.text {
 			h1 {
-				text-align: center;
+				text-align: left;
+				font-weight: $black;
 				em {
 					@include serifText;
 					@include mediumText;
@@ -18,7 +18,9 @@ body.search, body.tag {
 		}
 		#searchform {
 			width: 100%;
+			max-width: 40em;
 			padding: 0 0 2em 0;
+			margin: auto;
 		}
 	}
 	.loop {

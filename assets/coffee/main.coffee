@@ -245,14 +245,15 @@ jQuery ($) ->
 			$article = $('article')
 
 			# wraps inline images to load before showing
-			$sideImages = $side.find('.images')
+			$sideImages = $side.find('.images .loop')
 			$sideImages.masonry()
 			fixGrids($sideImages)
 			inlineImgs = $article.find('.content img')
+			hasImages = false
 			for inlineImg in inlineImgs
 				$inlineImg = $(inlineImg)
 				$inlineImg.wrap('<div class="image load"></div>')
-				currentSrc = $inlineImg[0].currentSrc
+				currentSrc = inlineImg.currentSrc
 				$inlineImg.attr('data-src', currentSrc)
 				pseudo = new Image()
 				pseudo.onload = (e) ->
@@ -266,9 +267,10 @@ jQuery ($) ->
 					fixGrids($sideImages, $cell)
 					$cellImage = $cell.find('.image')
 					sizeImages($cellImage)
+					$sideImages.parents('.images').removeClass('hide')
+				pseudo.onerror = (e) ->
+					console.log e
 				pseudo.src = currentSrc
-				
-			$sideImages.removeClass('hide')
 			sizeImages($article.find('.content .image.load'))
 
 			links = $article.find('a[href]')
@@ -401,38 +403,32 @@ jQuery ($) ->
 					error: (jqXHR, status, error) ->
 						console.log jqXHR.responseJSON
 
+		shareWindow = (e) ->
+			e.preventDefault()
+			href = this.href
+			window.open(href,'popup','width=600,height=600,scrollbars=no,resizable=no')
 
-		$.fn.scatter = () ->
-			$masonry = $(this)
-			$cells = $masonry.find('.cell')
-			$cells.filter(':not(.scattered)').each (i, cell) ->
-				$cell = $(this)
-				$wrap = $cell.find('.wrap')
-				padding = parseInt($wrap.css('padding'))
-				max = padding
-				min = -max
-				x = Math.random() * (max - min) + min
-				y = Math.random() * (max - min) + min
-				$wrap.css
-					x: x,
-					y: y
-				$cell.addClass('scattered')
 
-		$('.glisten').each (ri, html) ->
-			ri++
-			$html = $(html)
-			characters = $html.text().split('')
-			$html.empty()
-			$(characters).each (ci, html) ->
-				$span = $('<span>' + html + '</span>')
-				$html.append($span)
-			setTimeout () ->
-				$html.find('span').each (si, span) ->
-					si++
-					setTimeout () ->
-						$(span).addClass('animate')
-					, si*50
-			, 500*ri
+		setTimeout () ->
+			$('.glisten').each (ri, wrap) ->
+				ri++
+				$wrap = $(wrap)
+				characters = $wrap.text().split('')
+				$wrap.empty()
+				$(characters).each (ci, html) ->
+					$span = $('<span>' + html + '</span>')
+					$wrap.append($span)
+				$spans = $wrap.find('span')
+				setTimeout () ->
+					$spans.each (si, span) ->
+						si++
+						setTimeout () ->
+							$(span).addClass('animate')
+							if si == $spans.length - 1
+								$wrap.addClass('show')
+						, si*50
+				, 500*ri
+			, 500
 
 		$('#logo svg path').each (i, path) ->
 			setTimeout () ->
@@ -473,6 +469,7 @@ jQuery ($) ->
 		$('body').on('click', '#alert .close', closeAlert)
 		$('body').on('click', '#popup .close', closePopup)
 		$('body').on('hover', '.cell .link_wrap', hoverCell)
+		$('body').on('click', 'aside .share a.window', shareWindow)
 		# $('.single article .super').on 'click', scrollToFootnote
 
 		$window.on 'resize', () ->
