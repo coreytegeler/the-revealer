@@ -13,7 +13,7 @@ echo '<div class="readable">';
 				echo '<h1>Here are articles tagged <em>' . $term . '</em>.</h1>';
 			echo '</div>';
 		echo '</div>';
-		echo '<div class="loop posts small masonry">';
+		echo '<div class="loop posts four_col masonry">';
 			wp_parse_str( $query_string, $search_args );
 			$search_args['posts_per_page'] = $tagged_amount;
 			$search_query = new WP_Query( $search_args );

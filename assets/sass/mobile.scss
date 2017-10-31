@@ -5,6 +5,14 @@ body, html {
 		}
 	}
 	@include medium {
+		#wrapper {
+			&.split {
+				main {
+					width: calc(100% - #{$sideWidth * .75} - 2em);
+					padding-left: #{$sideWidth * .75};
+				}
+			}
+		}
 		#isMobile {
 			content: 'medium';
 		}

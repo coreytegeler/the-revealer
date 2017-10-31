@@ -99,6 +99,9 @@
 				bottom: 0;
 			}
 		}
+		@include medium {
+			width: calc(#{$sideWidth*.75} - 2em);
+		}
 		@include small {
 			width: calc(100% - 1em);
 			height: auto !important;

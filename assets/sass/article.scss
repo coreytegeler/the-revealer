@@ -236,10 +236,12 @@
 					    margin: 1em auto;
 						}
 						&.alignleft {
+							max-width: 50%;
 							float: left;
 							margin: 1em 1em 1em 0;
 						}
 						&.alignright {
+							max-width: 50%;
 							float: right;
 					    margin: 1em 0 1em 1em;
 					    &.wp-caption {
@@ -291,6 +293,17 @@
 			    display: table;
 			    margin: auto;
 			    fill: $medium;
+				}
+			}
+		}
+	}
+	@include medium {
+		#wrapper {
+			main article.readable .text {
+				img, div {
+					&.aligncenter, &.alignleft, &.alignright {
+						max-width: 100%;
+					}
 				}
 			}
 		}

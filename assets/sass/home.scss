@@ -5,62 +5,59 @@ body.home {
 		}
 		.loop {
 			.cell {
-				.date {
-					display: none;
-				}
-			}
-		}
-		#cover {
-			position: relative;
-			h1 {
-				position: relative;
-				z-index: 100;
-				font-weight: $black;
-				&.lead {
-					color: $medium;
-					@include serifText;
-					font-style: italic;
-				}
-				&.title {
-					color: $dark;
-				}
-				&.date {
-					color: $medium;
-					font-weight: $regular;
-					text-align: left;
+				&#cover {
 					position: relative;
-					z-index: 100;
-					@include serifText;
-					font-style: italic;
-					// padding-left: 10%;
-				}
-			}
-			.circle {
-				width: calc(5vw + 2em);
-				height: calc(5vw + 2em);
-				position: absolute;
-				left: 40%;
-				top: 25%;
-				z-index: 0;
-				background: $gold;
-				border-radius: 50%;
-			}
-			.newsletter {
-				padding: 4em 0;
-				form {
-					width: 100%;
-					max-width: 25em;
-					label {
-						width: 100%;
-						max-width: 15em;
-						margin: 0 0 .5em 0;
-						display: table;
-						@include sansSerifText;
-						@include xMediumText;
+					h1 {
+						position: relative;
+						z-index: 100;
 						font-weight: $black;
+						&.lead {
+							color: $medium;
+							@include serifText;
+							font-style: italic;
+						}
+						&.title {
+							color: $dark;
+						}
+						&.date {
+							color: $medium;
+							font-weight: $regular;
+							text-align: left;
+							position: relative;
+							z-index: 100;
+							@include serifText;
+							font-style: italic;
+							// padding-left: 10%;
+						}
 					}
-					.inputs {
-						padding-left: 10%;
+					.circle {
+						width: calc(5vw + 2em);
+						height: calc(5vw + 2em);
+						position: absolute;
+						left: 40%;
+						top: 25%;
+						z-index: 0;
+						background: $gold;
+						border-radius: 50%;
+					}
+					.newsletter {
+						padding: 4em 0;
+						form {
+							width: 100%;
+							max-width: 25em;
+							label {
+								width: 100%;
+								max-width: 15em;
+								margin: 0 0 .5em 0;
+								display: table;
+								@include sansSerifText;
+								@include xMediumText;
+								font-weight: $black;
+							}
+							.inputs {
+								padding-left: 10%;
+							}
+						}
 					}
 				}
 			}

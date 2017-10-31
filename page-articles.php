@@ -35,7 +35,7 @@ if( sizeof( $tax_query ) ) {
 
 query_posts( $articles_args );
 echo '<div class="readable">';
-	echo '<div class="loop articles medium masonry">';
+	echo '<div class="loop articles two_col masonry">';
 		if ( $wp_query->have_posts() ) {
 			while ( $wp_query->have_posts() ) {
 				the_post();

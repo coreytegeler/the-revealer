@@ -157,7 +157,7 @@
 			}
 		}
 	}
-	&.large {
+	&.one {
 		// background: $medium;
 		.cell {
 			width: 100%;
@@ -189,17 +189,22 @@
 			}
 		}
 	}
-	&.medium {
+	&.three_col {
 		.cell {
-			width: calc(100%/3 - 2em);
-			margin: 0 0 3em 0;
-			// background: $medium;
+			width: calc(100%/3 - .5em);
+			margin: 0 0 .75em 0;
 		}
 	}
-	&.small {
+	&.two_col {
 		.cell {
-			width: calc(100%/4 - 2.25em);
+			width: calc(100%/2 - 1.5em);
 			margin: 0 0 3em 0;
+		}
+	}
+	&.four_col {
+		.cell {
+			width: calc(100%/4 - .75em);
+			margin: 0 0 1em 0;
 		}
 	}
 	&.xsmall, &.xxsmall {
@@ -338,42 +343,56 @@
 }
 @include large {
 	.loop {
-		&.medium {
-			.cell {
-				
-			}
-		}
+		
 	}
 }
 @include medium {
 	.loop {
-		&.medium {
+		&.four_col {
+			.cell {
+				width: calc(100%/3 - .5em);
+				margin: 0 0 .75em 0;
+			}
+		}
+		&.three_col {
 			.cell {
 				width: calc(100%/2 - .5em);
 				margin-bottom: 1em;
 			}
 		}
 	}
-}
-@include xSmall {
-	.loop {
-		&.large {
-
-		}
-		&.medium {
-			.cell {
-				width: 100%;
-				margin-bottom: 4em;
+	body.articles {
+		.loop {
+			&.two_col {
+				.cell {
+					width: 100%;
+					margin-bottom: 1em;
+				}
 			}
 		}
-		&.small {
-			
+	}
+}
+@include small {
+	.loop {
+		&.four_col {
+			.cell {
+				width: calc(100%/2 - .5em);
+				margin-bottom: 1em;
+			}
 		}
-		&.xsmall {
-			
+		&.two_col {
+			.cell {
+				width: calc(100%/2 - .5em);
+				margin-bottom: 1em;
+			}
 		}
-		&.xxsmall {
-			
+	}
+}	
+@include xSmall {
+	.loop {
+		.cell {
+			width: 100% !important;
+			margin-bottom: 1em !important;
 		}
 	}
 	.pagination {

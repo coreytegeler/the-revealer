@@ -39,84 +39,88 @@ if( $articles_page ) {
 
 // print_r( $current_issue );
 echo '<div class="readable">';
-	echo '<div class="sections one_one">';
-		echo '<section id="cover">';
+	// echo '<div class="sections one_one">';
+	// 	echo '<section id="cover">';
+			
+	// 	echo '</section>';
+	// 	echo '<section>';
+	// 		$features_args = array_merge( $current_issue_args, array(
+	// 			'posts_per_page' => $features_amount,
+	// 			'category_name' => 'features'
+	// 		) );
+	// 		$features_query = new WP_Query( $features_args );
+	// 		if ( $features_query->have_posts() ) {
+	// 			echo '<div class="loop articles one_col masonry">';
+	// 				while ( $features_query->have_posts() ) {
+	// 					$features_query->the_post();
+	// 					get_template_part( 'parts/article' );
+	// 					$already_used[] = get_the_ID();
+	// 				}
+	// 			echo '</div>';
+	// 		}
+	// 		wp_reset_query();
+	// 	echo '</section>';	
+	// echo '</div>';
+
+	echo '<div class="loop articles two_col masonry">';
+		echo '<article class="cell" id="cover">';
 			echo '<h1 class="lead">Read our current issue</h1>';
 			echo '<h1 class="title">' . $current_issue->name  . '</h1>';
 			$issue_date = get_field( 'date', $current_issue );
 			echo '<h1 class="date">published on ' . $issue_date . '</h1>';
 			// echo '<div class="circle"></div>';
-			$current_issue_query = new WP_Query( 
-				array_merge( $current_issue_args, array(
-					'posts_per_page' => -1
-				) )
-			);
-			if ( $current_issue_query->have_posts() ) {
-				echo '<div class="loop issues xxsmall masonry">';
-					while ( $current_issue_query->have_posts() ) {
-						$current_issue_query->the_post();
-						$article_id = get_the_ID();
-						$article_permalink = get_permalink();
-						$thumb_id = get_post_thumbnail_id();
-						$thumb = wp_get_attachment_image_src( $thumb_id, 'thumb' );
-						$thumb_url = $thumb[0];
-						$thumb_width = $thumb[1];
-						$thumb_height = $thumb[2];
-						echo '<article class="cell" role="article" style="' . $style . '" data-id="' . $article_id . '">';
-							echo '<div class="wrap">';
-								echo '<div class="primary">';
-									echo '<a class="link_wrap" href="' . $article_permalink . '">';
-										echo '<div class="' . ( $thumb ? 'image load' : 'missing') . '">';
-											if ( $thumb ) {
-												echo '<img data-src="'.$thumb_url.'" data-width="'.$thumb_width.'" data-height="'.$thumb_height.'"/>';
-											}
-										echo '</div>';
-									echo '</a>';
-								echo '</div>';
-							echo '</div>';
-						echo '</article>';
-					}
-				echo '</div>';
-			}
-			wp_reset_query();
+			// $current_issue_query = new WP_Query( 
+			// 	array_merge( $current_issue_args, array(
+			// 		'posts_per_page' => -1
+			// 	) )
+			// );
+			// if ( $current_issue_query->have_posts() ) {
+			// 	echo '<div class="loop issues xxsmall masonry">';
+			// 		while ( $current_issue_query->have_posts() ) {
+			// 			$current_issue_query->the_post();
+			// 			$article_id = get_the_ID();
+			// 			$article_permalink = get_permalink();
+			// 			$thumb_id = get_post_thumbnail_id();
+			// 			$thumb = wp_get_attachment_image_src( $thumb_id, 'thumb' );
+			// 			$thumb_url = $thumb[0];
+			// 			$thumb_width = $thumb[1];
+			// 			$thumb_height = $thumb[2];
+			// 			echo '<article class="cell" role="article" style="' . $style . '" data-id="' . $article_id . '">';
+			// 				echo '<div class="wrap">';
+			// 					echo '<div class="primary">';
+			// 						echo '<a class="link_wrap" href="' . $article_permalink . '">';
+			// 							echo '<div class="' . ( $thumb ? 'image load' : 'missing') . '">';
+			// 								if ( $thumb ) {
+			// 									echo '<img data-src="'.$thumb_url.'" data-width="'.$thumb_width.'" data-height="'.$thumb_height.'"/>';
+			// 								}
+			// 							echo '</div>';
+			// 						echo '</a>';
+			// 					echo '</div>';
+			// 				echo '</div>';
+			// 			echo '</article>';
+			// 		}
+			// 	echo '</div>';
+			// }
+			// wp_reset_query();
 			echo '<div class="newsletter">';
 				get_template_part( 'parts/newsletter' );
 			echo '</div>';
-		echo '</section>';
-		echo '<section>';
-			$features_args = array_merge( $current_issue_args, array(
-				'posts_per_page' => $features_amount,
-				'category_name' => 'features'
-			) );
-			$features_query = new WP_Query( $features_args );
-			if ( $features_query->have_posts() ) {
-				echo '<div class="loop articles large masonry">';
-					while ( $features_query->have_posts() ) {
-						$features_query->the_post();
-						get_template_part( 'parts/article' );
-						$already_used[] = get_the_ID();
-					}
-				echo '</div>';
-			}
-			wp_reset_query();
-		echo '</section>';	
-	echo '</div>';
+		echo '</article>';
 
-	$medium_args = array_merge( $current_issue_args, array(
-		'posts_per_page' => $medium_amount,
-		'post__not_in' => $already_used
-	) );
-	$medium_query = new WP_Query( $medium_args );
-	if ( $medium_query->have_posts() ) {
-		echo '<div class="loop articles medium masonry">';
-			while ( $medium_query->have_posts() ) {
-				$medium_query->the_post();
+		$current_issue_args = array_merge( $current_issue_args, array(
+			'posts_per_page' => 15,
+			'post__not_in' => $already_used
+		) );
+		$current_issue_query = new WP_Query( $current_issue_args );
+		if ( $current_issue_query->have_posts() ) {
+			while ( $current_issue_query->have_posts() ) {
+				$current_issue_query->the_post();
 				get_template_part( 'parts/article' );
 				$already_used[] = get_the_ID();
 			}
-		echo '</div>';
-	}
-	wp_reset_query();
+		}
+		wp_reset_query();
+	echo '</div>';
 
 	echo '<div class="goldbar"><div class="solid"></div></div>';
 
@@ -154,7 +158,7 @@ echo '<div class="readable">';
 						echo '<em>' . $feat_col_writer . '</em>';
 					echo '</a>';
 				echo '.</h2>';
-				echo '<div class="loop articles large masonry" id="recent_column">';
+				echo '<div class="loop articles one_col masonry" id="recent_column">';
 					while ( $col_query->have_posts() ) {
 						$col_query->the_post();
 						get_template_part( 'parts/article' );
