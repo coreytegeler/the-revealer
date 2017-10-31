@@ -5,28 +5,27 @@
 global $post;
 $page_type = $post->post_type;
 $page_slug = $post->post_name;
-$split_pages = array( 'article', 'articles', 'search' );
+$split_pages = array( 'article', 'articles' );
+$wrapper_style = 'full';
 if( is_home() ) {
 	$page_slug = 'home';
-	$wrapper_style = 'full';
+} else if( is_search() || $page_slug == 'search' ) {
+	$page_slug = 'search';
 } else if( in_array( $page_slug, $split_pages ) ) {
 	$wrapper_style = 'split';
+} else if( is_404() ) {
+	$page_slug = 'article';
 } else if( $page_type == 'post' && !is_tag() ) {
 	$page_slug = 'article';
 	$wrapper_style = 'split';
 } else {
-	$page_slug = $post->post_name;
-	$wrapper_style = 'full';
-}
-if( is_search() || $page_slug == 'search' ) {
-	$page_slug = 'search';
-	$wrapper_style = 'full';
+	$page_slug = $post->post_name;;
 }
 ?>
 	<title>
 		<?php
 		bloginfo( 'name' );
-		if( !is_home() ) {
+		if( $page_slug != 'home' ) {
 			echo ' — ';
 			wp_title('', true);
 		}

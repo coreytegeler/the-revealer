@@ -20,24 +20,25 @@
 			margin: .25em 0 1em 0;
 			flex: 1;
 			.filter {
+				a {
+					@include xSmallText;
+					text-decoration: none;
+					color: $medium;
+				}
 				.toggle {
 					width: 100%;
 					padding: 0;
 					user-select: none;
-					font-weight: $black;
-					&:hover {
-						cursor: pointer;
-						color: $medium;
-					}
+					font-weight: $regular;
+					text-transform: uppercase;
 				}
 			}
 			.commas {
-				// height: 0;
 				opacity: 0;
 				overflow: hidden;
 				color: $medium;
 				transition: height 300ms ease, opacity 100ms 30ms ease;
-				// padding-left: .5em;
+				padding-bottom: 1em;
 				&.show {
 					opacity: 1;
 				}
@@ -98,7 +99,7 @@
 				bottom: 0;
 			}
 		}
-		@include tablet {
+		@include small {
 			width: calc(100% - 1em);
 			height: auto !important;
 			position: static !important;

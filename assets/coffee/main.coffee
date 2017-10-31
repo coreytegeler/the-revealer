@@ -177,36 +177,39 @@ jQuery ($) ->
 			else
 				pageTop = 0
 				
-			$headers.each (i, header) ->
-				$header = $(header)
-				$nav = $header.find('nav')
-				headerBottom = $header.offset().top + $header.innerHeight()
-				innerHeight = $nav.outerHeight()
-				if isBottom
-					$wrapper.addClass('bottom')
-					$header.css
-						y: pageEnd - winScroll
-				else
-					$header.css
-						y: 0
-					if $alert.length
-						top = alertHeight
-						winScroll += alertHeight
-					else
-						top = 0
-					$wrapper.removeClass('bottom')
-				# PROGRESS BAR
-				# $header.find('.bar').each (i, bar) ->
-				# 	$bar = $(this)
-				# 	if $bar.is('.prog')
-				# 		barWidth = $(bar).innerWidth()
-				# 		progress = winScroll * barWidth / pageEnd
-				# 		$bar.find('.solid').css
-				# 			width: progress
-
-			if $readable.is('#discover')
+			if $body.is('.discover')
 				if winScroll + winHeight >= scrollHeight - winHeight * 2
 					queryMore()
+			else
+				$headers.each (i, header) ->
+					$header = $(header)
+					$nav = $header.find('nav')
+					headerBottom = $header.offset().top + $header.innerHeight()
+					innerHeight = $nav.outerHeight()
+					if isBottom
+						$wrapper.addClass('bottom')
+						$header.css
+							y: pageEnd - winScroll
+					else
+						$header.css
+							y: 0
+						if $alert.length
+							top = alertHeight
+							winScroll += alertHeight
+						else
+							top = 0
+						$wrapper.removeClass('bottom')
+					# PROGRESS BAR
+					# $header.find('.bar').each (i, bar) ->
+					# 	$bar = $(this)
+					# 	if $bar.is('.prog')
+					# 		barWidth = $(bar).innerWidth()
+					# 		progress = winScroll * barWidth / pageEnd
+					# 		$bar.find('.solid').css
+					# 			width: progress
+
+				
+				
 
 			belowThresh = pageEnd/4 - winScroll <= 0
 			if $popup.length && !$popup.is('.stuck')
@@ -243,7 +246,6 @@ jQuery ($) ->
 			if !$body.is('.single-post')
 				return
 			$article = $('article')
-
 			# wraps inline images to load before showing
 			$sideImages = $side.find('.images .loop')
 			$sideImages.masonry()
@@ -252,7 +254,13 @@ jQuery ($) ->
 			hasImages = false
 			for inlineImg in inlineImgs
 				$inlineImg = $(inlineImg)
-				$inlineImg.wrap('<div class="image load"></div>')
+				$wpImg = $inlineImg.parents('.aligncenter, .alignleft, .alignright, .wp-caption')
+				if $wpImg.find('a').length
+					$wpImg = $wpImg.find('a')
+				if $wpImg.length
+					$wpImg.addClass('image load')
+				else
+					$inlineImg.wrap('<div class="shift image load"></div>')
 				currentSrc = inlineImg.currentSrc
 				$inlineImg.attr('data-src', currentSrc)
 				pseudo = new Image()
@@ -424,11 +432,12 @@ jQuery ($) ->
 						si++
 						setTimeout () ->
 							$(span).addClass('animate')
-							if si == $spans.length - 1
-								$wrap.addClass('show')
+							# if si == $spans.length - 1
+								
 						, si*50
-				, 500*ri
-			, 500
+					$wrap.addClass('show')
+				, 100*ri
+			, 100
 
 		$('#logo svg path').each (i, path) ->
 			setTimeout () ->

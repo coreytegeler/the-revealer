@@ -8,31 +8,28 @@
 	margin: auto;
 	padding: 0;
 	overflow: visible;
-	background: rgba($light, .99);
+	background: rgba($lightest, .99);
 	display: none;
 	&.show {
 		display: table;
-	}
-	&[data-direction="left"] .slides {
-		left: .25em;
-	}
-	&[data-direction="right"] .slides {
-		left: -.25em;
 	}
 	.slides {
 		height: 100%;
 		position: absolute;
 		left: 0;
 		top: 0;
-		transition: left 200ms $ease;
 		.slide {
 			width: 100vw;
 			height: 100%;
-			position: relative;
-			float: left;
+			position: absolute;
+			left: 0;
+			top: 0;
+			opacity: 0;
+			z-index: 400;
 			display: flex;
 	    align-items: center;
 	    flex-direction: column;
+	    transition: opacity 500ms $ease;
 	    .wrap {
 	    	width: 100%;
 				height: 100%;
@@ -49,7 +46,8 @@
 				}
 			}
 			&.current {
-				
+				opacity: 1;
+				z-index: 500;
 			}	
 		}
 	}
@@ -86,7 +84,7 @@
 		opacity: .4;
 		transition: opacity 600ms $ease;
 		.close.circle {
-			background-color: rgba($light,.9);
+			background-color: rgba($lightest,.9);
 			svg {
 				
 			}

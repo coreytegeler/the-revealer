@@ -13,7 +13,7 @@ if( $first_post = $query->posts[0] ) {
 	$age = $date_diff->y;
 }
 echo '<div class="stats">';
-	echo '<h1>Explore ' . $age . ' years and ' . $article_count . ' articles of</h1>';
-	echo '<h1 class="title">The Revealer</h1>';
+	echo '<h1 class="glisten bounce">Explore&nbsp;' . $age . '&nbsp;years&nbsp;and&nbsp;' . $article_count . '&nbsp;articles&nbsp;of</h1>';
+	echo '<h1 class="title glisten bounce">The&nbsp;Revealer</h1>';
 echo '</div>';
 ?>

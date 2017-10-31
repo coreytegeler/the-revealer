@@ -9,7 +9,7 @@ html, body {
 	@include sansSerifText;
 	@include baseText;
 	color: $dark;
-	background: $light;
+	background: $lightest;
 	overflow-x: hidden;
 	overflow-y: scroll;
 	-webkit-overflow-scrolling: touch;
@@ -56,18 +56,22 @@ p {
 }
 h1 {
 	@include largeText;
+	font-weight: normal;
 	margin: 0;
 }
 h2 {
 	@include xMediumText;
+	font-weight: normal;
 	margin: 0;
 }
 h3 {
 	@include smallText;
+	font-weight: normal;
 	margin: 0;
 }
 h4 {
 	@include xSmallText;
+	font-weight: normal;
 	margin: 0;
 }
 em, i {
@@ -75,7 +79,7 @@ em, i {
 }
 input {
 	@include sansSerifText;
-	transition: box-shadow 900ms $ease;
+	transition: box-shadow 1000ms $ease;
 	&:focus {
 		outline-color: $gold;
 	}
@@ -261,13 +265,19 @@ input {
   margin: 0 auto 2em auto;
   text-align: right;
 	h1 {
-    width: calc(100% - .5em);
-		padding-right: .5em;
 		text-align: center;
+		display: table;
+		margin: auto;
 		@include serifText;
 		&.title {
 			font-family: Clarendon;
 			text-transform: lowercase;
+		}
+	}
+	.bounce {
+		opacity: .125;
+		&.show {
+			opacity: .75;
 		}
 	}
 }
@@ -282,10 +292,10 @@ input {
 	width: 1.5em;
   height: 1.5em;
   border-radius: 50%;
-  background: $light;
+  background: $lightest;
   display: flex;
-  transition: transform 500ms $ease, box-shadow 800ms $ease;
-  @include circleShadow($gold);
+  transition: transform 500ms $ease, box-shadow 800ms $ease, transform 800ms $ease;
+  @include mediumShadow($gold);
   span {
 		display: table;
 		margin: auto;
@@ -360,7 +370,6 @@ input {
     width: 0px;
 }
 
-
 // cubic-bezier(0.86, 0, 0.07, 1)
 // .conceal {
 // 	opacity: 1;
@@ -384,3 +393,14 @@ input {
 @import 'newsletter';
 @import 'carousel';
 @import 'mobile';
+
+
+// $dark: rgba(#1a172e, 1);
+// $lightest: #5aa078;
+// body.green {
+// 	background-color: $lightest;
+// 	color: $dark;
+// 	header {
+// 		background-color: $lightest;
+// 	}
+// }

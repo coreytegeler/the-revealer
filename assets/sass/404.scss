@@ -1,7 +1,7 @@
 body.error404 {
 	footer {
     .newsletter form .inputs input {
-      @include lilShadow($light);
+      @include xSmallShadow($lightest);
     }
   }
 }

@@ -1,33 +1,36 @@
 body.discover, body.error404 {
 	background-color: $gold;
 	header {
-    background-color: rgba($gold,.95);
-    @include boxShadow(rgba($gold,.95));
+    background-color: transparent;
     .bar {
       display: none;
     }
     .inner {
       .tagline {
-        color: $dark;
-        opacity: .5;
+        color: $lightest;
+        opacity: .75;
       }
       #logo {
+        svg {
+          fill: $lightest;
+        }
         a.svg:hover {
           svg {
-            fill: $dark;
             opacity: .5;
           }
         }
       }
       nav {
-        .link a:hover {
-          color: $dark;
-          opacity: .5;
+        .link a {
+          color: $lightest;
+          &:hover {
+            opacity: .5;
+          }
         }
       }
-      .bar.bg .solid {
-        background-color: $gold;
-        @include boxShadow($gold);
+      .goldbar .solid {
+        background-color: $lightest;
+        box-shadow: 0 0 .25em .1em $lightest;
       }
     }
 	}
@@ -36,6 +39,7 @@ body.discover, body.error404 {
 			width: 100%;
 			margin-left: 0; 
 			margin-right: 0;
+      color: $lightest;
 		}
 	}
   #discover {
@@ -44,7 +48,7 @@ body.discover, body.error404 {
   }
 }
 #discover {
-	@include boxShadow($gold);
+	@include smallShadow($gold);
 	width: 100%;
   flex: 1;
   clear: both;
@@ -89,12 +93,12 @@ body.discover, body.error404 {
             transition: transform 800ms $ease;
           }
           &:focus {
-            outline-color: $light;
+            outline-color: $lightest;
           }
           &:hover {
             .image, .circle {
               transform: scale(1.05);
-              @include hoverShadow($light);
+              @include largeShadow($lightest);
             }
             .title {
               transform: scale(1.05);
@@ -105,13 +109,13 @@ body.discover, body.error404 {
           width: 5em;
           height: 5em;
           border-radius: 50%;
-          @include circleShadow($light);
+          @include mediumShadow($lightest);
           // box-shadow: inset 0 0 .25em .5em $gold;
           background-position: center;
           background-size: cover;
           &.load, &.loading {
             background-image: none !important;
-            background-color: $light;
+            background-color: $lightest;
           }
           &.loaded {
             // background-color: $gold; 
@@ -126,15 +130,9 @@ body.discover, body.error404 {
         .circle {
           width: 5em;
           height: 5em;
-          // position: absolute;
-          // left: calc(50% - 2em);
-          // top: calc(50% - 2em);
           z-index: 1;
-          @include circleShadow($light);
+          @include mediumShadow($lightest);
         }
-      }
-      &.category {
-        // width: calc(40%);
       }
       &:nth-child(12n+1),&:nth-child(12n+2), &:nth-child(12n+3), &:nth-child(12n+4), &:nth-child(12n+5), &:nth-child(12n+6) {
         transform: translateX(calc(100vw/12));
@@ -188,8 +186,8 @@ body.discover, body.error404 {
     //   width: 3em;
     //   height: 3em;
     //   border-radius: 50%;
-    //   background: $light;
-    //   box-shadow: inset 0 0 .25em .5em $light;
+    //   background: $lightest;
+    //   box-shadow: inset 0 0 .25em .5em $lightest;
     //   position: absolute;
     //   left: calc(50% - 1.5em);
     //   top: calc(50% - 1.5em);
@@ -202,14 +200,13 @@ body.discover, body.error404 {
       position: absolute;
       top: calc(50% - 2.5em);
       left: 0;
+      pointer-events: none;
       form {
         max-width: $lineWidth;
         input {
-          background: $light;
+          background: $lightest;
           backface-visibility: hidden;
-          &:focus, &:hover {
-            @include hoverShadow($gold);
-          }
+          pointer-events: all;
         }
       }
     }

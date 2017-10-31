@@ -7,7 +7,7 @@ if( is_single() ) {
 }
 echo '</div>';
 if( $post->post_name != 'discover' ) {
-	if( !is_404() ) {
+	if( !is_404() && $post->post_name != 'search' ) {
 		echo '<div id="discover" class="bottom">';
 			echo '<div class="inner">';
 				echo '<div class="header">';
@@ -25,7 +25,6 @@ if( $post->post_name != 'discover' ) {
 					get_template_part( 'parts/discover' );
 				echo '</div>';
 				get_search_form();
-				echo '</div>';
 			echo '</div>';
 		echo '</div>';
 	}

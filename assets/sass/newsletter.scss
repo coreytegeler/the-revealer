@@ -11,19 +11,16 @@
 		    padding: .25em .25em .35em .25em;
 		    outline-color: $gold;
 		    line-height: 1.3em;
-		    @include lilShadow($gold);
+		    @include xSmallShadow($gold);
+		    transition: box-shadow 500ms $ease, transform 500ms $ease;
 		    &[type="email"] {
 		      width: calc(100% - .5em);
-		      background: $light;
+		      background: $lightest;
 		      border-radius: 1em 0 0 1em;
 		      @include serifText;
 		      @include mediumText;
 		      &.mce_inline_error {
 		      	background-color: rgba(red, .25);
-		      }
-		      &:focus {
-		      	outline: none;
-		      	@include lightHoverShadow($gold);
 		      }
 		    }
 		    &[type="submit"] {
@@ -33,13 +30,15 @@
 		      color: $medium;
 		      font-weight: 600;
 		      border-radius: 0 1em 1em 0;
-		      transition: box-shadow 500ms $ease;
-		      &:hover {
+		      &:hover, &:focus {
 		        color: $dark;
 		        cursor: pointer;
-		        @include lightHoverShadow($gold);
 		      }
 		    }
+				&:focus, &:hover {
+	      	outline: none;
+	      	box-shadow: 0 0 10em 1em $gold;
+	      }
 		  }
 		}
 		.response, div.mce_inline_error, div.mce_inline_success {
@@ -50,7 +49,7 @@
 		width: 100%;	
 		display: none;
 		z-index: 700;
-		background: rgba($light,.98);
+		background: rgba($lightest,.98);
 		.close {
 	    position: absolute;
 	    right: 0;
@@ -59,7 +58,7 @@
 	    z-index: 800;
 	    &:hover {
 	    	cursor: pointer;
-	    	@include hoverShadow($light);
+	    	@include largeShadow($lightest);
 	    }
 		}
 		.inner {
@@ -76,6 +75,15 @@
 				display: table;
 				.inputs {
 			    justify-content: center;
+			    input {
+			    	@include smallText;
+			    	&[type="submit"] {
+			    		@include xSmallText;
+			    	}
+			    	&:hover, &:focus {
+			    		@include xSmallShadow($gold);
+			    	}
+			    }
 				}
 				label {
 					width: 100%;
@@ -83,11 +91,13 @@
 					font-weight: $bold;
 					padding: 0 0 .5em 0;
 					text-align: center;
+					@include xSmallText;
 				}
 			}
 		}
 		&.show {
 			display: block;
+			display: none;
 		}
 		&.fixed {
 			position: fixed;

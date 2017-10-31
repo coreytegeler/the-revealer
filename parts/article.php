@@ -50,7 +50,7 @@ echo '<article class="cell" role="article" style="' . $style . '" data-id="' . $
 			echo '</a>';
 			echo '<div class="meta">';
 				if( $writer ) {
-					echo 'by <a href="/' . $writer . '">' . $writer . '</a>&nbsp;&nbsp;';
+					echo '<a href="/' . $writer . '">' . $writer . '</a>&nbsp;&nbsp;';
 				}
 				echo '<span class="date">' . $date . '</span>';
 			echo '</div>';

@@ -21,6 +21,15 @@ body.about {
 				ul.child {
 					li {
 						width: 100%;
+						.body {
+							@include serifText;
+							@include smallText;
+						}
+						strong {
+							@include smallText;
+							@include sansSerifText;
+							font-weight: $black;
+						}
 						span {
 							&.years {
 								@include xSmallText;
@@ -42,15 +51,10 @@ body.about {
 					max-width: $maxWidth;
 					display: table;
 					margin: auto;
-					.body {
-						@include mediumText;
-						@include serifText;
-					}
-					strong {
-						@include mediumText;
-						@include sansSerifText;
-						font-weight: $black;
-						font-size: 1em;
+					li {
+						.body {
+							@include mediumText;
+						}
 					}
 				}
 			}

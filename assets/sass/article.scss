@@ -7,9 +7,6 @@
 				.title {
 					padding: 0 0 1em 0;
 					@include serifText;
-					.label {
-						// padding-bottom: .25em;
-					}
 					h1 {
 						width: 100%;
 						text-align: left;
@@ -30,7 +27,10 @@
 						margin: 0 0 .25em 0;
 						padding: 0 0 .25em 0;
 						border-bottom: 1px solid rgba($medium,.05);
-						@include xSmallText;
+						.label, .value {
+							color: $dark;
+							@include xSmallText;
+						}
 						&.split {
 							display: flex;
 							.label {
@@ -82,17 +82,19 @@
 						&.tags {
 							span {
 								&.label {
-									color: $dark;
 									padding: 0 .25em 0 0;
 									&::after {
 										content: '';
 									}
 								}
-								a {
-									font-style: italic;
-									color: $medium;
-									&:hover {
-										color: $dark;
+								&.tag {
+									@include xxSmallText;
+									a {
+										font-style: italic;
+										color: $medium;
+										&:hover {
+											color: $dark;
+										}
 									}
 								}
 							}
@@ -126,6 +128,7 @@
 					.excerpt {
 						padding: 0 0 2em 0;
 						text-align: center;
+						margin: auto;
 						opacity: .5;
 						h2 {
 							@include serifText;
@@ -134,7 +137,18 @@
 					.content {
 						padding-bottom: 2em;
 					}
+					img {
+						opacity: 0;
+					}
+					h1, h2, h3, h4 {
+						max-width: $lineWidth;
+						margin-left: auto;
+						margin-right: auto;
+					}
 					p {
+						max-width: $lineWidth;
+						margin-left: auto;
+						margin-right: auto;
 						a {
 							color: $dark;
 							&.ftn {
@@ -163,8 +177,10 @@
 						}
 					}
 					.image {
+						// transform: translateX(-1em);
 						img {
-							display: inline;
+							display: table;
+							margin: auto;
 						}
 					}
 					iframe {
@@ -185,27 +201,30 @@
 						}
 					}
 					.wp-caption {
+						color: $medium;
+						max-width: 100%;
+						display: block;
+						@include xxSmallText;
 						a {
 							display: inline-table;
 						}
-						max-width: 100%;
 						img {
 							max-width: 100%;
 							height: auto;
-							display: table;
 						}
-						.wp-caption-text {
-							padding: .5em 0 0 0;
-							opacity: 0.8;
-							// background: $medium;
-							@include xSmallText;
+						.wp-caption-text, p {
+							width: 100%;
+							max-width: 100%;
+							padding: .25em;
+							color: $medium;
+							font-size: 1em;
 						}
 						&:first-child {
 							margin-top: 0;
 						}
 					}
 					img {
-						width: 100%;
+						width: auto;
 						max-width: 100%;
 						height: auto;
 						// border: .5em solid $medium;
@@ -214,7 +233,6 @@
 						&.aligncenter {
 							max-width: 100%;
 							clear: both;
-					    display: block;
 					    margin: 1em auto;
 						}
 						&.alignleft {
@@ -232,15 +250,14 @@
 				}
 			}
 			.image {
-				background: rgba($medium,.1);
-				// transition: background 600ms $ease;
+				// background: $light;
 				img {
 					display: inline;
 					opacity: 0 !important;
 					transition: opacity 600ms $ease;
 				}
 				&.loaded {
-					background: rgba($medium,0);
+					// background: rgba($medium,0);
 					img {
 						opacity: 1 !important;
 					}
@@ -259,7 +276,7 @@
 				display: flex;
 				&:hover {
 					cursor: pointer;
-					@include hoverShadow($light);
+					@include largeShadow($lightest);
 				}
 				span {
 					display: table;
@@ -278,7 +295,7 @@
 			}
 		}
 	}
-	@include tablet {
+	@include small {
 		#wrapper {
 			aside {
 				.images, .tags {

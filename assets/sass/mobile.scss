@@ -1,5 +1,15 @@
 body, html {
-	@include tablet {
+	@include large {
+		#isMobile {
+			content: 'large';
+		}
+	}
+	@include medium {
+		#isMobile {
+			content: 'medium';
+		}
+	}
+	@include small {
 		#wrapper, #wrapper.split, #wrapper.full {
 			display: block;
 			main {
@@ -79,18 +89,22 @@ body, html {
 			}
 		}
 		#isMobile {
+			content: 'small';
 			content: '1';
 		}
 	}
-	@include phone {
+	@include xSmall {
 		#wrapper, #wrapper.split, #wrapper.full {
 			main {
 				width: calc(100% - 1em);
 		    padding: .5em .5em 4em .5em;
-		    .pagination .pafinate .text {
+		    .pagination .paginate .text {
 		    	display: none;
 		    }
 			}
+		}
+		#isMobile {
+			content: 'xSmall';
 		}
 	}
 }

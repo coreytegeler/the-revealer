@@ -11,10 +11,8 @@ var autoprefixer = require('gulp-autoprefixer');
 var htmlmin = require('gulp-htmlmin');
 var replace = require('gulp-replace');
 var htmlreplace = require('gulp-html-replace');
-var php = require('gulp-connect-php');
 
 var paths = {
-  templates: './site/**/*.php',
   sass: './assets/sass/*.scss',
   coffee: './assets/coffee/*.coffee',
 }
@@ -22,21 +20,8 @@ var paths = {
 var dest = {
   css: './',
   js: './assets/js/',
-  templates: './site',
   images: './assets/images/'
 }
-
-gulp.task('compile-templates', function() {
-  return gulp.src(paths.templates)
-    .pipe(plumber())
-    .pipe(gulpif(argv.prod, htmlmin({ collapseWhitespace: true })))
-    .pipe(gulpif(argv.prod, replace('style.css', 'style.min.css')))
-    .pipe(gulp.dest(dest.templates))
-
-  .on('end', function() {
-    log('HTML done');
-  });
-});
 
 gulp.task('compile-sass', function() {
   var options = {
@@ -82,20 +67,11 @@ gulp.task('watch', function() {
   gulp.watch(paths.coffee, ['compile-coffee']);
 });
 
-gulp.task('php', function() {
-  php.server({
-    base: './',
-    port: 8080,
-    keepalive: true,
-    stdio: 'ignore'
-  });
-});
 
 gulp.task('default', [
   'compile-sass',
   'compile-coffee',
-  'watch',
-  'php'
+  'watch'
 ]);
 
 gulp.task('prod', [

@@ -3,7 +3,7 @@
 	padding: 0;
 	margin: 0;
 	.max {
-		max-width: $desktopWidth;
+		max-width: $largeWidth;
 	}
 	.cell {
 		float: left;
@@ -13,7 +13,7 @@
 	    display: block;
 			&:hover {
 				.image {
-					@include lightHoverShadow($gold);
+					box-shadow: 0 0 5em 0 $gold;
 				}
 				svg, object {
 					fill: $medium;
@@ -24,8 +24,8 @@
 			width: 100%;
 			margin: 0;
 			display: block;
-			background-color: rgba($medium,.1);
-			transition: background-color 500ms $ease;
+			background-color: $light;
+			transition: box-shadow 800ms $ease, transform 800ms $ease;
 			img {
 				width: 100%;
 				max-width: 100%;
@@ -36,7 +36,7 @@
 				opacity: 0;
 			}
 			&.loaded {
-				background-color: rgba($medium,0);
+				background-color: rgba($light,0);
 				img {
 					opacity: 1;
 				}
@@ -62,7 +62,9 @@
 			.title {
 				transition: color 500ms $ease;
 				.label {
-					&.category {
+					&.categories {
+						text-transform: uppercase;
+						font-weight: $regular;
 						@include xSmallText;
 					}
 					&.column {
@@ -74,10 +76,12 @@
 					text-align: left;
 					margin: 0;
 					@include serifText;
+					// @include smallText;
 				}
 			}
 			.meta {
 				color: $medium;
+				padding-top: .5em;
 				@include xSmallText;
 				a {
 					color: $medium;
@@ -140,12 +144,13 @@
 				text-decoration: none;
 			}
 		}
-		&.hover {
+		&.hover, &:focus {
 			.title {
 				color: $medium;
 			}
 			.image {
 				box-shadow: 0 0 5em 0 $gold;
+				transform: scale(1.0025);
 			}
 			svg, object {
 				fill: $medium;
@@ -288,7 +293,8 @@
 			}
 			&:hover {
 				.circle {
-	        @include hoverShadow($light);
+	        @include largeShadow($lightest);
+	        transform: scale(1.09);
 	      }
 			}
 		}
@@ -330,7 +336,16 @@
 		}
 	}
 }
-@include tablet {
+@include large {
+	.loop {
+		&.medium {
+			.cell {
+				
+			}
+		}
+	}
+}
+@include medium {
 	.loop {
 		&.medium {
 			.cell {
@@ -340,7 +355,7 @@
 		}
 	}
 }
-@include phone {
+@include xSmall {
 	.loop {
 		&.large {
 

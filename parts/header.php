@@ -2,18 +2,18 @@
 global $post;
 $page_type = $post->post_type;
 echo '<header class="main">';
-	if( $page_type == 'post' && is_archived() && $archive_alert = get_field( 'archive_alert', 'option' ) ) {
-		echo '<div id="alert" role="alert">';
-			echo '<div class="message">';
-				echo  '<div class="archive_alert">' . $archive_alert . '</div>';
-			echo '</div>';
-			echo '<div class="close">';
-				$x_svg_url = get_template_directory_uri() . '/assets/images/x.svg';
-				$x_svg = file_get_contents( $x_svg_url );
-				echo '<div class="circle">' . $x_svg . '</div>';
-			echo '</div>';
-		echo '</div>';
-	}
+	// if( $page_type == 'post' && is_archived() && $archive_alert = get_field( 'archive_alert', 'option' ) ) {
+	// 	echo '<div id="alert" role="alert">';
+	// 		echo '<div class="message">';
+	// 			echo  '<div class="archive_alert">' . $archive_alert . '</div>';
+	// 		echo '</div>';
+	// 		echo '<div class="close">';
+	// 			$x_svg_url = get_template_directory_uri() . '/assets/images/x.svg';
+	// 			$x_svg = file_get_contents( $x_svg_url );
+	// 			echo '<div class="circle">' . $x_svg . '</div>';
+	// 		echo '</div>';
+	// 	echo '</div>';
+	// }
 	echo '<div class="inner">';
 		echo '<div id="logo">';
 			$logo_svg = get_template_directory_uri() . '/assets/images/logo.svg';

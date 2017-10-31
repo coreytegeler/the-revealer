@@ -3,10 +3,13 @@
 ///////////////////////////////////////////////////////////////
 $gold: #fecf0c;
 $lightGold: #f8df93;
-$dark: rgba(#1a172e, .9);
-$medium: rgba(#1a172e, .6);
+$dark: #4d6b58;
+$medium: #669270;
 $light: #f3f1f3;
-$light: white;
+$lightest: white;
+
+// $dark: rgba(#1a172e, 1);
+// $light: #5aa078;
 
 ///////////////////////////////////////////////////////////////
 ///////////////////////TEXT SIZE///////////////////////////////
@@ -14,13 +17,13 @@ $light: white;
 @mixin baseText {
 	font-size: 20px;
 	line-height: 1.4em;
-	@include tablet {
+	@include small {
 		font-size: 18px;
 	}
 }
 @mixin xxSmallText {
-	font-size: .5em;
-	line-height: 1.2em;
+	font-size: .62em;
+	line-height: 1.4em;
 }
 @mixin xSmallText {
 	font-size: .8em;
@@ -37,21 +40,21 @@ $light: white;
 @mixin xMediumText {
   font-size: 1.5em;
   line-height: 1.1em;
-  @include phone {
+  @include xSmall {
     font-size: 1.2em;
   }
 }
 @mixin largeText {
 	font-size: 2em;
 	line-height: 1.1em;
-  @include phone {
+  @include xSmall {
     font-size: 1.5em;
   }
 }
 @mixin xLargeText {
   font-size: 2.3em;
   line-height: 1.1em;
-  @include phone {
+  @include xSmall {
     font-size: 2em;
   }
 }
@@ -66,6 +69,7 @@ $black: 800;
 @import 'https://fonts.googleapis.com/css?family=Work+Sans:100,400,500,600,700,800,900';
 $serif: 'Crimson Text', 'Baskerville', times, serif;
 $sansSerif: 'Work Sans', Helvetica, Arial, sans-serif;
+$sansSerif: Helvetica, Arial, sans-serif;
 @mixin serifText {
 	font-family: $serif;
   font-weight: normal;
@@ -81,32 +85,32 @@ $sideWidth: 18em;
 $mobSideWidth: 35vw;
 $lineWidth: 30em;
 
-$phoneWidth: 480px;
-$tabletWidth: 768px;
-$laptopWidth: 1024px;
-$desktopWidth: 1440px;
+$xSmallWidth: 480px;
+$smallWidth: 768px;
+$mediumWidth: 1024px;
+$largeWidth: 1440px;
 $maxWidth: 950px;
 
-@mixin phone {
-	@media (max-width: #{$phoneWidth}) {
+@mixin xSmall {
+	@media (max-width: #{$xSmallWidth}) {
 		@content;
 	}
 }
 
-@mixin tablet {
-  @media (max-width: #{$tabletWidth}) {
+@mixin small {
+  @media (max-width: #{$smallWidth}) {
     @content;
   }
 }
 
-@mixin laptop {
-  @media (max-width: #{$laptopWidth}) {
+@mixin medium {
+  @media (max-width: #{$mediumWidth}) {
     @content;
   }
 }
 
-@mixin desktop {
-  @media (max-width: #{$desktopWidth}) {
+@mixin large {
+  @media (max-width: #{$largeWidth}) {
     @content;
   }
 }
@@ -176,18 +180,22 @@ $ease: cubic-bezier(0.19, 1, 0.22, 1);
 ///////////////////////////////////////////////////////////////
 ///////////////////////////SHADOWS/////////////////////////////
 ///////////////////////////////////////////////////////////////
-@mixin lilShadow($color) {
+@mixin xSmallShadow($color) {
+  // lil
   box-shadow: 0 0 .25em .05em $color;
 }
-@mixin boxShadow($color) {
+@mixin smallShadow($color) {
+  // box
   box-shadow: 0 0 .25em .5em $color;
 }
-@mixin circleShadow($color) {
+@mixin mediumShadow($color) {
+  // circle
   box-shadow: 0 0 .5em .25em $color;
 }
-@mixin hoverShadow($color) {
+@mixin largeShadow($color) {
+  // hover
   box-shadow: 0 0 2em 1em $color;
 }
-@mixin lightHoverShadow($color) {
-  box-shadow: 0 0 5em 0 $color;
+@mixin scale {
+  transform: scale(1.005);
 }
