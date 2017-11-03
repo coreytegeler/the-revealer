@@ -27,17 +27,18 @@
 		      max-width: 7em;
 		      height: 100%;
 		      background: $gold;
-		      color: $medium;
+		      color: $dark;
 		      font-weight: 600;
 		      border-radius: 0 1em 1em 0;
+		      transition: color 500ms $ease;
 		      &:hover, &:focus {
-		        color: $dark;
+		        color: $medium;
 		        cursor: pointer;
 		      }
 		    }
 				&:focus, &:hover {
 	      	outline: none;
-	      	box-shadow: 0 0 10em 1em $gold;
+	      	
 	      }
 		  }
 		}

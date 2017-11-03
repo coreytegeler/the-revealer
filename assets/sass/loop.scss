@@ -89,6 +89,9 @@
 					font-size: inherit;
 					text-decoration: none;
 				}
+				.writer {
+					padding-right: .5em;
+				}
 				.date {
 					opacity: .5;
 				}
@@ -386,6 +389,11 @@
 				margin-bottom: 1em;
 			}
 		}
+	}
+	.pagination {
+		width: calc(100% - 1em);
+		padding-left: .5em;
+		padding-right: .5em;
 	}
 }	
 @include xSmall {

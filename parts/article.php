@@ -9,7 +9,7 @@ $thumb_height = $thumb[2];
 $permalink = get_the_permalink();
 $excerpt = wp_strip_all_tags( get_the_excerpt() );
 $date = get_the_date();
-$writer = get_field( 'writer' );
+$contributors = get_contributors_list();
 $i = $wp_query->current_post;
 $missing_url = get_template_directory_uri() . '/assets/images/question.svg';
 $missing_svg = file_get_contents( $missing_url );
@@ -49,8 +49,8 @@ echo '<article class="cell" role="article" style="' . $style . '" data-id="' . $
 				echo '</div>';
 			echo '</a>';
 			echo '<div class="meta">';
-				if( $writer ) {
-					echo '<a href="/' . $writer . '">' . $writer . '</a>&nbsp;&nbsp;';
+				if( $contributors ) {
+					echo '<span class="writer">' . $contributors . '</span>';
 				}
 				echo '<span class="date">' . $date . '</span>';
 			echo '</div>';

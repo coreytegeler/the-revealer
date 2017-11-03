@@ -62,17 +62,11 @@ body.discover, body.error404 {
     display: table;
     .cell {
       display: block;
-      width: calc(100%/6 - .1em);
-      margin: 0;
-      // @include tablet {
-      //   width: calc(100%/4);
-      //   .wrap {
-      //     padding: 80px;
-      //   }
-      // }
+      width: calc(100%/6 - .1em) !important;
+      margin: 0 !important;
       .wrap {
         display: table;
-        padding: 1em 0;
+        padding: 0;
         margin: auto;
         text-align: center; 
         pointer-events: none;
@@ -211,4 +205,7 @@ body.discover, body.error404 {
       }
     }
   }
+}
+@include small {
+
 }

@@ -151,6 +151,12 @@ body.home {
 			}
 		}
 		@include small {
+			.sections {
+				section, * section {
+					width: 100%;
+					padding: 2em 0;
+				}
+			}
 			.loop {
 				&#featured_tag {
 					.cell {

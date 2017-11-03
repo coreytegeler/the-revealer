@@ -27,44 +27,38 @@ echo '<div id="about" role="contentinfo">';
 			echo '</div>';
 			echo '<div class="meta">';
 				if( have_rows( 'writers' ) ) {
-			    while( have_rows( 'writers') ) : the_row();
-		        $name = get_sub_field( 'name' );
-						echo '<div class="row split writer">';
-							echo '<div class="label">Writer</div>';
-							echo '<div class="value commas">';
-								foreach ( $writers as $writer ) {
-									$writer_name = get_sub_field( 'name' );
-									$writer_url = get_sub_field( 'url' );
-									echo '<span>';
-										if( $writer_url ) {
-											echo '<a href="' . $writer_url . '">' . $writer_name . '</a>';
-										} else {
-											echo $writer_name;
-										}
-									echo '</span>';
-								}
-							echo '</div>';
+					echo '<div class="row split writer">';
+						echo '<div class="label">Writer</div>';
+						echo '<div class="value commas">';
+					    while( have_rows( 'writers') ) : the_row();
+								$writer_name = get_sub_field( 'name' );
+								$writer_url = get_sub_field( 'url' );
+								echo '<span>';
+									if( $writer_url ) {
+										echo '<a href="' . urlify( $writer_url ) . '">' . $writer_name . '</a>';
+									} else {
+										echo $writer_name;
+									}
+								echo '</span>';
+							endwhile;
 						echo '</div>';
-					endwhile;
+					echo '</div>';
 				}
 				if( have_rows( 'contributors' ) ) {
 			    while( have_rows( 'contributors') ) : the_row();
-		        $name = get_sub_field( 'name' );
-		        $role = get_sub_field( 'role' );
+		        $contributor_role = get_sub_field( 'role' );
 						echo '<div class="row split writer">';
-							echo '<div class="label role">' . $role . '</div>';
+							echo '<div class="label role">' . $contributor_role . '</div>';
 							echo '<div class="value commas">';
-								foreach ( $contributors as $contributor ) {
-									$contributor_name = get_sub_field( 'name' );
-									$contributor_url = get_sub_field( 'url' );
-									echo '<span>';
-										if( $writer_url ) {
-											echo '<a href="' . $contributor_url . '">' . $contributor_name . '</a>';
-										} else {
-											echo $contributor_name;
-										}
-									echo '</span>';
-								}
+								$contributor_name = get_sub_field( 'name' );
+								$contributor_url = get_sub_field( 'url' );
+								echo '<span>';
+									if( $contributor_url ) {
+										echo '<a href="' . urlify( $contributor_url ) . '">' . $contributor_name . '</a>';
+									} else {
+										echo $contributor_name;
+									}
+								echo '</span>';
 							echo '</div>';
 						echo '</div>';
 					endwhile;

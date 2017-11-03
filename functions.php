@@ -54,6 +54,42 @@ function get_read_time() {
   return $read_time;
 }
 
+function get_contributors_list() {
+  $contributors = [];
+  if( have_rows( 'writers' ) ) {
+    while( have_rows( 'writers') ) : the_row();
+      $contributors[] = get_sub_field( 'name' );
+    endwhile;
+  }
+
+  if( have_rows( 'contributors' ) ) {
+    while( have_rows( 'contributors') ) : the_row();
+      $contributors[] = get_sub_field( 'name' );
+    endwhile;
+  }
+
+  return implode( $contributors, ', ' );
+}
+
+function get_tags_list() {
+  $tags_array = [];
+  if( $tags = get_the_tags() ) {
+    foreach ( $tags as  $tag ) {
+      $tags_array[] = $tag->name;
+    }
+    
+  }
+  return implode( $tags_array, ', ' ); 
+  
+}
+
+function urlify( $url ) {
+  if ( !preg_match( '~^(?:f|ht)tps?://~i', $url ) ) {
+    $url = 'http://' . $url;
+  }
+  return $url;
+}
+
 function is_archived() {
   $this_date = get_the_date();
   $archive_date = new DateTime('08/01/2017');

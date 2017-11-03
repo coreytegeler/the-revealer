@@ -3,8 +3,8 @@
 ///////////////////////////////////////////////////////////////
 $gold: #fecf0c;
 $lightGold: #f8df93;
-$dark: #4d6b58;
-$medium: #669270;
+$dark: #346378;
+$medium: #448399;
 $light: #f3f1f3;
 $lightest: white;
 
@@ -47,9 +47,6 @@ $lightest: white;
 @mixin largeText {
 	font-size: 2em;
 	line-height: 1.1em;
-  @include xSmall {
-    font-size: 1.5em;
-  }
 }
 @mixin xLargeText {
   font-size: 2.3em;
