@@ -11,21 +11,21 @@ $excerpt = wp_strip_all_tags( get_the_excerpt() );
 $date = get_the_date();
 $contributors = get_contributors_list();
 $i = $wp_query->current_post;
-$missing_url = get_template_directory_uri() . '/assets/images/question.svg';
+$missing_url = get_template_directory_uri() . '/assets/images/missing.svg';
 $missing_svg = file_get_contents( $missing_url );
 $column = get_the_terms( $post, 'columns' )[0];
 $categories = get_the_category();
-echo '<article class="cell" role="article" style="' . $style . '" data-id="' . $article_id . '">';
+echo '<article class="cell ' . ( $thumb ? 'has_image' : 'no_image') . '" role="article" style="' . $style . '" data-id="' . $article_id . '">';
 	echo '<div class="wrap">';
-		echo '<div class="primary">';
-			echo '<a class="link_wrap" href="' . $permalink . '">';
-				echo '<div class="' . ( $thumb ? 'image load' : 'missing') . '">';
-					if ( $thumb ) {
+		if ( $thumb ) {
+			echo '<div class="primary">';
+				echo '<a class="link_wrap" href="' . $permalink . '">';
+					echo '<div class="image load">';
 						echo '<img data-src="'.$thumb_url.'" data-width="'.$thumb_width.'" data-height="'.$thumb_height.'"/>';
-					}
-				echo '</div>';
-			echo '</a>';
-		echo '</div>';
+					echo '</div>';
+				echo '</a>';
+			echo '</div>';
+		}
 		echo '<div class="secondary">';
 			echo '<a class="link_wrap" href="' . $permalink . '">';
 				echo '<div class="title">';
@@ -49,10 +49,10 @@ echo '<article class="cell" role="article" style="' . $style . '" data-id="' . $
 				echo '</div>';
 			echo '</a>';
 			echo '<div class="meta">';
+				echo '<span class="date">' . $date . '</span>';
 				if( $contributors ) {
 					echo '<span class="writer">' . $contributors . '</span>';
 				}
-				echo '<span class="date">' . $date . '</span>';
 			echo '</div>';
 			echo '<div class="blurb">';
 				echo $excerpt;

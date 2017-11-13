@@ -71,15 +71,12 @@ body, html {
 				}
 			}
 			main {
-				article {
+				article.readable {
 					margin: auto;
 					padding-top: 2em;
 					.wp-caption {
 						width: 100% !important;
 						float: none !important;
-						.wp-caption-text {
-							text-align: center;
-						}
 					}
 					.image {
 						width: 100%;
@@ -95,6 +92,9 @@ body, html {
 					}
 				}
 			}
+		}
+		.section_header {
+			@include xLargeText;
 		}
 		#isMobile {
 			content: 'small';

@@ -19,6 +19,9 @@ echo '<article class="post readable">';
 	echo '</div>';
 	get_template_part( 'parts/pagination' );
 echo '</article>';
+
+related_posts();
+
 echo '<div class="carousel" id="carousel">';
 	echo '<div class="slides">';
 	echo '</div>';

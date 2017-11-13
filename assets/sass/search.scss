@@ -36,16 +36,41 @@ body.search, body.tag {
 		display: table;
 		margin: auto;
 		label {
+			width: 100%;
+			position: relative;
+			display: table;
 			em {
 				opacity: 0;
 				position: absolute;
 				left: -99999%;
 			}
+			&::before {
+	    	width: 100%;
+				height: 100%;
+				position: absolute;
+				left: 0;
+				top: 0;
+				margin: 0;
+				border-radius: 1em;
+	    	content: '';
+	    	@include xLargeText;
+	    	display: inline-block;
+	    	box-shadow: 0 0 100px 55px $gold;
+	    	transition: all 500ms $ease;
+	    	z-index: 0;
+	    }
+	    &:hover {
+	    	&::before {
+	    		transform: scale(1.015);
+	    		transition: all 700ms $ease;
+	    	}		
+    	}
 		}
 		input {
 			&#searchbox {
 				width: 100%;
 				height: 100%;
+				z-index: 100;
 				margin: 0;
 				border-radius: 1em;
 				text-align: center;
@@ -54,25 +79,20 @@ body.search, body.tag {
 				padding: 0;
 				outline-color: $gold;
 				padding: .25em .25em .35em .25em;
-				box-shadow: 0 0 10em 1em $gold;
 				@include xLargeText;
 				@include serifText;
 				line-height: 1.3em;
-				transition: transform 500ms $ease;
+				transition: all 500ms $ease;
 				&:focus, &:hover {
 	      	outline: none;
 	      	transform: scale(1.015);
-	      	box-shadow: 0 0 100em 1em $gold;
-	      	// transition: box-shadow 50000ms ease-in;
+	      	// box-shadow: 0 0 500px 5px $gold;
+	      	transition: all 700ms $ease;
 	      }
 			}
 		}
 	}
 	@include xSmall {
-		form {
-			input#searchbox {
-				@include mediumText;
-			}
-		}
+		
 	}
 }

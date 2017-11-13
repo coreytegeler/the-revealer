@@ -1,6 +1,6 @@
 jQuery(function($) {
   return $(function() {
-    var $alert, $body, $footer, $header, $headers, $logo, $main, $nav, $popup, $side, $window, $wrapper, closeAlert, closePopup, fixGrids, fixHeader, fixSide, hoverCell, isMobile, lastSideScroll, loadImage, queryMore, reveal, setupArticle, shareWindow, sideScroll, siteUrl, sizeImages, toggleFilterList, trackScroll, transport;
+    var $alert, $body, $footer, $header, $headers, $logo, $main, $nav, $popup, $side, $window, $wrapper, closeAlert, closePopup, fixHeader, fixLoops, fixSide, hoverCell, isMobile, lastSideScroll, loadImage, queryMore, setupArticle, shareWindow, sideScroll, siteUrl, sizeImages, toggleHeight, trackScroll, transport;
     $window = $(window);
     $body = $('body');
     $wrapper = $('#wrapper');
@@ -22,7 +22,7 @@ jQuery(function($) {
       } else {
         $images = $('.image.load');
       }
-      return $images.each(function(i, image) {
+      $images.each(function(i, image) {
         var $image, $img, $masonry, $parent, imageHeight, imageWidth, natHeight, natWidth, ratio, src;
         $image = $(image);
         $img = $image.find('img');
@@ -50,6 +50,7 @@ jQuery(function($) {
           } else {
             src = $image.attr('data-src');
           }
+          src = src.replace('http://', 'https://');
           image = new Image();
           image.onload = function(e) {
             var img;
@@ -79,6 +80,18 @@ jQuery(function($) {
           return $masonry.masonry();
         }
       });
+      return $('article.readable .wp-caption').each(function(i, elem) {
+        var $caption, $img, imgWidth;
+        $img = $(elem).find('img');
+        $caption = $(elem).find('.wp-caption-text');
+        imgWidth = $img.innerWidth();
+        if (!imgWidth) {
+          imgWidth = 'auto';
+        }
+        return $caption.css({
+          width: imgWidth
+        });
+      });
     };
     loadImage = function(image) {
       var $image, $img, src;
@@ -95,6 +108,7 @@ jQuery(function($) {
       $image.imagesLoaded({
         background: true
       }).done(function(instance) {
+        var $loop;
         $image.removeClass('loading').addClass('loaded');
         if ($img.length) {
           if ($img.parents('aside').length) {
@@ -103,7 +117,9 @@ jQuery(function($) {
             $image.attr('style', '');
             $image.width('');
             $image.height('');
-            fixGrids();
+            if ($loop = $img.parents('.masonry:eq(0)')) {
+              fixLoops($loop);
+            }
           }
         }
         return setTimeout(function() {
@@ -113,16 +129,20 @@ jQuery(function($) {
           }
         });
       }).fail(function(instance) {
+        var $loop;
         $(instance.elements).each(function() {
-          var $cell;
+          var $cell, $missing;
           $cell = $(this).parents('.cell');
           if ($cell.length) {
-            return $cell.remove();
+            $missing = $cell;
           } else {
-            return $(this).remove();
+            $missing = $(this);
           }
+          return $missing.addClass('missing');
         });
-        return fixGrids();
+        if ($loop = $img.parents('.masonry:eq(0)')) {
+          return fixLoops($loop);
+        }
       });
       if ($img.length) {
         return $img.attr('src', src);
@@ -132,7 +152,7 @@ jQuery(function($) {
         });
       }
     };
-    fixGrids = function($loops, $cells) {
+    fixLoops = function($loops, $cells) {
       if (!$loops) {
         $loops = $('.loop, .masonry');
       }
@@ -140,15 +160,6 @@ jQuery(function($) {
         var $first, $loop, columnWidth, gutter, isMasonry;
         $loop = $(this);
         isMasonry = $loop.is('.masonry');
-        if ($cells) {
-          if (isMasonry) {
-            $loop.masonry();
-          }
-          $loop.append($cells);
-          if (isMasonry) {
-            $loop.masonry('appended', $cells);
-          }
-        }
         $first = $loop.find('.cell:eq(0)');
         if (!$first.length) {
           return;
@@ -165,13 +176,19 @@ jQuery(function($) {
             fitWidth: true
           });
         }
-        return sizeImages($loop.find('.image.load'));
+        if ($cells && $cells.length) {
+          if (isMasonry) {
+            return $loop.masonry('appended', $cells);
+          } else {
+            return $loop.append($cells);
+          }
+        }
       });
     };
     sideScroll = null;
     lastSideScroll = null;
     fixSide = function(e) {
-      var isBottom, mainRemain, pageBottom, pageEnd, pageHeight, pageTop, winHeight, winScroll;
+      var headerHeight, isBottom, mainRemain, pageBottom, pageEnd, pageHeight, pageTop, sideHeight, winHeight, winScroll;
       if (!$side.length) {
         return;
       }
@@ -183,18 +200,25 @@ jQuery(function($) {
       pageEnd = pageBottom - winHeight;
       isBottom = winScroll >= pageEnd;
       mainRemain = pageEnd - winScroll;
+      headerHeight = Math.ceil($header.outerHeight());
       if (mainRemain > 0) {
-        return $side.css({
+        sideHeight = $window.innerHeight() - headerHeight;
+        $side.css({
           y: 0
         });
       } else {
-        return $side.css({
+        sideHeight = '100%';
+        $side.css({
           y: mainRemain
         });
       }
+      return $side.css({
+        height: sideHeight,
+        top: headerHeight
+      });
     };
     trackScroll = function(e) {
-      var $readable, alertHeight, belowThresh, isBottom, pageBottom, pageEnd, pageHeight, pageTop, scrollHeight, winHeight, winScroll;
+      var $readable, alertHeight, belowThresh, headerBottom, innerHeight, isBottom, pageBottom, pageEnd, pageHeight, pageTop, scrollHeight, top, winHeight, winScroll;
       $readable = $('.readable');
       if (!$readable.length) {
         return;
@@ -217,30 +241,26 @@ jQuery(function($) {
           queryMore();
         }
       } else {
-        $headers.each(function(i, header) {
-          var headerBottom, innerHeight, top;
-          $header = $(header);
-          $nav = $header.find('nav');
-          headerBottom = $header.offset().top + $header.innerHeight();
-          innerHeight = $nav.outerHeight();
-          if (isBottom) {
-            $wrapper.addClass('bottom');
-            return $header.css({
-              y: pageEnd - winScroll
-            });
+        $nav = $header.find('nav');
+        headerBottom = $header.offset().top + $header.innerHeight();
+        innerHeight = $nav.outerHeight();
+        if (isBottom) {
+          $wrapper.addClass('bottom');
+          $header.css({
+            y: pageEnd - winScroll
+          });
+        } else {
+          $header.css({
+            y: 0
+          });
+          if ($alert.length) {
+            top = alertHeight;
+            winScroll += alertHeight;
           } else {
-            $header.css({
-              y: 0
-            });
-            if ($alert.length) {
-              top = alertHeight;
-              winScroll += alertHeight;
-            } else {
-              top = 0;
-            }
-            return $wrapper.removeClass('bottom');
+            top = 0;
           }
-        });
+          $wrapper.removeClass('bottom');
+        }
       }
       belowThresh = pageEnd / 4 - winScroll <= 0;
       if ($popup.length && !$popup.is('.stuck')) {
@@ -260,20 +280,20 @@ jQuery(function($) {
       }
       return fixSide(e);
     };
-    toggleFilterList = function() {
-      var $filter, $list, $toggle, height;
+    toggleHeight = function() {
+      var $list, $listWrap, $toggle, height;
       $toggle = $(this);
-      $filter = $toggle.parents('.filter');
-      $list = $filter.find('.list');
-      $list.toggleClass('show');
-      if ($list.is('.show')) {
+      $listWrap = $toggle.parents('.listWrap');
+      $list = $listWrap.find('.list');
+      $listWrap.toggleClass('show');
+      if ($listWrap.is('.show')) {
         height = $list[0].scrollHeight;
+        return $listWrap.css({
+          maxHeight: height
+        });
       } else {
-        height = 0;
+        return $listWrap.attr('style', '');
       }
-      return $list.css({
-        height: height
-      });
     };
     setupArticle = function() {
       var $article, $inlineImg, $link, $sideImages, $wpImg, currentSrc, hasImages, href, inlineImg, inlineImgs, j, k, len, len1, link, links, pseudo, replace;
@@ -283,16 +303,13 @@ jQuery(function($) {
       $article = $('article');
       $sideImages = $side.find('.images .loop');
       $sideImages.masonry();
-      fixGrids($sideImages);
+      fixLoops($sideImages);
       inlineImgs = $article.find('.content img');
       hasImages = false;
       for (j = 0, len = inlineImgs.length; j < len; j++) {
         inlineImg = inlineImgs[j];
         $inlineImg = $(inlineImg);
         $wpImg = $inlineImg.parents('.aligncenter, .alignleft, .alignright, .wp-caption');
-        if ($wpImg.find('a').length) {
-          $wpImg = $wpImg.find('a');
-        }
         if ($wpImg.length) {
           $wpImg.addClass('image load');
         } else {
@@ -310,13 +327,13 @@ jQuery(function($) {
           $cell.find('.image').append(img);
           $thumb = $cell.find('img');
           $thumb.attr('data-width', imageWidth).attr('data-height', imageHeight);
-          fixGrids($sideImages, $cell);
+          fixLoops($sideImages, $cell);
           $cellImage = $cell.find('.image');
           sizeImages($cellImage);
           return $sideImages.parents('.images').removeClass('hide');
         };
         pseudo.onerror = function(e) {
-          return console.log(e);
+          return console.log(this, e);
         };
         pseudo.src = currentSrc;
       }
@@ -339,15 +356,6 @@ jQuery(function($) {
         }
       }
       return $article.addClass('show');
-    };
-    reveal = function() {
-      return $('.reveal').each(function(i, elem) {
-        var delay;
-        delay = (Math.random() * (50 - 20) + 20) + (i * 20);
-        return setTimeout(function() {
-          return $(elem).addClass('show');
-        }, delay);
-      });
     };
     transport = function(e) {
       var $button, $image, $img, $inline, $readable, hasOffset, headerHeight, href, scrollTo, scrollTop, src;
@@ -385,7 +393,7 @@ jQuery(function($) {
     };
     hoverCell = function() {
       var $cell;
-      $cell = $(this).parents('.cell');
+      $cell = $(this).parents('.cell:eq(0)');
       return $cell.toggleClass('hover');
     };
     fixHeader = function() {
@@ -395,10 +403,6 @@ jQuery(function($) {
         marginTop: topHeight
       });
       $body.addClass('initd');
-      $side.css({
-        height: $window.innerHeight() - topHeight,
-        top: topHeight
-      });
       $side.addClass('fixed');
       taglineHeight = $nav.find('.tagline').innerHeight();
       linksHeight = $nav.find('.links').innerHeight();
@@ -436,11 +440,10 @@ jQuery(function($) {
         }
         i = 0;
         while (i < 15) {
-          $cell = $('<div class="cell discover reveal thumb show empty"><div class="wrap"><div class="circle"></div></div></div>');
+          $cell = $('<div class="cell discover thumb show empty"><div class="wrap"><div class="circle"></div></div></div>');
           $loop.append($cell);
           i++;
         }
-        reveal();
         $loop.addClass('querying');
         return $.ajax({
           url: wp_api.ajax_url,
@@ -509,21 +512,21 @@ jQuery(function($) {
       }, i * 50);
     });
     $('body').on('click', '.transport', transport);
-    $('body').on('click', '#filters .toggle', toggleFilterList);
+    $('body').on('click', '.toggle', toggleHeight);
     $('body').on('click', '#alert .close', closeAlert);
     $('body').on('click', '#popup .close', closePopup);
     $('body').on('hover', '.cell .link_wrap', hoverCell);
     $('body').on('click', 'aside .share a.window', shareWindow);
     $window.on('resize', function() {
-      fixGrids();
+      fixLoops();
       sizeImages();
       fixHeader();
       return trackScroll();
     }).resize();
     $window.on('scroll', function(e) {
-      return trackScroll(e);
+      trackScroll(e);
+      return fixHeader();
     });
-    setupArticle();
-    return reveal();
+    return setupArticle();
   });
 });

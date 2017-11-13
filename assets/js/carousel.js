@@ -21,6 +21,9 @@ jQuery(function($) {
         $slide.append($wrap);
         $slides.append($slide);
         imgSrc = $newImg.attr('src');
+        if (!imgSrc) {
+          return;
+        }
         imgSrcEnd = imgSrc.substring(imgSrc.lastIndexOf('-') + 1);
         if (!isNaN(parseInt(imgSrcEnd))) {
           imgExt = imgSrc.substring(imgSrc.lastIndexOf('.') + 1);
@@ -134,7 +137,6 @@ jQuery(function($) {
   };
   setupCarousel = function() {
     $('#carousel').each(function(i, carousel) {
-      $(this).find('.slide:first-child').addClass('current');
       return $(carousel).imagesLoaded(function() {
         return $(carousel).addClass('loaded');
       });

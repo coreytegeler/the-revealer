@@ -19,6 +19,8 @@ jQuery ($) ->
         $slide.append($wrap)
         $slides.append($slide)
         imgSrc = $newImg.attr('src')
+        if !imgSrc
+          return
         imgSrcEnd = imgSrc.substring(imgSrc.lastIndexOf('-') + 1)
         if !isNaN(parseInt(imgSrcEnd))
           imgExt = imgSrc.substring(imgSrc.lastIndexOf('.') + 1)
@@ -115,7 +117,6 @@ jQuery ($) ->
 
   setupCarousel = () ->
     $('#carousel').each (i, carousel) ->
-      $(this).find('.slide:first-child').addClass 'current'
       $(carousel).imagesLoaded ->
         $(carousel).addClass 'loaded'
 

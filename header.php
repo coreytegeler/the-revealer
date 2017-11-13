@@ -17,7 +17,7 @@ if( is_home() ) {
 } else if( is_404() ) {
 	$page_slug = '404';
 } else if( $page_type == 'post' && !is_tag() ) {
-	$page_slug = 'article';
+	$page_type = 'article';
 	$og_type = 'article';
 	$wrapper_style = 'split';
 } else {
@@ -25,7 +25,12 @@ if( is_home() ) {
 }
 $page_title = get_bloginfo( 'name' );
 $og_title = $page_title;
-if( $page_slug != 'home' ) {
+$post_title = get_the_title();
+if( $page_type == 'article' && $column = get_the_terms( $post, 'columns' ) ) {
+	$article_title = $column[0]->name . ': ' . $post_title;
+	$page_title .= ' — ' . $article_title;
+	$og_title =  $article_title . ' — ' . $og_title;
+} else if( $page_slug != 'home' ) {
 	$page_title .= wp_title( '—', false );
 	$og_title = wp_title( '—', false, 'right' ) . $og_title;
 }

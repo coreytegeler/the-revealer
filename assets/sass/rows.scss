@@ -1,4 +1,4 @@
-body.issues {
+.rows {
 	.sections {
 		padding: 0 0 2em 0;
 		section {
@@ -8,12 +8,16 @@ body.issues {
 			h1.title {
 				@include sansSerifText;
 				@include xLargeText;
-				font-weight: $black;
+				font-weight: $regular;
+				em {
+					font-family: $serif;
+
+				}
 			}
-			h2.date {
+			h2 {
 				color: $medium;
 				font-weight: $regular;
-				text-align: right;
+				text-align: center;
 				position: relative;
 				z-index: 100;
 				@include serifText;

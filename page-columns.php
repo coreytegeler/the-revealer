@@ -4,33 +4,32 @@ Template Name: Issues
 */
 get_header();
 echo '<div class="readable">';
-	echo '<div class="issues rows">';
+	echo '<div class="columns rows">';
 		$paged = get_query_var( 'paged' );
 		if( !$paged ) {
 			$paged = 1;
 		}
 
-		$issues = get_terms( array(
-		  'taxonomy' => 'issues',
+		$columns = get_terms( array(
+		  'taxonomy' => 'columns',
 		  'hide_empty' => false,
 		  'orderby' => 'date',
 		  'order' => 'desc',
 		  'paged' => $paged
 		) );
-		foreach( $issues as $issue ) {
-			$title = $issue->name;
-			$slug = $issue->slug;
-			$id = $issue->term_id;
+		foreach( $columns as $column ) {
+			$title = $column->name;
+			$slug = $column->slug;
+			$id = $column->term_id;
 			$link = '';
-			$date = get_field( 'date', $issue );
+			$date = get_field( 'date', $column );
+			$writer = get_field( 'writer', $column );
 
-			echo '<div class="sections issue one_two" role="issue">';
+			echo '<div class="sections column one_two" role="column">';
 				echo '<section>';
 					echo '<div class="title">';
-						// echo '<a class="" href="' . $permalink . '">';
-						echo '<h1 class="title">' . $title . '</h1>';
-						echo '<h2 class="date">Published on ' . $date . '</h2>';
-						// echo '</a>';
+						echo '<h1 class="title"><em>' . $title . '</em></h1>';
+						echo '<h2 class="writer">Written by ' . $writer . '</h2>';
 					echo '</div>';
 				echo '</section>';
 
@@ -42,7 +41,7 @@ echo '<div class="readable">';
 					  'order' => 'asc',
 					  'tax_query' => array(
 					  	array(
-								'taxonomy' => 'issues',
+								'taxonomy' => 'columns',
 								'field' => 'id',
 								'terms' => $id
 							)

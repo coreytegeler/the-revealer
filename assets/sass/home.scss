@@ -7,6 +7,9 @@ body.home {
 			.cell {
 				&#cover {
 					position: relative;
+					.overlay {
+						width: 100%;
+					}
 					h1 {
 						position: relative;
 						z-index: 100;
@@ -18,6 +21,7 @@ body.home {
 						}
 						&.title {
 							color: $dark;
+							@include xxLargeText;
 						}
 						&.date {
 							color: $medium;
@@ -27,7 +31,18 @@ body.home {
 							z-index: 100;
 							@include serifText;
 							font-style: italic;
-							// padding-left: 10%;
+						}
+					}
+					.loop {
+						padding-top: 1em;
+						.cell {
+							.image {
+								background-color: $dark;
+								img {
+									filter: grayscale(1);
+									mix-blend-mode: screen;
+								}
+							}
 						}
 					}
 					.circle {
@@ -40,8 +55,10 @@ body.home {
 						background: $gold;
 						border-radius: 50%;
 					}
+				}
+				&#newsletter {
 					.newsletter {
-						padding: 4em 0;
+						padding: 0;
 						form {
 							width: 100%;
 							max-width: 25em;
@@ -50,8 +67,8 @@ body.home {
 								max-width: 15em;
 								margin: 0 0 .5em 0;
 								display: table;
-								@include sansSerifText;
-								@include xMediumText;
+								@include serifText;
+								@include largeText;
 								font-weight: $black;
 							}
 							.inputs {
@@ -94,24 +111,10 @@ body.home {
 		}
 		section {
 			padding: 2em 0;
-			.header {
-				font-weight: $regular;
-				color: $medium;
-				em {
-					@include serifText;
-					@include mediumText;
-				}
-				a {
-					text-decoration: none;
-					color: $medium;
-					&:hover {
-						color: $dark;
-					}
-				}
-			}
 			.loop {
 				padding-top: 1em;
 				&#recent_column {
+					padding-bottom: 2em;
 					.column {
 						display: none;
 					}
@@ -126,7 +129,6 @@ body.home {
 					article {
 						h4 {
 							@include serifText;
-							font-weight: $black;
 						}
 					}
 				}
@@ -151,11 +153,9 @@ body.home {
 			}
 		}
 		@include small {
-			.sections {
-				section, * section {
-					width: 100%;
-					padding: 2em 0;
-				}
+			section, .sections section {
+				width: 100%;
+				padding: 2em 0;
 			}
 			.loop {
 				&#featured_tag {

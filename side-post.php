@@ -8,6 +8,7 @@ $date = get_the_date();
 $categories = get_the_category();
 $column = get_the_terms( $post, 'columns' )[0];
 $column_url = add_query_arg( 'column', $column->slug, get_site_url() );
+$issue = get_the_terms( $post, 'issues' )[0];
 $writers = get_field( 'writers' );
 $contributors = get_field( 'contributors' );
 $content = $post->post_content;
@@ -25,6 +26,7 @@ echo '<div id="about" role="contentinfo">';
 					echo $title;
 				echo '</h1>';
 			echo '</div>';
+			// echo '<div class="goldbar"><div class="solid"></div></div>';
 			echo '<div class="meta">';
 				if( have_rows( 'writers' ) ) {
 					echo '<div class="row split writer">';
@@ -93,6 +95,15 @@ echo '<div id="about" role="contentinfo">';
 						echo '</div>';
 					echo '</div>';
 				}
+				if( $issue ) {
+					echo '<div class="row split issue">';
+						echo '<div class="label">Issue</div>';
+						echo '<div class="value">';
+							echo $issue->name;
+						echo '</div>';
+					echo '</div>';
+				}
+
 				echo '<div class="row split share">';
 					echo '<div class="label">Share</div>';
 					echo '<div class="value commas">';
@@ -111,15 +122,23 @@ echo '<div id="about" role="contentinfo">';
 					echo '</div>';
 				echo '</div>';
 				if( $tags ) {
-					echo '<div class="row tags commas">';
-						echo '<span class="label">Tags</span>';
-						foreach ( $tags as $tag ) {
-							$tag_name = $tag->name;
-							$tag_url = get_tag_link( $tag->term_id );
-							echo '<span class="tag">';
-								echo '<a href="' . $tag_url . '">' . $tag_name . '</a>';
-							echo '</span>';
-						}
+					echo '<div class="row tags commas listWrap">';
+						echo '<div class="list">';
+							echo '<span class="label">Tags</span>';
+							foreach ( $tags as $tag ) {
+								$tag_name = $tag->name;
+								$tag_url = get_tag_link( $tag->term_id );
+								echo '<span class="tag">';
+									echo '<a href="' . $tag_url . '">' . $tag_name . '</a>';
+								echo '</span>';
+							}
+						echo '</div>';						
+						echo '<div class="toggle">';
+							echo '<div class="circle">';
+								$up_svg = get_template_directory_uri() . '/assets/images/up.svg';
+								echo file_get_contents( $up_svg );
+							echo '</div>';
+						echo '</div>';
 					echo '</div>';
 				}
 			echo '</div>';

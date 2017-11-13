@@ -43,6 +43,8 @@ jQuery ($) ->
 						src = $img.attr('src')
 					else
 						src = $image.attr('data-src')
+
+					src = src.replace('http://', 'https://')
 					image = new Image()
 					image.onload = (e) ->
 						img = e.target
@@ -65,6 +67,15 @@ jQuery ($) ->
 				if $masonry = $image.parents('.masonry')
 					$masonry.masonry()
 
+			$('article.readable .wp-caption').each (i, elem) ->
+				$img = $(elem).find('img')
+				$caption = $(elem).find('.wp-caption-text')
+				imgWidth = $img.innerWidth()
+				if !imgWidth
+					imgWidth = 'auto'
+				$caption.css
+					width: imgWidth
+
 		loadImage = (image) ->
 			$image = $(image)
 			if !$image.is('.load')
@@ -84,7 +95,8 @@ jQuery ($) ->
 							$image.attr('style','')
 							$image.width('')
 							$image.height('')
-							fixGrids()
+							if $loop = $img.parents('.masonry:eq(0)')
+								fixLoops($loop)
 					setTimeout () ->
 						if $masonry = $image.parents('.masonry')
 							$masonry.masonry()
@@ -92,10 +104,12 @@ jQuery ($) ->
 					$(instance.elements).each () ->
 						$cell = $(this).parents('.cell')
 						if $cell.length
-							$cell.remove()
+							$missing = $cell
 						else
-							$(this).remove()
-					fixGrids()
+							$missing = $(this)
+						$missing.addClass('missing')	
+					if $loop = $img.parents('.masonry:eq(0)')
+						fixLoops($loop)
 			if $img.length
 				$img.attr('src', src)
 			else
@@ -103,18 +117,12 @@ jQuery ($) ->
 					backgroundImage: 'url('+src+')'
 
 
-		fixGrids = ($loops, $cells) ->
+		fixLoops = ($loops, $cells) ->
 			if !$loops
 				$loops = $('.loop, .masonry')
 			$loops.each () ->
 				$loop = $(this)
 				isMasonry = $loop.is('.masonry')
-				if $cells
-					if isMasonry
-						$loop.masonry()
-					$loop.append($cells)
-					if isMasonry
-						$loop.masonry('appended', $cells)
 				$first = $loop.find('.cell:eq(0)')
 				if !$first.length
 					return
@@ -128,7 +136,12 @@ jQuery ($) ->
 						transitionDuration: 0,
 						percentPosition: true,
 						fitWidth: true
-				sizeImages($loop.find('.image.load'))
+				if $cells && $cells.length
+					if isMasonry
+						$loop.masonry('appended', $cells)
+					else
+						$loop.append($cells)
+
 
 		sideScroll = null
 		lastSideScroll = null
@@ -143,12 +156,20 @@ jQuery ($) ->
 			pageEnd = pageBottom - winHeight
 			isBottom = (winScroll >= pageEnd)
 			mainRemain = pageEnd - winScroll
+
+			headerHeight = Math.ceil($header.outerHeight())
 			if mainRemain > 0
+				sideHeight = $window.innerHeight() - headerHeight
 				$side.css
 					y: 0
 			else
+				sideHeight = '100%'
 				$side.css
 					y: mainRemain
+
+			$side.css
+				height: sideHeight,
+				top: headerHeight
 
 			# sideTop = $side.position().top
 			# sideHeight = $side.innerHeight()
@@ -181,24 +202,22 @@ jQuery ($) ->
 				if winScroll + winHeight >= scrollHeight - winHeight * 2
 					queryMore()
 			else
-				$headers.each (i, header) ->
-					$header = $(header)
-					$nav = $header.find('nav')
-					headerBottom = $header.offset().top + $header.innerHeight()
-					innerHeight = $nav.outerHeight()
-					if isBottom
-						$wrapper.addClass('bottom')
-						$header.css
-							y: pageEnd - winScroll
+				$nav = $header.find('nav')
+				headerBottom = $header.offset().top + $header.innerHeight()
+				innerHeight = $nav.outerHeight()
+				if isBottom
+					$wrapper.addClass('bottom')
+					$header.css
+						y: pageEnd - winScroll
+				else
+					$header.css
+						y: 0
+					if $alert.length
+						top = alertHeight
+						winScroll += alertHeight
 					else
-						$header.css
-							y: 0
-						if $alert.length
-							top = alertHeight
-							winScroll += alertHeight
-						else
-							top = 0
-						$wrapper.removeClass('bottom')
+						top = 0
+					$wrapper.removeClass('bottom')
 					# PROGRESS BAR
 					# $header.find('.bar').each (i, bar) ->
 					# 	$bar = $(this)
@@ -228,17 +247,20 @@ jQuery ($) ->
 
 			fixSide(e)
 
-		toggleFilterList = () ->
+		toggleHeight = () ->
 			$toggle = $(this)
-			$filter = $toggle.parents('.filter')
-			$list = $filter.find('.list')
-			$list.toggleClass('show')
-			if $list.is('.show')
+			$listWrap = $toggle.parents('.listWrap')
+			$list = $listWrap.find('.list')
+			$listWrap.toggleClass('show')
+			if $listWrap.is('.show')
 				height = $list[0].scrollHeight
+				$listWrap.css
+					maxHeight: height
 			else
-				height = 0
-			$list.css
-				height: height
+				$listWrap.attr('style', '')
+
+
+			
 
 
 		# alters and appends article body text to make posts more dynamic
@@ -249,18 +271,19 @@ jQuery ($) ->
 			# wraps inline images to load before showing
 			$sideImages = $side.find('.images .loop')
 			$sideImages.masonry()
-			fixGrids($sideImages)
+			fixLoops($sideImages)
 			inlineImgs = $article.find('.content img')
 			hasImages = false
 			for inlineImg in inlineImgs
 				$inlineImg = $(inlineImg)
 				$wpImg = $inlineImg.parents('.aligncenter, .alignleft, .alignright, .wp-caption')
-				if $wpImg.find('a').length
-					$wpImg = $wpImg.find('a')
+				# if $wpImg.find('a').length
+				# 	$wpImg = $wpImg.find('a')
 				if $wpImg.length
 					$wpImg.addClass('image load')
 				else
 					$inlineImg.wrap('<div class="shift image load"></div>')
+
 				currentSrc = inlineImg.currentSrc
 				$inlineImg.attr('data-src', currentSrc)
 				pseudo = new Image()
@@ -272,13 +295,15 @@ jQuery ($) ->
 					$cell.find('.image').append(img)
 					$thumb = $cell.find('img')
 					$thumb.attr('data-width', imageWidth).attr('data-height', imageHeight)
-					fixGrids($sideImages, $cell)
+					fixLoops($sideImages, $cell)
 					$cellImage = $cell.find('.image')
 					sizeImages($cellImage)
 					$sideImages.parents('.images').removeClass('hide')
 				pseudo.onerror = (e) ->
-					console.log e
+					console.log this, e
 				pseudo.src = currentSrc
+
+			# console.log $sideImages
 			sizeImages($article.find('.content .image.load'))
 
 			links = $article.find('a[href]')
@@ -299,13 +324,6 @@ jQuery ($) ->
 				else if !href.includes(siteUrl)
 					$link.attr('target', '_blank')
 			$article.addClass('show')
-
-		reveal = () ->
-			$('.reveal').each (i, elem) ->
-				delay = (Math.random() * (50 - 20) + 20) + (i*20)
-				setTimeout () ->
-					$(elem).addClass('show')
-				, delay
 
 		transport = (e) ->
 			$button = $(this)
@@ -337,7 +355,7 @@ jQuery ($) ->
 						$inline.focus()
 
 		hoverCell = () ->
-			$cell = $(this).parents('.cell')
+			$cell = $(this).parents('.cell:eq(0)')
 			$cell.toggleClass('hover')
 
 		fixHeader = () ->
@@ -345,9 +363,6 @@ jQuery ($) ->
 			$wrapper.css
 				marginTop: topHeight
 			$body.addClass('initd')
-			$side.css
-				height: $window.innerHeight() - topHeight,
-				top: topHeight
 			$side.addClass('fixed')
 			taglineHeight = $nav.find('.tagline').innerHeight()
 			linksHeight = $nav.find('.links').innerHeight()
@@ -383,10 +398,9 @@ jQuery ($) ->
 
 				i = 0
 				while i < 15
-					$cell = $('<div class="cell discover reveal thumb show empty"><div class="wrap"><div class="circle"></div></div></div>')
+					$cell = $('<div class="cell discover thumb show empty"><div class="wrap"><div class="circle"></div></div></div>')
 					$loop.append($cell)
 					i++
-				reveal()
 				$loop.addClass('querying')
 				$.ajax
 					url: wp_api.ajax_url,
@@ -468,13 +482,13 @@ jQuery ($) ->
 		# 					.append($img)
 		# 					.addClass('load')
 		# 					.addClass('cell')
-		# 				fixGrids($images, $image)
+		# 				fixLoops($images, $image)
 		# 				sizeImages()
 		# 			thumb.src = src
 
 
 		$('body').on('click', '.transport', transport)
-		$('body').on('click', '#filters .toggle', toggleFilterList)
+		$('body').on('click', '.toggle', toggleHeight)
 		$('body').on('click', '#alert .close', closeAlert)
 		$('body').on('click', '#popup .close', closePopup)
 		$('body').on('hover', '.cell .link_wrap', hoverCell)
@@ -482,7 +496,7 @@ jQuery ($) ->
 		# $('.single article .super').on 'click', scrollToFootnote
 
 		$window.on 'resize', () ->
-			fixGrids()
+			fixLoops()
 			sizeImages()
 			fixHeader()
 			trackScroll()
@@ -491,7 +505,6 @@ jQuery ($) ->
 
 		$window.on 'scroll', (e) ->
 			trackScroll(e)
+			fixHeader()
 
 		setupArticle()
-		reveal()
-

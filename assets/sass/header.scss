@@ -82,10 +82,6 @@ header {
 				    	color: $medium;
 				    }
 					}
-					em {
-						font-family: 'Clarendon';
-						font-style: normal;
-					}
 					&:first-child {
 						margin: 0;
 					}
@@ -125,6 +121,11 @@ header {
 					}
 				}
 			}
+		}
+	}
+	@include medium {
+		.inner .rows .row {
+			@include xSmallText;
 		}
 	}
 	@include small {
