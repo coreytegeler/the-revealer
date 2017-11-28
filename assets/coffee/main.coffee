@@ -14,6 +14,8 @@ jQuery ($) ->
 		$alert = $('#alert')
 		$popup = $('#popup')
 		siteUrl = $body.attr('data-site-url')
+		themeUrl = siteUrl+'/wp-content/themes/therevealer'
+		assetsUrl = themeUrl+'/assets/'
 		sizeImages = (images) ->
 			if images
 				$images = $(images)
@@ -78,6 +80,7 @@ jQuery ($) ->
 
 		loadImage = (image) ->
 			$image = $(image)
+			$cell = $image.parents('.cell')
 			if !$image.is('.load')
 				return
 			$image.removeClass('load').addClass('loading')
@@ -100,6 +103,8 @@ jQuery ($) ->
 					setTimeout () ->
 						if $masonry = $image.parents('.masonry')
 							$masonry.masonry()
+					if $cell.length
+						$cell.addClass('show')
 				.fail (instance) ->
 					$(instance.elements).each () ->
 						$cell = $(this).parents('.cell')
@@ -107,7 +112,11 @@ jQuery ($) ->
 							$missing = $cell
 						else
 							$missing = $(this)
-						$missing.addClass('missing')	
+						$missing.addClass('missing')
+						$missingSvg = $('#missingSvg svg')
+						$missing.html($missingSvg)
+						if $cell.length
+							$cell.addClass('show')
 					if $loop = $img.parents('.masonry:eq(0)')
 						fixLoops($loop)
 			if $img.length
@@ -228,24 +237,36 @@ jQuery ($) ->
 					# 			width: progress
 
 				
-				
-
 			belowThresh = pageEnd/4 - winScroll <= 0
 			if $popup.length && !$popup.is('.stuck')
 				if winScroll - $popup.innerHeight() - $header.innerHeight() > pageEnd
-					$popup.addClass('show').removeClass('fixed').addClass('stuck')
+					console.log 1
+					$popup.addClass('show stuck').removeClass('fixed')
+					localStorage.setItem('showedPopup', 'true')
 					$popup.transition
 						y: 0,
 					, 0
 				else if belowThresh && !$popup.is('.stuck, .fixed')
-					$popup.addClass('show').addClass('fixed')
+					console.log 2
+					$popup.addClass('show fixed').removeClass('stuck')
+					localStorage.setItem('showedPopup', 'true')
 					$popup.transition
-						y: - $popup.innerHeight()
+						y: -$popup.innerHeight()
 					, 250
-				else if !$popup.is('.fixed')
-					$popup.removeClass('show')
+				# else if poppedUp()
+				# 	console.log 3
+				# 	$popup.addClass('show stuck')
+				# else if !$popup.is('.fixed')
+				# 	console.log 4
+				# 	$popup.removeClass('show')
 
 			fixSide(e)
+
+		poppedUp = () ->
+			if localStorage.getItem('showedPopup') == 'true'
+				return true
+			else
+				return false
 
 		toggleHeight = () ->
 			$toggle = $(this)
@@ -301,6 +322,9 @@ jQuery ($) ->
 					$sideImages.parents('.images').removeClass('hide')
 				pseudo.onerror = (e) ->
 					console.log this, e
+					# $missing.addClass('missing')
+					# $missing.html('<object type="image/svg+xml" data="'+siteUrl+'/assets/images/missing.svg"></object>')
+					# console.log $missing
 				pseudo.src = currentSrc
 
 			# console.log $sideImages
@@ -388,20 +412,18 @@ jQuery ($) ->
 		window.discovered = []
 		queryMore = () ->
 			$loop = $('.discover.loop')
-			
-			if !$loop.is('.querying')
+			if !$main.is('.querying')
 				if !discovered.length
 					$loop.find('.cell').each (i, cell) ->
 						$cell = $(cell)
 						id = $cell.attr('data-id')
 						discovered.push(id)
-
 				i = 0
 				while i < 15
-					$cell = $('<div class="cell discover thumb show empty"><div class="wrap"><div class="circle"></div></div></div>')
+					$cell = $('<div class="cell discover thumb empty"><div class="wrap"><div class="circle"></div></div></div>')
 					$loop.append($cell)
 					i++
-				$loop.addClass('querying')
+				$main.addClass('querying')
 				$.ajax
 					url: wp_api.ajax_url,
 					type: 'POST',
@@ -409,7 +431,7 @@ jQuery ($) ->
 						action: 'api_query',
 						discovered: discovered
 					success: (cells, status, jqXHR) ->
-						$loop.removeClass('querying')
+						$main.removeClass('querying')
 						$empties = $loop.find('.empty.cell')
 						$empties.each (i, empty) ->
 							$empty = $(empty)
@@ -420,7 +442,11 @@ jQuery ($) ->
 								$inner = $cell.find('.wrap').html()
 								$empty.removeClass('empty')
 								$empty.find('.wrap').html($inner)
-							sizeImages($empty.find('.image.load'))
+							$image = $empty.find('.image.load')
+							if $image.length
+								sizeImages($image)
+							else
+								$empty.addClass('show')
 
 					error: (jqXHR, status, error) ->
 						console.log jqXHR.responseJSON
@@ -444,10 +470,9 @@ jQuery ($) ->
 				setTimeout () ->
 					$spans.each (si, span) ->
 						si++
+						$span = $(span)
 						setTimeout () ->
-							$(span).addClass('animate')
-							# if si == $spans.length - 1
-								
+							$span.addClass('animate')
 						, si*50
 					$wrap.addClass('show')
 				, 100*ri
@@ -459,41 +484,18 @@ jQuery ($) ->
 			, i*50
 
 
-		# gatherArticleImages = () ->
-		# 	return
-		# 	if $body.is('.single')
-		# 		$images = $side.find('.images')
-		# 		$article = $('article')
-		# 		imgs = $article.find('.content img')
-		# 		for img in imgs
-		# 			src = img.src
-		# 			thumb = new Image()
-		# 			thumb.onload = (e) ->
-		# 				img = e.target
-		# 				src = img.src
-		# 				$img = $(img)
-		# 				natWidth = img.naturalWidth
-		# 				natHeight = img.naturalHeight
-		# 				$img = $('<img/>')
-		# 					.attr('src', src)
-		# 					.attr('data-width', natWidth)
-		# 					.attr('data-height', natHeight)
-		# 				$image = $('<div class="image"></div>')
-		# 					.append($img)
-		# 					.addClass('load')
-		# 					.addClass('cell')
-		# 				fixLoops($images, $image)
-		# 				sizeImages()
-		# 			thumb.src = src
-
-
 		$('body').on('click', '.transport', transport)
 		$('body').on('click', '.toggle', toggleHeight)
 		$('body').on('click', '#alert .close', closeAlert)
 		$('body').on('click', '#popup .close', closePopup)
 		$('body').on('hover', '.cell .link_wrap', hoverCell)
 		$('body').on('click', 'aside .share a.window', shareWindow)
-		# $('.single article .super').on 'click', scrollToFootnote
+		
+		if localStorage.getItem('showedPopup') == 'true'
+			$popup.addClass('show stuck')
+
+		if $body.is('.search')
+			$('input#searchbox').focus()
 
 		$window.on 'resize', () ->
 			fixLoops()
@@ -501,7 +503,6 @@ jQuery ($) ->
 			fixHeader()
 			trackScroll()
 		.resize()
-
 
 		$window.on 'scroll', (e) ->
 			trackScroll(e)

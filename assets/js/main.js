@@ -1,6 +1,6 @@
 jQuery(function($) {
   return $(function() {
-    var $alert, $body, $footer, $header, $headers, $logo, $main, $nav, $popup, $side, $window, $wrapper, closeAlert, closePopup, fixHeader, fixLoops, fixSide, hoverCell, isMobile, lastSideScroll, loadImage, queryMore, setupArticle, shareWindow, sideScroll, siteUrl, sizeImages, toggleHeight, trackScroll, transport;
+    var $alert, $body, $footer, $header, $headers, $logo, $main, $nav, $popup, $side, $window, $wrapper, assetsUrl, closeAlert, closePopup, fixHeader, fixLoops, fixSide, hoverCell, isMobile, lastSideScroll, loadImage, poppedUp, queryMore, setupArticle, shareWindow, sideScroll, siteUrl, sizeImages, themeUrl, toggleHeight, trackScroll, transport;
     $window = $(window);
     $body = $('body');
     $wrapper = $('#wrapper');
@@ -15,6 +15,8 @@ jQuery(function($) {
     $alert = $('#alert');
     $popup = $('#popup');
     siteUrl = $body.attr('data-site-url');
+    themeUrl = siteUrl + '/wp-content/themes/therevealer';
+    assetsUrl = themeUrl + '/assets/';
     sizeImages = function(images) {
       var $images;
       if (images) {
@@ -94,8 +96,9 @@ jQuery(function($) {
       });
     };
     loadImage = function(image) {
-      var $image, $img, src;
+      var $cell, $image, $img, src;
       $image = $(image);
+      $cell = $image.parents('.cell');
       if (!$image.is('.load')) {
         return;
       }
@@ -122,23 +125,31 @@ jQuery(function($) {
             }
           }
         }
-        return setTimeout(function() {
+        setTimeout(function() {
           var $masonry;
           if ($masonry = $image.parents('.masonry')) {
             return $masonry.masonry();
           }
         });
+        if ($cell.length) {
+          return $cell.addClass('show');
+        }
       }).fail(function(instance) {
         var $loop;
         $(instance.elements).each(function() {
-          var $cell, $missing;
+          var $missing, $missingSvg;
           $cell = $(this).parents('.cell');
           if ($cell.length) {
             $missing = $cell;
           } else {
             $missing = $(this);
           }
-          return $missing.addClass('missing');
+          $missing.addClass('missing');
+          $missingSvg = $('#missingSvg svg');
+          $missing.html($missingSvg);
+          if ($cell.length) {
+            return $cell.addClass('show');
+          }
         });
         if ($loop = $img.parents('.masonry:eq(0)')) {
           return fixLoops($loop);
@@ -265,20 +276,29 @@ jQuery(function($) {
       belowThresh = pageEnd / 4 - winScroll <= 0;
       if ($popup.length && !$popup.is('.stuck')) {
         if (winScroll - $popup.innerHeight() - $header.innerHeight() > pageEnd) {
-          $popup.addClass('show').removeClass('fixed').addClass('stuck');
+          console.log(1);
+          $popup.addClass('show stuck').removeClass('fixed');
+          localStorage.setItem('showedPopup', 'true');
           $popup.transition({
             y: 0
           }, 0);
         } else if (belowThresh && !$popup.is('.stuck, .fixed')) {
-          $popup.addClass('show').addClass('fixed');
+          console.log(2);
+          $popup.addClass('show fixed').removeClass('stuck');
+          localStorage.setItem('showedPopup', 'true');
           $popup.transition({
             y: -$popup.innerHeight()
           }, 250);
-        } else if (!$popup.is('.fixed')) {
-          $popup.removeClass('show');
         }
       }
       return fixSide(e);
+    };
+    poppedUp = function() {
+      if (localStorage.getItem('showedPopup') === 'true') {
+        return true;
+      } else {
+        return false;
+      }
     };
     toggleHeight = function() {
       var $list, $listWrap, $toggle, height;
@@ -429,7 +449,7 @@ jQuery(function($) {
     queryMore = function() {
       var $cell, $loop, i;
       $loop = $('.discover.loop');
-      if (!$loop.is('.querying')) {
+      if (!$main.is('.querying')) {
         if (!discovered.length) {
           $loop.find('.cell').each(function(i, cell) {
             var $cell, id;
@@ -440,11 +460,11 @@ jQuery(function($) {
         }
         i = 0;
         while (i < 15) {
-          $cell = $('<div class="cell discover thumb show empty"><div class="wrap"><div class="circle"></div></div></div>');
+          $cell = $('<div class="cell discover thumb empty"><div class="wrap"><div class="circle"></div></div></div>');
           $loop.append($cell);
           i++;
         }
-        $loop.addClass('querying');
+        $main.addClass('querying');
         return $.ajax({
           url: wp_api.ajax_url,
           type: 'POST',
@@ -454,10 +474,10 @@ jQuery(function($) {
           },
           success: function(cells, status, jqXHR) {
             var $empties;
-            $loop.removeClass('querying');
+            $main.removeClass('querying');
             $empties = $loop.find('.empty.cell');
             return $empties.each(function(i, empty) {
-              var $empty, $inner, id;
+              var $empty, $image, $inner, id;
               $empty = $(empty);
               $cell = $(cells).eq(i);
               id = $cell.attr('data-id');
@@ -467,7 +487,12 @@ jQuery(function($) {
                 $empty.removeClass('empty');
                 $empty.find('.wrap').html($inner);
               }
-              return sizeImages($empty.find('.image.load'));
+              $image = $empty.find('.image.load');
+              if ($image.length) {
+                return sizeImages($image);
+              } else {
+                return $empty.addClass('show');
+              }
             });
           },
           error: function(jqXHR, status, error) {
@@ -497,9 +522,11 @@ jQuery(function($) {
         $spans = $wrap.find('span');
         return setTimeout(function() {
           $spans.each(function(si, span) {
+            var $span;
             si++;
+            $span = $(span);
             return setTimeout(function() {
-              return $(span).addClass('animate');
+              return $span.addClass('animate');
             }, si * 50);
           });
           return $wrap.addClass('show');
@@ -517,6 +544,12 @@ jQuery(function($) {
     $('body').on('click', '#popup .close', closePopup);
     $('body').on('hover', '.cell .link_wrap', hoverCell);
     $('body').on('click', 'aside .share a.window', shareWindow);
+    if (localStorage.getItem('showedPopup') === 'true') {
+      $popup.addClass('show stuck');
+    }
+    if ($body.is('.search')) {
+      $('input#searchbox').focus();
+    }
     $window.on('resize', function() {
       fixLoops();
       sizeImages();

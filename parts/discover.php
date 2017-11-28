@@ -29,7 +29,7 @@ $rand_cells = get_posts( $rand_post_args );
 shuffle( $rand_cells );
 foreach( $rand_cells as $post ) {
 	setup_postdata( $post );
-	get_template_part( 'parts/cell', 'discover' );
+	get_template_part( 'parts/article', 'discover' );
 	wp_reset_postdata();
 }
 ?>

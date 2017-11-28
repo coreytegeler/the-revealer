@@ -5,21 +5,20 @@
 global $post;
 $page_type = $post->post_type;
 $page_slug = $post->post_name;
-$split_pages = array( 'article', 'articles' );
 $wrapper_style = 'full';
 $og_type = 'website';
 if( is_home() ) {
 	$page_slug = 'home';
 } else if( is_search() || $page_slug == 'search' ) {
 	$page_slug = 'search';
-} else if( in_array( $page_slug, $split_pages ) ) {
+} else if( $page_slug == 'articles' ) {
 	$wrapper_style = 'split';
 } else if( is_404() ) {
 	$page_slug = '404';
 } else if( $page_type == 'post' && !is_tag() ) {
 	$page_type = 'article';
 	$og_type = 'article';
-	$wrapper_style = 'split';
+	$wrapper_style = 'full';
 } else {
 	$page_slug = $post->post_name;;
 }

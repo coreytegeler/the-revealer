@@ -30,6 +30,7 @@ body.search, body.tag {
 #searchform {
 	width: calc(100% - 4em);
 	padding: 0 2em;
+	pointer-events: none;
 	form {
 		width: 100%;
 		height: 5em;
@@ -83,6 +84,8 @@ body.search, body.tag {
 				@include serifText;
 				line-height: 1.3em;
 				transition: all 500ms $ease;
+				backface-visibility: hidden;
+        pointer-events: all;
 				&:focus, &:hover {
 	      	outline: none;
 	      	transform: scale(1.015);

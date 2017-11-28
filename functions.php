@@ -111,23 +111,6 @@ function add_query_vars( $vars ){
 }
 add_filter( 'query_vars', 'add_query_vars' );
 
-function register_writers() {
-  register_post_type( 'writer',
-    array(
-      'labels' => array(
-        'name' => __( 'Writers' ),
-        'singular_name' => __( 'Writer' )
-      ),
-      'menu_position' => 5,
-      'menu_icon' => 'dashicons-admin-users',
-      'public' => true,
-      'has_archive' => true,
-      'supports' => array('title', 'editor', 'thumbnail')
-    )
-  );
-}
-add_action( 'init', 'register_writers' );
-
 function register_events() {
   register_post_type( 'event',
     array(

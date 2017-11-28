@@ -62,13 +62,13 @@ echo '<div class="readable">';
 	// 	echo '</section>';	
 	// echo '</div>';
 
-	echo '<div class="loop articles two_col masonry">';
+	echo '<div class="loop articles two_col grid" id="current_issue">';
 		echo '<div class="cell" id="cover">';
 			echo '<div class="overlay">';
-				echo '<h1 class="lead">Read our current issue</h1>';
-				echo '<h1 class="title">' . $current_issue->name  . '</h1>';
+				echo '<h1 class="lead">Read our current issue published on</h1>';
 				$issue_date = get_field( 'date', $current_issue );
-				echo '<h1 class="date">published on ' . $issue_date . '</h1>';
+				echo '<h1 class="date">' . $issue_date . '</h1>';
+				// echo '<h1 class="title">' . $current_issue->name  . '</h1>';
 			echo '</div>';
 			// echo '<div class="circle"></div>';
 			// $current_issue_query = new WP_Query( 
@@ -151,8 +151,10 @@ echo '<div class="readable">';
 	echo '<div class="goldbar"><div class="solid"></div></div>';
 
 	echo '<div class="sections one_one">';
-
 		echo '<section>';
+			$feat_cols = get_field( 'featured_columns', $current_issue );
+			$feat_col_i = array_rand( $feat_cols, 1 );
+			$feat_col = $feat_cols[$feat_col_i];
 			$col_args = array(
 				'post_type' => 'post',
 				'orderby' => 'date',
@@ -160,11 +162,12 @@ echo '<div class="readable">';
 				'posts_per_page' => 1,
 				'post__not_in' => $already_used,
 				'tax_query' => array(
-					array(
+			  	array(
 						'taxonomy' => 'columns',
-						'operator' => 'EXISTS'
+						'field' => 'id',
+						'terms' => $feat_col->term_id
 					)
-				)
+			  )
 			);
 			$col_query = new WP_Query( $col_args );
 			if ( $col_query->have_posts() ) {
@@ -237,7 +240,7 @@ echo '<div class="readable">';
 					echo '<em>' . $feat_tag->name . '</em>.';
 				echo '</a>';
 			echo '</h2>';
-			echo '<div class="loop articles masonry" id="featured_tag">';
+			echo '<div class="loop articles two_col grid" id="featured_tag">';
 				$tagged_args = array(
 					'posts_per_page' => $tagged_amount,
 					'post_type' => 'post',

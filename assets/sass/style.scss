@@ -115,7 +115,7 @@ input {
 	}
 }
 .label {
-	color: $medium;
+	// color: $medium;
 	&.column {
 		@include serifText;
 		font-style: italic;
@@ -272,7 +272,7 @@ input {
 		border-bottom: 2px solid $gold;
 		display: inline;
 		&:hover {
-			color: $dark;
+			color: $medium;
 		}
 	}
 }
@@ -294,7 +294,7 @@ input {
 	.bounce {
 		opacity: .125;
 		&.show {
-			opacity: .75;
+			opacity: 1;
 		}
 	}
 }
@@ -381,6 +381,9 @@ input {
 #isMobile {
 	display: none;
 	content: '0';
+}
+#missingSvg {
+	display: none;
 }
 ::-webkit-scrollbar {
     width: 0px;

@@ -29,13 +29,17 @@ echo '<article class="cell ' . ( $thumb ? 'has_image' : 'no_image') . '" role="a
 		echo '<div class="secondary">';
 			echo '<a class="link_wrap" href="' . $permalink . '">';
 				echo '<div class="title">';
-					if( $column ) {
-						echo '<div class="column label">' . $column->name . '</div> ';
-					} else if( $categories ) {
+					if( $categories ) {
 						echo '<div class="categories label">';
 							foreach( $categories as $i => $cat ) {
+								if( $cat->slug == 'features' ) {
+									echo '<span class="features">Featured </span>';
+									array_splice( $categories, $i, 1 );
+								}
+							}
+							foreach( $categories as $i => $cat ) {
 								$cat_name = get_field( 'singular', $cat );
-								if( !sizeof( $cat_name ) ) {
+								if( sizeof( $cat_name ) < 1 ) {
 									$cat_name = $cat->name;
 								}
 								echo '<span class="' . $cat->slug . '">' . $cat_name . '</span>';
@@ -45,7 +49,12 @@ echo '<article class="cell ' . ( $thumb ? 'has_image' : 'no_image') . '" role="a
 							}
 						echo '</div> ';
 					}
-					echo '<h2>' . $title . '</h2>';
+					echo '<h2>';
+						if( $column ) {
+							echo '<em class="column">' . $column->name . '</em>: ';
+						}
+						echo $title;
+					echo '</h2>';
 				echo '</div>';
 			echo '</a>';
 			echo '<div class="meta">';

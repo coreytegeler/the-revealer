@@ -48,6 +48,9 @@ if( $post->post_name != 'discover' ) {
 	echo '</footer>';
 }
 echo '<div id="isMobile"></div>';
+$missing_url = get_template_directory_uri() . '/assets/images/missing.svg';
+$missing_svg = file_get_contents( $missing_url );
+echo '<div id="missingSvg">'.$missing_svg.'</div>';
 wp_footer();
 ?>
 </body>

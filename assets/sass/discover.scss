@@ -42,6 +42,36 @@ body.discover, body.error404 {
       padding-left: 0; 
       padding-right: 0;
       color: $lightest;
+      .inner {
+        position: relative;
+        .loader {
+          width: 100%;
+          padding: 2em 0 4em 0; 
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          transition: transform 500ms $ease;
+          transform: translateY(20em);
+          .circle {
+            width: 8em;
+            height: 8em;
+            display: table;
+            margin: auto;
+            @include mediumShadow($lightest);
+            background: {
+              image: url(images/loading1.gif);
+              position: center;
+              repeat: no-repeat;
+              size: cover;
+            }
+          }
+        }
+      }
+      &.querying {
+        .loader {
+          transform: translateY(0);
+        }
+      }
 		}
 	}
   #discover {
@@ -66,6 +96,8 @@ body.discover, body.error404 {
       display: block;
       width: calc(100%/6 - .1em) !important;
       margin: 0 !important;
+      opacity: 0;
+      transition: opacity 1000ms $ease !important;
       .wrap {
         display: table;
         padding: 0;
@@ -83,7 +115,7 @@ body.discover, body.error404 {
           position: relative;
           pointer-events: all;
           .image, .circle {
-            transition: transform 500ms $ease, box-shadow 800ms $ease;
+            transition: transform 500ms $ease, box-shadow 800ms $ease, opacity 500ms $ease;
           }
           .title {
             transition: transform 800ms $ease;
@@ -132,6 +164,9 @@ body.discover, body.error404 {
       }
       &:nth-child(12n+1),&:nth-child(12n+2), &:nth-child(12n+3), &:nth-child(12n+4), &:nth-child(12n+5), &:nth-child(12n+6) {
         transform: translateX(calc(100vw/12));
+      }
+      &.show {
+        opacity: 1;
       }
     }
   }
@@ -196,13 +231,10 @@ body.discover, body.error404 {
       position: absolute;
       top: calc(50% - 2.5em);
       left: 0;
-      pointer-events: none;
       form {
         max-width: $lineWidth;
         input {
           background: $lightest;
-          backface-visibility: hidden;
-          pointer-events: all;
         }
       }
     }

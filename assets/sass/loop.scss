@@ -7,7 +7,7 @@
 	}
 	.cell {
 		float: left;
-		transition: none !important;
+		transition: none;
 		.wrap {
 			// width: 80%;
 			// display: table;
@@ -30,7 +30,7 @@
 			margin: 0;
 			display: block;
 			background-color: $light;
-			transition: box-shadow 800ms $ease, transform 800ms $ease;
+			transition: all 800ms $ease;
 			img {
 				width: 100%;
 				max-width: 100%;
@@ -65,6 +65,8 @@
 		&.no_image {
 			.secondary .title {
 				max-width: 20em;
+				display: table;
+				margin: auto;
 			}
 		}
 		.secondary {
@@ -72,13 +74,18 @@
 			.title {
 				transition: color 500ms $ease;
 				.label {
+					display: table;
+					margin: auto;
 					&.categories {
 						text-transform: uppercase;
 						font-weight: $regular;
 						@include xSmallText;
+						.features {
+							font-weight: $black;
+						}
 					}
 					&.column {
-						@include smallText;
+						@include mediumText;
 					}
 				}
 				h2 {
@@ -92,8 +99,10 @@
 				}
 			}
 			.meta {
-				color: $medium;
+				display: table;
 				padding-top: .5em;
+				margin: auto;
+				color: $medium;
 				@include xSmallText;
 				a {
 					color: $medium;
@@ -110,21 +119,14 @@
 			}
 			.blurb {
 				width: 100%;
-				max-width: 25em;
-				color: $medium;
+				display: table;
+				margin: auto;
 				padding-top: .5em;
+				color: $medium;
 				font-style: italic;
 				@include serifText;
-				@include xSmallText;
-				.more {
-					display: table;
-					margin-top: 1em;
-					text-decoration: none;
-					&::after {
-						content: '>';
-						margin-left: .25em;
-					}
-				}
+				line-height: 1.1em;
+				// @include xSmallText;
 			}
 		}
 		&.hover, &:focus {
@@ -133,7 +135,7 @@
 			}
 			.image {
 				box-shadow: 0 0 5em 0 $gold;
-				transform: scale(1.0025);
+				// transform: scale(1.0025);
 			}
 			svg, object {
 				fill: $medium;
@@ -248,8 +250,25 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-		.cell {
-
+		&.two_col {
+			.cell {
+				width: calc(50% - 1em);
+				&:nth-child(odd) {
+					margin-right: 1em;
+				}
+				&:nth-child(even) {
+					margin-left: 1em;
+				}
+			}
+		}
+		&.four_col {
+			.cell {
+				width: calc(25% - 1em);
+				margin-right: calc(1em + 1em/3);
+				&:nth-child(4n+4) {
+					margin-right: 0;
+				}
+			}
 		}
 		&.five_col {
 			.cell {
@@ -352,8 +371,8 @@
 	.loop {
 		&.four_col {
 			.cell {
-				width: calc(100%/3 - .5em);
-				margin: 0 0 .75em 0;
+				width: calc(100%/2 - .5em);
+				margin-bottom: 1em;
 			}
 		}
 		&.three_col {
@@ -378,14 +397,42 @@
 	.loop {
 		&.two_col {
 			.cell {
-				width: calc(100%/2 - .5em);
-				margin-bottom: 1em;
+				width: 100% !important;
+				max-width: 35em;
+				margin: 0 auto 3em auto !important;
+				.secondary {
+					.title {
+						max-width: 100%;
+						text-align: left;
+						margin: 0;
+					}
+					.meta, .blurb {
+						display: inline;
+						margin-right: 1em;
+					}
+				}
 			}
 		}
 		&.four_col {
-			.cell {
-				width: calc(100%/2 - .5em);
-				margin-bottom: 1em;
+			&.masonry {
+				.cell {
+					width: calc(100%/2 - 1em);
+					margin-bottom: 2em;
+				}
+			}
+			&.grid {
+				.cell {
+					width: calc(50% - 1em);
+					margin-bottom: 2em;
+					&:nth-child(odd) {
+						margin-right: 1em;
+						margin-left: 0;
+					}
+					&:nth-child(even) {
+						margin-left: 1em;
+						margin-right: 0;
+					}
+				}
 			}
 		}
 		&.five_col, &.five_col.grid {

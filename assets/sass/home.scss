@@ -19,11 +19,11 @@ body.home {
 							@include serifText;
 							font-style: italic;
 						}
-						&.title {
+						&.date {
 							color: $dark;
 							@include xxLargeText;
 						}
-						&.date {
+						&.title {
 							color: $medium;
 							font-weight: $regular;
 							text-align: left;
@@ -72,9 +72,20 @@ body.home {
 								font-weight: $black;
 							}
 							.inputs {
-								padding-left: 10%;
+								// padding-left: 10%;
 							}
 						}
+					}
+				}
+			}
+			&#current_issue {
+				.cell {
+					width: calc(50% - 2em);
+					&:nth-child(odd) {
+						margin-right: 2em;
+					}
+					&:nth-child(even) {
+						margin-left: 2em;
 					}
 				}
 			}
@@ -115,15 +126,9 @@ body.home {
 				padding-top: 1em;
 				&#recent_column {
 					padding-bottom: 2em;
-					.column {
-						display: none;
-					}
 				}
 				&#featured_tag {
-					.cell {
-						width: calc(100%/2 - 1em);
-						margin: 0 0 2em 0;
-					}
+					
 				}
 				&#past_issue {
 					article {
