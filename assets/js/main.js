@@ -1,6 +1,6 @@
 jQuery(function($) {
   return $(function() {
-    var $alert, $body, $footer, $header, $headers, $logo, $main, $nav, $popup, $side, $window, $wrapper, assetsUrl, closeAlert, closePopup, fixHeader, fixLoops, fixSide, hoverCell, isMobile, lastSideScroll, loadImage, poppedUp, queryMore, setupArticle, shareWindow, sideScroll, siteUrl, sizeImages, themeUrl, toggleHeight, trackScroll, transport;
+    var $alert, $body, $footer, $header, $headers, $logo, $main, $nav, $popup, $side, $window, $wrapper, assetsUrl, closeAlert, closePopup, fixHeader, fixLoops, fixSide, hoverCell, isMobile, lastSideScroll, lastWeek, loadImage, now, popupObj, queryMore, setupArticle, shareWindow, sideScroll, siteUrl, sizeImages, themeUrl, toggleHeight, trackScroll, transport, week;
     $window = $(window);
     $body = $('body');
     $wrapper = $('#wrapper');
@@ -229,7 +229,7 @@ jQuery(function($) {
       });
     };
     trackScroll = function(e) {
-      var $readable, alertHeight, belowThresh, headerBottom, innerHeight, isBottom, pageBottom, pageEnd, pageHeight, pageTop, scrollHeight, top, winHeight, winScroll;
+      var $readable, alertHeight, belowThresh, headerBottom, innerHeight, isBottom, pageBottom, pageEnd, pageHeight, pageTop, popupObj, scrollHeight, top, winHeight, winScroll;
       $readable = $('.readable');
       if (!$readable.length) {
         return;
@@ -275,30 +275,25 @@ jQuery(function($) {
       }
       belowThresh = pageEnd / 4 - winScroll <= 0;
       if ($popup.length && !$popup.is('.stuck')) {
+        popupObj = JSON.stringify({
+          shown: true,
+          time: new Date().getTime()
+        });
         if (winScroll - $popup.innerHeight() - $header.innerHeight() > pageEnd) {
-          console.log(1);
           $popup.addClass('show stuck').removeClass('fixed');
-          localStorage.setItem('showedPopup', 'true');
+          localStorage.setItem('popup', popupObj);
           $popup.transition({
             y: 0
           }, 0);
         } else if (belowThresh && !$popup.is('.stuck, .fixed')) {
-          console.log(2);
           $popup.addClass('show fixed').removeClass('stuck');
-          localStorage.setItem('showedPopup', 'true');
+          localStorage.setItem('popup', popupObj);
           $popup.transition({
             y: -$popup.innerHeight()
           }, 250);
         }
       }
       return fixSide(e);
-    };
-    poppedUp = function() {
-      if (localStorage.getItem('showedPopup') === 'true') {
-        return true;
-      } else {
-        return false;
-      }
     };
     toggleHeight = function() {
       var $list, $listWrap, $toggle, height;
@@ -544,8 +539,14 @@ jQuery(function($) {
     $('body').on('click', '#popup .close', closePopup);
     $('body').on('hover', '.cell .link_wrap', hoverCell);
     $('body').on('click', 'aside .share a.window', shareWindow);
-    if (localStorage.getItem('showedPopup') === 'true') {
-      $popup.addClass('show stuck');
+    if ($popup.length) {
+      popupObj = JSON.parse(localStorage.getItem('popup'));
+      now = new Date().getTime();
+      week = 60 * 60 * 24 * 7 * 1000;
+      lastWeek = now - week;
+      if (popupObj.shown && popupObj.time > lastWeek) {
+        $popup.addClass('show stuck');
+      }
     }
     if ($body.is('.search')) {
       $('input#searchbox').focus();

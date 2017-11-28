@@ -239,17 +239,18 @@ jQuery ($) ->
 				
 			belowThresh = pageEnd/4 - winScroll <= 0
 			if $popup.length && !$popup.is('.stuck')
+				popupObj = JSON.stringify
+					shown: true,
+					time: new Date().getTime()
 				if winScroll - $popup.innerHeight() - $header.innerHeight() > pageEnd
-					console.log 1
 					$popup.addClass('show stuck').removeClass('fixed')
-					localStorage.setItem('showedPopup', 'true')
+					localStorage.setItem('popup', popupObj)
 					$popup.transition
 						y: 0,
 					, 0
 				else if belowThresh && !$popup.is('.stuck, .fixed')
-					console.log 2
 					$popup.addClass('show fixed').removeClass('stuck')
-					localStorage.setItem('showedPopup', 'true')
+					localStorage.setItem('popup', popupObj)
 					$popup.transition
 						y: -$popup.innerHeight()
 					, 250
@@ -261,12 +262,6 @@ jQuery ($) ->
 				# 	$popup.removeClass('show')
 
 			fixSide(e)
-
-		poppedUp = () ->
-			if localStorage.getItem('showedPopup') == 'true'
-				return true
-			else
-				return false
 
 		toggleHeight = () ->
 			$toggle = $(this)
@@ -491,8 +486,13 @@ jQuery ($) ->
 		$('body').on('hover', '.cell .link_wrap', hoverCell)
 		$('body').on('click', 'aside .share a.window', shareWindow)
 		
-		if localStorage.getItem('showedPopup') == 'true'
-			$popup.addClass('show stuck')
+		if $popup.length
+			popupObj = JSON.parse(localStorage.getItem('popup'))
+			now = new Date().getTime()
+			week = 60*60*24*7*1000
+			lastWeek = now - week
+			if popupObj.shown && popupObj.time > lastWeek
+				$popup.addClass('show stuck')
 
 		if $body.is('.search')
 			$('input#searchbox').focus()
