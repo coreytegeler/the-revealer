@@ -32,9 +32,9 @@ $tagged_amount = 4;
 
 $articles_page = get_page_by_path( 'articles' );
 if( $articles_page ) {
-	$page_url = get_permalink( $articles_page );
+	$articles_url = get_permalink( $articles_page );
 } else {
-	$page_url = get_site_url() . '/articles/';
+	$articles_url = get_site_url() . '/articles/';
 }
 
 // print_r( $current_issue );
@@ -126,8 +126,6 @@ echo '<div class="readable">';
 		}
 		wp_reset_query();
 
-
-
 		$current_issue_args = array_merge( $current_issue_args, array(
 			'posts_per_page' => 15,
 			'post__not_in' => $already_used
@@ -151,11 +149,65 @@ echo '<div class="readable">';
 	echo '<div class="goldbar"><div class="solid"></div></div>';
 
 	echo '<div class="sections one_one">';
-		echo '<section>';
+
+		echo '<section id="featured_tags">';
+			$feat_tags = get_field( 'featured_tags', $current_issue );
+			$feat_tag_i = array_rand( $feat_tags, 1 );
+			$feat_tag = $feat_tags[$feat_tag_i];
+			echo '<h2 class="section_header">Read more articles about ';
+				$feat_tag_url = add_query_arg( 'tag', $feat_tag->slug, $articles_url );
+				echo '<a href="' . $feat_tag_url . '">';
+					echo '<em>' . $feat_tag->name . '</em>.';
+				echo '</a>';
+			echo '</h2>';
+			echo '<div class="loop grid two_col">';
+				$tagged_args = array(
+					'posts_per_page' => $tagged_amount,
+					'post_type' => 'post',
+					'post__not_in' => $already_used,
+				  'tag' => $feat_tag->slug
+				);
+				$tagged_query = new WP_Query( $tagged_args );
+				if ( $tagged_query->have_posts() ) {
+					while ( $tagged_query->have_posts() ) {
+						$tagged_query->the_post();
+						get_template_part( 'parts/article' );
+						$already_used[] = get_the_ID();
+					}
+				}
+				wp_reset_query();
+			echo '</div>';
+		echo '</section>';
+
+		echo '<section id="tags">';
+			echo '<div class="commas tags">';
+				echo '<span>Checkout some popular tags:&nbsp;</span>&nbsp;';
+				$tags = get_tags( array(
+				  'orderby' => 'count',
+				  'order' => 'desc',
+				  'number' => 20,
+				  'hide_empty' => 0
+				) );
+
+				foreach( $tags as $tag ) {
+					echo '<span>';
+						$tag_url = add_query_arg( 'tag', $tag->slug, $articles_url );
+						echo '<a href="' . $tag_url . '" class="tag">' . $tag->name . '</a>';
+					echo '</span>';
+				}
+				$tag_page = get_page_by_path( 'tags' );
+				$tag_page_url = get_permalink( $tag_page->ID );
+				echo '<span class="more">';
+					echo '<a href="' . $tag_page_url . '">and more</a>.';
+				echo '</span>';
+			echo '</div>';
+		echo '</section>';
+
+		echo '<section id="featured_columns">';
 			$feat_cols = get_field( 'featured_columns', $current_issue );
 			$feat_col_i = array_rand( $feat_cols, 1 );
 			$feat_col = $feat_cols[$feat_col_i];
-			$col_args = array(
+			$feat_col_args = array(
 				'post_type' => 'post',
 				'orderby' => 'date',
 			  'order' => 'asc',
@@ -169,16 +221,16 @@ echo '<div class="readable">';
 					)
 			  )
 			);
-			$col_query = new WP_Query( $col_args );
-			if ( $col_query->have_posts() ) {
-				$feat_col = get_the_terms( $col_query->posts[0], 'columns' )[0];
+			$feat_col_query = new WP_Query( $feat_col_args );
+			if ( $feat_col_query->have_posts() ) {
+				$feat_col = get_the_terms( $feat_col_query->posts[0], 'columns' )[0];
 				$feat_col_name = $feat_col->name;
 				$feat_col_slug = $feat_col->slug;
 				$feat_col_writer = get_field( 'writer', $feat_col );
 				$feat_col_url = add_query_arg( 'column', $feat_col_slug, $page_url );
 
 				echo '<h2 class="section_header">Another recent article from, ';
-					echo '<a href="' . $col_url . '">';
+					echo '<a href="' . $feat_col_url . '">';
 							echo '<em>' . $feat_col_name . '</em>';
 						echo '</a>';
 					echo ', a column by ';
@@ -187,17 +239,18 @@ echo '<div class="readable">';
 						echo '<em>' . $feat_col_writer . '</em>';
 					echo '</a>';
 				echo '.</h2>';
-				echo '<div class="loop articles one_col masonry" id="recent_column">';
-					while ( $col_query->have_posts() ) {
-						$col_query->the_post();
+				echo '<div class="loop articles one_col masonry">';
+					while ( $feat_col_query->have_posts() ) {
+						$feat_col_query->the_post();
 						get_template_part( 'parts/article' );
 						$already_used[] = get_the_ID();
 					}
 				echo '</div>';
 			}
 			wp_reset_query();
+		echo '</section>';
 
-
+		echo '<section id="columns">';
 			$columns_page = get_page_by_path( 'columns' );
 			if( $columns_page ) {
 				$columns_url = get_permalink( $columns_page );
@@ -230,35 +283,6 @@ echo '<div class="readable">';
 			}
 		echo '</section>';
 
-		echo '<section>';
-
-			$feat_tags = get_field( 'featured_tags', $current_issue );
-			$feat_tag_i = array_rand( $feat_tags, 1 );
-			$feat_tag = $feat_tags[$feat_tag_i];
-			echo '<h2 class="section_header">Some more articles about ';
-				echo '<a href="' . $feat_tag->slug . '">';
-					echo '<em>' . $feat_tag->name . '</em>.';
-				echo '</a>';
-			echo '</h2>';
-			echo '<div class="loop articles two_col grid" id="featured_tag">';
-				$tagged_args = array(
-					'posts_per_page' => $tagged_amount,
-					'post_type' => 'post',
-					'post__not_in' => $already_used,
-				  'tag' => $feat_tag->slug
-				);
-				$tagged_query = new WP_Query( $tagged_args );
-				if ( $tagged_query->have_posts() ) {
-					while ( $tagged_query->have_posts() ) {
-						$tagged_query->the_post();
-						get_template_part( 'parts/article' );
-						$already_used[] = get_the_ID();
-					}
-				}
-				wp_reset_query();
-			echo '</div>';
-		echo '</section>';
-
 	echo '</div>';
 
 	$past_issues = get_terms( array(
@@ -286,9 +310,9 @@ echo '<div class="readable">';
 	) );
 	$past_issue_query = new WP_Query( $past_issue_args );
 	if ( $past_issue_query->have_posts() ) {
-		echo '<section>';
+		echo '<section id="past_issue">';
 			echo '<h2 class="section_header">Catch up on our last issue</h2>';
-			echo '<div class="loop articles five_col grid" id="past_issue">';
+			echo '<div class="loop articles five_col grid">';
 				while ( $past_issue_query->have_posts() ) {
 					$past_issue_query->the_post();
 					$title = $post->post_title;

@@ -1,9 +1,9 @@
 <?php
 global $post;
-	
-$count = 17;
-if( is_404() ) {
-	$count = 30;
+
+$count = 24;
+if( $post->post_name == 'discover' ) {
+	$count = 48;
 }
 $rand_post_args = array(
 	'post_type' => 'post',

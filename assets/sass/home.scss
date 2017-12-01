@@ -124,16 +124,17 @@ body.home {
 			padding: 2em 0;
 			.loop {
 				padding-top: 1em;
-				&#recent_column {
-					padding-bottom: 2em;
+			}
+			&#tags .commas span {
+				&:first-child::after {
+					display: none;
 				}
-				&#featured_tag {
-					
-				}
-				&#past_issue {
-					article {
-						h4 {
-							@include serifText;
+				&:last-child {
+					a {
+						color: $medium;
+						border-bottom: 0;
+						&:hover {
+							border-bottom: 1px solid $gold;
 						}
 					}
 				}

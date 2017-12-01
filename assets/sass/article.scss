@@ -72,8 +72,8 @@
 						display: table;
 						margin: auto;
 						padding: .5em 0;
+						color: $light;
 						.date {
-							opacity: .75;
 							@include xSmallText;
 						}
 						// .row {
@@ -207,21 +207,46 @@
 					max-width: $maxWidth;
 					display: block;
 					margin: auto;
-					* {
-						color: $dark !important;
-					}
 					.excerpt {
 						padding: 1em 0;
 						text-align: center;
 						margin: auto;
-						opacity: .5;
+						color: $medium;
 						h2 {
 							@include serifText;
+						}
+					}
+					#alert {
+						width: 100%;
+						max-width: $lineWidth;
+						display: table;
+						margin: auto;
+						border: 1px solid $lighter;
+						position: relative;
+						overflow: hidden;
+						* {
+							color: $light;
+							border-bottom-color: $lighter;
+						}
+						.message {
+							width: 100%;
+							text-align: center;
+							line-height: 1em;
+							.archive_alert {
+								padding: .5em;
+								@include xSmallText;
+								p {
+									margin: 0;
+								}	
+							}
 						}
 					}
 					.content {
 						padding: 2em 0;
 						opacity: 0;
+						* {
+							color: $dark !important;
+						}
 						img {
 							opacity: 0;
 						}
@@ -276,7 +301,7 @@
 								width: 80% !important;
 								display: table;
 								margin: 2em auto;
-								background-color: $light;
+								background-color: $lighter;
 								a {
 									width: 100%;
 									height: 100%;

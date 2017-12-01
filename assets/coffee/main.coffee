@@ -254,12 +254,6 @@ jQuery ($) ->
 					$popup.transition
 						y: -$popup.innerHeight()
 					, 250
-				# else if poppedUp()
-				# 	console.log 3
-				# 	$popup.addClass('show stuck')
-				# else if !$popup.is('.fixed')
-				# 	console.log 4
-				# 	$popup.removeClass('show')
 
 			fixSide(e)
 
@@ -414,7 +408,7 @@ jQuery ($) ->
 						id = $cell.attr('data-id')
 						discovered.push(id)
 				i = 0
-				while i < 15
+				while i < 50
 					$cell = $('<div class="cell discover thumb empty"><div class="wrap"><div class="circle"></div></div></div>')
 					$loop.append($cell)
 					i++

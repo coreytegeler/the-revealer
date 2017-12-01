@@ -9,6 +9,8 @@ header {
 	z-index: 400;
 	transform: 0ms !important;
 	background: rgba($lightest,.98);
+	font-family: Clarendon;
+	text-transform: lowercase;
   &.mobile {
   	display: none;
   }
@@ -62,6 +64,7 @@ header {
     .tagline {
     	color: $medium;
     	flex: 1;
+    	text-transform: lowercase;
     }
     .navigation {
     	width: 100%;
@@ -78,6 +81,7 @@ header {
 				    text-decoration: none;
 				    font-style: normal;
 				    transition: color 500ms $ease, opacity 500ms $ease;
+				    text-transform: lowercase;
 				    // color: $lightest;
 				    &:hover {
 				    	color: $medium;
@@ -166,51 +170,4 @@ header {
 			}
 		}
 	}
-}
-#alert {
-	width: 100%;
-	height: auto;
-	background: $gold;
-	position: relative;
-	overflow: hidden;
-	display: flex;
-	align-items: center;
-	.message {
-		width: calc(100% - 3.5em);
-		padding: .25em 0 .25em 2em;
-		text-align: center;
-		float: left;
-		line-height: 1em;
-		.archive_alert {
-			@include xSmallText;
-			p {
-				margin: 0;
-			}	
-		}
-	}
-	.close {
-		width: 1.5em;
-		height: 1.5em;
-		float: left;
-		display: flex;
-		.circle {
-			width: .75em;
-			height: .75em;
-			margin: auto;
-			background: transparent;
-			svg {
-				transition: fill 500ms $ease
-			}
-		}
-		&:hover {
-			cursor: pointer;
-			.circle svg {
-				fill: $dark;
-			}
-		}
-	}
-	// position: fixed;
-	// left: 1em;
-	// top: 0;
-	z-index: 1200;
 }

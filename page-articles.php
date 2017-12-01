@@ -3,7 +3,7 @@ get_header();
 $cat_param = $_GET['category'];
 $year_param = $_GET['y'];
 $column_param = $_GET['column'];
-// $paged = $_GET['page'];
+$tag_param = $_GET['tag'];
 $paged = get_query_var( 'paged' );
 if( !$paged ) {
 	$paged = 1;
@@ -27,6 +27,9 @@ if( sizeof( $column_param ) ) {
 		'field' => 'slug',
 	  'terms' => $column_param,
   );
+}
+if( sizeof( $tag_param ) ) {
+	$articles_args['tag'] = $tag_param;
 }
 
 if( sizeof( $tax_query ) ) {

@@ -165,6 +165,19 @@ echo '<article class="post readable">';
 			echo '</div>';
 		echo '</div>';
 
+		if( is_archived() && $archive_alert = get_field( 'archive_alert', 'option' ) ) {
+			echo '<div id="alert" role="alert">';
+				echo '<div class="message">';
+					echo  '<div class="archive_alert">' . $archive_alert . '</div>';
+				echo '</div>';
+				// echo '<div class="close">';
+				// 	$x_svg_url = get_template_directory_uri() . '/assets/images/x.svg';
+				// 	$x_svg = file_get_contents( $x_svg_url );
+				// 	echo '<div class="circle">' . $x_svg . '</div>';
+				// echo '</div>';
+			echo '</div>';
+		}
+		
 		echo '<div class="content">';
 			echo $content;
 		echo '</div>';

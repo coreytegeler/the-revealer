@@ -8,11 +8,6 @@
 	.cell {
 		float: left;
 		transition: none;
-		.wrap {
-			// width: 80%;
-			// display: table;
-			// margin: 0 0 0 auto;
-		}
 		a.link_wrap {
 			text-decoration: none;
 	    display: block;
@@ -29,8 +24,8 @@
 			width: 100%;
 			margin: 0;
 			display: block;
-			background-color: $light;
-			transition: all 800ms $ease;
+			background-color: $lighter;
+			transition: background-color 800ms $ease, opacity 800ms $ease;
 			img {
 				width: 100%;
 				max-width: 100%;
@@ -41,7 +36,7 @@
 				opacity: 0;
 			}
 			&.loaded {
-				background-color: rgba($light,0);
+				background-color: $lighter;
 				img {
 					opacity: 1;
 				}
@@ -188,36 +183,53 @@
 	}
 	&.three_col {
 		.cell {
-			width: calc(100%/3 - .5em);
-			margin: 0 0 .75em 0;
+			width: calc(100%/3 - (3em - 3em/3));
+			margin: 0 0 3em 0;
 		}
 	}
 	&.four_col {
 		.cell {
-			width: calc(100%/4 - .75em);
+			width: calc(100%/4 - (1em - 1em/4));
 			margin: 0 0 1em 0;
 		}
 	}
 	&.five_col {
 		.cell {
-			width: calc(100%/5 - 1em);
-			margin-bottom: 1em;
+			width: calc(100%/5 - (1em - 1em/5));
+			margin: 0 0 1em 0;
 		}
 	}
 	&.list {
 		.cell {
+			text-align: left;
 			width: 100%;
-			margin: 0 0 2em 0;
-			.wrap {
-				.primary {
-					width: 30%;
-					float: left;
+			@include serifText;
+			.title {
+				.categories {
+					margin: 0;
 				}
-				.secondary {
-					width: calc(70% - 1em);
-					padding: 0 0 0 1em;
-					float: left;
+			}
+			.meta {
+				margin: 0;
+			}
+			.blurb {
+				margin-bottom: 2em;
+			}
+			a.title {
+				display: inline;
+				&:hover {
+					opacity: .5;
 				}
+			}
+			.date {
+				display: inline;
+				color: $light;
+				margin-right: .5em; 
+			}
+			.writer {
+				display: inline;
+				color: $light;
+				margin-left: .25em; 
 			}
 		}
 	}
@@ -435,13 +447,15 @@
 				}
 			}
 		}
-		&.five_col, &.five_col.grid {
-			.cell {
-				width: calc(100%/3 - 1em);
-		    margin-right: calc(1em + 1em/3) !important;
-				margin-bottom: 1.5em;
-				&:nth-child(3n+3) {
-					margin-right: 0 !important;
+		&.five_col {
+			&.grid {
+				.cell {
+					width: calc(100%/3 - 1em);
+			    margin-right: calc(1em + 1em/3) !important;
+					margin-bottom: 1.5em;
+					&:nth-child(3n+3) {
+						margin-right: 0 !important;
+					}
 				}
 			}
 		}

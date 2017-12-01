@@ -1,30 +1,14 @@
 <?php
 $title = $post->post_title;
 $article_id = $post->ID;
-$thumb_id = get_post_thumbnail_id();
-$thumb = wp_get_attachment_image_src( $thumb_id, 'thumb' );
-$thumb_url = $thumb[0];
-$thumb_width = $thumb[1];
-$thumb_height = $thumb[2];
 $permalink = get_the_permalink();
 $date = get_the_date();
 $contributors = get_contributors_list( true, true );
 $i = $wp_query->current_post;
-$missing_url = get_template_directory_uri() . '/assets/images/missing.svg';
-$missing_svg = file_get_contents( $missing_url );
 $column = get_the_terms( $post, 'columns' )[0];
 $categories = get_the_category();
-echo '<article class="cell ' . ( $thumb ? 'has_image' : 'no_image') . '" role="article" style="' . $style . '" data-id="' . $article_id . '">';
+echo '<article class="cell" role="article" style="' . $style . '" data-id="' . $article_id . '">';
 	echo '<div class="wrap">';
-		if ( $thumb ) {
-			echo '<div class="primary">';
-				echo '<a class="link_wrap" href="' . $permalink . '">';
-					echo '<div class="image load">';
-						echo '<img data-src="'.$thumb_url.'" data-width="'.$thumb_width.'" data-height="'.$thumb_height.'"/>';
-					echo '</div>';
-				echo '</a>';
-			echo '</div>';
-		}
 		echo '<div class="secondary">';
 			echo '<a class="link_wrap" href="' . $permalink . '">';
 				echo '<div class="title">';

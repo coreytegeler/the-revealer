@@ -20,73 +20,49 @@
 			margin: .25em 0 1em 0;
 			flex: 1;
 			.filter {
+				padding: 0 0 2em 0;
+				h4 {
+					font-weight: $black;
+					display: inline;
+					margin-right: .5em;
+					&::after {
+						content: ' ';
+					}
+				}
 				a {
 					@include xSmallText;
 					text-decoration: none;
 					color: $medium;
 				}
-				.toggle {
+				.label {
 					width: 100%;
 					padding: 0;
 					user-select: none;
-					font-weight: $regular;
-					text-transform: uppercase;
+					font-weight: $black;
+					.more {
+						font-weight: $regular;
+					}
 				}
 			}
 			.commas {
-				opacity: 0;
-				overflow: hidden;
 				color: $medium;
-				transition: height 300ms ease, opacity 100ms 30ms ease;
-				padding-bottom: 1em;
-				&.show {
-					opacity: 1;
-				}
-			}
-		}
-		.commas {
-			display: flex;
-			flex-wrap: wrap;
-			h4 {
-				font-weight: $black;
-				display: inline;
-				margin-right: .5em;
-				&::after {
-					content: ' ';
-				}
-			}
-			span {
-				display: inline-block;
-				color: $medium;
-				a {
-					display: inline;
-					color: $dark;
-					&:hover {
-						color: $medium;
-						border-bottom: 1px solid $gold;
-					}
-				}
-				&::after {
-					display: inline;
-					content: ',';
-					margin-right: .3em;
-				}
-				&:last-of-type::after, &.label::after {
-					display: none;
-				}
-				&.empty {
-					opacity: .5;
-				}
-				&.selected {
-					a {
-						border-bottom: 1px solid $dark;
-						&:hover {
-							border-bottom-color: $medium;
+				span {
+					@include serifText;
+					&.selected {
+						a {
+							border-bottom: 1px solid $gold;
+							&:hover {
+								border-bottom-color: transparent;
+							}
 						}
 					}
+					&.more {
+						font-style: italic;
+					}
 				}
 			}
 		}
+		
 		&.fixed {
 			position: fixed;
 		}

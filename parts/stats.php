@@ -13,6 +13,9 @@ if( $first_post = $query->posts[0] ) {
 	$age = $date_diff->y;
 }
 echo '<div class="stats">';
+	if( is_404() ) {
+		echo '<h1 class="glisten bounce">Oops,&nbsp;this&nbsp;page&nbsp;is&nbsp;lost.</h1>';
+	}
 	echo '<h1 class="glisten bounce">Explore&nbsp;' . $age . '&nbsp;years&nbsp;and&nbsp;' . $article_count . '&nbsp;articles&nbsp;of</h1>';
 	echo '<h1 class="title glisten bounce">The&nbsp;Revealer</h1>';
 echo '</div>';

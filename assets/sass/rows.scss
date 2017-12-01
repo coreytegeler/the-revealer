@@ -5,22 +5,70 @@
 			a {
 				text-decoration: none;
 			}
-			h1.title {
-				@include sansSerifText;
-				@include xLargeText;
-				font-weight: $regular;
-				em {
-					font-family: $serif;
+			.text {
+				h1 {
+					@include sansSerifText;
+					@include xLargeText;
+					font-weight: $regular;
+					text-align: center;
+					em {
+						font-family: $serif;
 
+					}
+				}
+				h2 {
+					color: $medium;
+					font-weight: $regular;
+					z-index: 100;
+					@include serifText;
+					text-align: center;
 				}
 			}
-			h2 {
-				color: $medium;
-				font-weight: $regular;
-				text-align: center;
-				position: relative;
-				z-index: 100;
-				@include serifText;
+		}
+	}
+}
+.sections {
+	width: 100%;
+	display: flex;
+	flex-direction: rows;
+	flex-wrap: wrap;
+	section {
+		width: 100%;
+		float: left;
+		display: table;
+		&:nth-of-type(odd) {
+			padding-right: 2em;
+		}
+		&:nth-of-type(even) {
+			padding-left: 2em;
+		}
+	}
+	&.one_one {
+		section {
+			width: calc(50% - 2em);
+		}
+	}
+	&.one_two {
+		section:first-child {
+			width: calc(33.333% - 2em);
+		}
+		section:last-child {
+			width: calc(66.666% - 2em);
+		}
+	}
+	&.two_one {
+		section:first-child {
+			width: calc(66.666% - 2em);
+		}
+		section:last-child {
+			width: calc(33.333% - 2em);
+		}
+	}
+	@include medium {
+		&.one_two {
+			section {
+				width: 100% !important;
+				padding-bottom: 1em;
 			}
 		}
 	}

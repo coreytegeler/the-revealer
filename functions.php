@@ -54,15 +54,15 @@ function get_read_time() {
   return $read_time;
 }
 
-function get_contributors_list() {
+function get_contributors_list( $writ = false, $cont = false ) {
   $contributors = [];
-  if( have_rows( 'writers' ) ) {
+  if( $writ && have_rows( 'writers' ) ) {
     while( have_rows( 'writers') ) : the_row();
       $contributors[] = get_sub_field( 'name' );
     endwhile;
   }
 
-  if( have_rows( 'contributors' ) ) {
+  if( $cont && have_rows( 'contributors' ) ) {
     while( have_rows( 'contributors') ) : the_row();
       $contributors[] = get_sub_field( 'name' );
     endwhile;
@@ -91,10 +91,15 @@ function urlify( $url ) {
 }
 
 function is_archived() {
-  $this_date = get_the_date();
-  $archive_date = new DateTime('08/01/2017');
-  if( is_single() && strtotime( $this_date ) < strtotime( '08/01/2017' ) ) {
-    return true;
+  global $post;
+  if( $post->post_type == 'post' ) {
+    $this_date = get_the_date();
+    $archive_date = new DateTime('08/01/2017');
+    if( is_single() && strtotime( $this_date ) < strtotime( '08/01/2017' ) ) {
+      return true;
+    } else {
+      return false;
+    }
   } else {
     return false;
   }

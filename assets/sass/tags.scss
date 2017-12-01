@@ -1,0 +1,13 @@
+#tags {
+	.commas {
+		@include largeText;
+		line-height: 1.5em;
+		span {
+			@include serifText;
+			font-style: italic;
+			a {
+				border-bottom: 1px solid $gold;
+			}
+		}
+	}
+}

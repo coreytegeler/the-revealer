@@ -15,7 +15,7 @@ $thumb_id = get_post_thumbnail_id( $id );
 $thumb = wp_get_attachment_image_src( $thumb_id, 'thumb' );
 $permalink = ( $type == 'post' ? get_permalink( $id ) : get_category_link( $id ) );
 
-echo '<div class="cell discover ' . $type . ( $thumb[0] ? ' thumb' : '' ) . '" data-id="' . $id . '">';
+echo '<div class="cell discover ' . $type . ( $thumb[0] ? ' thumb' : ' show' ) . '" data-id="' . $id . '">';
 	echo '<div class="wrap">';
 		echo '<a href="' . $permalink . '">';
 			if( $thumb[0] ) {

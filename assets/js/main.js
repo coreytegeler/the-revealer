@@ -454,7 +454,7 @@ jQuery(function($) {
           });
         }
         i = 0;
-        while (i < 15) {
+        while (i < 50) {
           $cell = $('<div class="cell discover thumb empty"><div class="wrap"><div class="circle"></div></div></div>');
           $loop.append($cell);
           i++;
