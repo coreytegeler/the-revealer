@@ -58,10 +58,9 @@ echo '<div class="readable">';
 						echo '<h2 class="span">' . $begin . '&mdash;' . $end . '</h2>';
 					echo '</div>';
 				echo '</section>';
-
-				echo '<section>';
+				echo '<section class="articles toggler">';
 					if ( $posts_query->have_posts() ) {
-						echo '<div class="loop posts list">';
+						echo '<div class="loop posts list inner">';
 							while ( $posts_query->have_posts() ) {
 								$posts_query->the_post();
 								$thumb_id = get_post_thumbnail_id();
@@ -78,6 +77,12 @@ echo '<div class="readable">';
 									echo '</h3>';
 								echo '</article>';
 							}
+						echo '</div>';
+						echo '<div class="toggle">';
+							echo '<div class="circle">';
+								$up_svg = get_template_directory_uri() . '/assets/images/up.svg';
+								echo file_get_contents( $up_svg );
+							echo '</div>';
 						echo '</div>';
 					}
 				echo '</section>';

@@ -11,24 +11,60 @@ body.about {
 		main {
 			ul.parent {
 				width: 100%;
-				display: table;
 				max-width: 100%;
-				li.cell {
-					width: calc(50% - 1em);
-					float: left;
-					margin-bottom: 2em;
+				display: block;
+				padding: 2em 0 0 0;
+				margin: 0;
+				li {
+					list-style: none;
+					&.cell {
+						width: calc(50% - 1em);
+						max-width: $lineWidth;
+						margin: 0 0 2em 0;
+						padding: 0;
+						float: left;
+					}
+				}
+				h2 {
+					@include serifText;
+					width: 100%;
+					margin: 0 0 .5em 0;
+			    display: block;
+			    text-align: center;
+			  }
+			  h2.title {
+					@include revealerText;
+					text-align: center;
 				}
 				ul.child {
+					display: block;
+					padding: 0 0 1.5em 0;
+					margin: auto;
 					li {
 						width: 100%;
+						padding: 0 0 1em 0;
 						.body {
 							@include serifText;
 							@include smallText;
+							strong {
+								@include revealerText;
+							}
 						}
-						strong {
+						.name {
+							@include serifText;
 							@include smallText;
-							@include sansSerifText;
 							font-weight: $black;
+							em {
+								font-style: normal;
+							}
+						}
+						p {
+							display: inline;
+							font-size: inherit; 
+							line-height: inherit;	
+						}
+						a {
+							display: inline;
 						}
 						span {
 							&.years {
@@ -45,7 +81,11 @@ body.about {
 					}
 				}
 				.links {
-					margin-top: .25em;
+					margin-top: .5em;
+					a {
+						text-decoration: none;
+						@include xSmallText;
+					}
 				}
 				&.about {
 					max-width: $maxWidth;
@@ -53,11 +93,36 @@ body.about {
 					margin: auto;
 					li {
 						.body {
-							@include mediumText;
+							h2 {
+								text-align: left;
+							}
 						}
 					}
 				}
 			}
+		}
+	}
+	@include medium {
+		#wrapper main ul.parent {
+			height: auto !important;
+			li.cell {
+				width: 100%;
+				display: table;
+				margin: auto;
+				position: static !important;
+				left: 0 !important;
+				top: 0 !important;
+				float: none;
+				ul.child {
+					display: block;
+				}
+			}
+		}
+	}
+	@include small {
+		#wrapper main ul.parent {
+			display: block;
+			margin: auto !important;
 		}
 	}
 }

@@ -20,7 +20,8 @@ var paths = {
 var dest = {
   css: './',
   js: './assets/js/',
-  images: './assets/images/'
+  images: './assets/images/',
+  webfonts: './assets/webfonts/'
 }
 
 gulp.task('compile-sass', function() {
@@ -28,10 +29,11 @@ gulp.task('compile-sass', function() {
     use: [rupture(), autoprefixer()],
     compress: argv.prod ? true : false
   };
-  return gulp.src('./assets/sass/style.scss')
+  return gulp.src(['./assets/sass/admin.scss', './assets/sass/style.scss'])
     .pipe(plumber())
     .pipe(sass(options))
     .pipe(replace('images/', dest.images))
+    .pipe(replace('webfonts/', dest.webfonts))
     .pipe(autoprefixer({
       browsers: ['last 2 versions'],
       cascade: false
@@ -44,17 +46,8 @@ gulp.task('compile-sass', function() {
 });
 
 gulp.task('compile-coffee', function() {
-  gulp.src('./assets/coffee/carousel.coffee')
+  gulp.src(['./assets/coffee/carousel.coffee', './assets/coffee/main.coffee'])
     .pipe(coffee({bare: true}))
-    .pipe(gulpif(argv.prod, rename('carousel.min.js')))
-    .pipe(gulp.dest(dest.js))
-  .on('end', function() {
-    log('Coffee done');
-    if (argv.prod) log('JS minified');
-  });
-  return gulp.src('./assets/coffee/main.coffee')
-    .pipe(coffee({bare: true}))
-    .pipe(gulpif(argv.prod, rename('main.min.js')))
     .pipe(gulp.dest(dest.js))
   .on('end', function() {
     log('Coffee done');

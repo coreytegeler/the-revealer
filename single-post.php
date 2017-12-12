@@ -199,9 +199,5 @@ echo '<div class="carousel" id="carousel">';
 		echo '</div>';
 	echo '</div>';
 echo '</div>';
-echo '<div class="transport top circle">';
-	$up_svg = get_template_directory_uri() . '/assets/images/up.svg';
-	echo file_get_contents( $up_svg );
-echo '</div>';
 get_footer();
 ?>

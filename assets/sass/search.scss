@@ -1,4 +1,7 @@
-body.search, body.tag {
+body.search, body.tag, body.error404 {
+	#wrapper main {
+		padding-bottom: 0;
+	}
 	.search_header {
 		width: 100%;
 		margin: auto;
@@ -19,13 +22,22 @@ body.search, body.tag {
 		#searchform {
 			width: 100%;
 			max-width: 40em;
-			padding: 3em 0 2em 0;
+			padding: 3em 0 5em 0;
 			margin: auto;
 		}
 	}
 	.loop {
 		margin-top: 2em;
 	}
+	.readable {
+		.goldbar {
+			margin-top: 4em;
+			position: relative;
+		}
+	}
+}
+#tags {
+	opacity: .75;
 }
 #searchform {
 	width: calc(100% - 4em);
@@ -46,6 +58,7 @@ body.search, body.tag {
 				left: -99999%;
 			}
 			&::before {
+				display: none;
 	    	width: 100%;
 				height: 100%;
 				position: absolute;
@@ -54,18 +67,11 @@ body.search, body.tag {
 				margin: 0;
 				border-radius: 1em;
 	    	content: '';
-	    	@include xLargeText;
 	    	display: inline-block;
-	    	box-shadow: 0 0 100px 55px $gold;
-	    	transition: all 500ms $ease;
+	    	@include xLargeText;
+	    	// @include xLargeShadow($gold);
 	    	z-index: 0;
 	    }
-	    &:hover {
-	    	&::before {
-	    		transform: scale(1.015);
-	    		transition: all 700ms $ease;
-	    	}		
-    	}
 		}
 		input {
 			&#searchbox {
@@ -86,16 +92,17 @@ body.search, body.tag {
 				transition: all 500ms $ease;
 				backface-visibility: hidden;
         pointer-events: all;
+        @include xSmallShadow($gold);
 				&:focus, &:hover {
 	      	outline: none;
-	      	transform: scale(1.015);
-	      	// box-shadow: 0 0 500px 5px $gold;
-	      	transition: all 700ms $ease;
 	      }
 			}
 		}
 	}
-	@include xSmall {
-		
+}
+@include small {
+	#searchform {
+		width: calc(100% - 1em);
+		padding: 0 .5em;
 	}
 }

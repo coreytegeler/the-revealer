@@ -1,6 +1,13 @@
 <?php
 global $post;
 global $pagename;
+
+echo '<div class="transport top circle">';
+	$up_svg = get_template_directory_uri() . '/assets/images/up.svg';
+	echo file_get_contents( $up_svg );
+echo '</div>';
+
+
 echo '</main>';
 if( is_single() ) {
 	get_template_part( 'parts/popup' );
@@ -14,9 +21,9 @@ if( $post->post_name != 'discover' ) {
 					echo '<div class="wrap">';
 						$discover_url = get_permalink( get_page_by_path( 'discover' ) );
 						echo '<a href="' . $discover_url . '">';
-							echo '<h2 class="glisten bounce">';
-								echo 'Discover&nbsp;&nbsp;more';
-							echo '</h2>';
+							echo '<h3 class="glisten bounce">';
+								echo 'discover&nbsp;more';
+							echo '</h3>';
 						echo '</a>';
 					echo '</div>';
 					// echo '<div class="circle"></div>';

@@ -5,20 +5,12 @@ body, html {
 		}
 	}
 	@include medium {
-		#wrapper {
-			&.split {
-				main {
-					width: calc(100% - #{$sideWidth * .75} - 2em);
-					padding-left: #{$sideWidth * .75};
-				}
-			}
-		}
 		#isMobile {
 			content: 'medium';
 		}
 	}
 	@include small {
-		#wrapper, #wrapper.split, #wrapper.full {
+		#wrapper {
 			display: block;
 			main {
 				width: calc(100% - 2em);
@@ -37,10 +29,6 @@ body, html {
 							}
 						}
 					}
-				}
-				.nested {
-					display: table;
-					margin: auto !important;
 				}
 				.split_box {
 					section {
@@ -95,6 +83,10 @@ body, html {
 		}
 		.section_header {
 			@include xLargeText;
+		}
+		.transport.top {
+			right: 1em;
+			bottom: 1em;
 		}
 		#isMobile {
 			content: 'small';

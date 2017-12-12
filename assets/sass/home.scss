@@ -2,6 +2,7 @@ body.home {
 	main {
 		.goldbar {
 			position: relative;
+			margin: 3em 0;
 		}
 		.loop {
 			.cell {
@@ -10,28 +11,20 @@ body.home {
 					.overlay {
 						width: 100%;
 					}
-					h1 {
+					.title {
+						color: $dark;
+						font-weight: $regular;
+						text-align: left;
 						position: relative;
 						z-index: 100;
-						font-weight: $black;
-						&.lead {
-							color: $medium;
-							@include serifText;
-							font-style: italic;
-						}
-						&.date {
-							color: $dark;
-							@include xxLargeText;
-						}
-						&.title {
-							color: $medium;
-							font-weight: $regular;
-							text-align: left;
-							position: relative;
-							z-index: 100;
-							@include serifText;
-							font-style: italic;
-						}
+						padding: 0 0 .15em 0;
+						@include serifText;
+						@include xxLargeText;
+					}
+					.lead, .date {
+						color: $medium;
+						@include serifText;
+						font-style: italic;
 					}
 					.loop {
 						padding-top: 1em;
@@ -45,6 +38,24 @@ body.home {
 							}
 						}
 					}
+					.newsletter {
+						form {
+							width: 100%;
+							max-width: 25em;
+							label {
+								width: 100%;
+								max-width: 15em;
+								margin: -.5em 0 .5em 0;
+								display: table;
+								@include revealerText;
+								@include largeText;
+								font-weight: $regular;
+							}
+							.inputs {
+								// padding-left: 10%;
+							}
+						}
+					}
 					.circle {
 						width: calc(5vw + 2em);
 						height: calc(5vw + 2em);
@@ -54,27 +65,6 @@ body.home {
 						z-index: 0;
 						background: $gold;
 						border-radius: 50%;
-					}
-				}
-				&#newsletter {
-					.newsletter {
-						padding: 0;
-						form {
-							width: 100%;
-							max-width: 25em;
-							label {
-								width: 100%;
-								max-width: 15em;
-								margin: 0 0 .5em 0;
-								display: table;
-								@include serifText;
-								@include largeText;
-								font-weight: $black;
-							}
-							.inputs {
-								// padding-left: 10%;
-							}
-						}
 					}
 				}
 			}
@@ -125,17 +115,10 @@ body.home {
 			.loop {
 				padding-top: 1em;
 			}
-			&#tags .commas span {
-				&:first-child::after {
-					display: none;
-				}
-				&:last-child {
-					a {
-						color: $medium;
-						border-bottom: 0;
-						&:hover {
-							border-bottom: 1px solid $gold;
-						}
+			&#featured_columns {
+				.loop {
+					article {
+						margin-bottom: 0;
 					}
 				}
 			}

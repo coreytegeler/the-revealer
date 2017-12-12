@@ -44,14 +44,15 @@ body.discover, body.error404 {
       color: $lightest;
       .inner {
         position: relative;
+        padding: 0 0 5em 0;
         .loader {
           width: 100%;
           padding: 2em 0 4em 0; 
           position: absolute;
           left: 0;
           bottom: 0;
-          transition: transform 500ms $ease;
-          transform: translateY(20em);
+          transition: transform 800ms $ease;
+          transform: translateY(10em);
           .circle {
             width: 8em;
             height: 8em;
@@ -76,7 +77,7 @@ body.discover, body.error404 {
 	}
   #discover {
     z-index: 300;
-    min-height: 100vh;
+    // min-height: 100vh;
   }
 }
 #discover {
@@ -149,12 +150,6 @@ body.discover, body.error404 {
             // background-color: $gold; 
           }
         }
-        .title {
-          font-family: 'Clarendon';
-          text-transform: lowercase;
-          position: relative;
-          z-index: 10;
-        }
         .circle {
           width: 5em;
           height: 5em;
@@ -170,16 +165,6 @@ body.discover, body.error404 {
       }
     }
   }
-  h1, h2, h3 {
-		span {
-  		font-style: normal;
-  		opacity: 0.5;
-  		transform: translateY(0);
-  		display: table;
-  		float: left;
-  		margin: 0;
-  	}
-	}
   .inner {
     width: 100%;
   	// width: calc(100% - 4em);
@@ -205,10 +190,9 @@ body.discover, body.error404 {
         text-decoration: none;
         display: table;
       }
-      h1, h2 {
-        @include serifText;
+      h3 {
+        @include revealerText;
         span {
-          font-style: italic;
           font-weight: $regular;
         }
       }
@@ -241,5 +225,17 @@ body.discover, body.error404 {
   }
 }
 @include small {
-
+  #discover {
+    .loop .cell .wrap {
+      a, .image, .circle {
+        width: 3em;
+        height: 3em;
+      }
+    }
+  }
+}
+body.error404 {
+ .newsletter form .inputs input {
+    @include xSmallShadow($lightest); 
+  }
 }

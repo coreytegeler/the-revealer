@@ -1,34 +1,34 @@
 <?php
-$cat_param = $_GET['category'];
-$year_param = $_GET['y'];
-$col_param = $_GET['column'];
-$tag_param = $_GET['tag'];
-if( $cat_id = get_query_var( 'cat' ) ) {
-	$cat_param = get_category( $cat_id, false )->slug;
-}
+echo '<aside>';
+	$cat_param = $_GET['category'];
+	$year_param = $_GET['y'];
+	$col_param = $_GET['column'];
+	$tag_param = $_GET['tag'];
+	if( $cat_id = get_query_var( 'cat' ) ) {
+		$cat_param = get_category( $cat_id, false )->slug;
+	}
 
-$articles_page = get_page_by_path( 'articles' );
-if( $articles_page ) {
-	$page_url = get_permalink( $articles_page );
-} else {
-	$page_url = get_site_url() . '/articles/';
-}
+	$articles_page = get_page_by_path( 'articles' );
+	if( $articles_page ) {
+		$page_url = get_permalink( $articles_page );
+	} else {
+		$page_url = get_site_url() . '/articles/';
+	}
 
-if( $cat_param ) {
-	$page_url = add_query_arg( 'category', $cat_param, $page_url );
-}
-if( $year_param ) {
-	$page_url = add_query_arg( 'y', $year_param, $page_url );
-}
-if( $col_param ) {
-	$page_url = add_query_arg( 'column', $col_param, $page_url );
-}
-if( $tag_param ) {
-	$page_url = add_query_arg( 'tag', $tag_param, $page_url );
-}
-echo '<div id="filters">';
-	echo '<div class="links">';
-		echo '<div class="link filter categories">';
+	if( $cat_param ) {
+		$page_url = add_query_arg( 'category', $cat_param, $page_url );
+	}
+	if( $year_param ) {
+		$page_url = add_query_arg( 'y', $year_param, $page_url );
+	}
+	if( $col_param ) {
+		$page_url = add_query_arg( 'column', $col_param, $page_url );
+	}
+	if( $tag_param ) {
+		$page_url = add_query_arg( 'tag', $tag_param, $page_url );
+	}
+	echo '<div id="filters">';
+		echo '<div class="filter categories">';
 			echo '<div class="label">Categories</div>';
 			$categories = get_categories( array(
 			  'orderby' => 'name',
@@ -55,7 +55,7 @@ echo '<div id="filters">';
 			echo '</div>';
 		echo '</div>';
 
-		echo '<div class="link filter years">';
+		echo '<div class="filter years">';
 			echo '<div class="label">Years</div>';
 			echo '<div class="commas years">';
 				$year = date( 'Y' );
@@ -75,7 +75,7 @@ echo '<div id="filters">';
 			echo '</div>';
 		echo '</div>';
 
-		echo '<div class="link filter columns">';
+		echo '<div class="filter columns">';
 			echo '<div class="label">Columns</div>';
 			$columns = get_terms( array(
 				'taxonomy' => 'columns',
@@ -103,8 +103,7 @@ echo '<div id="filters">';
 			echo '</div>';
 		echo '</div>';
 
-		echo '<div class="link filter tags">';
-			
+		echo '<div class="filter tags">';
 			echo '<div class="label">Tags</div>';
 			$tags = get_tags( array(
 			  'orderby' => 'count',
@@ -133,23 +132,21 @@ echo '<div id="filters">';
 						echo '</span>';
 					}
 
-					if( !$tag_param_included ) {
-						$missing_tag = get_term_by( 'slug', $tag_param, 'post_tag' );
-						$tag_url = remove_query_arg( 'tag', $page_url );
-						echo '<span class="' . $tag_param . ' selected">';
-							echo '<a href="' . $tag_url . '" class="tag">' . $missing_tag->name . '</a>';
-						echo '</span>';
+					if( $tag_param && !$tag_param_included ) {
+						if( $missing_tag = get_term_by( 'slug', $tag_param, 'post_tag' ) ) {
+							$tag_url = remove_query_arg( 'tag', $page_url );
+							echo '<span class="' . $tag_param . ' selected">';
+								echo '<a href="' . $tag_url . '" class="tag">' . $missing_tag->name . '</a>';
+							echo '</span>';
+						}
 					}
+					$tag_page = get_page_by_path( 'tags' );
+					$tag_page_url = get_permalink( $tag_page->ID );
+					echo '<span class="more">';
+						echo '<a href="' . $tag_page_url . '">and more</a>.';
+					echo '</span>';
 				}
-				$tag_page = get_page_by_path( 'tags' );
-				$tag_page_url = get_permalink( $tag_page->ID );
-				echo '<span class="more">';
-					echo '<a href="' . $tag_page_url . '">View all</a>';
-				echo '</span>';
-			echo '</div>';
 		echo '</div>';
-
-
 	echo '</div>';
-echo '</div>';
+echo '</aside>';
 ?>

@@ -7,8 +7,8 @@
 		}
 		main {
 			article.readable {
-				width: calc(100% - 4em);
-				padding: 2em 2em 0 2em;
+				width: 100%;
+				padding: 2em 0 0 0;
 				opacity: 0;
 				&.show {
 					opacity: 1;
@@ -221,7 +221,7 @@
 						max-width: $lineWidth;
 						display: table;
 						margin: auto;
-						border: 1px solid $lighter;
+						border: 1px solid $light;
 						position: relative;
 						overflow: hidden;
 						* {
@@ -257,7 +257,7 @@
 							a {
 								color: $dark;
 								&.ftn {
-									width: 1em;
+									min-width: 1em;
 									height: 1em;
 									display: inline-block;
 									border: 1px solid $medium;
@@ -265,6 +265,8 @@
 									color: $medium !important;
 									text-align: center;
 									padding: .2em;
+									overflow: hidden;
+									white-space: nowrap;
 									&.super {
 								    transform: translateY(-.5em);
 								    @include xxSmallText;
@@ -277,6 +279,10 @@
 									&:focus {
 										outline: none;
 										background-color: $gold;
+										&:hover {
+											color: $dark !important;
+											border-color: $dark;
+										}
 									}
 								}
 								&:hover, &:hover * {
@@ -299,8 +305,8 @@
 							}
 							&.missing {
 								width: 80% !important;
+								height: auto !important;
 								display: table;
-								margin: 2em auto;
 								background-color: $lighter;
 								a {
 									width: 100%;
@@ -318,16 +324,20 @@
 							}
 						}
 						h1, h2, h3, h4 {
-							width: $lineWidth;
+							max-width: $lineWidth;
 							@include serifText;
-							@include xMediumText;
 							font-weight: $regular;
 							margin: auto;
 							padding: 1em 0;
-							text-align: center;
 							* {
 								font-weight: $regular;
 							}
+						}
+						h1 {
+							@include largeText;
+						}
+						h2, h3, h4 {
+							@include xMediumText;
 						}
 						iframe {
 							width: 100%;
@@ -351,9 +361,10 @@
 								@include mediumText;
 							}
 						}
-						.wp-caption {
+						.wp-caption, figure.wp-block-image {
 							color: $medium;
 							max-width: 100%;
+							padding: 2em 0;
 							display: block;
 							@include xxSmallText;
 							a {
@@ -363,13 +374,14 @@
 								max-width: 100%;
 								height: auto;
 							}
-							.wp-caption-text, p {
+							.wp-caption-text, p, figcaption {
 								width: 100%;
 								max-width: 100%;
-								padding: .25em 0 2em 0;
+								padding: .25em 0 0 0;
 								color: $medium;
 								font-size: 1em;
 								line-height: 1.5em;
+								text-align: left;
 							}
 							&:first-child {
 								margin-top: 0;
@@ -413,31 +425,6 @@
 					border: 0;
 				}
 			}
-			.transport.top {
-				position: fixed;
-				right: 2em;
-				bottom: 2em;
-				z-index: 700;
-				display: flex;
-				&:hover {
-					cursor: pointer;
-					@include largeShadow($lightest);
-				}
-				span {
-					display: table;
-					margin: auto;
-					@include xSmallText;
-					line-height: 0;
-					font-family: 'Clarendon';
-				}
-				svg {
-					width: 75%;
-					height: 75%;
-			    display: table;
-			    margin: auto;
-			    fill: $medium;
-				}
-			}
 			#related {
 				width: 100%;
 				display: table;
@@ -464,6 +451,9 @@
 			}
 		}
 	}
+	.transport.top {
+		display: flex;
+	}
 	@include small {
 		#wrapper {
 			aside {
@@ -476,13 +466,19 @@
 					width: 100%;
 					padding-right: 0;
 					padding-left: 0;
+					.lead {
+						.title {
+							h1 {
+								@include xLargeText;
+							}
+						}
+						.excerpt {
+							text-align: left;
+						}
+					}
 					.max {
 						margin: auto;
 					}
-				}
-				.transport.top {
-					right: 1em;
-					bottom: 1em;
 				}
 				#related {
 					width: 100%;

@@ -209,7 +209,9 @@ jQuery ($) ->
 				
 			if $body.is('.discover')
 				if winScroll + winHeight >= scrollHeight - winHeight * 2
-					queryMore()
+					setTimeout () ->
+						queryMore()
+					, 3000
 			else
 				$nav = $header.find('nav')
 				headerBottom = $header.offset().top + $header.innerHeight()
@@ -257,18 +259,27 @@ jQuery ($) ->
 
 			fixSide(e)
 
-		toggleHeight = () ->
+		toggleToggler = () ->
 			$toggle = $(this)
-			$listWrap = $toggle.parents('.listWrap')
-			$list = $listWrap.find('.list')
-			$listWrap.toggleClass('show')
-			if $listWrap.is('.show')
-				height = $list[0].scrollHeight
-				$listWrap.css
+			$toggler = $toggle.parents('.toggler')
+			$inner = $toggler.find('.inner')
+			$toggler.toggleClass('toggled')
+			if $toggler.is('.toggled')
+				height = $inner[0].scrollHeight
+				$toggler.css
 					maxHeight: height
 			else
-				$listWrap.attr('style', '')
+				$toggler.attr('style', '')
 
+		fixToggler = () ->
+		 	$('.toggler').each (i, toggler) ->
+		 		$toggler = $(toggler)
+		 		$inner = $toggler.find('.inner')
+		 		console.log $toggler.is('.toggled'), $inner.innerHeight(), $toggler.innerHeight()
+		 		if $inner.innerHeight() <= $toggler.innerHeight() + 5
+		 			$toggler.addClass('toggled')
+		 		else
+		 			$toggler.removeClass('toggled')
 
 			
 
@@ -277,12 +288,19 @@ jQuery ($) ->
 		setupArticle = () ->
 			if !$body.is('.single-post')
 				return
-			$article = $('article')
+			$article = $('article.readable')
+			$content = $article.find('.text .content')
+			goodTags = 'p,a,em,img,blockquote,object,.wp-caption-text,.wp-caption,.image'
+			$elems = $content.find('*:not('+goodTags+')').contents()
+			# $elems.unwrap()
+			# $elems.each (i, elem) ->
+			# 	console.log $(elem)
+
 			# wraps inline images to load before showing
 			$sideImages = $side.find('.images .loop')
 			$sideImages.masonry()
 			fixLoops($sideImages)
-			inlineImgs = $article.find('.content img')
+			inlineImgs = $content.find('img')
 			hasImages = false
 			for inlineImg in inlineImgs
 				$inlineImg = $(inlineImg)
@@ -316,7 +334,6 @@ jQuery ($) ->
 					# console.log $missing
 				pseudo.src = currentSrc
 
-			# console.log $sideImages
 			sizeImages($article.find('.content .image.load'))
 
 			links = $article.find('a[href]')
@@ -324,15 +341,21 @@ jQuery ($) ->
 				$link = $(link)
 				href = $link.attr('href')	
 				# add classes to inline citations and footnotes
-				if href.includes('#_ftn')
+				if href.includes('#_ftn') || href.includes('#_edn')
 					replace = $link.text()
 						.replace('[','')
 						.replace(']','')
+						.replace('(','')
+						.replace(')','')
 					$link.text(replace)
-					if href.includes('#_ftnref')
-						$link.addClass('ref ftn transport')
+					if href.includes('#_ftnref') || href.includes('#_ednref')
+						name = href.replace('ref','').replace('#', '')
+						$link.attr('name', name).addClass('ref ftn transport')
 					else
-						$link.addClass('super ftn transport')
+						name = href.replace('#', '')
+						split = name.split(/(\d+)/)
+						name = split[0]+'ref'+split[1]
+						$link.attr('name', name).addClass('super ftn transport')
 				# open external links in new tab
 				else if !href.includes(siteUrl)
 					$link.attr('target', '_blank')
@@ -445,38 +468,42 @@ jQuery ($) ->
 			href = this.href
 			window.open(href,'popup','width=600,height=600,scrollbars=no,resizable=no')
 
-
-		setTimeout () ->
-			$('.glisten').each (ri, wrap) ->
-				ri++
-				$wrap = $(wrap)
-				characters = $wrap.text().split('')
-				$wrap.empty()
-				$(characters).each (ci, html) ->
-					$span = $('<span>' + html + '</span>')
-					$wrap.append($span)
-				$spans = $wrap.find('span')
-				setTimeout () ->
-					$spans.each (si, span) ->
-						si++
-						$span = $(span)
-						setTimeout () ->
-							$span.addClass('animate')
-						, si*50
-					$wrap.addClass('show')
-				, 100*ri
-			, 100
-
-		$('#logo svg path').each (i, path) ->
+		animateTexts = () ->
 			setTimeout () ->
-				$(path).addClass('animate')
-			, i*50
+				$('.glisten').each (ri, wrap) ->
+					ri++
+					$wrap = $(wrap)
+					words = $wrap.text().split(' ')
+					$wrap.empty()
+					for word in words
+						$wordSpan = $('<span class="word"></span>')
+						chars = word.split('')
+						for char in chars
+							$span = $('<span class="char">' + char + '</span>')
+							$wordSpan.append($span)
+						$wrap.append($wordSpan)
+
+					$spans = $wrap.find('span.char')
+					$spans.each (si, span) ->
+						animateText(span, si)
+					$wrap.addClass('show')
+
+		animateText = (html, index) ->
+			setTimeout () ->
+				$(html).addClass('animate')
+			, 50*index
 
 
-		$('body').on('click', '.transport', transport)
-		$('body').on('click', '.toggle', toggleHeight)
-		$('body').on('click', '#alert .close', closeAlert)
-		$('body').on('click', '#popup .close', closePopup)
+		# $('#logo svg path').each (i, path) ->
+		# 	setTimeout () ->
+		# 		$(path).addClass('animate')
+		# 	, i*50
+
+
+		$('body').on('click touch', '.transport', transport)
+		$('body').on('click', '.toggler .toggle', toggleToggler)
+		$('body').on('click touch', '#alert .close', closeAlert)
+		$('body').on('click touch', '#popup .close', closePopup)
 		$('body').on('hover', '.cell .link_wrap', hoverCell)
 		$('body').on('click', 'aside .share a.window', shareWindow)
 		
@@ -485,7 +512,7 @@ jQuery ($) ->
 			now = new Date().getTime()
 			week = 60*60*24*7*1000
 			lastWeek = now - week
-			if popupObj.shown && popupObj.time > lastWeek
+			if popupObj && popupObj.shown && popupObj.time > lastWeek
 				$popup.addClass('show stuck')
 
 		if $body.is('.search')
@@ -496,6 +523,7 @@ jQuery ($) ->
 			sizeImages()
 			fixHeader()
 			trackScroll()
+			fixToggler()
 		.resize()
 
 		$window.on 'scroll', (e) ->
@@ -503,3 +531,4 @@ jQuery ($) ->
 			fixHeader()
 
 		setupArticle()
+		animateTexts()

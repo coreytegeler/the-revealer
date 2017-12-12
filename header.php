@@ -1,24 +1,41 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
 <head>
+<!-- /**
+ * @license
+ * MyFonts Webfont Build ID 3494945, 2017-12-08T17:55:29-0500
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: ClarendonBTWXX-Roman by Bitstream
+ * URL: https://www.myfonts.com/fonts/bitstream/clarendon/roman-148722/
+ * Copyright: Copyright &#x00A9; 2015 Monotype Imaging Inc. All rights reserved.
+ * Licensed pageviews: 10,000
+ * 
+ * 
+ * License: https://www.myfonts.com/viewlicense?type=web&buildid=3494945
+ * 
+ * © 2017 MyFonts Inc
+*/ -->
 <?php
 global $post;
 $page_type = $post->post_type;
 $page_slug = $post->post_name;
-$wrapper_style = 'full';
 $og_type = 'website';
 if( is_home() ) {
 	$page_slug = 'home';
 } else if( is_search() || $page_slug == 'search' ) {
 	$page_slug = 'search';
 } else if( $page_slug == 'articles' ) {
-	$wrapper_style = 'split';
 } else if( is_404() ) {
 	$page_slug = '404';
 } else if( $page_type == 'post' && !is_tag() ) {
 	$page_type = 'article';
 	$og_type = 'article';
-	$wrapper_style = 'full';
 } else {
 	$page_slug = $post->post_name;;
 }
@@ -64,16 +81,17 @@ if( $og_type == 'article' ) {
 }
 echo '<meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />';
 echo '<meta property="og:image" content="http://ia.media-imdb.com/images/rock.jpg" />';
+echo '<script type="text/javascript" src="' . get_template_directory_uri() . '/MyFontsWebfontsKit.js"/>';
 wp_head();
 ?>
 </head>
 <body <?php body_class( array( $page_slug, $page_type ) ) ?> data-site-url="<?php echo get_site_url() ?>">
 <?php
 get_template_part( 'parts/header' );
-echo '<div id="wrapper" class="' . $wrapper_style . '">';
+echo '<div id="wrapper">';
 	wp_reset_query();
-	if( $wrapper_style == 'split' ) {
-		get_template_part( 'parts/side' );
+	if( $page_slug == 'articles' ) {
+		get_template_part( 'parts/filters' );
 	}
 	echo '<main>';
 ?>

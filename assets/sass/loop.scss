@@ -8,6 +8,22 @@
 	.cell {
 		float: left;
 		transition: none;
+		.label {
+			display: table;
+			margin: auto;
+			&.categories {
+				text-transform: uppercase;
+				font-weight: $regular;
+				@include xxSmallText;
+				padding: 0 0 .5em 0;
+				.features {
+					font-weight: $black;
+				}
+			}
+			&.column {
+				@include mediumText;
+			}
+		}
 		a.link_wrap {
 			text-decoration: none;
 	    display: block;
@@ -25,7 +41,7 @@
 			margin: 0;
 			display: block;
 			background-color: $lighter;
-			transition: background-color 800ms $ease, opacity 800ms $ease;
+			transition: background-color 800ms $ease, opacity 800ms $ease, box-shadow 800ms $ease;
 			img {
 				width: 100%;
 				max-width: 100%;
@@ -68,21 +84,6 @@
 			padding: .5em 0 0 0;
 			.title {
 				transition: color 500ms $ease;
-				.label {
-					display: table;
-					margin: auto;
-					&.categories {
-						text-transform: uppercase;
-						font-weight: $regular;
-						@include xSmallText;
-						.features {
-							font-weight: $black;
-						}
-					}
-					&.column {
-						@include mediumText;
-					}
-				}
 				h2 {
 					width: 100%;
 					text-align: left;
@@ -94,9 +95,8 @@
 				}
 			}
 			.meta {
-				display: table;
+				width: 100%;
 				padding-top: .5em;
-				margin: auto;
 				color: $medium;
 				@include xSmallText;
 				a {
@@ -410,7 +410,6 @@
 		&.two_col {
 			.cell {
 				width: 100% !important;
-				max-width: 35em;
 				margin: 0 auto 3em auto !important;
 				.secondary {
 					.title {
@@ -419,8 +418,7 @@
 						margin: 0;
 					}
 					.meta, .blurb {
-						display: inline;
-						margin-right: 1em;
+						display: block;
 					}
 				}
 			}
@@ -467,11 +465,13 @@
 	}
 }	
 @include xSmall {
-	.loop, .loop.two_col, .loop.three_col, .loop.four_col, .loop.five_col.grid {
-		.cell, article {
-			width: 100% !important;
-			margin-bottom: 2em !important;
-			margin-right: 0 !important
+	.loop {
+		&.grid {
+			.cell, article {
+				width: 100% !important;
+				margin-bottom: 2em !important;
+				margin-right: 0 !important
+			}
 		}
 	}
 	.pagination {

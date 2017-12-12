@@ -1,4 +1,8 @@
-#wrapper {
+body.articles #wrapper {
+	main {
+		width: calc(100% - #{$sideWidth} - 4em);
+		padding: 0 2em 4em calc(#{$sideWidth} + 2em);
+	}
 	aside {
 		width: calc(#{$sideWidth} - 2em);
 		height: 100%;
@@ -17,7 +21,7 @@
 			padding: 2em 0;
 		}
 		#filters {
-			margin: .25em 0 1em 0;
+			padding: 2em 0 0 0;
 			flex: 1;
 			.filter {
 				padding: 0 0 2em 0;
@@ -43,6 +47,9 @@
 						font-weight: $regular;
 					}
 				}
+				&:last-child {
+					padding: 0;
+				}
 			}
 			.commas {
 				color: $medium;
@@ -62,7 +69,6 @@
 				}
 			}
 		}
-		
 		&.fixed {
 			position: fixed;
 		}
@@ -75,19 +81,39 @@
 				bottom: 0;
 			}
 		}
-		@include medium {
-			width: calc(#{$sideWidth*.75} - 2em);
+	}
+	@include medium {
+		.transport.top {
+			display: flex;
 		}
-		@include small {
+		main {
+			width: calc(100% - 4em);
+	    padding: .5em 2em 4em 2em;
+		}
+		aside {
 			width: calc(100% - 1em);
+			padding: .5em .5em 2em .5em;
+		}
+	}
+	@include small {
+		.loop {
+			max-width: 35em;
+			margin: auto;
+			display: table;
+		}
+		aside {
+			width: calc(100% - 4em);
+			max-width: 35em;
 			height: auto !important;
+			padding: .5em 2em 2em 2em;
+			margin: auto;
+			display: table;
 			position: static !important;
-			padding: 1em .5em .5em .5em;
+			transform: 0 !important;
 			.content {
 				margin: 0;
 				padding: 0;
 				#filters {
-					margin: 0 0 1em 0;
 					.filter {
 						.list {
 							height: 0;

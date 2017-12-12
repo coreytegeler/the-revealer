@@ -1,6 +1,6 @@
 jQuery(function($) {
   return $(function() {
-    var $alert, $body, $footer, $header, $headers, $logo, $main, $nav, $popup, $side, $window, $wrapper, assetsUrl, closeAlert, closePopup, fixHeader, fixLoops, fixSide, hoverCell, isMobile, lastSideScroll, lastWeek, loadImage, now, popupObj, queryMore, setupArticle, shareWindow, sideScroll, siteUrl, sizeImages, themeUrl, toggleHeight, trackScroll, transport, week;
+    var $alert, $body, $footer, $header, $headers, $logo, $main, $nav, $popup, $side, $window, $wrapper, animateText, animateTexts, assetsUrl, closeAlert, closePopup, fixHeader, fixLoops, fixSide, fixToggler, hoverCell, isMobile, lastSideScroll, lastWeek, loadImage, now, popupObj, queryMore, setupArticle, shareWindow, sideScroll, siteUrl, sizeImages, themeUrl, toggleToggler, trackScroll, transport, week;
     $window = $(window);
     $body = $('body');
     $wrapper = $('#wrapper');
@@ -249,7 +249,9 @@ jQuery(function($) {
       }
       if ($body.is('.discover')) {
         if (winScroll + winHeight >= scrollHeight - winHeight * 2) {
-          queryMore();
+          setTimeout(function() {
+            return queryMore();
+          }, 3000);
         }
       } else {
         $nav = $header.find('nav');
@@ -295,31 +297,47 @@ jQuery(function($) {
       }
       return fixSide(e);
     };
-    toggleHeight = function() {
-      var $list, $listWrap, $toggle, height;
+    toggleToggler = function() {
+      var $inner, $toggle, $toggler, height;
       $toggle = $(this);
-      $listWrap = $toggle.parents('.listWrap');
-      $list = $listWrap.find('.list');
-      $listWrap.toggleClass('show');
-      if ($listWrap.is('.show')) {
-        height = $list[0].scrollHeight;
-        return $listWrap.css({
+      $toggler = $toggle.parents('.toggler');
+      $inner = $toggler.find('.inner');
+      $toggler.toggleClass('toggled');
+      if ($toggler.is('.toggled')) {
+        height = $inner[0].scrollHeight;
+        return $toggler.css({
           maxHeight: height
         });
       } else {
-        return $listWrap.attr('style', '');
+        return $toggler.attr('style', '');
       }
     };
+    fixToggler = function() {
+      return $('.toggler').each(function(i, toggler) {
+        var $inner, $toggler;
+        $toggler = $(toggler);
+        $inner = $toggler.find('.inner');
+        console.log($toggler.is('.toggled'), $inner.innerHeight(), $toggler.innerHeight());
+        if ($inner.innerHeight() <= $toggler.innerHeight() + 5) {
+          return $toggler.addClass('toggled');
+        } else {
+          return $toggler.removeClass('toggled');
+        }
+      });
+    };
     setupArticle = function() {
-      var $article, $inlineImg, $link, $sideImages, $wpImg, currentSrc, hasImages, href, inlineImg, inlineImgs, j, k, len, len1, link, links, pseudo, replace;
+      var $article, $content, $elems, $inlineImg, $link, $sideImages, $wpImg, currentSrc, goodTags, hasImages, href, inlineImg, inlineImgs, j, k, len, len1, link, links, name, pseudo, replace, split;
       if (!$body.is('.single-post')) {
         return;
       }
-      $article = $('article');
+      $article = $('article.readable');
+      $content = $article.find('.text .content');
+      goodTags = 'p,a,em,img,blockquote,object,.wp-caption-text,.wp-caption,.image';
+      $elems = $content.find('*:not(' + goodTags + ')').contents();
       $sideImages = $side.find('.images .loop');
       $sideImages.masonry();
       fixLoops($sideImages);
-      inlineImgs = $article.find('.content img');
+      inlineImgs = $content.find('img');
       hasImages = false;
       for (j = 0, len = inlineImgs.length; j < len; j++) {
         inlineImg = inlineImgs[j];
@@ -358,13 +376,17 @@ jQuery(function($) {
         link = links[k];
         $link = $(link);
         href = $link.attr('href');
-        if (href.includes('#_ftn')) {
-          replace = $link.text().replace('[', '').replace(']', '');
+        if (href.includes('#_ftn') || href.includes('#_edn')) {
+          replace = $link.text().replace('[', '').replace(']', '').replace('(', '').replace(')', '');
           $link.text(replace);
-          if (href.includes('#_ftnref')) {
-            $link.addClass('ref ftn transport');
+          if (href.includes('#_ftnref') || href.includes('#_ednref')) {
+            name = href.replace('ref', '').replace('#', '');
+            $link.attr('name', name).addClass('ref ftn transport');
           } else {
-            $link.addClass('super ftn transport');
+            name = href.replace('#', '');
+            split = name.split(/(\d+)/);
+            name = split[0] + 'ref' + split[1];
+            $link.attr('name', name).addClass('super ftn transport');
           }
         } else if (!href.includes(siteUrl)) {
           $link.attr('target', '_blank');
@@ -502,41 +524,42 @@ jQuery(function($) {
       href = this.href;
       return window.open(href, 'popup', 'width=600,height=600,scrollbars=no,resizable=no');
     };
-    setTimeout(function() {
-      return $('.glisten').each(function(ri, wrap) {
-        var $spans, $wrap, characters;
-        ri++;
-        $wrap = $(wrap);
-        characters = $wrap.text().split('');
-        $wrap.empty();
-        $(characters).each(function(ci, html) {
-          var $span;
-          $span = $('<span>' + html + '</span>');
-          return $wrap.append($span);
-        });
-        $spans = $wrap.find('span');
-        return setTimeout(function() {
+    animateTexts = function() {
+      return setTimeout(function() {
+        return $('.glisten').each(function(ri, wrap) {
+          var $span, $spans, $wordSpan, $wrap, char, chars, j, k, len, len1, word, words;
+          ri++;
+          $wrap = $(wrap);
+          words = $wrap.text().split(' ');
+          $wrap.empty();
+          for (j = 0, len = words.length; j < len; j++) {
+            word = words[j];
+            $wordSpan = $('<span class="word"></span>');
+            chars = word.split('');
+            for (k = 0, len1 = chars.length; k < len1; k++) {
+              char = chars[k];
+              $span = $('<span class="char">' + char + '</span>');
+              $wordSpan.append($span);
+            }
+            $wrap.append($wordSpan);
+          }
+          $spans = $wrap.find('span.char');
           $spans.each(function(si, span) {
-            var $span;
-            si++;
-            $span = $(span);
-            return setTimeout(function() {
-              return $span.addClass('animate');
-            }, si * 50);
+            return animateText(span, si);
           });
           return $wrap.addClass('show');
-        }, 100 * ri);
-      }, 100);
-    });
-    $('#logo svg path').each(function(i, path) {
+        });
+      });
+    };
+    animateText = function(html, index) {
       return setTimeout(function() {
-        return $(path).addClass('animate');
-      }, i * 50);
-    });
-    $('body').on('click', '.transport', transport);
-    $('body').on('click', '.toggle', toggleHeight);
-    $('body').on('click', '#alert .close', closeAlert);
-    $('body').on('click', '#popup .close', closePopup);
+        return $(html).addClass('animate');
+      }, 50 * index);
+    };
+    $('body').on('click touch', '.transport', transport);
+    $('body').on('click', '.toggler .toggle', toggleToggler);
+    $('body').on('click touch', '#alert .close', closeAlert);
+    $('body').on('click touch', '#popup .close', closePopup);
     $('body').on('hover', '.cell .link_wrap', hoverCell);
     $('body').on('click', 'aside .share a.window', shareWindow);
     if ($popup.length) {
@@ -544,7 +567,7 @@ jQuery(function($) {
       now = new Date().getTime();
       week = 60 * 60 * 24 * 7 * 1000;
       lastWeek = now - week;
-      if (popupObj.shown && popupObj.time > lastWeek) {
+      if (popupObj && popupObj.shown && popupObj.time > lastWeek) {
         $popup.addClass('show stuck');
       }
     }
@@ -555,12 +578,14 @@ jQuery(function($) {
       fixLoops();
       sizeImages();
       fixHeader();
-      return trackScroll();
+      trackScroll();
+      return fixToggler();
     }).resize();
     $window.on('scroll', function(e) {
       trackScroll(e);
       return fixHeader();
     });
-    return setupArticle();
+    setupArticle();
+    return animateTexts();
   });
 });

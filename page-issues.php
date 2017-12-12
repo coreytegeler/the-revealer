@@ -43,8 +43,10 @@ echo '<div class="readable">';
 			echo '<div class="sections issue one_two" role="issue">';
 				echo '<section>';
 					echo '<div class="text">';
-						echo '<h1 class="title"><em>' . $title . '</em></h1>';
-						echo '<h2 class="date">by ' . $date . '</h2>';
+						echo '<h1 class="title">' . $title . '</h1>';
+						if( get_field( 'special', $issue ) ) {
+							echo '<h2 class="date">published ' . $date . '</h2>';
+						}
 					echo '</div>';
 				echo '</section>';
 

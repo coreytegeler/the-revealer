@@ -18,6 +18,26 @@ echo '<article class="cell ' . ( $thumb ? 'has_image' : 'no_image') . '" role="a
 	echo '<div class="wrap">';
 		if ( $thumb ) {
 			echo '<div class="primary">';
+				if( $categories ) {
+					echo '<div class="categories label">';
+						foreach( $categories as $i => $cat ) {
+							if( $cat->slug == 'features' ) {
+								echo '<span class="features">Featured </span>';
+								array_splice( $categories, $i, 1 );
+							}
+						}
+						foreach( $categories as $i => $cat ) {
+							$cat_name = get_field( 'singular', $cat );
+							if( sizeof( $cat_name ) < 1 ) {
+								$cat_name = $cat->name;
+							}
+							echo '<span class="' . $cat->slug . '">' . $cat_name . '</span>';
+							if( $i < sizeof( $categories ) - 1 ) {
+								echo ', ';
+							}
+						}
+					echo '</div> ';
+				}
 				echo '<a class="link_wrap" href="' . $permalink . '">';
 					echo '<div class="image load">';
 						echo '<img data-src="'.$thumb_url.'" data-width="'.$thumb_width.'" data-height="'.$thumb_height.'"/>';
@@ -28,26 +48,6 @@ echo '<article class="cell ' . ( $thumb ? 'has_image' : 'no_image') . '" role="a
 		echo '<div class="secondary">';
 			echo '<a class="link_wrap" href="' . $permalink . '">';
 				echo '<div class="title">';
-					if( $categories ) {
-						echo '<div class="categories label">';
-							foreach( $categories as $i => $cat ) {
-								if( $cat->slug == 'features' ) {
-									echo '<span class="features">Featured </span>';
-									array_splice( $categories, $i, 1 );
-								}
-							}
-							foreach( $categories as $i => $cat ) {
-								$cat_name = get_field( 'singular', $cat );
-								if( sizeof( $cat_name ) < 1 ) {
-									$cat_name = $cat->name;
-								}
-								echo '<span class="' . $cat->slug . '">' . $cat_name . '</span>';
-								if( $i < sizeof( $categories ) - 1 ) {
-									echo ', ';
-								}
-							}
-						echo '</div> ';
-					}
 					echo '<h2>';
 						if( $column ) {
 							echo '<em class="column">' . $column->name . '</em>: ';

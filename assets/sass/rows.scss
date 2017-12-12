@@ -7,21 +7,16 @@
 			}
 			.text {
 				h1 {
-					@include sansSerifText;
+					@include serifText;
 					@include xLargeText;
 					font-weight: $regular;
-					text-align: center;
-					em {
-						font-family: $serif;
-
-					}
 				}
 				h2 {
 					color: $medium;
 					font-weight: $regular;
 					z-index: 100;
 					@include serifText;
-					text-align: center;
+					font-style: italic; 
 				}
 			}
 		}

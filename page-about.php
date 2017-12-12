@@ -12,8 +12,7 @@ echo '<div class="readable">';
 		echo '<ul class="nested parent about">';
 			echo '<li><ul class="child">';
 				echo '<li>';
-					echo '<h1>About</h1>';
-					echo '<span class="body">' . $content . '</span>';
+					echo '<span class="body"><h2>' . $content . '</h2></span>';
 				echo '</li>';
 			echo '</ul></li>';
 		echo '</ul>';
@@ -22,12 +21,12 @@ echo '<div class="readable">';
 				$title = $role['title'];
 				$these_people = $role['person'];
 				echo '<li class="role cell">';
-					echo '<h1>' . $title . '</h1>';
+					echo '<h2 class="title">' . $title . '</h2>';
 					echo '<ul class="child people">';
 						foreach( $these_people as $person ) {
 							echo '<li>';
 								if( $name = $person['name'] ) {
-									echo '<strong class="title"><em>' . $name . '</em></strong>';
+									echo '<span class="name">' . $name . '</span>';
 									if( $years = $person['years'] ) {
 										echo '<span class="years">' . $years . '</span>';
 									}

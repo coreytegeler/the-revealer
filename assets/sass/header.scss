@@ -9,11 +9,7 @@ header {
 	z-index: 400;
 	transform: 0ms !important;
 	background: rgba($lightest,.98);
-	font-family: Clarendon;
-	text-transform: lowercase;
-  &.mobile {
-  	display: none;
-  }
+	@include revealerText;
   .inner {
   	width: calc(100% - 4em);
 		margin: 0 2em;
@@ -30,7 +26,7 @@ header {
 			margin: auto;
 	    text-decoration: none;
 			svg {
-				width: calc(#{$sideWidth} - 1em);
+				width: calc(#{$logoWidth} - 1em);
 				height: auto;
 				padding: .5em 0;
 				fill: $dark;
@@ -75,7 +71,7 @@ header {
 					float: left;
 					display: inline;
 					padding: 0;
-					margin: 0 0 0 .5em;
+					margin: 0 .5em 0 0;
 					list-style: none;
 					a {
 				    text-decoration: none;
@@ -87,7 +83,7 @@ header {
 				    	color: $medium;
 				    }
 					}
-					&:first-child {
+					&:last-child {
 						margin: 0;
 					}
 				}
@@ -106,7 +102,6 @@ header {
 						width: 100%;
 						user-select: none;
 						text-transform: lowercase;
-						font-family: Clarendon;
 						@include xSmallText;
 						&:hover {
 							cursor: pointer;
@@ -129,18 +124,17 @@ header {
 		}
 	}
 	@include medium {
-		.inner .rows .row {
-			@include xSmallText;
-		}
+		
 	}
 	@include small {
+		@include xSmallText;
 		.inner {
 			width: calc(100% - 1em);
 	    margin: .5em .5em 0 .5em;
 	    display: block;
 			#logo {
 				width: 100%;
-				max-width: $sideWidth;
+				max-width: $logoWidth;
 				padding: 0;
 				margin: auto;
 				a.svg {

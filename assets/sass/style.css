@@ -1,40 +1,12 @@
-@charset "UTF-8";
 /*
 Theme Name: The Revealer
 Author: Corey Tegeler
 Author URI: http://coreytegeler.com
 Version: 1.1
 */
-/**
- * @license
- * MyFonts Webfont Build ID 3494950, 2017-12-08T18:19:40-0500
- * 
- * The fonts listed in this notice are subject to the End User License
- * Agreement(s) entered into by the website owner. All other parties are 
- * explicitly restricted from using the Licensed Webfonts(s).
- * 
- * You may obtain a valid license at the URLs below.
- * 
- * Webfont: ClarendonBTWXX-Roman by Bitstream
- * URL: https://www.myfonts.com/fonts/bitstream/clarendon/roman-148722/
- * Copyright: Copyright &#x00A9; 2015 Monotype Imaging Inc. All rights reserved.
- * Licensed pageviews: 10,000
- * 
- * 
- * License: https://www.myfonts.com/viewlicense?type=web&buildid=3494950
- * 
- * © 2017 MyFonts Inc
-*/
-/* @import must be at top of file, otherwise CSS will not work */
-@import url("//hello.myfonts.net/count/355426");
 @import 'https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i&subset=latin-ext';
 @import 'https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600,600i,700,700i';
 @import 'https://fonts.googleapis.com/css?family=Work+Sans:100,400,500,600,700,800,900';
-@font-face {
-  font-family: 'ClarendonBTWXX-Roman';
-  src: url("./assets/webfonts/355426_0_0.eot");
-  src: url("./assets/webfonts/355426_0_0.eot?#iefix") format("embedded-opentype"), url("./assets/webfonts/355426_0_0.woff2") format("woff2"), url("./assets/webfonts/355426_0_0.woff") format("woff"), url("./assets/webfonts/355426_0_0.ttf") format("truetype"), url("./assets/webfonts/355426_0_0.svg#wf") format("svg"); }
-
 @-webkit-keyframes conceal {
   0% {
     opacity: 1; }
@@ -42,7 +14,6 @@ Version: 1.1
     opacity: .8; }
   100% {
     opacity: .02; } }
-
 @keyframes conceal {
   0% {
     opacity: 1; }
@@ -53,27 +24,27 @@ Version: 1.1
 
 @-webkit-keyframes glisten {
   0% {
-    opacity: 0.75; }
+    opacity: 0.5; }
   25% {
     opacity: 1; }
   50% {
-    opacity: .75; }
+    opacity: .5; }
   75% {
     opacity: 1; }
   100% {
-    opacity: 0.75; } }
+    opacity: 0.5; } }
 
 @keyframes glisten {
   0% {
-    opacity: 0.75; }
+    opacity: 0.5; }
   25% {
     opacity: 1; }
   50% {
-    opacity: .75; }
+    opacity: .5; }
   75% {
     opacity: 1; }
   100% {
-    opacity: 0.75; } }
+    opacity: 0.5; } }
 
 @-webkit-keyframes bounce {
   0% {
@@ -99,37 +70,37 @@ Version: 1.1
 
 @-webkit-keyframes glistenBounce {
   0% {
-    opacity: 0.75;
+    opacity: 0.5;
     -webkit-transform: translateY(0);
     transform: translateY(0); }
   25% {
     opacity: 1; }
   50% {
-    opacity: .75;
+    opacity: .5;
     -webkit-transform: translateY(-0.125em);
     transform: translateY(-0.125em); }
   75% {
     opacity: 1; }
   100% {
-    opacity: 0.75;
+    opacity: 0.5;
     -webkit-transform: translateY(0);
     transform: translateY(0); } }
 
 @keyframes glistenBounce {
   0% {
-    opacity: 0.75;
+    opacity: 0.5;
     -webkit-transform: translateY(0);
     transform: translateY(0); }
   25% {
     opacity: 1; }
   50% {
-    opacity: .75;
+    opacity: .5;
     -webkit-transform: translateY(-0.125em);
     transform: translateY(-0.125em); }
   75% {
     opacity: 1; }
   100% {
-    opacity: 0.75;
+    opacity: 0.5;
     -webkit-transform: translateY(0);
     transform: translateY(0); } }
 
@@ -275,6 +246,50 @@ input {
       padding: 2em 0 0 0;
       display: block;
       position: relative; }
+  #wrapper .nested.parent {
+    max-width: 650px;
+    padding: 2em 0 0 0;
+    margin: 0; }
+    #wrapper .nested.parent li {
+      list-style: none;
+      padding: 0;
+      margin: 0; }
+      #wrapper .nested.parent li h2 {
+        font-family: "Crimson Text", "Baskerville", times, serif;
+        font-weight: normal;
+        width: 100%;
+        margin: 0 0 .5em 0;
+        display: table;
+        text-align: center; }
+      #wrapper .nested.parent li .child {
+        display: table;
+        padding: 0 0 1.5em 0;
+        margin: auto; }
+        #wrapper .nested.parent li .child li {
+          padding: 0 0 1em 0; }
+        #wrapper .nested.parent li .child a {
+          display: inline; }
+        #wrapper .nested.parent li .child p {
+          display: inline;
+          font-size: inherit;
+          line-height: inherit; }
+        #wrapper .nested.parent li .child .title {
+          font-family: Helvetica, Arial, sans-serif;
+          font-weight: 400;
+          font-weight: 800; }
+          #wrapper .nested.parent li .child .title em {
+            font-style: normal; }
+        #wrapper .nested.parent li .child .body {
+          font-size: .8em;
+          line-height: 1.2em; }
+      #wrapper .nested.parent li .links a {
+        margin-right: .5em;
+        font-size: .8em;
+        line-height: 1.2em;
+        text-decoration: none;
+        color: #448399; }
+        #wrapper .nested.parent li .links a:hover {
+          color: #346378; }
 
 .transport.top {
   position: fixed;
@@ -286,6 +301,13 @@ input {
     cursor: pointer;
     -webkit-box-shadow: 0 0 2em 1em #f1f5f7;
     box-shadow: 0 0 2em 1em #f1f5f7; }
+  .transport.top span {
+    display: table;
+    margin: auto;
+    font-size: .8em;
+    line-height: 1.2em;
+    line-height: 0;
+    font-family: 'Clarendon'; }
   .transport.top svg {
     width: 75%;
     height: 75%;
@@ -306,7 +328,9 @@ input {
   display: -ms-flexbox;
   display: flex; }
   .glisten span {
-    opacity: 0.75; }
+    opacity: 0.5;
+    display: block;
+    float: left; }
   .glisten .animate {
     opacity: 1;
     -webkit-animation-name: glisten;
@@ -448,22 +472,13 @@ input {
   text-align: right; }
   .stats h1 {
     text-align: center;
-    display: block;
+    display: table;
     margin: auto;
-    font-style: normal;
-    opacity: 0.25;
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif;
-    font-weight: 400;
-    text-transform: lowercase; }
-    .stats h1 .word {
-      display: inline; }
-      .stats h1 .word::after {
-        content: ' ';
-        white-space: pre; }
-      .stats h1 .word:last-child::after {
-        content: ''; }
+    font-family: "Crimson Text", "Baskerville", times, serif;
+    font-weight: normal; }
+    .stats h1.title {
+      font-family: Clarendon;
+      text-transform: lowercase; }
   .stats .bounce {
     opacity: .125; }
     .stats .bounce.show {
@@ -537,8 +552,7 @@ header {
   -webkit-transform: 0ms !important;
   transform: 0ms !important;
   background: rgba(241, 245, 247, 0.98);
-  font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif;
-  font-weight: 400;
+  font-family: Clarendon;
   text-transform: lowercase; }
   header .inner {
     width: calc(100% - 4em);
@@ -634,6 +648,7 @@ header {
         -ms-user-select: none;
         user-select: none;
         text-transform: lowercase;
+        font-family: Clarendon;
         font-size: .8em;
         line-height: 1.2em; }
         header .rows .navigation.filters .filter .toggle:hover {
@@ -1078,7 +1093,8 @@ body.articles #wrapper aside {
       text-align: left;
       margin: 0; }
     .loop.two_col .cell .secondary .meta, .loop.two_col .cell .secondary .blurb {
-      display: block; }
+      display: inline;
+      margin-right: 1em; }
   .loop.four_col.masonry .cell {
     width: calc(100%/2 - 1em);
     margin-bottom: 2em; }
@@ -1109,8 +1125,7 @@ body.articles #wrapper aside {
     margin-right: 0 !important; } }
 
 body.home main .goldbar {
-  position: relative;
-  margin: 3em 0; }
+  position: relative; }
 
 body.home main .loop .cell#cover {
   position: relative; }
@@ -1143,15 +1158,17 @@ body.home main .loop .cell#cover {
         -webkit-filter: grayscale(1);
         filter: grayscale(1);
         mix-blend-mode: screen; }
+  body.home main .loop .cell#cover .goldbar {
+    margin: 3em 0; }
   body.home main .loop .cell#cover .newsletter form {
     width: 100%;
     max-width: 25em; }
     body.home main .loop .cell#cover .newsletter form label {
       width: 100%;
       max-width: 15em;
-      margin: -.5em 0 .5em 0;
+      margin: 0 0 .5em 0;
       display: table;
-      font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif;
+      font-family: Clarendon, Arial, sans-serif;
       font-weight: 400;
       text-transform: lowercase;
       font-size: 2em;
@@ -1393,24 +1410,21 @@ body.home main section {
             display: table;
             fill: rgba(52, 99, 120, 0.5); }
         .single-post #wrapper main article.readable .text .content h1, .single-post #wrapper main article.readable .text .content h2, .single-post #wrapper main article.readable .text .content h3, .single-post #wrapper main article.readable .text .content h4 {
-          max-width: 650px;
+          width: 650px;
           font-family: "Crimson Text", "Baskerville", times, serif;
           font-weight: normal;
+          font-size: 1.5em;
+          line-height: 1.1em;
           font-weight: 400;
           margin: auto;
-          padding: 1em 0; }
-          .single-post #wrapper main article.readable .text .content h1 *, .single-post #wrapper main article.readable .text .content h2 *, .single-post #wrapper main article.readable .text .content h3 *, .single-post #wrapper main article.readable .text .content h4 * {
-            font-weight: 400; }
-        .single-post #wrapper main article.readable .text .content h1 {
-          font-size: 2em;
-          line-height: 1.1em; }
-        .single-post #wrapper main article.readable .text .content h2, .single-post #wrapper main article.readable .text .content h3, .single-post #wrapper main article.readable .text .content h4 {
-          font-size: 1.5em;
-          line-height: 1.1em; }
+          padding: 1em 0;
+          text-align: center; }
           @media (max-width: 480px) {
-            .single-post #wrapper main article.readable .text .content h2, .single-post #wrapper main article.readable .text .content h3, .single-post #wrapper main article.readable .text .content h4 {
+            .single-post #wrapper main article.readable .text .content h1, .single-post #wrapper main article.readable .text .content h2, .single-post #wrapper main article.readable .text .content h3, .single-post #wrapper main article.readable .text .content h4 {
               font-size: 1.2em;
               line-height: 1.4em; } }
+          .single-post #wrapper main article.readable .text .content h1 *, .single-post #wrapper main article.readable .text .content h2 *, .single-post #wrapper main article.readable .text .content h3 *, .single-post #wrapper main article.readable .text .content h4 * {
+            font-weight: 400; }
         .single-post #wrapper main article.readable .text .content iframe {
           width: 100%; }
         .single-post #wrapper main article.readable .text .content blockquote {
@@ -1518,74 +1532,42 @@ body.home main section {
 
 body.about #wrapper main ul.parent {
   width: 100%;
-  max-width: 100%;
-  display: block;
-  padding: 2em 0 0 0;
-  margin: 0; }
-  body.about #wrapper main ul.parent li {
-    list-style: none; }
-    body.about #wrapper main ul.parent li.cell {
-      width: calc(50% - 1em);
-      max-width: 650px;
-      margin: 0 0 2em 0;
-      padding: 0;
-      float: left; }
-  body.about #wrapper main ul.parent h2 {
-    font-family: "Crimson Text", "Baskerville", times, serif;
-    font-weight: normal;
-    width: 100%;
-    margin: 0 0 .5em 0;
-    display: block;
-    text-align: center; }
-  body.about #wrapper main ul.parent h2.title {
-    font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif;
-    font-weight: 400;
-    text-transform: lowercase;
-    text-align: center; }
-  body.about #wrapper main ul.parent ul.child {
-    display: block;
-    padding: 0 0 1.5em 0;
-    margin: auto; }
-    body.about #wrapper main ul.parent ul.child li {
-      width: 100%;
-      padding: 0 0 1em 0; }
-      body.about #wrapper main ul.parent ul.child li .body {
-        font-family: "Crimson Text", "Baskerville", times, serif;
-        font-weight: normal;
-        font-size: 1em;
-        line-height: 1.3em; }
-        body.about #wrapper main ul.parent ul.child li .body strong {
-          font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif;
-          font-weight: 400;
-          text-transform: lowercase; }
-      body.about #wrapper main ul.parent ul.child li .name {
-        font-family: "Crimson Text", "Baskerville", times, serif;
-        font-weight: normal;
-        font-size: 1em;
-        line-height: 1.3em;
-        font-weight: 800; }
-        body.about #wrapper main ul.parent ul.child li .name em {
-          font-style: normal; }
-      body.about #wrapper main ul.parent ul.child li p {
-        display: inline;
-        font-size: inherit;
-        line-height: inherit; }
-      body.about #wrapper main ul.parent ul.child li a {
-        display: inline; }
-      body.about #wrapper main ul.parent ul.child li span.years {
-        font-size: .8em;
-        line-height: 1.2em;
-        opacity: 0.5; }
-        body.about #wrapper main ul.parent ul.child li span.years::before {
-          content: ' ('; }
-        body.about #wrapper main ul.parent ul.child li span.years::after {
-          content: ')'; }
+  display: table;
+  max-width: 100%; }
+  body.about #wrapper main ul.parent li.cell {
+    width: calc(50% - 1em);
+    max-width: 650px;
+    float: left;
+    margin-bottom: 2em; }
+    body.about #wrapper main ul.parent li.cell h1 {
+      font-family: Clarendon, Arial, sans-serif;
+      font-weight: 400;
+      text-transform: lowercase;
+      font-size: 1em;
+      line-height: 1.3em; }
+  body.about #wrapper main ul.parent ul.child li {
+    width: 100%; }
+    body.about #wrapper main ul.parent ul.child li .body {
+      font-family: "Crimson Text", "Baskerville", times, serif;
+      font-weight: normal;
+      font-size: 1em;
+      line-height: 1.3em; }
+    body.about #wrapper main ul.parent ul.child li strong.title {
+      font-family: "Crimson Text", "Baskerville", times, serif;
+      font-weight: normal;
+      font-size: 1em;
+      line-height: 1.3em;
+      font-weight: 800; }
+    body.about #wrapper main ul.parent ul.child li span.years {
+      font-size: .8em;
+      line-height: 1.2em;
+      opacity: 0.5; }
+      body.about #wrapper main ul.parent ul.child li span.years::before {
+        content: ' ('; }
+      body.about #wrapper main ul.parent ul.child li span.years::after {
+        content: ')'; }
   body.about #wrapper main ul.parent .links {
     margin-top: .5em; }
-    body.about #wrapper main ul.parent .links a {
-      text-decoration: none;
-      font-size: .8em;
-      line-height: 1.2em; }
   body.about #wrapper main ul.parent.about {
     max-width: 950px;
     display: table;
@@ -1606,11 +1588,6 @@ body.about #wrapper main ul.parent {
       float: none; }
       body.about #wrapper main ul.parent li.cell ul.child {
         display: block; } }
-
-@media (max-width: 768px) {
-  body.about #wrapper main ul.parent {
-    display: block;
-    margin: auto !important; } }
 
 .rows .sections {
   padding: 0 0 2em 0; }
@@ -1667,33 +1644,33 @@ body.about #wrapper main ul.parent {
       width: 100% !important;
       padding-bottom: 1em; } }
 
-body.search #wrapper main, body.tag #wrapper main, body.error404 #wrapper main {
+body.search #wrapper main, body.tag #wrapper main {
   padding-bottom: 0; }
 
-body.search .search_header, body.tag .search_header, body.error404 .search_header {
+body.search .search_header, body.tag .search_header {
   width: 100%;
   margin: auto; }
-  body.search .search_header .text h1, body.tag .search_header .text h1, body.error404 .search_header .text h1 {
+  body.search .search_header .text h1, body.tag .search_header .text h1 {
     text-align: left;
     font-weight: 800; }
-    body.search .search_header .text h1 em, body.tag .search_header .text h1 em, body.error404 .search_header .text h1 em {
+    body.search .search_header .text h1 em, body.tag .search_header .text h1 em {
       font-family: "Crimson Text", "Baskerville", times, serif;
       font-weight: normal;
       font-size: 1.2em;
       line-height: 1.4em;
       font-weight: 400; }
-      body.search .search_header .text h1 em:focus, body.tag .search_header .text h1 em:focus, body.error404 .search_header .text h1 em:focus {
+      body.search .search_header .text h1 em:focus, body.tag .search_header .text h1 em:focus {
         outline: none; }
-  body.search .search_header #searchform, body.tag .search_header #searchform, body.error404 .search_header #searchform {
+  body.search .search_header #searchform, body.tag .search_header #searchform {
     width: 100%;
     max-width: 40em;
     padding: 3em 0 5em 0;
     margin: auto; }
 
-body.search .loop, body.tag .loop, body.error404 .loop {
+body.search .loop, body.tag .loop {
   margin-top: 2em; }
 
-body.search .readable .goldbar, body.tag .readable .goldbar, body.error404 .readable .goldbar {
+body.search .readable .goldbar, body.tag .readable .goldbar {
   margin-top: 4em;
   position: relative; }
 
@@ -1798,20 +1775,19 @@ body.discover, body.error404 {
     padding-right: 0;
     color: #f1f5f7; }
     body.discover #wrapper main .inner, body.error404 #wrapper main .inner {
-      position: relative;
-      padding: 0 0 5em 0; }
+      position: relative; }
       body.discover #wrapper main .inner .loader, body.error404 #wrapper main .inner .loader {
         width: 100%;
         padding: 2em 0 4em 0;
         position: absolute;
         left: 0;
         bottom: 0;
-        -webkit-transition: -webkit-transform 800ms cubic-bezier(0.19, 1, 0.22, 1);
-        transition: -webkit-transform 800ms cubic-bezier(0.19, 1, 0.22, 1);
-        transition: transform 800ms cubic-bezier(0.19, 1, 0.22, 1);
-        transition: transform 800ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-transform 800ms cubic-bezier(0.19, 1, 0.22, 1);
-        -webkit-transform: translateY(10em);
-        transform: translateY(10em); }
+        -webkit-transition: -webkit-transform 500ms cubic-bezier(0.19, 1, 0.22, 1);
+        transition: -webkit-transform 500ms cubic-bezier(0.19, 1, 0.22, 1);
+        transition: transform 500ms cubic-bezier(0.19, 1, 0.22, 1);
+        transition: transform 500ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-transform 500ms cubic-bezier(0.19, 1, 0.22, 1);
+        -webkit-transform: translateY(20em);
+        transform: translateY(20em); }
         body.discover #wrapper main .inner .loader .circle, body.error404 #wrapper main .inner .loader .circle {
           width: 8em;
           height: 8em;
@@ -1827,7 +1803,8 @@ body.discover, body.error404 {
       -webkit-transform: translateY(0);
       transform: translateY(0); }
   body.discover #discover, body.error404 #discover {
-    z-index: 300; }
+    z-index: 300;
+    min-height: 100vh; }
 
 #discover {
   -webkit-box-shadow: 0 0 0.25em 0.5em #fecf0c;
@@ -1898,6 +1875,11 @@ body.discover, body.error404 {
           #discover .loop .cell .wrap .image.load, #discover .loop .cell .wrap .image.loading {
             background-image: none !important;
             background-color: #f1f5f7; }
+        #discover .loop .cell .wrap .title {
+          font-family: 'Clarendon';
+          text-transform: lowercase;
+          position: relative;
+          z-index: 10; }
         #discover .loop .cell .wrap .circle {
           width: 5em;
           height: 5em;
@@ -1909,6 +1891,14 @@ body.discover, body.error404 {
         transform: translateX(calc(100vw/12)); }
       #discover .loop .cell.show {
         opacity: 1; }
+  #discover h1 span, #discover h2 span, #discover h3 span {
+    font-style: normal;
+    opacity: 0.5;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    display: table;
+    float: left;
+    margin: 0; }
   #discover .inner {
     width: 100%; }
     #discover .inner .center {
@@ -1929,11 +1919,11 @@ body.discover, body.error404 {
       #discover .header .wrap a {
         text-decoration: none;
         display: table; }
-      #discover .header .wrap h3 {
-        font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif;
-        font-weight: 400;
-        text-transform: lowercase; }
-        #discover .header .wrap h3 span {
+      #discover .header .wrap h1, #discover .header .wrap h2 {
+        font-family: "Crimson Text", "Baskerville", times, serif;
+        font-weight: normal; }
+        #discover .header .wrap h1 span, #discover .header .wrap h2 span {
+          font-style: italic;
           font-weight: 400; }
   #discover.bottom {
     padding: 3em 0; }
@@ -1950,10 +1940,6 @@ body.discover, body.error404 {
   #discover .loop .cell .wrap a, #discover .loop .cell .wrap .image, #discover .loop .cell .wrap .circle {
     width: 3em;
     height: 3em; } }
-
-body.error404 .newsletter form .inputs input {
-  -webkit-box-shadow: 0 0 0.25em 0.05em #f1f5f7;
-  box-shadow: 0 0 0.25em 0.05em #f1f5f7; }
 
 #tags .commas {
   font-size: 2em;
@@ -1974,6 +1960,10 @@ body.error404 .newsletter form .inputs input {
     #tags .commas {
       font-size: 1.2em;
       line-height: 1.4em; } }
+
+body.error404 footer .newsletter form .inputs input {
+  -webkit-box-shadow: 0 0 0.25em 0.05em #f1f5f7;
+  box-shadow: 0 0 0.25em 0.05em #f1f5f7; }
 
 footer {
   width: 100%;
@@ -1998,7 +1988,7 @@ footer {
     margin: auto;
     padding: 1em 1em 0 1em;
     text-align: center;
-    font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif;
+    font-family: Clarendon, Arial, sans-serif;
     font-weight: 400;
     text-transform: lowercase;
     font-size: .8em;
@@ -2250,6 +2240,9 @@ footer {
         body #wrapper main .readable .pagination .paginate .circle, html #wrapper main .readable .pagination .paginate .circle {
           width: 1.5em;
           height: 1.5em; }
+      body #wrapper main .nested, html #wrapper main .nested {
+        display: table;
+        margin: auto !important; }
       body #wrapper main .split_box section, html #wrapper main .split_box section {
         width: 100%;
         padding: 0 0 2em 0; }

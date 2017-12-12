@@ -1,3 +1,4 @@
+@import 'webfonts';
 ///////////////////////////////////////////////////////////////
 ///////////////////////////COLORS//////////////////////////////
 ///////////////////////////////////////////////////////////////
@@ -7,7 +8,7 @@ $dark: #346378;
 $medium: #448399;
 $light: #86a1ad;
 $lighter: #f3f1f3;
-$lightest: white;
+$lightest: #f1f5f7;
 
 // $dark: rgba(#1a172e, 1);
 // $light: #5aa078;
@@ -43,6 +44,7 @@ $lightest: white;
   line-height: 1.1em;
   @include xSmall {
     font-size: 1.2em;
+    line-height: 1.4em;
   }
 }
 @mixin largeText {
@@ -75,6 +77,7 @@ $black: 800;
 $serif: 'Crimson Text', 'Baskerville', times, serif;
 $sansSerif: 'Work Sans', Helvetica, Arial, sans-serif;
 $sansSerif: Helvetica, Arial, sans-serif;
+$clarendon: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif;
 @mixin serifText {
 	font-family: $serif;
   font-weight: normal;
@@ -83,9 +86,15 @@ $sansSerif: Helvetica, Arial, sans-serif;
 	font-family: $sansSerif;
   font-weight: 400;
 }
+@mixin revealerText {
+  font-family: $clarendon;
+  font-weight: 400;
+  text-transform: lowercase;
+}
 ///////////////////////////////////////////////////////////////
 ////////////////////////BREAK POINTS///////////////////////////
 ///////////////////////////////////////////////////////////////
+$logoWidth: 16em;
 $sideWidth: 18em;
 $mobSideWidth: 35vw;
 $lineWidth: 650px;
@@ -134,19 +143,19 @@ $ease: cubic-bezier(0.19, 1, 0.22, 1);
 
 @keyframes glisten {
   0% {
-  	opacity: 0.5;
+  	opacity: 0.75;
   }
   25% {
   	opacity: 1;
   }
   50% {
-  	opacity: .5;
+  	opacity: .75;
   }
   75% {
   	opacity: 1;
   }
   100% {
-  	opacity: 0.5;
+  	opacity: 0.75;
   }
 }
 
@@ -164,21 +173,21 @@ $ease: cubic-bezier(0.19, 1, 0.22, 1);
 
 @keyframes glistenBounce {
   0% {
-  	opacity: 0.5;
+  	opacity: 0.75;
   	transform: translateY(0);
   }
   25% {
   	opacity: 1;
   }
   50% {
-  	opacity: .5;
+  	opacity: .75;
   	transform: translateY(-.125em);
   }
   75% {
   	opacity: 1;
   }
   100% {
-  	opacity: 0.5;
+  	opacity: 0.75;
   	transform: translateY(0);
   }
 }
@@ -200,6 +209,10 @@ $ease: cubic-bezier(0.19, 1, 0.22, 1);
 @mixin largeShadow($color) {
   // hover
   box-shadow: 0 0 2em 1em $color;
+}
+@mixin xLargeShadow($color) {
+  // search
+  box-shadow: 0 0 5em 1em $color;
 }
 @mixin scale {
   transform: scale(1.005);

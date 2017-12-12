@@ -9,23 +9,25 @@ $thumb_height = $thumb[2];
 $link = get_field( 'link' );
 $date = get_field( 'event_date' );
 $i = $wp_query->current_post;
-echo '<div class="cell event">';
+echo '<article class="cell event">';
 	echo '<div class="wrap">';
-		echo '<a class="link_wrap" target="_blank" href="' . $link . '">';
-			echo '<div class="' . ( $thumb ? 'image load' : 'missing') . '">';
-				if ( $thumb ) {
-					echo '<img data-src="'.$thumb_url.'" data-width="'.$thumb_width.'" data-height="'.$thumb_height.'"/>';
-				}
+		echo '<div class="primary">';
+			echo '<a class="link_wrap" target="_blank" href="' . $link . '">';
+				echo '<div class="' . ( $thumb ? 'image load' : 'missing') . '">';
+					if ( $thumb ) {
+						echo '<img data-src="'.$thumb_url.'" data-width="'.$thumb_width.'" data-height="'.$thumb_height.'"/>';
+					}
+				echo '</div>';
 			echo '</div>';
-			echo '<div class="meta">';
-				echo '<h2>' . $title . '</h2>';
+			echo '<div class="secondary">';
+				echo '<div class="title">';
+					echo '<h2>' . $title . '</h2>';
+				echo '</div>';
 				if( $date ) {
-					echo $date;
-					// $date = strtotime( $date );
-					// echo '<span class="date">' . date_format( $date, 'm/d/y' ) . '</span>';
+					echo '<div class="meta"><span class="date">' . $date . '</span></div>';
 				}
 			echo '</div>';
 		echo '</a>';
 	echo '</div>';
-echo '</div>';
+echo '</article>';
 ?>
