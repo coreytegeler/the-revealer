@@ -21,7 +21,7 @@ body.articles #wrapper {
 			padding: 2em 0;
 		}
 		#filters {
-			padding: 2em 0 0 0;
+			padding: 2em 0 4em 0;
 			flex: 1;
 			.filter {
 				padding: 0 0 2em 0;
@@ -42,7 +42,8 @@ body.articles #wrapper {
 					width: 100%;
 					padding: 0;
 					user-select: none;
-					font-weight: $black;
+					// font-weight: $black;
+					@include revealerText;
 					.more {
 						font-weight: $regular;
 					}

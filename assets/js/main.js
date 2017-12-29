@@ -1,6 +1,6 @@
 jQuery(function($) {
   return $(function() {
-    var $alert, $body, $footer, $header, $headers, $logo, $main, $nav, $popup, $side, $window, $wrapper, animateText, animateTexts, assetsUrl, closeAlert, closePopup, fixHeader, fixLoops, fixSide, fixToggler, hoverCell, isMobile, lastSideScroll, lastWeek, loadImage, now, popupObj, queryMore, setupArticle, shareWindow, sideScroll, siteUrl, sizeImages, themeUrl, toggleToggler, trackScroll, transport, week;
+    var $alert, $body, $footer, $header, $headers, $logo, $main, $nav, $popup, $side, $window, $wrapper, animateText, animateTexts, assetsUrl, closeAlert, closePopup, dur, fixHeader, fixLoops, fixSide, fixToggler, hoverCell, isMobile, lastSideScroll, lastWeek, loadImage, now, popupObj, queryMore, setupArticle, shareWindow, sideScroll, siteUrl, sizeImages, themeUrl, toggleToggler, trackScroll, transport;
     $window = $(window);
     $body = $('body');
     $wrapper = $('#wrapper');
@@ -137,16 +137,21 @@ jQuery(function($) {
       }).fail(function(instance) {
         var $loop;
         $(instance.elements).each(function() {
-          var $missing, $missingSvg;
+          var $missingCell, $missingImage, $missingImg, missingUrl;
           $cell = $(this).parents('.cell');
           if ($cell.length) {
-            $missing = $cell;
+            $missingCell = $cell;
           } else {
-            $missing = $(this);
+            $missingCell = $(this);
           }
-          $missing.addClass('missing');
-          $missingSvg = $('#missingSvg svg');
-          $missing.html($missingSvg);
+          if ($missingImg = $missingCell.find('img')) {
+            $missingImg.remove();
+          }
+          $missingImage = $missingCell.find('.image');
+          missingUrl = $('#missingSvg').attr('data-url');
+          $missingCell.load(missingUrl, null, function() {
+            return $missingCell.addClass('missing');
+          });
           if ($cell.length) {
             return $cell.addClass('show');
           }
@@ -317,7 +322,6 @@ jQuery(function($) {
         var $inner, $toggler;
         $toggler = $(toggler);
         $inner = $toggler.find('.inner');
-        console.log($toggler.is('.toggled'), $inner.innerHeight(), $toggler.innerHeight());
         if ($inner.innerHeight() <= $toggler.innerHeight() + 5) {
           return $toggler.addClass('toggled');
         } else {
@@ -327,7 +331,7 @@ jQuery(function($) {
     };
     setupArticle = function() {
       var $article, $content, $elems, $inlineImg, $link, $sideImages, $wpImg, currentSrc, goodTags, hasImages, href, inlineImg, inlineImgs, j, k, len, len1, link, links, name, pseudo, replace, split;
-      if (!$body.is('.single-post')) {
+      if (!$body.is('.single-post, .page-template-default')) {
         return;
       }
       $article = $('article.readable');
@@ -342,7 +346,8 @@ jQuery(function($) {
       for (j = 0, len = inlineImgs.length; j < len; j++) {
         inlineImg = inlineImgs[j];
         $inlineImg = $(inlineImg);
-        $wpImg = $inlineImg.parents('.aligncenter, .alignleft, .alignright, .wp-caption');
+        $wpImg = $inlineImg.parents('a, .aligncenter, .alignleft, .alignright, .wp-caption');
+        $wpImg.filter('a').removeClass('href');
         if ($wpImg.length) {
           $wpImg.addClass('image load');
         } else {
@@ -365,9 +370,7 @@ jQuery(function($) {
           sizeImages($cellImage);
           return $sideImages.parents('.images').removeClass('hide');
         };
-        pseudo.onerror = function(e) {
-          return console.log(this, e);
-        };
+        pseudo.onerror = function(e) {};
         pseudo.src = currentSrc;
       }
       sizeImages($article.find('.content .image.load'));
@@ -527,29 +530,31 @@ jQuery(function($) {
     animateTexts = function() {
       return setTimeout(function() {
         return $('.glisten').each(function(ri, wrap) {
-          var $span, $spans, $wordSpan, $wrap, char, chars, j, k, len, len1, word, words;
+          var $spans, $words, $wrap;
           ri++;
           $wrap = $(wrap);
-          words = $wrap.text().split(' ');
+          $words = $wrap.find('.word');
           $wrap.empty();
-          for (j = 0, len = words.length; j < len; j++) {
-            word = words[j];
-            $wordSpan = $('<span class="word"></span>');
+          $words.each(function(i, word) {
+            var $span, $wordSpan, char, chars, j, len;
+            $wordSpan = $(word);
+            word = $wordSpan.text();
             chars = word.split('');
-            for (k = 0, len1 = chars.length; k < len1; k++) {
-              char = chars[k];
+            $wordSpan.empty();
+            for (j = 0, len = chars.length; j < len; j++) {
+              char = chars[j];
               $span = $('<span class="char">' + char + '</span>');
               $wordSpan.append($span);
             }
-            $wrap.append($wordSpan);
-          }
+            return $wrap.append($wordSpan);
+          });
           $spans = $wrap.find('span.char');
           $spans.each(function(si, span) {
             return animateText(span, si);
           });
           return $wrap.addClass('show');
         });
-      });
+      }, 400);
     };
     animateText = function(html, index) {
       return setTimeout(function() {
@@ -565,8 +570,8 @@ jQuery(function($) {
     if ($popup.length) {
       popupObj = JSON.parse(localStorage.getItem('popup'));
       now = new Date().getTime();
-      week = 60 * 60 * 24 * 7 * 1000;
-      lastWeek = now - week;
+      dur = 60 * 15 * 1000;
+      lastWeek = now - dur;
       if (popupObj && popupObj.shown && popupObj.time > lastWeek) {
         $popup.addClass('show stuck');
       }

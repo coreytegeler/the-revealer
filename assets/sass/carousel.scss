@@ -59,21 +59,41 @@
 		height: 100%;
 		position: absolute;
 		top: 0;
+		opacity: 1;
+		display: flex;
 		font-family: Helvetica, Arial, sans-serif;
 		background-size: contain;
 		background-repeat: no-repeat;
 		background-position: center;
+		transition: opacity 500ms $ease;
 		z-index: 600;
+		svg {
+			width: 100%;
+			height: auto;
+			display: table;
+			fill: $lighter;
+			margin: auto;
+			vertical-align: middle;
+		}
 		&.left {
 			left: 0;
-			&:hover {
-				cursor: w-resize;
-			}
+			// background-image: url(images/left.svg);
+			// &:hover {
+			// 	cursor: w-resize;
+			// }
 		}
 		&.right {
 			right: 0;
-			&:hover {
-				cursor: e-resize;
+			// background-image: url(images/right.svg);
+			// &:hover {
+			// 	cursor: e-resize;
+			// }
+		}
+		&:hover {
+			opacity: 1;
+			cursor: pointer;
+			svg {
+				fill: $gold;
 			}
 		}
 	}
@@ -84,7 +104,6 @@
 		padding: 1em;
 		display: table;
 		z-index: 600;
-		opacity: .4;
 		transition: opacity 600ms $ease;
 		.close.circle {
 			background-color: rgba($lightest,.9);
@@ -93,6 +112,9 @@
 			}
 			&:hover {
 				cursor: pointer;
+				svg {
+					fill: $gold;
+				}
 			}
 		}
 		&:hover {

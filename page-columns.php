@@ -63,11 +63,6 @@ echo '<div class="readable">';
 						echo '<div class="loop posts list inner">';
 							while ( $posts_query->have_posts() ) {
 								$posts_query->the_post();
-								$thumb_id = get_post_thumbnail_id();
-								$thumb = wp_get_attachment_image_src( $thumb_id, 'thumb' );
-								$thumb_url = $thumb[0];
-								$thumb_width = $thumb[1];
-								$thumb_height = $thumb[2];
 								$date = get_the_date();
 								$permalink = get_permalink();
 								echo '<article class="cell" role="article" style="' . $style . '" data-id="' . get_the_ID() . '">';

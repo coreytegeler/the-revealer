@@ -50,14 +50,18 @@ if( $post->post_name != 'discover' ) {
 				echo '</a>';
 			}
 		echo '</div>';
-		echo '<div class="note">The Revealer is published by the <a target="_blank" href="' . $crm_url . '">Center for Religion and Media at NYU</a></div>';
-		echo '<div class="note">Copyright © 2017 The Revealer All Rights Reserved.</div>';
+
+		if( have_rows('footer_lines', 'option') ) {
+		  while( have_rows('footer_lines', 'option') ) : the_row();
+	      echo '<div class="note">' . get_sub_field('text') . '</div>';
+		  endwhile;
+		}
 	echo '</footer>';
 }
 echo '<div id="isMobile"></div>';
 $missing_url = get_template_directory_uri() . '/assets/images/missing.svg';
 $missing_svg = file_get_contents( $missing_url );
-echo '<div id="missingSvg">'.$missing_svg.'</div>';
+echo '<div id="missingSvg" data-url="' . $missing_url . '">'.$missing_svg.'</div>';
 wp_footer();
 ?>
 </body>

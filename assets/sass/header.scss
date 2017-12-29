@@ -61,6 +61,7 @@ header {
     	color: $medium;
     	flex: 1;
     	text-transform: lowercase;
+    	@include xSmallText;
     }
     .navigation {
     	width: 100%;
@@ -122,6 +123,11 @@ header {
 				}
 			}
 		}
+	}
+	.goldbar {
+		position: absolute;
+		left: 0;
+		bottom: 0;
 	}
 	@include medium {
 		

@@ -2,7 +2,7 @@
 global $post;
 $title = $post->post_title;
 $thumb_id = get_post_thumbnail_id();
-$thumb = wp_get_attachment_image_src( $thumb_id, 'small' );
+$thumb = wp_get_attachment_image_src( $thumb_id, 'medium_large' );
 $thumb_url = $thumb[0];
 $thumb_width = $thumb[1];
 $thumb_height = $thumb[2];

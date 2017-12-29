@@ -4,14 +4,20 @@ Template Name: Page
 */
 global $post;
 $title = $post->post_title;
-$content = get_the_content();
 get_header();
-echo '<div class="readable">';
-	echo '<div class="max">';
-		echo '<h1>';
-			echo $title;
-		echo '</h1>';
+echo '<article class="readable show">';
+	echo '<div class="text">';
+		echo '<div class="lead">';
+			echo '<div class="header">';
+				echo '<h1 class="title">';
+					echo $title;
+				echo '</h1>';
+			echo '</div>';
+		echo '</div>';
+		echo '<div class="content">';
+			the_content();
+		echo '</div>';
 	echo '</div>';
-echo '</div>';
+echo '</article>';
 get_footer();
 ?>

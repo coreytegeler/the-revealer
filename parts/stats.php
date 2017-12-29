@@ -12,11 +12,21 @@ if( $first_post = $query->posts[0] ) {
 	$date_diff = date_diff( $first_date, $current_date );
 	$age = $date_diff->y;
 }
+// echo '<div class="stats">';
+// 	if( is_404() ) {
+// 		echo '<h1 class="animation glisten bounce">Oops, this page is lost.</h1>';
+// 	}
+// 	echo '<h1 class="animation glisten bounce">Explore ' . $age . ' years and ' . $article_count . ' articles of</h1>';
+// 	echo '<h1 class="title animation glisten bounce">The Revealer</h1>';
+// echo '</div>';
+
+
+
 echo '<div class="stats">';
 	if( is_404() ) {
-		echo '<h1 class="glisten bounce">Oops, this page is lost.</h1>';
+		echo '<h1><div class="animation glisten bounce">' . wrap_words( 'Oops, this page is lost.' ) . '</div></h1>';
 	}
-	echo '<h1 class="glisten bounce">Explore ' . $age . ' years and ' . $article_count . ' articles of</h1>';
-	echo '<h1 class="title glisten bounce">The Revealer</h1>';
+	echo '<h1><div class="animation glisten bounce">' . wrap_words( 'Explore ' . $age . ' years and ' . $article_count . ' articles of' ) . '</div></h1>';
+	echo '<h1><div class="title animation glisten bounce">' . wrap_words( 'The Revealer' ) . '</div></h1>';
 echo '</div>';
 ?>

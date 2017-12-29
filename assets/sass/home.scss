@@ -1,7 +1,6 @@
 body.home {
 	main {
 		.goldbar {
-			position: relative;
 			margin: 3em 0;
 		}
 		.loop {
@@ -18,13 +17,17 @@ body.home {
 						position: relative;
 						z-index: 100;
 						padding: 0 0 .15em 0;
-						@include serifText;
-						@include xxLargeText;
+						// @include serifText;
+						@include revealerText;
+						@include xLargeText;
 					}
 					.lead, .date {
 						color: $medium;
-						@include serifText;
-						font-style: italic;
+						// @include serifText;
+						@include revealerText;
+						// font-style: italic;
+						position: relative;
+						z-index: 100;
 					}
 					.loop {
 						padding-top: 1em;
@@ -52,25 +55,17 @@ body.home {
 								font-weight: $regular;
 							}
 							.inputs {
-								// padding-left: 10%;
+								max-width: 20em;
+								margin: auto;
 							}
 						}
-					}
-					.circle {
-						width: calc(5vw + 2em);
-						height: calc(5vw + 2em);
-						position: absolute;
-						left: 40%;
-						top: 25%;
-						z-index: 0;
-						background: $gold;
-						border-radius: 50%;
 					}
 				}
 			}
 			&#current_issue {
 				.cell {
 					width: calc(50% - 2em);
+					margin-bottom: 7em;
 					&:nth-child(odd) {
 						margin-right: 2em;
 					}
@@ -107,6 +102,18 @@ body.home {
 							}
 						}
 					}
+				}
+			}
+		}
+		#field_notes {
+			margin-top: 5em;
+			img {
+				width: 100%;
+			}
+			a.link_wrap:hover {
+				.image {
+					background-color: rgba($gold, .45);
+					border-radius: 2em;
 				}
 			}
 		}

@@ -1,5 +1,6 @@
 <?php
 echo '<aside>';
+	$articles_url = get_articles_page();
 	$cat_param = $_GET['category'];
 	$year_param = $_GET['y'];
 	$col_param = $_GET['column'];
@@ -7,14 +8,6 @@ echo '<aside>';
 	if( $cat_id = get_query_var( 'cat' ) ) {
 		$cat_param = get_category( $cat_id, false )->slug;
 	}
-
-	$articles_page = get_page_by_path( 'articles' );
-	if( $articles_page ) {
-		$page_url = get_permalink( $articles_page );
-	} else {
-		$page_url = get_site_url() . '/articles/';
-	}
-
 	if( $cat_param ) {
 		$page_url = add_query_arg( 'category', $cat_param, $page_url );
 	}
@@ -105,13 +98,7 @@ echo '<aside>';
 
 		echo '<div class="filter tags">';
 			echo '<div class="label">Tags</div>';
-			$tags = get_tags( array(
-			  'orderby' => 'count',
-			  'order' => 'desc',
-			  'number' => 20,
-			  'hide_empty' => 0
-			) );
-
+			$tags = get_recent_tags();
 			$tag_param_included = false;
 			echo '<div class="commas tags">';
 				if( sizeof( $tags ) ) {

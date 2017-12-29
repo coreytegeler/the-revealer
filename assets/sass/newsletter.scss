@@ -47,10 +47,10 @@
 		}
 	}
 	&#popup {
-		width: 100%;	
-		display: none;
+		width: 100%;
 		z-index: 700;
 		background: rgba($lightest,.98);
+		transition: opacity 500ms $ease;
 		.close {
 	    position: absolute;
 	    right: 0;
@@ -67,6 +67,7 @@
 			margin: 0 2em;
 			position: relative;
 			.goldbar {
+				position: absolute;
 				top: 0;
 				bottom: auto;
 			}
@@ -92,6 +93,7 @@
 					font-weight: $bold;
 					padding: 0 0 .5em 0;
 					text-align: center;
+					@include revealerText;
 					@include xSmallText;
 				}
 			}
@@ -110,6 +112,18 @@
 		&.stuck {
 			transform: none !important;
 			transition: none !important;
+			position: absolute;
+			pointer-events: none;
+			opacity: 0;
 		}
+	}
+}
+@include small {
+	.newsletter#popup .inner {
+		width: calc(100% - 1em);
+    margin: 0 .5em;
+    .close {
+    	top: -1em;
+    }
 	}
 }

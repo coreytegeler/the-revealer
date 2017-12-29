@@ -1,4 +1,7 @@
 <?php
+/*
+Template Name: Discover
+*/
 get_header();
 	echo '<div id="discover" class="readable">';
 		echo '<div class="inner">';

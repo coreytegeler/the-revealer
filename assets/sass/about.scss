@@ -15,6 +15,9 @@ body.about {
 				display: block;
 				padding: 2em 0 0 0;
 				margin: 0;
+				&:first-child {
+					padding: 0;
+				}
 				li {
 					list-style: none;
 					&.cell {
@@ -35,10 +38,10 @@ body.about {
 			  h2.title {
 					@include revealerText;
 					text-align: center;
+					// padding: 0 0 1.5em 0;
 				}
 				ul.child {
 					display: block;
-					padding: 0 0 1.5em 0;
 					margin: auto;
 					li {
 						width: 100%;
@@ -83,8 +86,13 @@ body.about {
 				.links {
 					margin-top: .5em;
 					a {
+						margin-right: 1em;
 						text-decoration: none;
 						@include xSmallText;
+						border-bottom: 1px solid $gold;
+						&:hover {
+							color: $gold;
+						}
 					}
 				}
 				&.about {
@@ -107,7 +115,7 @@ body.about {
 			height: auto !important;
 			li.cell {
 				width: 100%;
-				display: table;
+				display: block;
 				margin: auto;
 				position: static !important;
 				left: 0 !important;

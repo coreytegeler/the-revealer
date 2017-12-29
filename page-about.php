@@ -9,14 +9,14 @@ $content = apply_filters( 'the_content', $post->post_content );
 $people = get_field( 'people' );
 echo '<div class="readable">';
 	echo '<div class="max">';
-		echo '<ul class="nested parent about">';
+		echo '<ul class="parent about">';
 			echo '<li><ul class="child">';
 				echo '<li>';
 					echo '<span class="body"><h2>' . $content . '</h2></span>';
 				echo '</li>';
 			echo '</ul></li>';
 		echo '</ul>';
-		echo '<ul class="nested parent people masonry">';
+		echo '<ul class="parent people masonry">';
 			foreach( $people as $role ) {
 				$title = $role['title'];
 				$these_people = $role['person'];

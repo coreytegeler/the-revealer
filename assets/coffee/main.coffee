@@ -109,12 +109,15 @@ jQuery ($) ->
 					$(instance.elements).each () ->
 						$cell = $(this).parents('.cell')
 						if $cell.length
-							$missing = $cell
+							$missingCell = $cell
 						else
-							$missing = $(this)
-						$missing.addClass('missing')
-						$missingSvg = $('#missingSvg svg')
-						$missing.html($missingSvg)
+							$missingCell = $(this)
+						if $missingImg = $missingCell.find('img')
+							$missingImg.remove()
+						$missingImage = $missingCell.find('.image')
+						missingUrl = $('#missingSvg').attr('data-url')
+						$missingCell.load missingUrl, null, () ->
+							$missingCell.addClass('missing')
 						if $cell.length
 							$cell.addClass('show')
 					if $loop = $img.parents('.masonry:eq(0)')
@@ -275,7 +278,6 @@ jQuery ($) ->
 		 	$('.toggler').each (i, toggler) ->
 		 		$toggler = $(toggler)
 		 		$inner = $toggler.find('.inner')
-		 		console.log $toggler.is('.toggled'), $inner.innerHeight(), $toggler.innerHeight()
 		 		if $inner.innerHeight() <= $toggler.innerHeight() + 5
 		 			$toggler.addClass('toggled')
 		 		else
@@ -286,7 +288,7 @@ jQuery ($) ->
 
 		# alters and appends article body text to make posts more dynamic
 		setupArticle = () ->
-			if !$body.is('.single-post')
+			if !$body.is('.single-post, .page-template-default')
 				return
 			$article = $('article.readable')
 			$content = $article.find('.text .content')
@@ -304,9 +306,8 @@ jQuery ($) ->
 			hasImages = false
 			for inlineImg in inlineImgs
 				$inlineImg = $(inlineImg)
-				$wpImg = $inlineImg.parents('.aligncenter, .alignleft, .alignright, .wp-caption')
-				# if $wpImg.find('a').length
-				# 	$wpImg = $wpImg.find('a')
+				$wpImg = $inlineImg.parents('a, .aligncenter, .alignleft, .alignright, .wp-caption')
+				$wpImg.filter('a').removeClass('href')
 				if $wpImg.length
 					$wpImg.addClass('image load')
 				else
@@ -328,7 +329,7 @@ jQuery ($) ->
 					sizeImages($cellImage)
 					$sideImages.parents('.images').removeClass('hide')
 				pseudo.onerror = (e) ->
-					console.log this, e
+					# console.log this, e
 					# $missing.addClass('missing')
 					# $missing.html('<object type="image/svg+xml" data="'+siteUrl+'/assets/images/missing.svg"></object>')
 					# console.log $missing
@@ -470,14 +471,24 @@ jQuery ($) ->
 
 		animateTexts = () ->
 			setTimeout () ->
+				# $('.glisten .word span').each (i, html) ->
+				# 	$word = $(html)
+				# 	word = html.innerText
+				# 	console.log html, word
+				# 	setTimeout () ->
+				# 		$word.addClass('animate')
+				# 	, i*50
 				$('.glisten').each (ri, wrap) ->
 					ri++
 					$wrap = $(wrap)
-					words = $wrap.text().split(' ')
+					# words = $wrap.text().split(' ')
+					$words = $wrap.find('.word')
 					$wrap.empty()
-					for word in words
-						$wordSpan = $('<span class="word"></span>')
+					$words.each ( i, word ) ->
+						$wordSpan = $(word)
+						word = $wordSpan.text()
 						chars = word.split('')
+						$wordSpan.empty()
 						for char in chars
 							$span = $('<span class="char">' + char + '</span>')
 							$wordSpan.append($span)
@@ -487,6 +498,7 @@ jQuery ($) ->
 					$spans.each (si, span) ->
 						animateText(span, si)
 					$wrap.addClass('show')
+			, 400
 
 		animateText = (html, index) ->
 			setTimeout () ->
@@ -510,8 +522,9 @@ jQuery ($) ->
 		if $popup.length
 			popupObj = JSON.parse(localStorage.getItem('popup'))
 			now = new Date().getTime()
-			week = 60*60*24*7*1000
-			lastWeek = now - week
+			#15 minutes
+			dur = 60*15*1000
+			lastWeek = now - dur
 			if popupObj && popupObj.shown && popupObj.time > lastWeek
 				$popup.addClass('show stuck')
 

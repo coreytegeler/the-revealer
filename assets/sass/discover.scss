@@ -7,12 +7,12 @@ body.discover, body.error404 {
     }
     .inner {
       .tagline {
-        color: $lightest;
+        // color: $lightest;
         opacity: .75;
       }
       #logo {
         svg {
-          fill: $lightest;
+          // fill: $lightest;
         }
         a.svg:hover {
           svg {
@@ -22,7 +22,7 @@ body.discover, body.error404 {
       }
       nav {
         .link a {
-          color: $lightest;
+          // color: $lightest;
           &:hover {
             opacity: .5;
           }
@@ -41,7 +41,7 @@ body.discover, body.error404 {
 			margin-right: 0;
       padding-left: 0; 
       padding-right: 0;
-      color: $lightest;
+      color: $dark;
       .inner {
         position: relative;
         padding: 0 0 5em 0;
@@ -78,6 +78,10 @@ body.discover, body.error404 {
   #discover {
     z-index: 300;
     // min-height: 100vh;
+  }
+  .transport {
+    @include mediumShadow($lightest);
+    display: flex;
   }
 }
 #discover {
@@ -158,7 +162,7 @@ body.discover, body.error404 {
         }
       }
       &:nth-child(12n+1),&:nth-child(12n+2), &:nth-child(12n+3), &:nth-child(12n+4), &:nth-child(12n+5), &:nth-child(12n+6) {
-        transform: translateX(calc(100vw/12));
+        transform: translateX(-50%);
       }
       &.show {
         opacity: 1;
@@ -194,20 +198,10 @@ body.discover, body.error404 {
         @include revealerText;
         span {
           font-weight: $regular;
+          display: inline-block;
         }
       }
     }
-    // .circle {
-    //   width: 3em;
-    //   height: 3em;
-    //   border-radius: 50%;
-    //   background: $lightest;
-    //   box-shadow: inset 0 0 .25em .5em $lightest;
-    //   position: absolute;
-    //   left: calc(50% - 1.5em);
-    //   top: calc(50% - 1.5em);
-    //   z-index: 1;
-    // }
   }
   &.bottom {
     padding: 3em 0; 
@@ -220,6 +214,27 @@ body.discover, body.error404 {
         input {
           background: $lightest;
         }
+      }
+    }
+  }
+}
+body.search {
+  #discover .header {
+    bottom: auto;
+    top: 1em;
+    .wrap h3 {
+
+    }
+  }
+  .header {
+    .shape {
+      width: 25%;
+      float: left;
+      &:first-of-type {
+
+      }
+      &:last-of-type {
+        
       }
     }
   }

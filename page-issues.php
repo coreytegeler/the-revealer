@@ -44,9 +44,7 @@ echo '<div class="readable">';
 				echo '<section>';
 					echo '<div class="text">';
 						echo '<h1 class="title">' . $title . '</h1>';
-						if( get_field( 'special', $issue ) ) {
-							echo '<h2 class="date">published ' . $date . '</h2>';
-						}
+						echo '<h2 class="date">published ' . $date . '</h2>';
 					echo '</div>';
 				echo '</section>';
 
@@ -55,12 +53,15 @@ echo '<div class="readable">';
 						echo '<div class="loop posts list">';
 							while ( $posts_query->have_posts() ) {
 								$posts_query->the_post();
-								$writers = get_contributors_list( true, false );
+								$post_id = get_the_ID();
+								$writers = get_contributors_list( $post_id, true, false );
 								$permalink = get_permalink();
-								echo '<article class="cell" role="article" style="' . $style . '" data-id="' . get_the_ID() . '">';
+								echo '<article class="cell" role="article" style="' . $style . '" data-id="' . $post_id . '">';
 									echo '<h3>';
 										echo '<a class="title" href="' . $permalink . '">' . get_the_title() . '</a>';
-										echo '<em class="writer">' . $writers . '</em>';
+										if( $writers ) {
+											echo '<em class="writer">by ' . $writers . '</em>';
+										}
 									echo '</h3>';
 								echo '</article>';
 							}

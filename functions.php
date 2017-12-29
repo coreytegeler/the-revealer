@@ -1,10 +1,7 @@
 <?php
 show_admin_bar( false );
 add_theme_support( 'post-thumbnails', array( 'post', 'page', 'event' ) ); 
-add_image_size( 'thumb', 800, 500, true );
-add_image_size( 'small', 1000, 1000, false );
 
-// wp_register_script( 'MyFonts', get_template_directory_uri() . '/MyFontsWebfontsKit.js' );
 wp_register_script( 'jquery', get_template_directory_uri() . '/assets/js/jquery-3.2.1.min.js' );
 wp_register_script( 'imagesloaded', get_template_directory_uri() . '/assets/js/imagesloaded.js' );
 wp_register_script( 'transit', get_template_directory_uri() . '/assets/js/transit.js' );
@@ -17,7 +14,6 @@ wp_localize_script( 'main', 'wp_api', array(
 ) );
 
 function revealer_enqueue() {
-  // wp_enqueue_script( 'MyFonts' );
   wp_enqueue_script( 'jquery' );
   wp_enqueue_script( 'imagesloaded' );
   wp_enqueue_script( 'transit' );
@@ -56,15 +52,32 @@ function get_read_time() {
   return $read_time;
 }
 
-function get_contributors_list( $writers = false, $conts = false ) {
+function get_articles_page() {
+  $articles_page = get_page_by_path( 'articles' );
+  if( $articles_page ) {
+    return get_permalink( $articles_page );
+  } else {
+    return get_site_url() . '/articles/';
+  }
+}
+
+function wrap_words( $str ) {
+  $str = preg_replace( '([a-zA-Z.,!?0-9]+(?![^<]*>))', '<span class="word">$0</span>', $str );
+  return $str;
+}
+
+function get_contributors_list( $id, $show_writers = false, $show_contributors = false, $links = false  ) {
   $contributors = [];
-  if( $writers && have_rows( 'writers' ) ) {
+  if( !isset( $id ) || !$id ) {
+    return false;
+  }
+  if( $show_writers && have_rows( 'writers', $id ) ) {
     while( have_rows( 'writers') ) : the_row();
       $contributors[] = get_sub_field( 'name' );
     endwhile;
   }
 
-  if( $conts && have_rows( 'contributors' ) ) {
+  if( $show_contributors && have_rows( 'contributors', $id ) ) {
     while( have_rows( 'contributors') ) : the_row();
       $contributors[] = get_sub_field( 'name' );
     endwhile;
@@ -81,7 +94,69 @@ function get_tags_list() {
     
   }
   return implode( $tags_array, ', ' ); 
-  
+}
+
+function get_cat_list( $id, $link = false ) {
+  $html = '';
+  $categories = get_the_category( $id );
+  $show_categories = array();
+  $hidden = array( 'today', 'timeless', 'daily', 'in-the-world-2', 'uncategorized', 'timely', 'world-daily' );
+  $articles_url = get_articles_page();
+  if( $categories ) {
+    foreach( $categories as $i => $cat ) {
+      $slug = $cat->slug;
+      if( $slug == 'features' ) {
+        array_unshift( $show_categories, $cat );
+      } else if( !in_array( $slug, $hidden ) ) {
+        array_push( $show_categories, $cat );
+      }
+    }
+    foreach( $show_categories as $i => $cat ) {
+      $cat_name = get_field( 'singular', $cat );
+      $cat_slug = $cat->slug;
+      if( !$cat_name ) {
+        $cat_name = $cat->name;
+      }
+      $html .= '<span class="' . $cat_slug . '">';
+      if( $link ) {
+        $cat_url = add_query_arg( 'category', $cat_slug, $articles_url );
+        $html .= '<a href="' . $cat_url . '">' . $cat_name . '</a>';
+      } else {
+        $html .= $cat_name;
+      }
+      $html .= '</span>';
+      if( $i < sizeof( $show_categories ) - 1 ) {
+        $html .= ', ';
+      }
+    }
+    // print_r( $categories );
+  }
+  return $html;
+}
+
+function get_recent_tags() {
+  global $wp_query;
+  $tags = $used_tags = array();
+  $articles_args = array(
+    'posts_per_page' => 10
+  );
+  query_posts( $articles_args );
+  if ( $wp_query->have_posts() ) {
+    while ( $wp_query->have_posts() ) {
+      the_post();
+      $post_tags = get_the_tags();
+      array_slice( $post_tags, 0, 5 );
+      foreach( $post_tags as $i => $tag ) {
+        $slug = $tag->slug;
+        if( $tag->count > 5 && !in_array( $slug, $used_tags ) ) {
+          array_push( $used_tags, $slug );
+          array_push( $tags, $tag );
+        }
+      }
+    }
+  }
+  wp_reset_query();
+  return $tags;
 }
 
 function urlify( $url ) {
@@ -257,6 +332,6 @@ function add_admin_styles() {
 }
 add_action( 'init', 'add_admin_styles' );
 
-flush_rewrite_rules( false );
-// flush_rewrite_rules();
+// flush_rewrite_rules( false );
+flush_rewrite_rules();
 ?>

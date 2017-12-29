@@ -42,9 +42,13 @@ if( is_home() ) {
 $page_title = get_bloginfo( 'name' );
 $og_title = $page_title;
 $post_title = get_the_title();
-if( $page_type == 'article' && $column = get_the_terms( $post, 'columns' ) ) {
-	$article_title = $column[0]->name . ': ' . $post_title;
-	$page_title .= ' — ' . $article_title;
+if( $page_type == 'article' ) {
+	if( $column = get_the_terms( $post, 'columns' ) ) {
+		$article_title = $column[0]->name . ': ' . $post_title;
+	} else {
+		$article_title = $post_title;
+	}
+	$page_title = $article_title . ' — ' . $page_title;
 	$og_title =  $article_title . ' — ' . $og_title;
 } else if( $page_slug != 'home' ) {
 	$page_title .= wp_title( '—', false );
@@ -73,9 +77,10 @@ echo '<link rel="profile" href="http://gmpg.org/xfn/11">';
 echo '<meta property="og:title" content="' . $og_title . '" />';
 echo '<meta property="og:type" content="' . $og_type .  '" />';
 if( $og_type == 'article' ) {
+	$article_id = $post->ID;
 	echo '<meta property="article:published_time" content="' . get_the_date( 'c' ) . '" />';
 	echo '<meta property="article:modified_time" content="' . get_the_modified_date( 'c' ) . '" />';
-	echo '<meta property="article:author" content="' . get_contributors_list() . '" />';
+	echo '<meta property="article:author" content="' . get_contributors_list( $article_id, true, true ) . '" />';
 	echo '<meta property="article:section" content="Religion" />';
 	echo '<meta property="article:tag" content="' . get_tags_list() . '" />';
 }

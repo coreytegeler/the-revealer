@@ -42,7 +42,7 @@ echo '<header class="main">';
 			// 	get_template_part( 'parts/filters' );
 			// echo '</div>';
 		echo '</div>';
-		echo '<div class="goldbar"><div class="solid"></div></div>';
+		get_template_part( 'parts/goldbar' );
 	echo '</div>';
 echo '</header>';
 	// if( is_archive() ) {

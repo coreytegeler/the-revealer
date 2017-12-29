@@ -5,9 +5,9 @@
 $gold: #fecf0c;
 $lightGold: #f8df93;
 $dark: #346378;
-$medium: #448399;
+$medium: #8f9da2;
 $light: #86a1ad;
-$lighter: #f3f1f3;
+$lighter: #eaedee;
 $lightest: #f1f5f7;
 
 // $dark: rgba(#1a172e, 1);
@@ -71,13 +71,11 @@ $lightest: #f1f5f7;
 $regular: 400;
 $bold: 600;
 $black: 800;
-@import 'https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i&subset=latin-ext';
-@import 'https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600,600i,700,700i';
-@import 'https://fonts.googleapis.com/css?family=Work+Sans:100,400,500,600,700,800,900';
 $serif: 'Crimson Text', 'Baskerville', times, serif;
 $sansSerif: 'Work Sans', Helvetica, Arial, sans-serif;
 $sansSerif: Helvetica, Arial, sans-serif;
 $clarendon: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif;
+$monospace: 'Overpass Mono', courier, monospace;
 @mixin serifText {
 	font-family: $serif;
   font-weight: normal;
@@ -87,9 +85,13 @@ $clarendon: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif;
   font-weight: 400;
 }
 @mixin revealerText {
-  font-family: $clarendon;
-  font-weight: 400;
-  text-transform: lowercase;
+  font-family: $clarendon !important;
+  font-weight: 400 !important;
+  text-transform: lowercase !important;
+}
+@mixin monoText {
+  font-family: $monospace !important;
+  font-weight: 600 !important;
 }
 ///////////////////////////////////////////////////////////////
 ////////////////////////BREAK POINTS///////////////////////////

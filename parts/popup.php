@@ -1,7 +1,7 @@
 <?php
 echo '<div id="popup" class="newsletter">';
 	echo '<div class="inner">';
-		echo '<div class="goldbar"><div class="solid"></div></div>';
+		get_template_part( 'parts/goldbar' );
 		get_template_part( 'parts/newsletter' );
 		echo '<div class="close circle">';
 			$x_svg = get_template_directory_uri() . '/assets/images/x.svg';

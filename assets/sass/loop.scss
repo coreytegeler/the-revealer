@@ -14,10 +14,12 @@
 			&.categories {
 				text-transform: uppercase;
 				font-weight: $regular;
-				@include xxSmallText;
-				padding: 0 0 .5em 0;
-				.features {
-					font-weight: $black;
+				@include xSmallText;
+				padding: 0 0 .25em 0;
+				text-align: center;
+				color: $medium;
+				.field-notes {
+					font-weight: $black !important;
 				}
 			}
 			&.column {
@@ -27,12 +29,12 @@
 		a.link_wrap {
 			text-decoration: none;
 	    display: block;
-			&:hover {
-				.image {
-					box-shadow: 0 0 5em 0 $gold;
+			&:hover, &.hover, , &:focus {
+				.title {
+					color: $medium;
 				}
-				svg, object {
-					fill: $medium;
+				.image, .missing {
+					box-shadow: 0 0 5em 0 $gold;
 				}
 			}
 		}
@@ -47,41 +49,47 @@
 				max-width: 100%;
 				height: auto;
 				margin: 0 auto;
-				transition: opacity 500ms $ease;
 				display: table;
 				opacity: 0;
 			}
-			&.loaded {
-				background-color: $lighter;
-				img {
+			img, svg {
+				transition: opacity 500ms $ease;
+			}
+			&.loaded, &.missing {
+				img, svg, object {
 					opacity: 1;
 				}
 			}
 		}
 		.missing {
-			width: 100%;
 			height: 100%;
-			margin: 0 auto;
-			// background: $medium;
+			background: $lighter;
 			display: table;
 			svg, object {
 				width: 100%;
 				height: auto;
-				fill: $dark;					
+				fill: $medium;					
 				margin: auto;
 				display: table;
 				pointer-events: none;
 			}
 		}
 		&.no_image {
+			.primary .label.categories {
+				padding: 0;
+			}
 			.secondary .title {
 				max-width: 20em;
 				display: table;
 				margin: auto;
 			}
 		}
+		.primary {
+			.link_wrap {
+				margin: 0 0 .5em 0;
+			}
+		}
 		.secondary {
-			padding: .5em 0 0 0;
 			.title {
 				transition: color 500ms $ease;
 				h2 {
@@ -121,19 +129,17 @@
 				font-style: italic;
 				@include serifText;
 				line-height: 1.1em;
-				// @include xSmallText;
 			}
 		}
-		&.hover, &:focus {
-			.title {
-				color: $medium;
+		&.field-notes {
+			@include monoText;
+	    font-size: .85em;
+			* {
+				@include monoText;
 			}
-			.image {
-				box-shadow: 0 0 5em 0 $gold;
-				// transform: scale(1.0025);
-			}
-			svg, object {
-				fill: $medium;
+			.blurb {
+				font-style: normal;
+				font-weight: 600;
 			}
 		}
 	}
@@ -470,7 +476,8 @@
 			.cell, article {
 				width: 100% !important;
 				margin-bottom: 2em !important;
-				margin-right: 0 !important
+				margin-right: 0 !important;
+				margin-left: 0 !important;
 			}
 		}
 	}

@@ -2,6 +2,8 @@
 get_header();
 global $post;
 $home_url = get_site_url();
+$missing_url = get_template_directory_uri() . '/assets/images/missing.svg';
+$missing_svg = file_get_contents( $missing_url );
 $issues = get_terms( array(
   'taxonomy' => 'issues',
   'hide_empty' => false,
@@ -44,15 +46,12 @@ echo '<div class="readable">';
 			echo '<h2 class="lead">Read our current issue</h2>';
 			$issue_date = get_field( 'date', $current_issue );
 			echo '<h1 class="title">' . $current_issue->name  . '</h1>';	
-			if( get_field( 'special', $current_issue ) ) {
-				echo '<h2 class="date">published ' . $issue_date . '</h2>';
-			}
-			echo '<div class="goldbar"><div class="solid"></div></div>';
+			echo '<h2 class="date">published ' . $issue_date . '</h2>';
+			get_template_part( 'parts/goldbar' );
 			echo '<div class="newsletter">';
 				get_template_part( 'parts/newsletter' );
 			echo '</div>';
-			echo '<div class="circle"></div>';
-			echo '<div class="goldbar"><div class="solid"></div></div>';
+			get_template_part( 'parts/goldbar' );
 		echo '</div>';
 
 		$features_args = array_merge( $current_issue_args, array(
@@ -83,7 +82,7 @@ echo '<div class="readable">';
 		}
 		wp_reset_query();
 	echo '</div>';
-	echo '<div class="goldbar"><div class="solid"></div></div>';
+	get_template_part( 'parts/goldbar' );
 	echo '<div class="sections one_one">';
 		if( $feat_tags = get_field( 'featured_tags', $current_issue ) ) {
 			echo '<section id="featured_tags">';
@@ -116,14 +115,8 @@ echo '<div class="readable">';
 		}
 		echo '<section id="tags">';
 			echo '<div class="commas tags">';
-				echo '<span class="no_comma">Checkout some popular tags:&nbsp;</span>';
-				$tags = get_tags( array(
-				  'orderby' => 'count',
-				  'order' => 'desc',
-				  'number' => 20,
-				  'hide_empty' => 0
-				) );
-
+				echo '<span class="no_comma">Checkout some recent tags:&nbsp;</span>';
+				$tags = get_recent_tags();
 				foreach( $tags as $tag ) {
 					echo '<span>';
 						$tag_url = add_query_arg( 'tag', $tag->slug, $articles_url );
@@ -199,7 +192,9 @@ echo '<div class="readable">';
 			$columns = get_terms( array(
 				'taxonomy' => 'columns',
 			  'orderby' => 'name',
-			  'order'   => 'ASC'
+			  'order'   => 'ASC',
+		  	'meta_key' => 'active',
+		  	'meta_value' => 1
 			) );
 			if( sizeof( $columns ) ) {
 				echo '<div class="columns">';
@@ -217,11 +212,30 @@ echo '<div class="readable">';
 					}
 				echo '</div>';
 			}
-		echo '</section>';
 
+			echo '<div id="field_notes">';
+				$fn_page = get_page_by_path( 'field-notes' );
+				$fn_header = get_field( 'home_header', $fn_page );
+				$fn_thumb_id = get_post_thumbnail_id( $fn_page );
+				$fn_thumb = wp_get_attachment_image_src( $fn_thumb_id, 'large' );
+				$fn_thumb_url = $fn_thumb[0];
+				$fn_thumb_width = $fn_thumb[1];
+				$fn_thumb_height = $fn_thumb[2];
+				echo '<h2 class="section_header">' . $fn_header . '</h2>';
+				echo '<div class="loop grid one_col">';
+					echo '<article class="cell">';
+						echo '<a class="link_wrap" href="' . $fn_url . '">';
+							echo '<div class="image load">';
+								echo '<img data-src="'.$fn_thumb_url.'" data-width="'.$fn_thumb_width.'" data-height="'.$fn_thumb_height.'"/>';
+							echo '</div>';
+						echo '</a>';
+					echo '</article>';
+				echo '</div>';
+			echo '</div>';
+		echo '</section>';
 	echo '</div>';
 
-	echo '<div class="goldbar"><div class="solid"></div></div>';
+	get_template_part( 'parts/goldbar' );
 
 	$past_issues = get_terms( array(
 	  'taxonomy' => 'issues',
@@ -261,7 +275,7 @@ echo '<div class="readable">';
 					$past_issue_query->the_post();
 					$title = $post->post_title;
 					$thumb_id = get_post_thumbnail_id();
-					$thumb = wp_get_attachment_image_src( $thumb_id, 'thumb' );
+					$thumb = wp_get_attachment_image_src( $thumb_id, 'medium' );
 					$thumb_url = $thumb[0];
 					$thumb_width = $thumb[1];
 					$thumb_height = $thumb[2];
@@ -273,6 +287,8 @@ echo '<div class="readable">';
 									echo '<div class="' . ( $thumb ? 'image load' : 'missing') . '">';
 										if ( $thumb ) {
 											echo '<img data-src="'.$thumb_url.'" data-width="'.$thumb_width.'" data-height="'.$thumb_height.'"/>';
+										} else {
+											echo $missing_svg;
 										}
 									echo '</div>';
 								echo '</a>';

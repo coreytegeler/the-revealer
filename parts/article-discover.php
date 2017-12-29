@@ -12,7 +12,7 @@ if( $type == 'post' ) {
 }
 $id = ( $type == 'post' ? $cell->ID : $cell->cat_ID );
 $thumb_id = get_post_thumbnail_id( $id );
-$thumb = wp_get_attachment_image_src( $thumb_id, 'thumb' );
+$thumb = wp_get_attachment_image_src( $thumb_id, 'thumbnail' );
 $permalink = ( $type == 'post' ? get_permalink( $id ) : get_category_link( $id ) );
 
 echo '<div class="cell discover ' . $type . ( $thumb[0] ? ' thumb' : ' show' ) . '" data-id="' . $id . '">';

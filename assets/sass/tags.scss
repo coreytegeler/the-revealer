@@ -5,8 +5,8 @@
 		span {
 			@include serifText;
 			font-style: italic;
-			a {
-				border-bottom: 1px solid $gold;
+			a, a:hover {
+				border-bottom: 2px solid $gold !important;
 			}
 		}
 	}
