@@ -48,11 +48,17 @@ p {
 	}
 	a {
 		text-decoration: none;
-		border-bottom: 1px solid $medium;
+		display: inline;
+		@include underline($medium)
+		position: relative;
+		margin-left: -1px;
 		&:hover {
 			color: $medium;
-			border-bottom-color: $gold;
+			@include underline($gold)
 		}
+	}
+	strong {
+		font-weight: $bold;
 	}
 }
 h1 {
@@ -416,15 +422,96 @@ input {
     width: 0px;
 }
 
-// cubic-bezier(0.86, 0, 0.07, 1)
-// .conceal {
-// 	opacity: 1;
-// transition: opacity 500ms ease-out;
-	// &:hover {
-// 		animation: conceal 1000ms forwards;
-// 		opacity: .02;
-//   }
-// }
+@include large {
+	#isMobile {
+		content: 'large';
+	}
+}
+@include medium {
+	#isMobile {
+		content: 'medium';
+	}
+}
+@include small {
+	#wrapper {
+		display: block;
+		main {
+			width: calc(100% - 2em);
+			padding: 0 1em 2em 1em;
+			.readable {
+				width: 100%;
+				padding-right: 0;
+				.pagination {
+					.paginate {
+						.text {
+							
+						}
+						.circle {
+							width: 1.5em;
+							height: 1.5em;
+						}
+					}
+				}
+			}
+			.split_box {
+				section {
+					width: 100%;
+					padding: 0 0 2em 0;
+				}
+			}
+		}
+	}
+	body.single-post {
+		main {
+			article.readable {
+				margin: auto;
+				padding-top: 2em;
+				.wp-caption {
+					width: 100% !important;
+					float: none !important;
+				}
+				.image {
+					width: 100%;
+					display: table;
+					padding: 1em 0;
+					img {
+						width: auto !important;
+						max-width: 100% !important;
+						display: table !important;
+						margin: auto !important;
+						float: none !important;
+					}
+				}
+			}
+		}
+	}
+	.section_header {
+		@include xLargeText;
+	}
+	.transport.top {
+		right: 1em;
+		bottom: 1em;
+	}
+	#isMobile {
+		content: 'small';
+		content: '1';
+	}
+}
+@include xSmall {
+	#wrapper, #wrapper.split, #wrapper.full {
+		main {
+			width: calc(100% - 1em);
+	    padding: .5em .5em 4em .5em;
+	    .pagination .paginate .text {
+	    	display: none;
+	    }
+		}
+	}
+	#isMobile {
+		content: 'xSmall';
+	}
+}
+
 @import 'header';
 @import 'articles';
 @import 'loop';
@@ -439,15 +526,3 @@ input {
 @import 'footer';
 @import 'newsletter';
 @import 'carousel';
-@import 'mobile';
-
-
-// $dark: rgba(#1a172e, 1);
-// $lightest: #5aa078;
-// body.green {
-// 	background-color: $lightest;
-// 	color: $dark;
-// 	header {
-// 		background-color: $lightest;
-// 	}
-// }

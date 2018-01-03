@@ -8,7 +8,9 @@
     "gulp:prod": "gulp prod --prod",
     "browsersync": "browser-sync start --files '**/*.css' '**/*.js' '**/*.php'",
     "dev": "npm run gulp",
-    "prod": "npm run gulp:prod"
+    "prod": "npm run gulp:prod",
+    "ssh": "ssh -t therevg5@therevealer.org 'cd public_html/wp-content/themes/the-revealer ; bash'",
+    "ssh-staging": "ssh -t therevg5@therevealer.org 'cd public_html/staging/wp-content/themes/the-revealer ; bash'"
   },
   "repository": {
     "type": "git",

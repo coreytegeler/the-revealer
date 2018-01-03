@@ -177,10 +177,25 @@ p {
     margin: 0; }
   p a {
     text-decoration: none;
-    border-bottom: 1px solid #8f9da2; }
+    display: inline;
+    text-shadow: 0 1px 0 #f1f5f7, 0 2px 0 #f1f5f7, 0 -1px 0 #f1f5f7, 0 -2px 0 #f1f5f7, -1px 1px 0 #f1f5f7, -1px 2px 0 #f1f5f7, 1px 1px 0 #f1f5f7, 1px 2px 0 #f1f5f7, -1px 0 0 #f1f5f7, 0 -3px 0 #f1f5f7;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#8f9da2), to(#8f9da2));
+    background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#8f9da2, #8f9da2);
+    background-position: 0 87%,100% 87%,0 92%;
+    background-repeat: no-repeat,no-repeat,repeat-x;
+    background-size: .05em 1px,.05em 1px,1px 1px;
+    position: relative;
+    margin-left: -1px; }
     p a:hover {
       color: #8f9da2;
-      border-bottom-color: #fecf0c; }
+      text-shadow: 0 1px 0 #f1f5f7, 0 2px 0 #f1f5f7, 0 -1px 0 #f1f5f7, 0 -2px 0 #f1f5f7, -1px 1px 0 #f1f5f7, -1px 2px 0 #f1f5f7, 1px 1px 0 #f1f5f7, 1px 2px 0 #f1f5f7, -1px 0 0 #f1f5f7, 0 -3px 0 #f1f5f7;
+      background: -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
+      background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#fecf0c, #fecf0c);
+      background-position: 0 87%,100% 87%,0 92%;
+      background-repeat: no-repeat,no-repeat,repeat-x;
+      background-size: .05em 1px,.05em 1px,1px 1px; }
+  p strong {
+    font-weight: 600; }
 
 h1 {
   font-size: 2em;
@@ -517,6 +532,69 @@ input {
 ::-webkit-scrollbar {
   width: 0px; }
 
+@media (max-width: 1440px) {
+  #isMobile {
+    content: 'large'; } }
+
+@media (max-width: 1024px) {
+  #isMobile {
+    content: 'medium'; } }
+
+@media (max-width: 768px) {
+  #wrapper {
+    display: block; }
+    #wrapper main {
+      width: calc(100% - 2em);
+      padding: 0 1em 2em 1em; }
+      #wrapper main .readable {
+        width: 100%;
+        padding-right: 0; }
+        #wrapper main .readable .pagination .paginate .circle {
+          width: 1.5em;
+          height: 1.5em; }
+      #wrapper main .split_box section {
+        width: 100%;
+        padding: 0 0 2em 0; }
+  body.single-post main article.readable {
+    margin: auto;
+    padding-top: 2em; }
+    body.single-post main article.readable .wp-caption {
+      width: 100% !important;
+      float: none !important; }
+    body.single-post main article.readable .image {
+      width: 100%;
+      display: table;
+      padding: 1em 0; }
+      body.single-post main article.readable .image img {
+        width: auto !important;
+        max-width: 100% !important;
+        display: table !important;
+        margin: auto !important;
+        float: none !important; }
+  .section_header {
+    font-size: 2.3em;
+    line-height: 1.1em; } }
+  @media (max-width: 768px) and (max-width: 480px) {
+    .section_header {
+      font-size: 2em; } }
+
+@media (max-width: 768px) {
+  .transport.top {
+    right: 1em;
+    bottom: 1em; }
+  #isMobile {
+    content: 'small';
+    content: '1'; } }
+
+@media (max-width: 480px) {
+  #wrapper main, #wrapper.split main, #wrapper.full main {
+    width: calc(100% - 1em);
+    padding: .5em .5em 4em .5em; }
+    #wrapper main .pagination .paginate .text, #wrapper.split main .pagination .paginate .text, #wrapper.full main .pagination .paginate .text {
+      display: none; }
+  #isMobile {
+    content: 'xSmall'; } }
+
 header {
   width: 100%;
   height: auto;
@@ -649,30 +727,29 @@ header {
     left: 0;
     bottom: 0; }
   @media (max-width: 768px) {
-    header {
-      font-size: .8em;
-      line-height: 1.2em; }
-      header .inner {
-        width: calc(100% - 1em);
-        margin: .5em .5em 0 .5em;
-        display: block; }
-        header .inner #logo {
+    header .inner {
+      width: calc(100% - 1em);
+      margin: .5em .5em 0 .5em;
+      display: block; }
+      header .inner #logo {
+        width: 100%;
+        max-width: 16em;
+        padding: 0;
+        margin: auto; }
+        header .inner #logo a.svg svg {
           width: 100%;
-          max-width: 16em;
+          display: block;
           padding: 0;
           margin: auto; }
-          header .inner #logo a.svg svg {
-            width: 100%;
-            display: block;
-            padding: 0;
-            margin: auto; }
-        header .inner .rows {
-          width: 100%; }
-          header .inner .rows .row {
-            width: auto;
-            display: table;
-            margin: auto;
-            text-align: center; } }
+      header .inner .rows {
+        width: 100%;
+        font-size: .8em;
+        line-height: 1.2em; }
+        header .inner .rows .row {
+          width: auto;
+          display: table;
+          margin: auto;
+          text-align: center; } }
 
 body.articles #wrapper main {
   width: calc(100% - 18em - 4em);
@@ -2314,77 +2391,3 @@ footer {
           fill: #fecf0c; }
     #carousel .close_padding:hover {
       opacity: 1; }
-
-@media (max-width: 1440px) {
-  body #isMobile, html #isMobile {
-    content: 'large'; } }
-
-@media (max-width: 1024px) {
-  body #isMobile, html #isMobile {
-    content: 'medium'; } }
-
-@media (max-width: 768px) {
-  body #wrapper, html #wrapper {
-    display: block; }
-    body #wrapper main, html #wrapper main {
-      width: calc(100% - 2em);
-      padding: 0 1em 2em 1em; }
-      body #wrapper main .readable, html #wrapper main .readable {
-        width: 100%;
-        padding-right: 0; }
-        body #wrapper main .readable .pagination .paginate .circle, html #wrapper main .readable .pagination .paginate .circle {
-          width: 1.5em;
-          height: 1.5em; }
-      body #wrapper main .split_box section, html #wrapper main .split_box section {
-        width: 100%;
-        padding: 0 0 2em 0; }
-  body.single-post aside header .info, html.single-post aside header .info {
-    clear: both; }
-    body.single-post aside header .info .title h1, html.single-post aside header .info .title h1 {
-      text-align: center; }
-    body.single-post aside header .info .excerpt, body.single-post aside header .info .meta, body.single-post aside header .info .tags, html.single-post aside header .info .excerpt, html.single-post aside header .info .meta, html.single-post aside header .info .tags {
-      max-width: 650px;
-      display: table;
-      margin-left: auto;
-      margin-right: auto; }
-    body.single-post aside header .info .images, html.single-post aside header .info .images {
-      display: none; }
-  body.single-post main article.readable, html.single-post main article.readable {
-    margin: auto;
-    padding-top: 2em; }
-    body.single-post main article.readable .wp-caption, html.single-post main article.readable .wp-caption {
-      width: 100% !important;
-      float: none !important; }
-    body.single-post main article.readable .image, html.single-post main article.readable .image {
-      width: 100%;
-      display: table;
-      padding: 1em 0; }
-      body.single-post main article.readable .image img, html.single-post main article.readable .image img {
-        width: auto !important;
-        max-width: 100% !important;
-        display: table !important;
-        margin: auto !important;
-        float: none !important; }
-  body .section_header, html .section_header {
-    font-size: 2.3em;
-    line-height: 1.1em; } }
-  @media (max-width: 768px) and (max-width: 480px) {
-    body .section_header, html .section_header {
-      font-size: 2em; } }
-
-@media (max-width: 768px) {
-  body .transport.top, html .transport.top {
-    right: 1em;
-    bottom: 1em; }
-  body #isMobile, html #isMobile {
-    content: 'small';
-    content: '1'; } }
-
-@media (max-width: 480px) {
-  body #wrapper main, body #wrapper.split main, body #wrapper.full main, html #wrapper main, html #wrapper.split main, html #wrapper.full main {
-    width: calc(100% - 1em);
-    padding: .5em .5em 4em .5em; }
-    body #wrapper main .pagination .paginate .text, body #wrapper.split main .pagination .paginate .text, body #wrapper.full main .pagination .paginate .text, html #wrapper main .pagination .paginate .text, html #wrapper.split main .pagination .paginate .text, html #wrapper.full main .pagination .paginate .text {
-      display: none; }
-  body #isMobile, html #isMobile {
-    content: 'xSmall'; } }
