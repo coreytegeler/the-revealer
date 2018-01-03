@@ -32,7 +32,7 @@ body.single-post, body.page-template-default {
 							color: $medium;
 						}
 						.row {
-							color: $light;
+							color: $dark;
 							padding: .15em 0;
 						}
 					}
@@ -96,6 +96,7 @@ body.single-post, body.page-template-default {
 							.archive_alert {
 								padding: .5em;
 								@include xSmallText;
+								@include sansSerifText;
 								p {
 									margin: 0;
 								}	
@@ -105,6 +106,7 @@ body.single-post, body.page-template-default {
 					.content {
 						padding: 2em 0;
 						opacity: 0;
+						@include serifText;
 						* {
 							color: $dark !important;
 						}
@@ -172,8 +174,7 @@ body.single-post, body.page-template-default {
 								width: 100% !important;
 								height: auto !important;
 								display: table;
-								margin: 1em auto;
-								background-color: $lighter;
+								// background-color: $lighter;
 								border: 1px solid $light;
 								a {
 									width: 100%;
@@ -233,6 +234,7 @@ body.single-post, body.page-template-default {
 							max-width: 100%;
 							padding: 2em 0;
 							display: block;
+							@include sansSerifText;
 							@include xxSmallText;
 							a {
 								display: inline-table;
@@ -293,7 +295,7 @@ body.single-post, body.page-template-default {
 				}
 				.foot {
 					.meta {
-						width: 100%;
+						padding: 2em 0 0 0;
 					}
 					.share.social {
 						@include serifText;

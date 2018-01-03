@@ -92,8 +92,15 @@ body.articles #wrapper {
 	    padding: .5em 2em 4em 2em;
 		}
 		aside {
-			width: calc(100% - 1em);
-			padding: .5em .5em 2em .5em;
+			width: calc(100% - 4em);
+			max-width: $lineWidth;
+			height: auto !important;
+			padding: .5em 2em 2em 2em;
+
+			margin: auto;
+			display: table;
+			position: static !important;
+			transform: 0 !important;
 		}
 	}
 	@include small {
@@ -103,14 +110,8 @@ body.articles #wrapper {
 			display: table;
 		}
 		aside {
-			width: calc(100% - 4em);
-			max-width: 35em;
-			height: auto !important;
-			padding: .5em 2em 2em 2em;
-			margin: auto;
-			display: table;
-			position: static !important;
-			transform: 0 !important;
+			
+			
 			.content {
 				margin: 0;
 				padding: 0;

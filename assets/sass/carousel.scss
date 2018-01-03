@@ -12,6 +12,7 @@
 	display: table;
 	opacity: 0;
 	transition: opacity 500ms 100ms $ease;
+	user-select: none;
 	&.show {
 		left: 0;
 		opacity: 1;
