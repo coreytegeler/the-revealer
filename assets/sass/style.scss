@@ -50,10 +50,10 @@ p {
 		text-decoration: none;
 		display: inline;
 		position: relative;
-		@include underline($light, $lighter, 1px);
+		@include underline($light, $lightest, 1px);
 		&:hover {
 			color: $medium;
-			@include underline($gold, $lighter, 1px);
+			@include underline($gold, $lightest, 1px);
 		}
 	}
 	strong {

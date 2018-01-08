@@ -218,6 +218,7 @@ echo '<div class="readable">';
 				$fn_header = get_field( 'home_header', $fn_page );
 				$fn_thumb_id = get_post_thumbnail_id( $fn_page );
 				$fn_thumb = wp_get_attachment_image_src( $fn_thumb_id, 'large' );
+				$fn_url = add_query_arg( 'category', 'field-notes', $page_url );
 				$fn_thumb_url = $fn_thumb[0];
 				$fn_thumb_width = $fn_thumb[1];
 				$fn_thumb_height = $fn_thumb[2];

@@ -110,10 +110,15 @@ body.home {
 			img {
 				width: 100%;
 			}
-			a.link_wrap:hover {
+			a.link_wrap {
 				.image {
-					background-color: rgba($gold, .45);
+					background-color: $lightest;
 					border-radius: 2em;
+				}
+				&:hover, &:focus {
+					.image {
+						background-color: rgba($gold, .45);
+					}
 				}
 			}
 		}

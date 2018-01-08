@@ -1,0 +1,148 @@
+@include serifText;
+* {
+	color: $dark !important;
+}
+p, .element {
+	@include baseText;
+	max-width: $lineWidth;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0 !important;
+	a {
+		color: $dark;
+		&.ftn {
+			min-width: 1em;
+			height: 1em;
+			display: inline-block;
+			border: 1px solid $medium;
+			border-radius: 50%;
+			color: $medium !important;
+			text-align: center;
+			padding: .2em;
+			overflow: hidden;
+			white-space: nowrap;
+			&.super {
+		    transform: translateY(-.5em);
+		    @include xxSmallText;
+		    line-height: 1em;
+			}
+			&.ref {
+				@include xSmallText;
+				line-height: 1em;
+			}
+			&:focus {
+				outline: none;
+				background-color: $gold;
+				&:hover {
+					color: $dark !important;
+					border-color: $dark;
+				}
+			}
+		}
+		&:hover, &:hover * {
+			// background-color: $gold !important;
+			// border-color: transparent;
+		}
+		&.image {
+			// width: 100%;
+		}
+	}
+}
+.image {
+	border: none;
+	img {
+		display: table;
+		margin: auto;
+	}
+}
+h1, h2, h3, h4 {
+	max-width: $lineWidth;
+	@include serifText;
+	font-weight: $regular;
+	margin: auto;
+	padding: 1em 0;
+	* {
+		font-weight: $regular;
+	}
+}
+h1 {
+	@include largeText;
+}
+h2, h3, h4 {
+	@include xMediumText;
+}
+iframe {
+	width: 100%;
+}
+blockquote {
+	max-width: calc(#{$lineWidth} - 2em);
+	margin-left: auto;
+	margin-right: auto;
+	font-style: normal;
+	@include serifText;
+	@include smallText;
+	* {
+		@include serifText;
+		font-weight: normal;
+		font-style: normal;
+		color: $dark;
+		text-decoration: none;
+	}
+}
+.wp-caption, figure.wp-block-image {
+	color: $medium;
+	max-width: 100%;
+	padding: 2em 0;
+	display: block;
+	@include sansSerifText;
+	@include xxSmallText;
+	a {
+		display: inline-table;
+	}
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+	.wp-caption-text, p, figcaption {
+		width: 100%;
+		max-width: 100%;
+		padding: .5em 0 0 0 !important;
+		color: $medium;
+		font-size: 1em;
+		line-height: 1.5em;
+		text-align: left;
+	}
+	&:first-child {
+		margin-top: 0;
+	}
+}
+img {
+	width: auto;
+	max-width: 100%;
+	height: auto;
+	// border: .5em solid $medium;
+}
+img, div {
+	&.aligncenter {
+		max-width: 100%;
+		clear: both;
+    margin: 2em auto;
+    a {
+    	display: table;
+    	margin: auto; 
+    }
+	}
+	&.alignleft {
+		max-width: 50%;
+		float: left;
+		margin: 1em 1em 1em 0;
+	}
+	&.alignright {
+		max-width: 50%;
+		float: right;
+    margin: 1em 0 1em 1em;
+    &.wp-caption {
+	    // transform: translateX(2.95em);
+    }
+	}
+}

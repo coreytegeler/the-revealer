@@ -179,18 +179,18 @@ p {
     text-decoration: none;
     display: inline;
     position: relative;
-    text-shadow: 0 1px 0 #eaedee, 0 2px 0 #eaedee, 0 -1px 0 #eaedee, 0 -2px 0 #eaedee, -1px 1px 0 #eaedee, -1px 2px 0 #eaedee, 1px 1px 0 #eaedee, 1px 2px 0 #eaedee, -1px 0 0 #eaedee, 0 -3px 0 #eaedee;
-    background: -webkit-gradient(linear, left top, left bottom, from(#eaedee), to(#eaedee)), -webkit-gradient(linear, left top, left bottom, from(#eaedee), to(#eaedee)), -webkit-gradient(linear, left top, left bottom, from(#86a1ad), to(#86a1ad));
-    background: linear-gradient(#eaedee, #eaedee), linear-gradient(#eaedee, #eaedee), linear-gradient(#86a1ad, #86a1ad);
+    text-shadow: 0 1px 0 #f1f5f7, 0 2px 0 #f1f5f7, 0 -1px 0 #f1f5f7, 0 -2px 0 #f1f5f7, -1px 1px 0 #f1f5f7, -1px 2px 0 #f1f5f7, 1px 1px 0 #f1f5f7, 1px 2px 0 #f1f5f7, -1px 0 0 #f1f5f7, 0 -3px 0 #f1f5f7;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#86a1ad), to(#86a1ad));
+    background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#86a1ad, #86a1ad);
     background-position: 0 87%,100% 87%,0 92%;
     background-repeat: no-repeat,no-repeat,repeat-x;
     background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
     text-decoration: none; }
     p a:hover {
       color: #8f9da2;
-      text-shadow: 0 1px 0 #eaedee, 0 2px 0 #eaedee, 0 -1px 0 #eaedee, 0 -2px 0 #eaedee, -1px 1px 0 #eaedee, -1px 2px 0 #eaedee, 1px 1px 0 #eaedee, 1px 2px 0 #eaedee, -1px 0 0 #eaedee, 0 -3px 0 #eaedee;
-      background: -webkit-gradient(linear, left top, left bottom, from(#eaedee), to(#eaedee)), -webkit-gradient(linear, left top, left bottom, from(#eaedee), to(#eaedee)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
-      background: linear-gradient(#eaedee, #eaedee), linear-gradient(#eaedee, #eaedee), linear-gradient(#fecf0c, #fecf0c);
+      text-shadow: 0 1px 0 #f1f5f7, 0 2px 0 #f1f5f7, 0 -1px 0 #f1f5f7, 0 -2px 0 #f1f5f7, -1px 1px 0 #f1f5f7, -1px 2px 0 #f1f5f7, 1px 1px 0 #f1f5f7, 1px 2px 0 #f1f5f7, -1px 0 0 #f1f5f7, 0 -3px 0 #f1f5f7;
+      background: -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
+      background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#fecf0c, #fecf0c);
       background-position: 0 87%,100% 87%,0 92%;
       background-repeat: no-repeat,no-repeat,repeat-x;
       background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
@@ -1308,9 +1308,11 @@ body.home main #field_notes {
   margin-top: 5em; }
   body.home main #field_notes img {
     width: 100%; }
-  body.home main #field_notes a.link_wrap:hover .image {
-    background-color: rgba(254, 207, 12, 0.45);
+  body.home main #field_notes a.link_wrap .image {
+    background-color: #f1f5f7;
     border-radius: 2em; }
+  body.home main #field_notes a.link_wrap:hover .image, body.home main #field_notes a.link_wrap:focus .image {
+    background-color: rgba(254, 207, 12, 0.45); }
 
 body.home main section {
   padding: 2em 0; }
@@ -1438,157 +1440,160 @@ body.single-post #wrapper, body.page-template-default #wrapper {
               text-shadow: none;
               background: none;
               text-decoration: underline; }
-      body.single-post #wrapper main .readable .text .content, body.page-template-default #wrapper main .readable .text .content {
-        padding: 2em 0;
-        opacity: 0;
+    body.single-post #wrapper main .readable .content, body.page-template-default #wrapper main .readable .content {
+      opacity: 0;
+      padding: 2em 0;
+      font-family: "Crimson Text", "Baskerville", times, serif;
+      font-weight: normal; }
+      body.single-post #wrapper main .readable .content *, body.page-template-default #wrapper main .readable .content * {
+        color: #346378 !important; }
+      body.single-post #wrapper main .readable .content p, body.single-post #wrapper main .readable .content .element, body.page-template-default #wrapper main .readable .content p, body.page-template-default #wrapper main .readable .content .element {
+        font-size: 20px;
+        line-height: 1.4em;
+        max-width: 650px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 !important; }
+        @media (max-width: 768px) {
+          body.single-post #wrapper main .readable .content p, body.single-post #wrapper main .readable .content .element, body.page-template-default #wrapper main .readable .content p, body.page-template-default #wrapper main .readable .content .element {
+            font-size: 18px; } }
+        body.single-post #wrapper main .readable .content p a, body.single-post #wrapper main .readable .content .element a, body.page-template-default #wrapper main .readable .content p a, body.page-template-default #wrapper main .readable .content .element a {
+          color: #346378; }
+          body.single-post #wrapper main .readable .content p a.ftn, body.single-post #wrapper main .readable .content .element a.ftn, body.page-template-default #wrapper main .readable .content p a.ftn, body.page-template-default #wrapper main .readable .content .element a.ftn {
+            min-width: 1em;
+            height: 1em;
+            display: inline-block;
+            border: 1px solid #8f9da2;
+            border-radius: 50%;
+            color: #8f9da2 !important;
+            text-align: center;
+            padding: .2em;
+            overflow: hidden;
+            white-space: nowrap; }
+            body.single-post #wrapper main .readable .content p a.ftn.super, body.single-post #wrapper main .readable .content .element a.ftn.super, body.page-template-default #wrapper main .readable .content p a.ftn.super, body.page-template-default #wrapper main .readable .content .element a.ftn.super {
+              -webkit-transform: translateY(-0.5em);
+              transform: translateY(-0.5em);
+              font-size: .62em;
+              line-height: 1.4em;
+              line-height: 1em; }
+            body.single-post #wrapper main .readable .content p a.ftn.ref, body.single-post #wrapper main .readable .content .element a.ftn.ref, body.page-template-default #wrapper main .readable .content p a.ftn.ref, body.page-template-default #wrapper main .readable .content .element a.ftn.ref {
+              font-size: .8em;
+              line-height: 1.2em;
+              line-height: 1em; }
+            body.single-post #wrapper main .readable .content p a.ftn:focus, body.single-post #wrapper main .readable .content .element a.ftn:focus, body.page-template-default #wrapper main .readable .content p a.ftn:focus, body.page-template-default #wrapper main .readable .content .element a.ftn:focus {
+              outline: none;
+              background-color: #fecf0c; }
+              body.single-post #wrapper main .readable .content p a.ftn:focus:hover, body.single-post #wrapper main .readable .content .element a.ftn:focus:hover, body.page-template-default #wrapper main .readable .content p a.ftn:focus:hover, body.page-template-default #wrapper main .readable .content .element a.ftn:focus:hover {
+                color: #346378 !important;
+                border-color: #346378; }
+      body.single-post #wrapper main .readable .content .image, body.page-template-default #wrapper main .readable .content .image {
+        border: none; }
+        body.single-post #wrapper main .readable .content .image img, body.page-template-default #wrapper main .readable .content .image img {
+          display: table;
+          margin: auto; }
+      body.single-post #wrapper main .readable .content h1, body.single-post #wrapper main .readable .content h2, body.single-post #wrapper main .readable .content h3, body.single-post #wrapper main .readable .content h4, body.page-template-default #wrapper main .readable .content h1, body.page-template-default #wrapper main .readable .content h2, body.page-template-default #wrapper main .readable .content h3, body.page-template-default #wrapper main .readable .content h4 {
+        max-width: 650px;
         font-family: "Crimson Text", "Baskerville", times, serif;
-        font-weight: normal; }
-        body.single-post #wrapper main .readable .text .content *, body.page-template-default #wrapper main .readable .text .content * {
-          color: #346378 !important; }
-        body.single-post #wrapper main .readable .text .content img, body.page-template-default #wrapper main .readable .text .content img {
-          opacity: 0; }
-        body.single-post #wrapper main .readable .text .content p, body.single-post #wrapper main .readable .text .content .element, body.page-template-default #wrapper main .readable .text .content p, body.page-template-default #wrapper main .readable .text .content .element {
-          max-width: 650px;
-          margin-left: auto;
-          margin-right: auto;
-          padding: 0 !important; }
-          body.single-post #wrapper main .readable .text .content p a, body.single-post #wrapper main .readable .text .content .element a, body.page-template-default #wrapper main .readable .text .content p a, body.page-template-default #wrapper main .readable .text .content .element a {
-            color: #346378; }
-            body.single-post #wrapper main .readable .text .content p a.ftn, body.single-post #wrapper main .readable .text .content .element a.ftn, body.page-template-default #wrapper main .readable .text .content p a.ftn, body.page-template-default #wrapper main .readable .text .content .element a.ftn {
-              min-width: 1em;
-              height: 1em;
-              display: inline-block;
-              border: 1px solid #8f9da2;
-              border-radius: 50%;
-              color: #8f9da2 !important;
-              text-align: center;
-              padding: .2em;
-              overflow: hidden;
-              white-space: nowrap; }
-              body.single-post #wrapper main .readable .text .content p a.ftn.super, body.single-post #wrapper main .readable .text .content .element a.ftn.super, body.page-template-default #wrapper main .readable .text .content p a.ftn.super, body.page-template-default #wrapper main .readable .text .content .element a.ftn.super {
-                -webkit-transform: translateY(-0.5em);
-                transform: translateY(-0.5em);
-                font-size: .62em;
-                line-height: 1.4em;
-                line-height: 1em; }
-              body.single-post #wrapper main .readable .text .content p a.ftn.ref, body.single-post #wrapper main .readable .text .content .element a.ftn.ref, body.page-template-default #wrapper main .readable .text .content p a.ftn.ref, body.page-template-default #wrapper main .readable .text .content .element a.ftn.ref {
-                font-size: .8em;
-                line-height: 1.2em;
-                line-height: 1em; }
-              body.single-post #wrapper main .readable .text .content p a.ftn:focus, body.single-post #wrapper main .readable .text .content .element a.ftn:focus, body.page-template-default #wrapper main .readable .text .content p a.ftn:focus, body.page-template-default #wrapper main .readable .text .content .element a.ftn:focus {
-                outline: none;
-                background-color: #fecf0c; }
-                body.single-post #wrapper main .readable .text .content p a.ftn:focus:hover, body.single-post #wrapper main .readable .text .content .element a.ftn:focus:hover, body.page-template-default #wrapper main .readable .text .content p a.ftn:focus:hover, body.page-template-default #wrapper main .readable .text .content .element a.ftn:focus:hover {
-                  color: #346378 !important;
-                  border-color: #346378; }
-        body.single-post #wrapper main .readable .text .content .image, body.page-template-default #wrapper main .readable .text .content .image {
-          border: none; }
-          body.single-post #wrapper main .readable .text .content .image img, body.page-template-default #wrapper main .readable .text .content .image img {
-            opacity: 0 !important;
-            -webkit-transition: opacity 600ms cubic-bezier(0.19, 1, 0.22, 1);
-            transition: opacity 600ms cubic-bezier(0.19, 1, 0.22, 1);
-            display: table;
-            margin: auto; }
-          body.single-post #wrapper main .readable .text .content .image.loaded img, body.page-template-default #wrapper main .readable .text .content .image.loaded img {
-            opacity: 1 !important; }
-          body.single-post #wrapper main .readable .text .content .image.missing, body.page-template-default #wrapper main .readable .text .content .image.missing {
-            width: 100% !important;
-            height: auto !important;
-            display: table;
-            border: 1px solid #86a1ad; }
-            body.single-post #wrapper main .readable .text .content .image.missing a, body.page-template-default #wrapper main .readable .text .content .image.missing a {
-              width: 100%;
-              height: 100%; }
-            body.single-post #wrapper main .readable .text .content .image.missing img, body.page-template-default #wrapper main .readable .text .content .image.missing img {
-              display: none; }
-            body.single-post #wrapper main .readable .text .content .image.missing svg, body.page-template-default #wrapper main .readable .text .content .image.missing svg {
-              width: 100%;
-              height: auto;
-              display: table;
-              fill: #8f9da2; }
-        body.single-post #wrapper main .readable .text .content h1, body.single-post #wrapper main .readable .text .content h2, body.single-post #wrapper main .readable .text .content h3, body.single-post #wrapper main .readable .text .content h4, body.page-template-default #wrapper main .readable .text .content h1, body.page-template-default #wrapper main .readable .text .content h2, body.page-template-default #wrapper main .readable .text .content h3, body.page-template-default #wrapper main .readable .text .content h4 {
-          max-width: 650px;
+        font-weight: normal;
+        font-weight: 400;
+        margin: auto;
+        padding: 1em 0; }
+        body.single-post #wrapper main .readable .content h1 *, body.single-post #wrapper main .readable .content h2 *, body.single-post #wrapper main .readable .content h3 *, body.single-post #wrapper main .readable .content h4 *, body.page-template-default #wrapper main .readable .content h1 *, body.page-template-default #wrapper main .readable .content h2 *, body.page-template-default #wrapper main .readable .content h3 *, body.page-template-default #wrapper main .readable .content h4 * {
+          font-weight: 400; }
+      body.single-post #wrapper main .readable .content h1, body.page-template-default #wrapper main .readable .content h1 {
+        font-size: 2em;
+        line-height: 1.1em; }
+      body.single-post #wrapper main .readable .content h2, body.single-post #wrapper main .readable .content h3, body.single-post #wrapper main .readable .content h4, body.page-template-default #wrapper main .readable .content h2, body.page-template-default #wrapper main .readable .content h3, body.page-template-default #wrapper main .readable .content h4 {
+        font-size: 1.5em;
+        line-height: 1.1em; }
+        @media (max-width: 480px) {
+          body.single-post #wrapper main .readable .content h2, body.single-post #wrapper main .readable .content h3, body.single-post #wrapper main .readable .content h4, body.page-template-default #wrapper main .readable .content h2, body.page-template-default #wrapper main .readable .content h3, body.page-template-default #wrapper main .readable .content h4 {
+            font-size: 1.2em;
+            line-height: 1.4em; } }
+      body.single-post #wrapper main .readable .content iframe, body.page-template-default #wrapper main .readable .content iframe {
+        width: 100%; }
+      body.single-post #wrapper main .readable .content blockquote, body.page-template-default #wrapper main .readable .content blockquote {
+        max-width: calc(650px - 2em);
+        margin-left: auto;
+        margin-right: auto;
+        font-style: normal;
+        font-family: "Crimson Text", "Baskerville", times, serif;
+        font-weight: normal;
+        font-size: 1em;
+        line-height: 1.3em; }
+        body.single-post #wrapper main .readable .content blockquote *, body.page-template-default #wrapper main .readable .content blockquote * {
           font-family: "Crimson Text", "Baskerville", times, serif;
           font-weight: normal;
-          font-weight: 400;
-          margin: auto;
-          padding: 1em 0; }
-          body.single-post #wrapper main .readable .text .content h1 *, body.single-post #wrapper main .readable .text .content h2 *, body.single-post #wrapper main .readable .text .content h3 *, body.single-post #wrapper main .readable .text .content h4 *, body.page-template-default #wrapper main .readable .text .content h1 *, body.page-template-default #wrapper main .readable .text .content h2 *, body.page-template-default #wrapper main .readable .text .content h3 *, body.page-template-default #wrapper main .readable .text .content h4 * {
-            font-weight: 400; }
-        body.single-post #wrapper main .readable .text .content h1, body.page-template-default #wrapper main .readable .text .content h1 {
-          font-size: 2em;
-          line-height: 1.1em; }
-        body.single-post #wrapper main .readable .text .content h2, body.single-post #wrapper main .readable .text .content h3, body.single-post #wrapper main .readable .text .content h4, body.page-template-default #wrapper main .readable .text .content h2, body.page-template-default #wrapper main .readable .text .content h3, body.page-template-default #wrapper main .readable .text .content h4 {
-          font-size: 1.5em;
-          line-height: 1.1em; }
-          @media (max-width: 480px) {
-            body.single-post #wrapper main .readable .text .content h2, body.single-post #wrapper main .readable .text .content h3, body.single-post #wrapper main .readable .text .content h4, body.page-template-default #wrapper main .readable .text .content h2, body.page-template-default #wrapper main .readable .text .content h3, body.page-template-default #wrapper main .readable .text .content h4 {
-              font-size: 1.2em;
-              line-height: 1.4em; } }
-        body.single-post #wrapper main .readable .text .content iframe, body.page-template-default #wrapper main .readable .text .content iframe {
-          width: 100%; }
-        body.single-post #wrapper main .readable .text .content blockquote, body.page-template-default #wrapper main .readable .text .content blockquote {
-          max-width: calc(650px - 2em);
-          margin-left: auto;
-          margin-right: auto;
+          font-weight: normal;
           font-style: normal;
-          font-family: "Crimson Text", "Baskerville", times, serif;
-          font-weight: normal; }
-          body.single-post #wrapper main .readable .text .content blockquote *, body.page-template-default #wrapper main .readable .text .content blockquote * {
-            font-family: "Crimson Text", "Baskerville", times, serif;
-            font-weight: normal;
-            font-weight: normal;
-            font-style: normal;
-            color: #346378;
-            text-decoration: none;
-            font-size: 1em;
-            line-height: 1.2em; }
-          body.single-post #wrapper main .readable .text .content blockquote p, body.page-template-default #wrapper main .readable .text .content blockquote p {
-            font-size: 1.2em;
-            line-height: 1.4em; }
-        body.single-post #wrapper main .readable .text .content .wp-caption, body.single-post #wrapper main .readable .text .content figure.wp-block-image, body.page-template-default #wrapper main .readable .text .content .wp-caption, body.page-template-default #wrapper main .readable .text .content figure.wp-block-image {
-          color: #8f9da2;
-          max-width: 100%;
-          padding: 2em 0;
-          display: block;
-          font-family: Helvetica, Arial, sans-serif;
-          font-weight: 400;
-          font-size: .62em;
-          line-height: 1.4em; }
-          body.single-post #wrapper main .readable .text .content .wp-caption a, body.single-post #wrapper main .readable .text .content figure.wp-block-image a, body.page-template-default #wrapper main .readable .text .content .wp-caption a, body.page-template-default #wrapper main .readable .text .content figure.wp-block-image a {
-            display: inline-table; }
-          body.single-post #wrapper main .readable .text .content .wp-caption img, body.single-post #wrapper main .readable .text .content figure.wp-block-image img, body.page-template-default #wrapper main .readable .text .content .wp-caption img, body.page-template-default #wrapper main .readable .text .content figure.wp-block-image img {
-            max-width: 100%;
-            height: auto; }
-          body.single-post #wrapper main .readable .text .content .wp-caption .wp-caption-text, body.single-post #wrapper main .readable .text .content .wp-caption p, body.single-post #wrapper main .readable .text .content .wp-caption figcaption, body.single-post #wrapper main .readable .text .content figure.wp-block-image .wp-caption-text, body.single-post #wrapper main .readable .text .content figure.wp-block-image p, body.single-post #wrapper main .readable .text .content figure.wp-block-image figcaption, body.page-template-default #wrapper main .readable .text .content .wp-caption .wp-caption-text, body.page-template-default #wrapper main .readable .text .content .wp-caption p, body.page-template-default #wrapper main .readable .text .content .wp-caption figcaption, body.page-template-default #wrapper main .readable .text .content figure.wp-block-image .wp-caption-text, body.page-template-default #wrapper main .readable .text .content figure.wp-block-image p, body.page-template-default #wrapper main .readable .text .content figure.wp-block-image figcaption {
-            width: 100%;
-            max-width: 100%;
-            padding: .25em 0 0 0;
-            color: #8f9da2;
-            font-size: 1em;
-            line-height: 1.5em;
-            text-align: left; }
-          body.single-post #wrapper main .readable .text .content .wp-caption:first-child, body.single-post #wrapper main .readable .text .content figure.wp-block-image:first-child, body.page-template-default #wrapper main .readable .text .content .wp-caption:first-child, body.page-template-default #wrapper main .readable .text .content figure.wp-block-image:first-child {
-            margin-top: 0; }
-        body.single-post #wrapper main .readable .text .content img, body.page-template-default #wrapper main .readable .text .content img {
-          width: auto;
+          color: #346378;
+          text-decoration: none; }
+      body.single-post #wrapper main .readable .content .wp-caption, body.single-post #wrapper main .readable .content figure.wp-block-image, body.page-template-default #wrapper main .readable .content .wp-caption, body.page-template-default #wrapper main .readable .content figure.wp-block-image {
+        color: #8f9da2;
+        max-width: 100%;
+        padding: 2em 0;
+        display: block;
+        font-family: Helvetica, Arial, sans-serif;
+        font-weight: 400;
+        font-size: .62em;
+        line-height: 1.4em; }
+        body.single-post #wrapper main .readable .content .wp-caption a, body.single-post #wrapper main .readable .content figure.wp-block-image a, body.page-template-default #wrapper main .readable .content .wp-caption a, body.page-template-default #wrapper main .readable .content figure.wp-block-image a {
+          display: inline-table; }
+        body.single-post #wrapper main .readable .content .wp-caption img, body.single-post #wrapper main .readable .content figure.wp-block-image img, body.page-template-default #wrapper main .readable .content .wp-caption img, body.page-template-default #wrapper main .readable .content figure.wp-block-image img {
           max-width: 100%;
           height: auto; }
-        body.single-post #wrapper main .readable .text .content img.aligncenter, body.single-post #wrapper main .readable .text .content div.aligncenter, body.page-template-default #wrapper main .readable .text .content img.aligncenter, body.page-template-default #wrapper main .readable .text .content div.aligncenter {
+        body.single-post #wrapper main .readable .content .wp-caption .wp-caption-text, body.single-post #wrapper main .readable .content .wp-caption p, body.single-post #wrapper main .readable .content .wp-caption figcaption, body.single-post #wrapper main .readable .content figure.wp-block-image .wp-caption-text, body.single-post #wrapper main .readable .content figure.wp-block-image p, body.single-post #wrapper main .readable .content figure.wp-block-image figcaption, body.page-template-default #wrapper main .readable .content .wp-caption .wp-caption-text, body.page-template-default #wrapper main .readable .content .wp-caption p, body.page-template-default #wrapper main .readable .content .wp-caption figcaption, body.page-template-default #wrapper main .readable .content figure.wp-block-image .wp-caption-text, body.page-template-default #wrapper main .readable .content figure.wp-block-image p, body.page-template-default #wrapper main .readable .content figure.wp-block-image figcaption {
+          width: 100%;
           max-width: 100%;
-          clear: both;
-          margin: 2em auto; }
-          body.single-post #wrapper main .readable .text .content img.aligncenter a, body.single-post #wrapper main .readable .text .content div.aligncenter a, body.page-template-default #wrapper main .readable .text .content img.aligncenter a, body.page-template-default #wrapper main .readable .text .content div.aligncenter a {
-            display: table;
-            margin: auto; }
-        body.single-post #wrapper main .readable .text .content img.alignleft, body.single-post #wrapper main .readable .text .content div.alignleft, body.page-template-default #wrapper main .readable .text .content img.alignleft, body.page-template-default #wrapper main .readable .text .content div.alignleft {
-          max-width: 50%;
-          float: left;
-          margin: 1em 1em 1em 0; }
-        body.single-post #wrapper main .readable .text .content img.alignright, body.single-post #wrapper main .readable .text .content div.alignright, body.page-template-default #wrapper main .readable .text .content img.alignright, body.page-template-default #wrapper main .readable .text .content div.alignright {
-          max-width: 50%;
-          float: right;
-          margin: 1em 0 1em 1em; }
+          padding: .5em 0 0 0 !important;
+          color: #8f9da2;
+          font-size: 1em;
+          line-height: 1.5em;
+          text-align: left; }
+        body.single-post #wrapper main .readable .content .wp-caption:first-child, body.single-post #wrapper main .readable .content figure.wp-block-image:first-child, body.page-template-default #wrapper main .readable .content .wp-caption:first-child, body.page-template-default #wrapper main .readable .content figure.wp-block-image:first-child {
+          margin-top: 0; }
+      body.single-post #wrapper main .readable .content img, body.page-template-default #wrapper main .readable .content img {
+        width: auto;
+        max-width: 100%;
+        height: auto; }
+      body.single-post #wrapper main .readable .content img.aligncenter, body.single-post #wrapper main .readable .content div.aligncenter, body.page-template-default #wrapper main .readable .content img.aligncenter, body.page-template-default #wrapper main .readable .content div.aligncenter {
+        max-width: 100%;
+        clear: both;
+        margin: 2em auto; }
+        body.single-post #wrapper main .readable .content img.aligncenter a, body.single-post #wrapper main .readable .content div.aligncenter a, body.page-template-default #wrapper main .readable .content img.aligncenter a, body.page-template-default #wrapper main .readable .content div.aligncenter a {
+          display: table;
+          margin: auto; }
+      body.single-post #wrapper main .readable .content img.alignleft, body.single-post #wrapper main .readable .content div.alignleft, body.page-template-default #wrapper main .readable .content img.alignleft, body.page-template-default #wrapper main .readable .content div.alignleft {
+        max-width: 50%;
+        float: left;
+        margin: 1em 1em 1em 0; }
+      body.single-post #wrapper main .readable .content img.alignright, body.single-post #wrapper main .readable .content div.alignright, body.page-template-default #wrapper main .readable .content img.alignright, body.page-template-default #wrapper main .readable .content div.alignright {
+        max-width: 50%;
+        float: right;
+        margin: 1em 0 1em 1em; }
+      body.single-post #wrapper main .readable .content .image img, body.page-template-default #wrapper main .readable .content .image img {
+        opacity: 0 !important;
+        -webkit-transition: opacity 600ms cubic-bezier(0.19, 1, 0.22, 1);
+        transition: opacity 600ms cubic-bezier(0.19, 1, 0.22, 1); }
+      body.single-post #wrapper main .readable .content .image.loaded img, body.page-template-default #wrapper main .readable .content .image.loaded img {
+        opacity: 1 !important; }
+      body.single-post #wrapper main .readable .content .image.missing, body.page-template-default #wrapper main .readable .content .image.missing {
+        width: 100% !important;
+        height: auto !important;
+        display: table;
+        border: 1px solid #86a1ad; }
+        body.single-post #wrapper main .readable .content .image.missing a, body.page-template-default #wrapper main .readable .content .image.missing a {
+          width: 100%;
+          height: 100%; }
+        body.single-post #wrapper main .readable .content .image.missing img, body.page-template-default #wrapper main .readable .content .image.missing img {
+          display: none; }
+        body.single-post #wrapper main .readable .content .image.missing svg, body.page-template-default #wrapper main .readable .content .image.missing svg {
+          width: 100%;
+          height: auto;
+          display: table;
+          fill: #8f9da2; }
+      body.single-post #wrapper main .readable .content img, body.page-template-default #wrapper main .readable .content img {
+        opacity: 0; }
     body.single-post #wrapper main .readable .gallery-item img, body.page-template-default #wrapper main .readable .gallery-item img {
       border: 0; }
     body.single-post #wrapper main .readable .foot .meta, body.page-template-default #wrapper main .readable .foot .meta {
