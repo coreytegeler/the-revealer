@@ -422,8 +422,8 @@ input {
   overflow: hidden;
   position: relative;
   display: block !important;
-  -webkit-transition: max-height 800ms cubic-bezier(0.19, 1, 0.22, 1);
-  transition: max-height 800ms cubic-bezier(0.19, 1, 0.22, 1); }
+  -webkit-transition: max-height 800ms cubic-bezier(0.19, 1, 0.22, 1) !important;
+  transition: max-height 800ms cubic-bezier(0.19, 1, 0.22, 1) !important; }
   .toggler .inner {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1817,21 +1817,21 @@ body.about #wrapper main ul.parent {
         width: calc(100% - 2em) !important;
         padding: 0 0 0 2em; } }
 
-.issues .issue {
-  height: 32vw;
-  max-height: 32vw;
+.issues .issue.toggler {
+  min-height: 42vw;
+  max-height: 42vw;
   background: #eaedee;
   color: #346378;
   font-family: "Crimson Text", "Baskerville", times, serif;
   font-weight: normal; }
-  .issues .issue .text {
+  .issues .issue.toggler .text {
     padding: 1em; }
-  .issues .issue .list {
+  .issues .issue.toggler .list {
     padding: 0 1em 1em 1em; }
-    .issues .issue .list article.row {
+    .issues .issue.toggler .list article.row {
       font-weight: 400;
       z-index: 100; }
-      .issues .issue .list article.row a {
+      .issues .issue.toggler .list article.row a {
         text-decoration: none;
         text-shadow: 0 1px 0 #eaedee, 0 2px 0 #eaedee, 0 -1px 0 #eaedee, 0 -2px 0 #eaedee, -1px 1px 0 #eaedee, -1px 2px 0 #eaedee, 1px 1px 0 #eaedee, 1px 2px 0 #eaedee, -1px 0 0 #eaedee, 0 -3px 0 #eaedee;
         background: -webkit-gradient(linear, left top, left bottom, from(#eaedee), to(#eaedee)), -webkit-gradient(linear, left top, left bottom, from(#eaedee), to(#eaedee)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
@@ -1840,7 +1840,7 @@ body.about #wrapper main ul.parent {
         background-repeat: no-repeat,no-repeat,repeat-x;
         background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
         text-decoration: none; }
-      .issues .issue .list article.row .title::after {
+      .issues .issue.toggler .list article.row .title::after {
         content: ' ';
         display: inline; }
 

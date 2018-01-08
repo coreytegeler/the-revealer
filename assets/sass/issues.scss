@@ -1,7 +1,7 @@
 .issues {
-	.issue {
-		height: 32vw;
-		max-height: 32vw;
+	.issue.toggler {
+		min-height: 42vw;
+		max-height: 42vw;
 		background: $lighter;
 		color: $dark;
 		@include serifText;

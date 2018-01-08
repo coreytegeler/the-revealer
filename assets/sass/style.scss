@@ -276,7 +276,7 @@ input {
 	overflow: hidden;
 	position: relative;
 	display: block !important;
-	transition: max-height 800ms $ease;
+	transition: max-height 800ms $ease !important;
 	.inner {
 		display: flex;
 		flex-wrap: wrap;
