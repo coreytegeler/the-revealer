@@ -13,6 +13,7 @@ $issues = get_terms( array(
 ) );
 $current_issue = $issues[0];
 $current_issue_id = $current_issue->term_id;
+$current_issue_url = get_term_link( $current_issue_id, 'issues' );
 
 $current_issue_args = array(
 	'post_type' => 'post',
@@ -43,15 +44,20 @@ if( $articles_page ) {
 echo '<div class="readable">';
 	echo '<div class="loop articles two_col grid" id="current_issue">';
 		echo '<div class="cell" id="cover">';
-			echo '<h2 class="lead">Read our current issue</h2>';
-			$issue_date = get_field( 'date', $current_issue );
-			echo '<h1 class="title">' . $current_issue->name  . '</h1>';	
-			echo '<h2 class="date">published ' . $issue_date . '</h2>';
-			get_template_part( 'parts/goldbar' );
+			echo '<div class="issue">';
+				echo '<div class="text">';
+					echo '<h2 class="lead">Read our current issue</h2>';
+					$issue_date = get_field( 'date', $current_issue );
+					echo '<h1 class="title">';
+						echo '<a href="' . $current_issue_url . '">' . $current_issue->name . '</a>';
+					echo '</h1>';	
+					echo '<h2 class="date">published ' . $issue_date . '</h2>';
+				echo '</div>';
+				get_template_part( 'parts/goldbar' );
+			echo '</div>';
 			echo '<div class="newsletter">';
 				get_template_part( 'parts/newsletter' );
 			echo '</div>';
-			get_template_part( 'parts/goldbar' );
 		echo '</div>';
 
 		$features_args = array_merge( $current_issue_args, array(

@@ -7,8 +7,16 @@ body.home {
 			.cell {
 				&#cover {
 					position: relative;
-					.overlay {
-						width: 100%;
+					.issue {
+						background: $lighter;
+						margin: 0 0 4em 0;
+						.text {
+							width: calc(100% - 2em);
+							padding: 2em 1em;
+						}
+						.goldbar {
+							margin: 0;
+						}
 					}
 					.title {
 						color: $dark;
@@ -17,17 +25,23 @@ body.home {
 						position: relative;
 						z-index: 100;
 						padding: 0 0 .15em 0;
-						// @include serifText;
 						@include revealerText;
 						@include xLargeText;
+						a {
+							text-decoration: none;
+							&:hover {
+								@include underline($gold, $lighter, 3px);
+							}
+						}
 					}
-					.lead, .date {
+					.lead {
 						color: $medium;
-						// @include serifText;
 						@include revealerText;
-						// font-style: italic;
-						position: relative;
-						z-index: 100;
+					}
+					.date {
+						color: $medium;
+						@include serifText;
+						font-style: italic;
 					}
 					.loop {
 						padding-top: 1em;
@@ -43,7 +57,8 @@ body.home {
 					}
 					.newsletter {
 						form {
-							width: 100%;
+							width: calc(100% - 2em);
+							padding: 0 1em;
 							max-width: 25em;
 							label {
 								width: 100%;
@@ -117,7 +132,7 @@ body.home {
 				}
 				&:hover, &:focus {
 					.image {
-						background-color: rgba($gold, .45);
+						background-color: $lightGold;
 					}
 				}
 			}

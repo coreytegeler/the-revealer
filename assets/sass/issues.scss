@@ -1,26 +1,54 @@
 .issues {
-	.issue.toggler {
-		min-height: 42vw;
-		max-height: 42vw;
-		background: $lighter;
+	.issue {
 		color: $dark;
+		background: $lighter;
 		@include serifText;
-		.text {
-			padding: 1em;
+		position: relative;
+		svg {
+			width: 100%;
+			height: auto;
 		}
-		.list {
-			padding: 0 1em 1em 1em;
-			article.row {
-				font-weight: $regular;
-				z-index: 100;
-				a {
-					text-decoration: none;
-					@include underline($gold, $lighter);
-				}
-				.title::after {
-					content: ' ';
-					display: inline;
-				}
+		.text {
+			width: calc(100% - 2em);
+			padding: .5em 1em;
+			position: absolute;
+			left: 0;
+			top: 0;
+			font-size: 2vw;
+			line-height: 1.2em;
+			h1.title {
+				@include revealerText;
+				color: inherit !important;
+				word-break: break-word;
+			}
+			h3.date {
+				color: inherit !important;
+				font-style: italic;	
+			}
+		}
+		a.link_wrap {
+			color: $dark;
+			background: $lighter;
+			transition: color 1500ms $ease, box-shadow 1500ms $ease;
+			// box-shadow: 0 0 2em 0 $lightGold;
+			&:hover, &.hover, &:focus {
+				color: $dark;
+				box-shadow: 0 0 5em 0 $gold;
+			}
+		}
+		@include medium {
+			a.link_wrap .text {
+				font-size: 3vw;
+			}
+		}
+		@include small {
+			a.link_wrap .text {
+				font-size: 4vw;
+			}
+		}
+		@include xSmall {
+			a.link_wrap .text {
+				font-size: 8vw;
 			}
 		}
 	}

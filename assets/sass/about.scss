@@ -43,6 +43,7 @@ body.about {
 				ul.child {
 					display: block;
 					margin: auto;
+					padding: 0;
 					li {
 						width: 100%;
 						padding: 0 0 1em 0;
@@ -86,6 +87,7 @@ body.about {
 				.links {
 					margin-top: .5em;
 					a {
+						display: inline-block !important;
 						margin-right: 1em;
 						text-decoration: none;
 						@include xSmallText;

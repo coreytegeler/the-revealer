@@ -30,7 +30,7 @@ echo '<header class="main">';
 							$slug = $link->slug;
 							$url = $link->url;
 							echo '<div class="link">';
-								echo '<a class="conceal" href="' . $url . '" data-slug="' . $slug . '">';
+								echo '<a href="' . $url . '" data-slug="' . $slug . '">';
 									echo $title;
 								echo '</a>';
 							echo '</div>';
