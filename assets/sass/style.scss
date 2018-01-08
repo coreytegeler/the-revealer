@@ -49,12 +49,11 @@ p {
 	a {
 		text-decoration: none;
 		display: inline;
-		@include underline($medium)
 		position: relative;
-		margin-left: -1px;
+		@include underline($light, $lighter, 1px);
 		&:hover {
 			color: $medium;
-			@include underline($gold)
+			@include underline($gold, $lighter, 1px);
 		}
 	}
 	strong {
@@ -227,8 +226,9 @@ input {
 	a {
 		text-decoration: none;
 		color: $dark;
-		border-bottom: 2px solid $gold;
+		// border-bottom: 2px solid $gold;
 		display: inline;
+		@include underline($gold);
 		&:hover {
 			color: $gold;
 		}
@@ -243,10 +243,10 @@ input {
 		a {
 			display: inline;
 			color: $dark;
-			text-decoration: none;
+			@include underline($gold);
 			&:hover {
 				color: $gold;
-				border-bottom: 1px solid $gold;
+				@include underline($gold);
 			}
 		}
 		&::after {
@@ -260,9 +260,9 @@ input {
 		&.no_line {
 			a {
 				color: $medium;
-				border-bottom: 0 !important;
+				@include noUnderline();
 				&:hover {
-					border-bottom: 1px solid $gold !important;
+					@include underline($gold);
 				}
 			}
 		}
@@ -329,9 +329,9 @@ input {
 	&.toggled {
 		.toggle {
 			pointer-events: none;
-			opacity: 0;
+			box-shadow: none;
 			.circle {
-				
+				opacity: 0;	
 			}
 		}
 	}
@@ -519,7 +519,8 @@ input {
 @import 'article';
 @import 'page';
 @import 'about';
-@import 'rows';
+@import 'columns';
+@import 'issues';
 @import 'search';
 @import 'discover';
 @import 'tags';

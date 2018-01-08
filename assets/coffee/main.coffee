@@ -66,8 +66,9 @@ jQuery ($) ->
 						img = e.target
 						loadImage($image)
 					image.src = src
-				if $masonry = $image.parents('.masonry')
-					$masonry.masonry()
+				$loop = $image.parents('.loop')[0]
+				# if $loop.length && $loop.is('.masonry')
+				# 		$masonry.masonry()
 
 			$('article.readable .wp-caption').each (i, elem) ->
 				$img = $(elem).find('img')
@@ -294,14 +295,6 @@ jQuery ($) ->
 			$content = $article.find('.text .content')
 			goodTags = 'p,a,em,img,blockquote,object,.wp-caption-text,.wp-caption,.image'
 			$elems = $content.find('*:not('+goodTags+')').contents()
-			# $elems.unwrap()
-			# $elems.each (i, elem) ->
-			# 	console.log $(elem)
-
-			# wraps inline images to load before showing
-			$sideImages = $side.find('.images .loop')
-			$sideImages.masonry()
-			fixLoops($sideImages)
 			inlineImgs = $content.find('img')
 			hasImages = false
 			for inlineImg in inlineImgs
@@ -324,10 +317,8 @@ jQuery ($) ->
 					$cell.find('.image').append(img)
 					$thumb = $cell.find('img')
 					$thumb.attr('data-width', imageWidth).attr('data-height', imageHeight)
-					fixLoops($sideImages, $cell)
 					$cellImage = $cell.find('.image')
 					sizeImages($cellImage)
-					$sideImages.parents('.images').removeClass('hide')
 				pseudo.onerror = (e) ->
 					# console.log this, e
 					# $missing.addClass('missing')

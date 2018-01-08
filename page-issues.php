@@ -4,7 +4,8 @@ Template Name: Issues
 */
 get_header();
 echo '<div class="readable">';
-	echo '<div class="issues rows">';
+	// echo '<div class="issues rows">';
+echo '<div class="masonry issues loop three_col">';
 		$paged = ( get_query_var('paged') ) ? get_query_var( 'paged' ) : 1;
 		$per_page = 10;
 		$offset = ( $paged - 1 ) * $per_page;
@@ -38,25 +39,24 @@ echo '<div class="readable">';
 					)
 			  )
 			);
+
 			$posts_query = new WP_Query( $posts_args );
 			$post_count = $posts_query->post_count;
-			echo '<div class="sections issue one_two" role="issue">';
-				echo '<section>';
+			// echo '<div class="sections issue one_two" role="issue">';
+			echo '<div class="cell issue toggler" role="issue">';
+				echo '<div class="inner">';
 					echo '<div class="text">';
 						echo '<h1 class="title">' . $title . '</h1>';
 						echo '<h2 class="date">published ' . $date . '</h2>';
 					echo '</div>';
-				echo '</section>';
-
-				echo '<section>';
 					if ( $posts_query->have_posts() ) {
-						echo '<div class="loop posts list">';
+						echo '<div class="list">';
 							while ( $posts_query->have_posts() ) {
 								$posts_query->the_post();
 								$post_id = get_the_ID();
 								$writers = get_contributors_list( $post_id, true, false );
 								$permalink = get_permalink();
-								echo '<article class="cell" role="article" style="' . $style . '" data-id="' . $post_id . '">';
+								echo '<article class="row" role="article" style="' . $style . '" data-id="' . $post_id . '">';
 									echo '<h3>';
 										echo '<a class="title" href="' . $permalink . '">' . get_the_title() . '</a>';
 										if( $writers ) {
@@ -65,10 +65,16 @@ echo '<div class="readable">';
 									echo '</h3>';
 								echo '</article>';
 							}
+							wp_reset_query();
 						echo '</div>';
 					}
-				echo '</section>';
-				wp_reset_query();
+					echo '<div class="toggle">';
+						echo '<div class="circle">';
+							$up_svg = get_template_directory_uri() . '/assets/images/up.svg';
+							echo file_get_contents( $up_svg );
+						echo '</div>';
+					echo '</div>';
+				echo '</div>';
 			echo '</div>';
 		}
 		wp_reset_query();

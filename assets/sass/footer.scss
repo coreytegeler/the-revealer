@@ -10,10 +10,6 @@ footer {
 		text-align: center;
     @include revealerText;
 		@include smallText;
-    a {
-      text-decoration: none;
-      border-bottom: 1px solid $medium;
-    }
     &.newsletter {
       padding: 1em;
       font-size: 1em;

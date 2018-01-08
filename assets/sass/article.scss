@@ -100,6 +100,10 @@ body.single-post, body.page-template-default {
 								p {
 									margin: 0;
 								}	
+								a, a:hover {
+									@include noUnderline();
+									text-decoration: underline;
+								}
 							}
 						}
 					}
@@ -117,6 +121,7 @@ body.single-post, body.page-template-default {
 							max-width: $lineWidth;
 							margin-left: auto;
 							margin-right: auto;
+							padding: 0 !important;
 							a {
 								color: $dark;
 								&.ftn {

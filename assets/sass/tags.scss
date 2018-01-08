@@ -5,9 +5,6 @@
 		span {
 			@include serifText;
 			font-style: italic;
-			a, a:hover {
-				border-bottom: 2px solid $gold !important;
-			}
 		}
 	}
 	@include small {

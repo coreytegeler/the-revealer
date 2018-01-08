@@ -5,18 +5,20 @@
 			a {
 				text-decoration: none;
 			}
+			h3 {
+				@include serifText;
+				color: $medium;
+				font-weight: $regular;
+				z-index: 100;
+				a {
+					font-style: italic; 
+				}
+			}
 			.text {
 				h1 {
 					@include serifText;
 					@include xLargeText;
 					font-weight: $regular;
-				}
-				h2 {
-					color: $medium;
-					font-weight: $regular;
-					z-index: 100;
-					@include serifText;
-					font-style: italic; 
 				}
 			}
 		}

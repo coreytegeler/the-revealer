@@ -25,7 +25,7 @@ jQuery(function($) {
         $images = $('.image.load');
       }
       $images.each(function(i, image) {
-        var $image, $img, $masonry, $parent, imageHeight, imageWidth, natHeight, natWidth, ratio, src;
+        var $image, $img, $loop, $parent, imageHeight, imageWidth, natHeight, natWidth, ratio, src;
         $image = $(image);
         $img = $image.find('img');
         if ($img.parents('article')) {
@@ -78,9 +78,7 @@ jQuery(function($) {
           };
           image.src = src;
         }
-        if ($masonry = $image.parents('.masonry')) {
-          return $masonry.masonry();
-        }
+        return $loop = $image.parents('.loop')[0];
       });
       return $('article.readable .wp-caption').each(function(i, elem) {
         var $caption, $img, imgWidth;
@@ -330,7 +328,7 @@ jQuery(function($) {
       });
     };
     setupArticle = function() {
-      var $article, $content, $elems, $inlineImg, $link, $sideImages, $wpImg, currentSrc, goodTags, hasImages, href, inlineImg, inlineImgs, j, k, len, len1, link, links, name, pseudo, replace, split;
+      var $article, $content, $elems, $inlineImg, $link, $wpImg, currentSrc, goodTags, hasImages, href, inlineImg, inlineImgs, j, k, len, len1, link, links, name, pseudo, replace, split;
       if (!$body.is('.single-post, .page-template-default')) {
         return;
       }
@@ -338,9 +336,6 @@ jQuery(function($) {
       $content = $article.find('.text .content');
       goodTags = 'p,a,em,img,blockquote,object,.wp-caption-text,.wp-caption,.image';
       $elems = $content.find('*:not(' + goodTags + ')').contents();
-      $sideImages = $side.find('.images .loop');
-      $sideImages.masonry();
-      fixLoops($sideImages);
       inlineImgs = $content.find('img');
       hasImages = false;
       for (j = 0, len = inlineImgs.length; j < len; j++) {
@@ -365,10 +360,8 @@ jQuery(function($) {
           $cell.find('.image').append(img);
           $thumb = $cell.find('img');
           $thumb.attr('data-width', imageWidth).attr('data-height', imageHeight);
-          fixLoops($sideImages, $cell);
           $cellImage = $cell.find('.image');
-          sizeImages($cellImage);
-          return $sideImages.parents('.images').removeClass('hide');
+          return sizeImages($cellImage);
         };
         pseudo.onerror = function(e) {};
         pseudo.src = currentSrc;

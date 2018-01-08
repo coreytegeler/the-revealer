@@ -178,22 +178,23 @@ p {
   p a {
     text-decoration: none;
     display: inline;
-    text-shadow: 0 1px 0 #f1f5f7, 0 2px 0 #f1f5f7, 0 -1px 0 #f1f5f7, 0 -2px 0 #f1f5f7, -1px 1px 0 #f1f5f7, -1px 2px 0 #f1f5f7, 1px 1px 0 #f1f5f7, 1px 2px 0 #f1f5f7, -1px 0 0 #f1f5f7, 0 -3px 0 #f1f5f7;
-    background: -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#8f9da2), to(#8f9da2));
-    background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#8f9da2, #8f9da2);
+    position: relative;
+    text-shadow: 0 1px 0 #eaedee, 0 2px 0 #eaedee, 0 -1px 0 #eaedee, 0 -2px 0 #eaedee, -1px 1px 0 #eaedee, -1px 2px 0 #eaedee, 1px 1px 0 #eaedee, 1px 2px 0 #eaedee, -1px 0 0 #eaedee, 0 -3px 0 #eaedee;
+    background: -webkit-gradient(linear, left top, left bottom, from(#eaedee), to(#eaedee)), -webkit-gradient(linear, left top, left bottom, from(#eaedee), to(#eaedee)), -webkit-gradient(linear, left top, left bottom, from(#86a1ad), to(#86a1ad));
+    background: linear-gradient(#eaedee, #eaedee), linear-gradient(#eaedee, #eaedee), linear-gradient(#86a1ad, #86a1ad);
     background-position: 0 87%,100% 87%,0 92%;
     background-repeat: no-repeat,no-repeat,repeat-x;
-    background-size: .05em 1px,.05em 1px,1px 1px;
-    position: relative;
-    margin-left: -1px; }
+    background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+    text-decoration: none; }
     p a:hover {
       color: #8f9da2;
-      text-shadow: 0 1px 0 #f1f5f7, 0 2px 0 #f1f5f7, 0 -1px 0 #f1f5f7, 0 -2px 0 #f1f5f7, -1px 1px 0 #f1f5f7, -1px 2px 0 #f1f5f7, 1px 1px 0 #f1f5f7, 1px 2px 0 #f1f5f7, -1px 0 0 #f1f5f7, 0 -3px 0 #f1f5f7;
-      background: -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
-      background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#fecf0c, #fecf0c);
+      text-shadow: 0 1px 0 #eaedee, 0 2px 0 #eaedee, 0 -1px 0 #eaedee, 0 -2px 0 #eaedee, -1px 1px 0 #eaedee, -1px 2px 0 #eaedee, 1px 1px 0 #eaedee, 1px 2px 0 #eaedee, -1px 0 0 #eaedee, 0 -3px 0 #eaedee;
+      background: -webkit-gradient(linear, left top, left bottom, from(#eaedee), to(#eaedee)), -webkit-gradient(linear, left top, left bottom, from(#eaedee), to(#eaedee)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
+      background: linear-gradient(#eaedee, #eaedee), linear-gradient(#eaedee, #eaedee), linear-gradient(#fecf0c, #fecf0c);
       background-position: 0 87%,100% 87%,0 92%;
       background-repeat: no-repeat,no-repeat,repeat-x;
-      background-size: .05em 1px,.05em 1px,1px 1px; }
+      background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+      text-decoration: none; }
   p strong {
     font-weight: 600; }
 
@@ -357,8 +358,14 @@ input {
   .section_header a {
     text-decoration: none;
     color: #346378;
-    border-bottom: 2px solid #fecf0c;
-    display: inline; }
+    display: inline;
+    text-shadow: 0 1px 0 #f1f5f7, 0 2px 0 #f1f5f7, 0 -1px 0 #f1f5f7, 0 -2px 0 #f1f5f7, -1px 1px 0 #f1f5f7, -1px 2px 0 #f1f5f7, 1px 1px 0 #f1f5f7, 1px 2px 0 #f1f5f7, -1px 0 0 #f1f5f7, 0 -3px 0 #f1f5f7;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
+    background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#fecf0c, #fecf0c);
+    background-position: 0 87%,100% 87%,0 92%;
+    background-repeat: no-repeat,no-repeat,repeat-x;
+    background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+    text-decoration: none; }
     .section_header a:hover {
       color: #fecf0c; }
 
@@ -373,10 +380,22 @@ input {
     .commas span a {
       display: inline;
       color: #346378;
+      text-shadow: 0 1px 0 #f1f5f7, 0 2px 0 #f1f5f7, 0 -1px 0 #f1f5f7, 0 -2px 0 #f1f5f7, -1px 1px 0 #f1f5f7, -1px 2px 0 #f1f5f7, 1px 1px 0 #f1f5f7, 1px 2px 0 #f1f5f7, -1px 0 0 #f1f5f7, 0 -3px 0 #f1f5f7;
+      background: -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
+      background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#fecf0c, #fecf0c);
+      background-position: 0 87%,100% 87%,0 92%;
+      background-repeat: no-repeat,no-repeat,repeat-x;
+      background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
       text-decoration: none; }
       .commas span a:hover {
         color: #fecf0c;
-        border-bottom: 1px solid #fecf0c; }
+        text-shadow: 0 1px 0 #f1f5f7, 0 2px 0 #f1f5f7, 0 -1px 0 #f1f5f7, 0 -2px 0 #f1f5f7, -1px 1px 0 #f1f5f7, -1px 2px 0 #f1f5f7, 1px 1px 0 #f1f5f7, 1px 2px 0 #f1f5f7, -1px 0 0 #f1f5f7, 0 -3px 0 #f1f5f7;
+        background: -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
+        background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#fecf0c, #fecf0c);
+        background-position: 0 87%,100% 87%,0 92%;
+        background-repeat: no-repeat,no-repeat,repeat-x;
+        background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+        text-decoration: none; }
     .commas span::after {
       display: inline;
       content: ',';
@@ -385,9 +404,16 @@ input {
       display: none; }
     .commas span.no_line a {
       color: #8f9da2;
-      border-bottom: 0 !important; }
+      text-shadow: none;
+      background: none; }
       .commas span.no_line a:hover {
-        border-bottom: 1px solid #fecf0c !important; }
+        text-shadow: 0 1px 0 #f1f5f7, 0 2px 0 #f1f5f7, 0 -1px 0 #f1f5f7, 0 -2px 0 #f1f5f7, -1px 1px 0 #f1f5f7, -1px 2px 0 #f1f5f7, 1px 1px 0 #f1f5f7, 1px 2px 0 #f1f5f7, -1px 0 0 #f1f5f7, 0 -3px 0 #f1f5f7;
+        background: -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
+        background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#fecf0c, #fecf0c);
+        background-position: 0 87%,100% 87%,0 92%;
+        background-repeat: no-repeat,no-repeat,repeat-x;
+        background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+        text-decoration: none; }
     .commas span.empty {
       opacity: .5; }
 
@@ -448,7 +474,10 @@ input {
         box-shadow: 0 0 0.5em 0.25em #fecf0c; }
   .toggler.toggled .toggle {
     pointer-events: none;
-    opacity: 0; }
+    -webkit-box-shadow: none;
+    box-shadow: none; }
+    .toggler.toggled .toggle .circle {
+      opacity: 0; }
 
 .stats {
   width: 100%;
@@ -1008,26 +1037,26 @@ body.articles #wrapper aside {
   .loop.five_col .cell {
     width: calc(100%/5 - (1em - 1em/5));
     margin: 0 0 1em 0; }
-  .loop.list .cell {
-    text-align: left;
+  .loop.list .row {
     width: 100%;
     font-family: "Crimson Text", "Baskerville", times, serif;
-    font-weight: normal; }
-    .loop.list .cell .title .categories {
+    font-weight: normal;
+    float: none; }
+    .loop.list .row .title .categories {
       margin: 0; }
-    .loop.list .cell .meta {
+    .loop.list .row .meta {
       margin: 0; }
-    .loop.list .cell .blurb {
+    .loop.list .row .blurb {
       margin-bottom: 2em; }
-    .loop.list .cell a.title {
+    .loop.list .row a.title {
       display: inline; }
-      .loop.list .cell a.title:hover {
+      .loop.list .row a.title:hover {
         opacity: .5; }
-    .loop.list .cell .date {
+    .loop.list .row .date {
       display: inline;
       color: #86a1ad;
       margin-right: .5em; }
-    .loop.list .cell .writer {
+    .loop.list .row .writer {
       display: inline;
       color: #86a1ad;
       margin-left: .25em; }
@@ -1180,7 +1209,7 @@ body.articles #wrapper aside {
     padding-right: .5em; } }
 
 @media (max-width: 480px) {
-  .loop.grid .cell, .loop.grid article {
+  .loop.one_col .cell, .loop.one_col article, .loop.one_col.grid .cell, .loop.one_col.grid article, .loop.two_col .cell, .loop.two_col article, .loop.two_col.grid .cell, .loop.two_col.grid article, .loop.three_col .cell, .loop.three_col article, .loop.three_col.grid .cell, .loop.three_col.grid article, .loop.four_col .cell, .loop.four_col article, .loop.four_col.grid .cell, .loop.four_col.grid article, .loop.five_col .cell, .loop.five_col article, .loop.five_col.grid .cell, .loop.five_col.grid article {
     width: 100% !important;
     margin-bottom: 2em !important;
     margin-right: 0 !important;
@@ -1405,6 +1434,10 @@ body.single-post #wrapper, body.page-template-default #wrapper {
             font-weight: 400; }
             body.single-post #wrapper main .readable .text #alert .message .archive_alert p, body.page-template-default #wrapper main .readable .text #alert .message .archive_alert p {
               margin: 0; }
+            body.single-post #wrapper main .readable .text #alert .message .archive_alert a, body.single-post #wrapper main .readable .text #alert .message .archive_alert a:hover, body.page-template-default #wrapper main .readable .text #alert .message .archive_alert a, body.page-template-default #wrapper main .readable .text #alert .message .archive_alert a:hover {
+              text-shadow: none;
+              background: none;
+              text-decoration: underline; }
       body.single-post #wrapper main .readable .text .content, body.page-template-default #wrapper main .readable .text .content {
         padding: 2em 0;
         opacity: 0;
@@ -1417,7 +1450,8 @@ body.single-post #wrapper, body.page-template-default #wrapper {
         body.single-post #wrapper main .readable .text .content p, body.single-post #wrapper main .readable .text .content .element, body.page-template-default #wrapper main .readable .text .content p, body.page-template-default #wrapper main .readable .text .content .element {
           max-width: 650px;
           margin-left: auto;
-          margin-right: auto; }
+          margin-right: auto;
+          padding: 0 !important; }
           body.single-post #wrapper main .readable .text .content p a, body.single-post #wrapper main .readable .text .content .element a, body.page-template-default #wrapper main .readable .text .content p a, body.page-template-default #wrapper main .readable .text .content .element a {
             color: #346378; }
             body.single-post #wrapper main .readable .text .content p a.ftn, body.single-post #wrapper main .readable .text .content .element a.ftn, body.page-template-default #wrapper main .readable .text .content p a.ftn, body.page-template-default #wrapper main .readable .text .content .element a.ftn {
@@ -1724,26 +1758,27 @@ body.about #wrapper main ul.parent {
     display: block;
     margin: auto !important; } }
 
-.rows .sections {
+.columns .sections {
   padding: 0 0 2em 0; }
-  .rows .sections section a {
+  .columns .sections section a {
     text-decoration: none; }
-  .rows .sections section .text h1 {
+  .columns .sections section h3 {
+    font-family: "Crimson Text", "Baskerville", times, serif;
+    font-weight: normal;
+    color: #8f9da2;
+    font-weight: 400;
+    z-index: 100; }
+    .columns .sections section h3 a {
+      font-style: italic; }
+  .columns .sections section .text h1 {
     font-family: "Crimson Text", "Baskerville", times, serif;
     font-weight: normal;
     font-size: 2.3em;
     line-height: 1.1em;
     font-weight: 400; }
     @media (max-width: 480px) {
-      .rows .sections section .text h1 {
+      .columns .sections section .text h1 {
         font-size: 2em; } }
-  .rows .sections section .text h2 {
-    color: #8f9da2;
-    font-weight: 400;
-    z-index: 100;
-    font-family: "Crimson Text", "Baskerville", times, serif;
-    font-weight: normal;
-    font-style: italic; }
 
 .sections {
   width: 100%;
@@ -1777,7 +1812,37 @@ body.about #wrapper main ul.parent {
   @media (max-width: 1024px) {
     .sections.one_two section {
       width: 100% !important;
-      padding-bottom: 1em; } }
+      padding: 0 0 1em 0; }
+      .sections.one_two section .loop {
+        width: calc(100% - 2em) !important;
+        padding: 0 0 0 2em; } }
+
+.issues .issue {
+  height: 32vw;
+  max-height: 32vw;
+  background: #eaedee;
+  color: #346378;
+  font-family: "Crimson Text", "Baskerville", times, serif;
+  font-weight: normal; }
+  .issues .issue .text {
+    padding: 1em; }
+  .issues .issue .list {
+    padding: 0 1em 1em 1em; }
+    .issues .issue .list article.row {
+      font-weight: 400;
+      z-index: 100; }
+      .issues .issue .list article.row a {
+        text-decoration: none;
+        text-shadow: 0 1px 0 #eaedee, 0 2px 0 #eaedee, 0 -1px 0 #eaedee, 0 -2px 0 #eaedee, -1px 1px 0 #eaedee, -1px 2px 0 #eaedee, 1px 1px 0 #eaedee, 1px 2px 0 #eaedee, -1px 0 0 #eaedee, 0 -3px 0 #eaedee;
+        background: -webkit-gradient(linear, left top, left bottom, from(#eaedee), to(#eaedee)), -webkit-gradient(linear, left top, left bottom, from(#eaedee), to(#eaedee)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
+        background: linear-gradient(#eaedee, #eaedee), linear-gradient(#eaedee, #eaedee), linear-gradient(#fecf0c, #fecf0c);
+        background-position: 0 87%,100% 87%,0 92%;
+        background-repeat: no-repeat,no-repeat,repeat-x;
+        background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+        text-decoration: none; }
+      .issues .issue .list article.row .title::after {
+        content: ' ';
+        display: inline; }
 
 body.search #wrapper main, body.tag #wrapper main, body.error404 #wrapper main {
   width: 100%;
@@ -2086,8 +2151,6 @@ body.error404 .newsletter form .inputs input {
     font-family: "Crimson Text", "Baskerville", times, serif;
     font-weight: normal;
     font-style: italic; }
-    #tags .commas span a, #tags .commas span a:hover {
-      border-bottom: 2px solid #fecf0c !important; }
 
 @media (max-width: 768px) {
   #tags .commas {
@@ -2113,9 +2176,6 @@ footer {
     text-transform: lowercase !important;
     font-size: 1em;
     line-height: 1.3em; }
-    footer .note a {
-      text-decoration: none;
-      border-bottom: 1px solid #8f9da2; }
     footer .note.newsletter {
       padding: 1em;
       font-size: 1em; }

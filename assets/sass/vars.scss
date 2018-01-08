@@ -40,30 +40,30 @@ $lightest: #f1f5f7;
 	line-height: 1.4em;
 }
 @mixin xMediumText {
-  font-size: 1.5em;
-  line-height: 1.1em;
-  @include xSmall {
-    font-size: 1.2em;
-    line-height: 1.4em;
-  }
+	font-size: 1.5em;
+	line-height: 1.1em;
+	@include xSmall {
+		font-size: 1.2em;
+		line-height: 1.4em;
+	}
 }
 @mixin largeText {
 	font-size: 2em;
 	line-height: 1.1em;
 }
 @mixin xLargeText {
-  font-size: 2.3em;
-  line-height: 1.1em;
-  @include xSmall {
-    font-size: 2em;
-  }
+	font-size: 2.3em;
+	line-height: 1.1em;
+	@include xSmall {
+		font-size: 2em;
+	}
 }
 @mixin xxLargeText {
-  font-size: 3.5em;
-  line-height: 1.1em;
-  @include xSmall {
-    font-size: 3em;
-  }
+	font-size: 3.5em;
+	line-height: 1.1em;
+	@include xSmall {
+		font-size: 3em;
+	}
 }
 ///////////////////////////////////////////////////////////////
 ///////////////////////////FONTS///////////////////////////////
@@ -78,20 +78,20 @@ $clarendon: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif;
 $monospace: 'Overpass Mono', courier, monospace;
 @mixin serifText {
 	font-family: $serif;
-  font-weight: normal;
+	font-weight: normal;
 }
 @mixin sansSerifText {
 	font-family: $sansSerif;
-  font-weight: 400;
+	font-weight: 400;
 }
 @mixin revealerText {
-  font-family: $clarendon !important;
-  font-weight: 400 !important;
-  text-transform: lowercase !important;
+	font-family: $clarendon !important;
+	font-weight: 400 !important;
+	text-transform: lowercase !important;
 }
 @mixin monoText {
-  font-family: $monospace !important;
-  font-weight: 600 !important;
+	font-family: $monospace !important;
+	font-weight: 600 !important;
 }
 ///////////////////////////////////////////////////////////////
 ////////////////////////BREAK POINTS///////////////////////////
@@ -114,21 +114,21 @@ $maxWidth: 950px;
 }
 
 @mixin small {
-  @media (max-width: #{$smallWidth}) {
-    @content;
-  }
+	@media (max-width: #{$smallWidth}) {
+		@content;
+	}
 }
 
 @mixin medium {
-  @media (max-width: #{$mediumWidth}) {
-    @content;
-  }
+	@media (max-width: #{$mediumWidth}) {
+		@content;
+	}
 }
 
 @mixin large {
-  @media (max-width: #{$largeWidth}) {
-    @content;
-  }
+	@media (max-width: #{$largeWidth}) {
+		@content;
+	}
 }
 
 
@@ -138,91 +138,101 @@ $maxWidth: 950px;
 $ease: cubic-bezier(0.19, 1, 0.22, 1);
 
 @keyframes conceal {
-  0% {opacity: 1;}
-  7% {opacity: .8;}
-  100% {opacity: .02;}
+	0% {opacity: 1;}
+	7% {opacity: .8;}
+	100% {opacity: .02;}
 }
 
 @keyframes glisten {
-  0% {
-  	opacity: 0.75;
-  }
-  25% {
-  	opacity: 1;
-  }
-  50% {
-  	opacity: .75;
-  }
-  75% {
-  	opacity: 1;
-  }
-  100% {
-  	opacity: 0.75;
-  }
+	0% {
+		opacity: 0.75;
+	}
+	25% {
+		opacity: 1;
+	}
+	50% {
+		opacity: .75;
+	}
+	75% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0.75;
+	}
 }
 
 @keyframes bounce {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-.125em);
-  }
-  100% {
-    transform: translateY(0);
-  }
+	0% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-.125em);
+	}
+	100% {
+		transform: translateY(0);
+	}
 }
 
 @keyframes glistenBounce {
-  0% {
-  	opacity: 0.75;
-  	transform: translateY(0);
-  }
-  25% {
-  	opacity: 1;
-  }
-  50% {
-  	opacity: .75;
-  	transform: translateY(-.125em);
-  }
-  75% {
-  	opacity: 1;
-  }
-  100% {
-  	opacity: 0.75;
-  	transform: translateY(0);
-  }
+	0% {
+		opacity: 0.75;
+		transform: translateY(0);
+	}
+	25% {
+		opacity: 1;
+	}
+	50% {
+		opacity: .75;
+		transform: translateY(-.125em);
+	}
+	75% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0.75;
+		transform: translateY(0);
+	}
 }
 ///////////////////////////////////////////////////////////////
 ///////////////////////////SHADOWS/////////////////////////////
 ///////////////////////////////////////////////////////////////
-@mixin underline($color) {
-  text-shadow: 0 1px 0 $lightest, 0 2px 0 $lightest, 0 -1px 0 $lightest, 0 -2px 0 $lightest, -1px 1px 0 $lightest, -1px 2px 0 $lightest, 1px 1px 0 $lightest, 1px 2px 0 $lightest, -1px 0 0 $lightest, 0 -3px 0 $lightest;
-  background: linear-gradient($lightest,$lightest),linear-gradient($lightest,$lightest),linear-gradient($color,$color);
-  background-position: 0 87%,100% 87%,0 92%;
-  background-repeat: no-repeat,no-repeat,repeat-x;
-  background-size: .05em 1px,.05em 1px,1px 1px;
+@mixin underline($color:inherit, $bg:$lightest, $width:1px) {
+	$space: 1px;
+	$half: #{$space/2};
+	$double: #{$space*2};
+	$triple: #{$space*3};
+	text-shadow: 0 $space 0 $bg, 0 $double 0 $bg, 0  -#{$space} 0 $bg, 0 -#{$double} 0 $bg, -#{$space} $space 0 $bg, -#{$space} $double 0 $bg, $space $space 0 $bg, $space $double 0 $bg, -#{$space} 0 0 $bg, 0 -#{$triple} 0 $bg;
+	background: linear-gradient($bg,$bg),linear-gradient($bg,$bg),linear-gradient($color,$color);
+	background-position: 0 87%,100% 87%,0 92%;
+	background-repeat: no-repeat,no-repeat,repeat-x;
+	background-size: .05em $width,.05em $width,$width $width;
+	text-decoration: none;
+	// position: relative;
+}
+@mixin noUnderline() {
+	text-shadow: none;
+	background: none;
 }
 @mixin xSmallShadow($color) {
-  // lil
-  box-shadow: 0 0 .25em .05em $color;
+	// lil
+	box-shadow: 0 0 .25em .05em $color;
 }
 @mixin smallShadow($color) {
-  // box
-  box-shadow: 0 0 .25em .5em $color;
+	// box
+	box-shadow: 0 0 .25em .5em $color;
 }
 @mixin mediumShadow($color) {
-  // circle
-  box-shadow: 0 0 .5em .25em $color;
+	// circle
+	box-shadow: 0 0 .5em .25em $color;
 }
 @mixin largeShadow($color) {
-  // hover
-  box-shadow: 0 0 2em 1em $color;
+	// hover
+	box-shadow: 0 0 2em 1em $color;
 }
 @mixin xLargeShadow($color) {
-  // search
-  box-shadow: 0 0 5em 1em $color;
+	// search
+	box-shadow: 0 0 5em 1em $color;
 }
 @mixin scale {
-  transform: scale(1.005);
+	transform: scale(1.005);
 }

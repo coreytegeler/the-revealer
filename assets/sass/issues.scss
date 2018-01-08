@@ -1,0 +1,27 @@
+.issues {
+	.issue {
+		height: 32vw;
+		max-height: 32vw;
+		background: $lighter;
+		color: $dark;
+		@include serifText;
+		.text {
+			padding: 1em;
+		}
+		.list {
+			padding: 0 1em 1em 1em;
+			article.row {
+				font-weight: $regular;
+				z-index: 100;
+				a {
+					text-decoration: none;
+					@include underline($gold, $lighter);
+				}
+				.title::after {
+					content: ' ';
+					display: inline;
+				}
+			}
+		}
+	}
+}
