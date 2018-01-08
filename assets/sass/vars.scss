@@ -196,8 +196,8 @@ $ease: cubic-bezier(0.19, 1, 0.22, 1);
 ///////////////////////////////////////////////////////////////
 ///////////////////////////SHADOWS/////////////////////////////
 ///////////////////////////////////////////////////////////////
-@mixin underline($color:inherit, $bg:$lightest, $width:1px) {
-	$space: 1px;
+@mixin underline($color:inherit, $bg:$lightest, $width:.05em) {
+	$space: .03em;
 	$half: #{$space/2};
 	$double: #{$space*2};
 	$triple: #{$space*3};
@@ -205,7 +205,7 @@ $ease: cubic-bezier(0.19, 1, 0.22, 1);
 	background: linear-gradient($bg,$bg),linear-gradient($bg,$bg),linear-gradient($color,$color);
 	background-position: 0 87%,100% 87%,0 92%;
 	background-repeat: no-repeat,no-repeat,repeat-x;
-	background-size: .05em $width,.05em $width,$width $width;
+	background-size: .05em 1px,.05em 1px,1px $width;
 	text-decoration: none;
 	// position: relative;
 }

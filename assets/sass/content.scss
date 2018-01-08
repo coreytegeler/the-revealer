@@ -2,6 +2,13 @@
 * {
 	color: $dark !important;
 }
+a {
+	@include underline($light, $lightest);
+	&:hover {
+		color: $medium;
+		@include underline($gold, $lightest);
+	}
+}
 p, .element {
 	@include baseText;
 	max-width: $lineWidth;

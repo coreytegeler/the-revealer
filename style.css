@@ -180,21 +180,21 @@ p {
     text-decoration: none;
     display: inline;
     position: relative;
-    text-shadow: 0 1px 0 #f1f5f7, 0 2px 0 #f1f5f7, 0 -1px 0 #f1f5f7, 0 -2px 0 #f1f5f7, -1px 1px 0 #f1f5f7, -1px 2px 0 #f1f5f7, 1px 1px 0 #f1f5f7, 1px 2px 0 #f1f5f7, -1px 0 0 #f1f5f7, 0 -3px 0 #f1f5f7;
+    text-shadow: 0 0.03em 0 #f1f5f7, 0 0.06em 0 #f1f5f7, 0 -0.03em 0 #f1f5f7, 0 -0.06em 0 #f1f5f7, -0.03em 0.03em 0 #f1f5f7, -0.03em 0.06em 0 #f1f5f7, 0.03em 0.03em 0 #f1f5f7, 0.03em 0.06em 0 #f1f5f7, -0.03em 0 0 #f1f5f7, 0 -0.09em 0 #f1f5f7;
     background: -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#86a1ad), to(#86a1ad));
     background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#86a1ad, #86a1ad);
     background-position: 0 87%,100% 87%,0 92%;
     background-repeat: no-repeat,no-repeat,repeat-x;
-    background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+    background-size: 0.05em 1px, 0.05em 1px, 1px 0.05em;
     text-decoration: none; }
     p a:hover {
       color: #8f9da2;
-      text-shadow: 0 1px 0 #f1f5f7, 0 2px 0 #f1f5f7, 0 -1px 0 #f1f5f7, 0 -2px 0 #f1f5f7, -1px 1px 0 #f1f5f7, -1px 2px 0 #f1f5f7, 1px 1px 0 #f1f5f7, 1px 2px 0 #f1f5f7, -1px 0 0 #f1f5f7, 0 -3px 0 #f1f5f7;
+      text-shadow: 0 0.03em 0 #f1f5f7, 0 0.06em 0 #f1f5f7, 0 -0.03em 0 #f1f5f7, 0 -0.06em 0 #f1f5f7, -0.03em 0.03em 0 #f1f5f7, -0.03em 0.06em 0 #f1f5f7, 0.03em 0.03em 0 #f1f5f7, 0.03em 0.06em 0 #f1f5f7, -0.03em 0 0 #f1f5f7, 0 -0.09em 0 #f1f5f7;
       background: -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
       background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#fecf0c, #fecf0c);
       background-position: 0 87%,100% 87%,0 92%;
       background-repeat: no-repeat,no-repeat,repeat-x;
-      background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+      background-size: 0.05em 1px, 0.05em 1px, 1px 0.05em;
       text-decoration: none; }
   p strong {
     font-weight: 600; }
@@ -360,12 +360,12 @@ input {
     text-decoration: none;
     color: #346378;
     display: inline;
-    text-shadow: 0 1px 0 #f1f5f7, 0 2px 0 #f1f5f7, 0 -1px 0 #f1f5f7, 0 -2px 0 #f1f5f7, -1px 1px 0 #f1f5f7, -1px 2px 0 #f1f5f7, 1px 1px 0 #f1f5f7, 1px 2px 0 #f1f5f7, -1px 0 0 #f1f5f7, 0 -3px 0 #f1f5f7;
+    text-shadow: 0 0.03em 0 #f1f5f7, 0 0.06em 0 #f1f5f7, 0 -0.03em 0 #f1f5f7, 0 -0.06em 0 #f1f5f7, -0.03em 0.03em 0 #f1f5f7, -0.03em 0.06em 0 #f1f5f7, 0.03em 0.03em 0 #f1f5f7, 0.03em 0.06em 0 #f1f5f7, -0.03em 0 0 #f1f5f7, 0 -0.09em 0 #f1f5f7;
     background: -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
     background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#fecf0c, #fecf0c);
     background-position: 0 87%,100% 87%,0 92%;
     background-repeat: no-repeat,no-repeat,repeat-x;
-    background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+    background-size: 0.05em 1px, 0.05em 1px, 1px 0.05em;
     text-decoration: none; }
     .section_header a:hover {
       color: #fecf0c; }
@@ -381,21 +381,21 @@ input {
     .commas span a {
       display: inline;
       color: #346378;
-      text-shadow: 0 1px 0 #f1f5f7, 0 2px 0 #f1f5f7, 0 -1px 0 #f1f5f7, 0 -2px 0 #f1f5f7, -1px 1px 0 #f1f5f7, -1px 2px 0 #f1f5f7, 1px 1px 0 #f1f5f7, 1px 2px 0 #f1f5f7, -1px 0 0 #f1f5f7, 0 -3px 0 #f1f5f7;
+      text-shadow: 0 0.03em 0 #f1f5f7, 0 0.06em 0 #f1f5f7, 0 -0.03em 0 #f1f5f7, 0 -0.06em 0 #f1f5f7, -0.03em 0.03em 0 #f1f5f7, -0.03em 0.06em 0 #f1f5f7, 0.03em 0.03em 0 #f1f5f7, 0.03em 0.06em 0 #f1f5f7, -0.03em 0 0 #f1f5f7, 0 -0.09em 0 #f1f5f7;
       background: -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
       background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#fecf0c, #fecf0c);
       background-position: 0 87%,100% 87%,0 92%;
       background-repeat: no-repeat,no-repeat,repeat-x;
-      background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+      background-size: 0.05em 1px, 0.05em 1px, 1px 0.05em;
       text-decoration: none; }
       .commas span a:hover {
         color: #fecf0c;
-        text-shadow: 0 1px 0 #f1f5f7, 0 2px 0 #f1f5f7, 0 -1px 0 #f1f5f7, 0 -2px 0 #f1f5f7, -1px 1px 0 #f1f5f7, -1px 2px 0 #f1f5f7, 1px 1px 0 #f1f5f7, 1px 2px 0 #f1f5f7, -1px 0 0 #f1f5f7, 0 -3px 0 #f1f5f7;
+        text-shadow: 0 0.03em 0 #f1f5f7, 0 0.06em 0 #f1f5f7, 0 -0.03em 0 #f1f5f7, 0 -0.06em 0 #f1f5f7, -0.03em 0.03em 0 #f1f5f7, -0.03em 0.06em 0 #f1f5f7, 0.03em 0.03em 0 #f1f5f7, 0.03em 0.06em 0 #f1f5f7, -0.03em 0 0 #f1f5f7, 0 -0.09em 0 #f1f5f7;
         background: -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
         background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#fecf0c, #fecf0c);
         background-position: 0 87%,100% 87%,0 92%;
         background-repeat: no-repeat,no-repeat,repeat-x;
-        background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+        background-size: 0.05em 1px, 0.05em 1px, 1px 0.05em;
         text-decoration: none; }
     .commas span::after {
       display: inline;
@@ -408,12 +408,12 @@ input {
       text-shadow: none;
       background: none; }
       .commas span.no_line a:hover {
-        text-shadow: 0 1px 0 #f1f5f7, 0 2px 0 #f1f5f7, 0 -1px 0 #f1f5f7, 0 -2px 0 #f1f5f7, -1px 1px 0 #f1f5f7, -1px 2px 0 #f1f5f7, 1px 1px 0 #f1f5f7, 1px 2px 0 #f1f5f7, -1px 0 0 #f1f5f7, 0 -3px 0 #f1f5f7;
+        text-shadow: 0 0.03em 0 #f1f5f7, 0 0.06em 0 #f1f5f7, 0 -0.03em 0 #f1f5f7, 0 -0.06em 0 #f1f5f7, -0.03em 0.03em 0 #f1f5f7, -0.03em 0.06em 0 #f1f5f7, 0.03em 0.03em 0 #f1f5f7, 0.03em 0.06em 0 #f1f5f7, -0.03em 0 0 #f1f5f7, 0 -0.09em 0 #f1f5f7;
         background: -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
         background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#fecf0c, #fecf0c);
         background-position: 0 87%,100% 87%,0 92%;
         background-repeat: no-repeat,no-repeat,repeat-x;
-        background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+        background-size: 0.05em 1px, 0.05em 1px, 1px 0.05em;
         text-decoration: none; }
     .commas span.empty {
       opacity: .5; }
@@ -922,11 +922,12 @@ body.articles #wrapper aside {
     .loop .cell a.link_wrap {
       text-decoration: none;
       display: block; }
-      .loop .cell a.link_wrap:hover .title, .loop .cell a.link_wrap.hover .title, .loop .cell a.link_wrap:focus .title {
-        color: #8f9da2; }
-      .loop .cell a.link_wrap:hover .image, .loop .cell a.link_wrap:hover .missing, .loop .cell a.link_wrap.hover .image, .loop .cell a.link_wrap.hover .missing, .loop .cell a.link_wrap:focus .image, .loop .cell a.link_wrap:focus .missing {
+      .loop .cell a.link_wrap:hover .image, .loop .cell a.link_wrap:hover .missing, .loop .cell a.link_wrap:focus .image, .loop .cell a.link_wrap:focus .missing {
         -webkit-box-shadow: 0 0 5em 0 #fecf0c;
         box-shadow: 0 0 5em 0 #fecf0c; }
+    .loop .cell.hover .image, .loop .cell.hover .missing {
+      -webkit-box-shadow: 0 0 5em 0 #fecf0c;
+      box-shadow: 0 0 5em 0 #fecf0c; }
     .loop .cell .image {
       width: 100%;
       margin: 0;
@@ -1252,12 +1253,12 @@ body.home main .loop .cell#cover {
     body.home main .loop .cell#cover .title a {
       text-decoration: none; }
       body.home main .loop .cell#cover .title a:hover {
-        text-shadow: 0 1px 0 #eaedee, 0 2px 0 #eaedee, 0 -1px 0 #eaedee, 0 -2px 0 #eaedee, -1px 1px 0 #eaedee, -1px 2px 0 #eaedee, 1px 1px 0 #eaedee, 1px 2px 0 #eaedee, -1px 0 0 #eaedee, 0 -3px 0 #eaedee;
+        text-shadow: 0 0.03em 0 #eaedee, 0 0.06em 0 #eaedee, 0 -0.03em 0 #eaedee, 0 -0.06em 0 #eaedee, -0.03em 0.03em 0 #eaedee, -0.03em 0.06em 0 #eaedee, 0.03em 0.03em 0 #eaedee, 0.03em 0.06em 0 #eaedee, -0.03em 0 0 #eaedee, 0 -0.09em 0 #eaedee;
         background: -webkit-gradient(linear, left top, left bottom, from(#eaedee), to(#eaedee)), -webkit-gradient(linear, left top, left bottom, from(#eaedee), to(#eaedee)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
         background: linear-gradient(#eaedee, #eaedee), linear-gradient(#eaedee, #eaedee), linear-gradient(#fecf0c, #fecf0c);
         background-position: 0 87%,100% 87%,0 92%;
         background-repeat: no-repeat,no-repeat,repeat-x;
-        background-size: 0.05em 3px, 0.05em 3px, 3px 3px;
+        background-size: 0.05em 1px, 0.05em 1px, 1px 3px;
         text-decoration: none; }
   body.home main .loop .cell#cover .lead {
     color: #8f9da2;
@@ -1473,6 +1474,23 @@ body.single-post #wrapper, body.page-template-default #wrapper {
       font-weight: normal; }
       body.single-post #wrapper main .readable .content *, body.page-template-default #wrapper main .readable .content * {
         color: #346378 !important; }
+      body.single-post #wrapper main .readable .content a, body.page-template-default #wrapper main .readable .content a {
+        text-shadow: 0 0.03em 0 #f1f5f7, 0 0.06em 0 #f1f5f7, 0 -0.03em 0 #f1f5f7, 0 -0.06em 0 #f1f5f7, -0.03em 0.03em 0 #f1f5f7, -0.03em 0.06em 0 #f1f5f7, 0.03em 0.03em 0 #f1f5f7, 0.03em 0.06em 0 #f1f5f7, -0.03em 0 0 #f1f5f7, 0 -0.09em 0 #f1f5f7;
+        background: -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#86a1ad), to(#86a1ad));
+        background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#86a1ad, #86a1ad);
+        background-position: 0 87%,100% 87%,0 92%;
+        background-repeat: no-repeat,no-repeat,repeat-x;
+        background-size: 0.05em 1px, 0.05em 1px, 1px 0.05em;
+        text-decoration: none; }
+        body.single-post #wrapper main .readable .content a:hover, body.page-template-default #wrapper main .readable .content a:hover {
+          color: #8f9da2;
+          text-shadow: 0 0.03em 0 #f1f5f7, 0 0.06em 0 #f1f5f7, 0 -0.03em 0 #f1f5f7, 0 -0.06em 0 #f1f5f7, -0.03em 0.03em 0 #f1f5f7, -0.03em 0.06em 0 #f1f5f7, 0.03em 0.03em 0 #f1f5f7, 0.03em 0.06em 0 #f1f5f7, -0.03em 0 0 #f1f5f7, 0 -0.09em 0 #f1f5f7;
+          background: -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
+          background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#fecf0c, #fecf0c);
+          background-position: 0 87%,100% 87%,0 92%;
+          background-repeat: no-repeat,no-repeat,repeat-x;
+          background-size: 0.05em 1px, 0.05em 1px, 1px 0.05em;
+          text-decoration: none; }
       body.single-post #wrapper main .readable .content p, body.single-post #wrapper main .readable .content .element, body.page-template-default #wrapper main .readable .content p, body.page-template-default #wrapper main .readable .content .element {
         font-size: 20px;
         line-height: 1.4em;
@@ -1801,7 +1819,8 @@ body.about #wrapper main ul.parent {
     color: #8f9da2;
     font-weight: 400;
     z-index: 100; }
-    .columns .sections section h3 a {
+    .columns .sections section h3 .date {
+      margin-right: .5em;
       font-style: italic; }
   .columns .sections section .text h1 {
     font-family: "Crimson Text", "Baskerville", times, serif;
@@ -1812,6 +1831,12 @@ body.about #wrapper main ul.parent {
     @media (max-width: 480px) {
       .columns .sections section .text h1 {
         font-size: 2em; } }
+  .columns .sections section .text h2 {
+    font-family: "Crimson Text", "Baskerville", times, serif;
+    font-weight: normal; }
+  .columns .sections section.articles .loop article.cell {
+    width: 100%;
+    display: block; }
 
 .sections {
   width: 100%;

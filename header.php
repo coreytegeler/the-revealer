@@ -30,10 +30,9 @@ if( is_home() ) {
 	$page_slug = 'home';
 } else if( is_search() || $page_slug == 'search' ) {
 	$page_slug = 'search';
-} else if( $page_slug == 'articles' ) {
 } else if( is_404() ) {
 	$page_slug = '404';
-} else if( $page_type == 'post' && !is_tag() ) {
+} else if( $page_type == 'post' && !is_tax() ) {
 	$page_type = 'article';
 	$og_type = 'article';
 } else {

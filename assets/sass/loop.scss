@@ -34,13 +34,15 @@
 		a.link_wrap {
 			text-decoration: none;
 	    display: block;
-			&:hover, &.hover, &:focus {
-				.title {
-					color: $medium;
-				}
+			&:hover, &:focus {
 				.image, .missing {
 					box-shadow: 0 0 5em 0 $gold;
 				}
+			}
+		}
+		&.hover {
+			.image, .missing {
+				box-shadow: 0 0 5em 0 $gold;
 			}
 		}
 		.image {

@@ -10,8 +10,12 @@
 				color: $medium;
 				font-weight: $regular;
 				z-index: 100;
+				.date {
+					margin-right: .5em;
+					font-style: italic;
+				}
 				a {
-					font-style: italic; 
+					
 				}
 			}
 			.text {
@@ -19,6 +23,17 @@
 					@include serifText;
 					@include xLargeText;
 					font-weight: $regular;
+				}
+				h2 {
+					@include serifText;
+				}
+			}
+			&.articles {
+				.loop {
+					article.cell {
+						width: 100%;
+						display: block;
+					}
 				}
 			}
 		}
