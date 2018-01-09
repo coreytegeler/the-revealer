@@ -160,10 +160,10 @@ html, body {
   html.noscroll, body.noscroll {
     overflow: hidden; }
 
-body header, body #wrapper, body footer, body #discover {
+body header#header, body #wrapper, body footer#footer, body #discover {
   opacity: 0; }
 
-body.initd header, body.initd #wrapper, body.initd footer, body.initd #discover {
+body.initd header#header, body.initd #wrapper, body.initd footer#footer, body.initd #discover {
   opacity: 1; }
 
 a {
@@ -627,7 +627,7 @@ input {
   #isMobile {
     content: 'xSmall'; } }
 
-header {
+header#header {
   width: 100%;
   height: auto;
   margin: 0;
@@ -642,25 +642,25 @@ header {
   font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif !important;
   font-weight: 400 !important;
   text-transform: lowercase !important; }
-  header .inner {
+  header#header .inner {
     width: calc(100% - 4em);
     margin: 0 2em;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     position: relative; }
-  header #logo {
+  header#header #logo {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-line-pack: center;
     align-content: center;
     padding: 0 2em 0 0; }
-    header #logo a.svg {
+    header#header #logo a.svg {
       display: table;
       margin: auto;
       text-decoration: none; }
-      header #logo a.svg svg {
+      header#header #logo a.svg svg {
         width: calc(16em - 1em);
         max-width: 50vw;
         height: auto;
@@ -668,15 +668,15 @@ header {
         fill: #346378;
         -webkit-transition: fill 500ms cubic-bezier(0.19, 1, 0.22, 1), opacity 500ms cubic-bezier(0.19, 1, 0.22, 1);
         transition: fill 500ms cubic-bezier(0.19, 1, 0.22, 1), opacity 500ms cubic-bezier(0.19, 1, 0.22, 1); }
-      header #logo a.svg:hover svg {
+      header#header #logo a.svg:hover svg {
         fill: #fecf0c; }
-    header #logo .about {
+    header#header #logo .about {
       display: inline;
       margin-bottom: 1em; }
-    header #logo em {
+    header#header #logo em {
       font-size: inherit;
       line-height: inherit; }
-  header .rows {
+  header#header .rows {
     padding: .5em 0;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -695,7 +695,7 @@ header {
     font-weight: 800;
     text-transform: uppercase;
     font-weight: 400; }
-    header .rows .tagline {
+    header#header .rows .tagline {
       color: #8f9da2;
       -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -703,36 +703,36 @@ header {
       text-transform: lowercase;
       font-size: .8em;
       line-height: 1.2em; }
-    header .rows .navigation {
+    header#header .rows .navigation {
       width: 100%; }
-      header .rows .navigation nav {
+      header#header .rows .navigation nav {
         display: table;
         float: right; }
-        header .rows .navigation nav .link {
+        header#header .rows .navigation nav .link {
           float: left;
           display: inline;
           padding: 0;
           margin: 0 .5em 0 0;
           list-style: none; }
-          header .rows .navigation nav .link a {
+          header#header .rows .navigation nav .link a {
             text-decoration: none;
             font-style: normal;
             -webkit-transition: color 500ms cubic-bezier(0.19, 1, 0.22, 1), opacity 500ms cubic-bezier(0.19, 1, 0.22, 1);
             transition: color 500ms cubic-bezier(0.19, 1, 0.22, 1), opacity 500ms cubic-bezier(0.19, 1, 0.22, 1);
             text-transform: lowercase; }
-            header .rows .navigation nav .link a:hover {
+            header#header .rows .navigation nav .link a:hover {
               color: #8f9da2; }
-          header .rows .navigation nav .link:last-child {
+          header#header .rows .navigation nav .link:last-child {
             margin: 0; }
-      header .rows .navigation.break {
+      header#header .rows .navigation.break {
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
         flex-direction: column; }
-        header .rows .navigation.break .tagline, header .rows .navigation.break .links {
+        header#header .rows .navigation.break .tagline, header#header .rows .navigation.break .links {
           display: table;
           margin: auto; }
-      header .rows .navigation.filters .filter .toggle {
+      header#header .rows .navigation.filters .filter .toggle {
         width: 100%;
         -webkit-user-select: none;
         -moz-user-select: none;
@@ -741,10 +741,10 @@ header {
         text-transform: lowercase;
         font-size: .8em;
         line-height: 1.2em; }
-        header .rows .navigation.filters .filter .toggle:hover {
+        header#header .rows .navigation.filters .filter .toggle:hover {
           cursor: pointer;
           color: #8f9da2; }
-      header .rows .navigation.filters .filter .list {
+      header#header .rows .navigation.filters .filter .list {
         height: 0;
         opacity: 0;
         overflow: hidden;
@@ -752,32 +752,32 @@ header {
         -webkit-transition: height 500ms ease, opacity 500ms 30ms ease;
         transition: height 500ms ease, opacity 500ms 30ms ease;
         padding-left: .5em; }
-        header .rows .navigation.filters .filter .list.show {
+        header#header .rows .navigation.filters .filter .list.show {
           opacity: 1; }
-  header .goldbar {
+  header#header .goldbar {
     position: absolute;
     left: 0;
     bottom: 0; }
   @media (max-width: 768px) {
-    header .inner {
+    header#header .inner {
       width: calc(100% - 1em);
       margin: .5em .5em 0 .5em;
       display: block; }
-      header .inner #logo {
+      header#header .inner #logo {
         width: 100%;
         max-width: 16em;
         padding: 0;
         margin: auto; }
-        header .inner #logo a.svg svg {
+        header#header .inner #logo a.svg svg {
           width: 100%;
           display: block;
           padding: 0;
           margin: auto; }
-      header .inner .rows {
+      header#header .inner .rows {
         width: 100%;
         font-size: .8em;
         line-height: 1.2em; }
-        header .inner .rows .row {
+        header#header .inner .rows .row {
           width: auto;
           display: table;
           margin: auto;
@@ -2029,17 +2029,17 @@ body.search .readable .goldbar, body.tag .readable .goldbar, body.error404 .read
 
 body.discover, body.error404 {
   background-color: #fecf0c; }
-  body.discover header, body.error404 header {
+  body.discover header#header, body.error404 header#header {
     background-color: transparent; }
-    body.discover header .bar, body.error404 header .bar {
+    body.discover header#header .bar, body.error404 header#header .bar {
       display: none; }
-    body.discover header .inner .tagline, body.error404 header .inner .tagline {
+    body.discover header#header .inner .tagline, body.error404 header#header .inner .tagline {
       opacity: .75; }
-    body.discover header .inner #logo a.svg:hover svg, body.error404 header .inner #logo a.svg:hover svg {
+    body.discover header#header .inner #logo a.svg:hover svg, body.error404 header#header .inner #logo a.svg:hover svg {
       opacity: .5; }
-    body.discover header .inner nav .link a:hover, body.error404 header .inner nav .link a:hover {
+    body.discover header#header .inner nav .link a:hover, body.error404 header#header .inner nav .link a:hover {
       opacity: .5; }
-    body.discover header .inner .goldbar .solid, body.error404 header .inner .goldbar .solid {
+    body.discover header#header .inner .goldbar .solid, body.error404 header#header .inner .goldbar .solid {
       background-color: #f1f5f7;
       -webkit-box-shadow: 0 0 0.25em 0.1em #f1f5f7;
       box-shadow: 0 0 0.25em 0.1em #f1f5f7; }
@@ -2241,11 +2241,11 @@ body.error404 .newsletter form .inputs input {
       font-size: 1.2em;
       line-height: 1.4em; } }
 
-footer {
+footer#footer {
   width: 100%;
   padding: 1em 0;
   margin: 2em 0 2em 0; }
-  footer .note {
+  footer#footer .note {
     color: #8f9da2;
     display: table;
     margin: auto;
@@ -2256,15 +2256,15 @@ footer {
     text-transform: lowercase !important;
     font-size: 1em;
     line-height: 1.3em; }
-    footer .note.newsletter {
+    footer#footer .note.newsletter {
       padding: 1em;
       font-size: 1em; }
-      footer .note.newsletter label {
+      footer#footer .note.newsletter label {
         font-size: 2em;
         line-height: 1.1em; }
-  footer form {
+  footer#footer form {
     width: 100%; }
-    footer form .inputs {
+    footer#footer form .inputs {
       -webkit-box-pack: center;
       -ms-flex-pack: center;
       justify-content: center;
