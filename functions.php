@@ -19,9 +19,9 @@ function revealer_enqueue() {
   wp_enqueue_script( 'transit' );
   wp_enqueue_script( 'masonry' );
   wp_enqueue_script( 'carousel' );
-  wp_enqueue_script( 'main' );
+  wp_enqueue_script( 'main', '' );
   wp_enqueue_style( 'normalize', get_template_directory_uri() . '/assets/css/normalize.css' );
-  wp_enqueue_style( 'style', get_stylesheet_uri() );
+  wp_enqueue_style( 'style', get_stylesheet_uri(), '', 2.0 );
 }
 add_action( 'wp_enqueue_scripts', 'revealer_enqueue' );
 
