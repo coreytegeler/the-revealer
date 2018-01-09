@@ -3,7 +3,7 @@
 Theme Name: The Revealer
 Author: Corey Tegeler
 Author URI: http://coreytegeler.com
-Version: 1.1
+Version: 2.0
 */
 /**
  * @license
@@ -381,6 +381,8 @@ input {
     .commas span a {
       display: inline;
       color: #346378;
+      -webkit-transition: color 500ms cubic-bezier(0.19, 1, 0.22, 1);
+      transition: color 500ms cubic-bezier(0.19, 1, 0.22, 1);
       text-shadow: 0 0.03em 0 #f1f5f7, 0 0.06em 0 #f1f5f7, 0 -0.03em 0 #f1f5f7, 0 -0.06em 0 #f1f5f7, -0.03em 0.03em 0 #f1f5f7, -0.03em 0.06em 0 #f1f5f7, 0.03em 0.03em 0 #f1f5f7, 0.03em 0.06em 0 #f1f5f7, -0.03em 0 0 #f1f5f7, 0 -0.09em 0 #f1f5f7;
       background: -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#f1f5f7)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
       background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#fecf0c, #fecf0c);

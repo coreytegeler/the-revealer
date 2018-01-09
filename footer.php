@@ -35,7 +35,7 @@ if( $post->post_name != 'discover' ) {
 			echo '</div>';
 		echo '</div>';
 	}
-	echo '<footer>';
+	echo '<footer id="footer">';
 		$crm_url = get_field( 'crm_url', 'option' );
 		echo '<div class="note newsletter">';
 			get_template_part( 'parts/newsletter' );

@@ -1,7 +1,7 @@
 <?php
 global $post;
 $page_type = $post->post_type;
-echo '<header class="main">';
+echo '<header class="main" id="header">';
 	echo '<div class="inner">';
 		echo '<div id="logo">';
 			$logo_svg = get_template_directory_uri() . '/assets/images/logo.svg';

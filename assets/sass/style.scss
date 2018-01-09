@@ -2,7 +2,7 @@
 Theme Name: The Revealer
 Author: Corey Tegeler
 Author URI: http://coreytegeler.com
-Version: 1.1
+Version: 2.0
 */
 @import 'vars';
 html, body {
@@ -244,6 +244,7 @@ input {
 		a {
 			display: inline;
 			color: $dark;
+			transition: color 500ms $ease;
 			@include underline($gold);
 			&:hover {
 				color: $gold;
