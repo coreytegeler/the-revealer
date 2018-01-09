@@ -26,11 +26,11 @@ html, body {
 	}
 }
 body {
-	header, #wrapper, footer, #discover {
+	header#header, #wrapper, footer#footer, #discover {
 		opacity: 0;
 	}
 	&.initd {
-		header, #wrapper, footer, #discover {
+		header#header, #wrapper, footer#footer, #discover {
 			opacity: 1;
 		}
 	}
