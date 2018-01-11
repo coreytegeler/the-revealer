@@ -21,9 +21,9 @@ if( $post->post_name != 'discover' ) {
 					echo '<div class="wrap">';
 						$discover_url = get_permalink( get_page_by_path( 'discover' ) );
 						echo '<a href="' . $discover_url . '">';
-							echo '<h3 class="glisten bounce">';
-								echo 'discover&nbsp;more';
-							echo '</h3>';
+							echo '<h3><div class="animation glisten bounce">';
+								echo wrap_words( 'discover  more' );
+							echo '</div></h3>';
 						echo '</a>';
 					echo '</div>';
 					// echo '<div class="circle"></div>';
@@ -51,11 +51,14 @@ if( $post->post_name != 'discover' ) {
 			}
 		echo '</div>';
 
-		if( have_rows('footer_lines', 'option') ) {
-		  while( have_rows('footer_lines', 'option') ) : the_row();
-	      echo '<div class="note">' . get_sub_field('text') . '</div>';
+		if( have_rows( 'footer_lines', 'option' ) ) {
+		  while( have_rows( 'footer_lines', 'option' ) ) : the_row();
+	      echo '<div class="note small">' . get_sub_field( 'text' ) . '</div>';
 		  endwhile;
 		}
+		// if( $credit = get_field( 'credit', 'option' ) ) {
+		// 	echo '<div class="note" id="credit">' . $credit . '</div>';
+		// }
 	echo '</footer>';
 }
 echo '<div id="isMobile"></div>';

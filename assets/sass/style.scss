@@ -124,8 +124,9 @@ input {
 	// color: $medium;
 	&.column {
 		@include serifText;
-		font-style: italic;
-		font-weight: $regular;
+		// font-style: italic;
+		font-weight: $bold;
+		// font-weight: $regular;
 	}
 	&.categories {
 		@include revealerText;
@@ -182,6 +183,19 @@ input {
 			timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
 		}
 	}
+	.word {
+		display: inline-block;
+		&::after {
+			content: ' ';
+			white-space: pre;
+		}
+		.char {
+			display: inline-block;
+		}
+		&:last-child::after {
+			content: '';
+		}
+	}
 	&.show {
 		opacity: 1;
 	}
@@ -227,7 +241,7 @@ input {
 	a {
 		text-decoration: none;
 		color: $dark;
-		// border-bottom: 2px solid $gold;
+		transition: color 500ms $ease;
 		display: inline;
 		@include underline($gold);
 		&:hover {
@@ -356,19 +370,6 @@ input {
 		font-style: normal;
 		transform: translateY(0);
 		@include revealerText;
-		.word {
-			display: inline-block;
-			&::after {
-				content: ' ';
-				white-space: pre;
-			}
-			.char {
-				display: inline-block;
-			}
-			&:last-child::after {
-				content: '';
-			}
-		}
 	}
 }
 .circle {

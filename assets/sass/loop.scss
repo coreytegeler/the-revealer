@@ -106,7 +106,9 @@
 					@include serifText;
 			    word-break: break-word;
 			    hyphens: auto;
-					// @include smallText;
+					span.column {
+						font-weight: $bold;
+					}
 				}
 			}
 			.meta {
@@ -198,6 +200,9 @@
 		.cell {
 			width: calc(100%/3 - (3em - 3em/3));
 			margin: 0 0 3em 0;
+			&.large {
+				width: calc(100%/1.5 - (3em - 3em/3));
+			}
 		}
 	}
 	&.four_col {
@@ -285,6 +290,9 @@
 					margin-left: 1em;
 				}
 			}
+		}
+		&.three_col {
+			
 		}
 		&.four_col {
 			.cell {

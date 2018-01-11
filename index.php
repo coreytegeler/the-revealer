@@ -42,8 +42,11 @@ if( $articles_page ) {
 }
 
 echo '<div class="readable">';
+	$current_issue_query = new WP_Query( $current_issue_args );
+	$current_issue_posts = $current_issue_query->posts;
+	// print_r( $current_issue_posts );
 	echo '<div class="loop articles two_col grid" id="current_issue">';
-		echo '<div class="cell" id="cover">';
+		echo '<div class="cell cover">';
 			echo '<div class="issue">';
 				echo '<div class="text">';
 					echo '<h2 class="lead">Read our current issue</h2>';
@@ -53,38 +56,40 @@ echo '<div class="readable">';
 					echo '</h1>';	
 					echo '<h2 class="date">published ' . $issue_date . '</h2>';
 				echo '</div>';
-				get_template_part( 'parts/goldbar' );
-			echo '</div>';
-			echo '<div class="newsletter">';
-				get_template_part( 'parts/newsletter' );
 			echo '</div>';
 		echo '</div>';
 
-		$features_args = array_merge( $current_issue_args, array(
-			'posts_per_page' => $features_amount,
-			'category_name' => 'features'
-		) );
-		$features_query = new WP_Query( $features_args );
-		if ( $features_query->have_posts() ) {
-			while ( $features_query->have_posts() ) {
-				$features_query->the_post();
-				get_template_part( 'parts/article' );
-				$already_used[] = get_the_ID();
-			}
-		}
-		wp_reset_query();
+		echo '<div class="cell newsletter">';
+			get_template_part( 'parts/newsletter' );
+		echo '</div>';
 
-		$current_issue_args = array_merge( $current_issue_args, array(
-			'posts_per_page' => 15,
-			'post__not_in' => $already_used
-		) );
-		$current_issue_query = new WP_Query( $current_issue_args );
-		if ( $current_issue_query->have_posts() ) {
-			while ( $current_issue_query->have_posts() ) {
-				$current_issue_query->the_post();
-				get_template_part( 'parts/article' );
-				$already_used[] = get_the_ID();
-			}
+		// $current_issue_top = array_splice( $current_issue_posts, 0, 3);
+		// if( $current_issue_top ) {
+		// 	foreach( $current_issue_top as $post ) {
+		// 		get_template_part( 'parts/article' );
+		// 		// $already_used[] = get_the_ID();
+		// 	}
+		// }
+	// echo '</div>';
+
+		// $features_args = array_merge( $current_issue_args, array(
+		// 	'posts_per_page' => $features_amount,
+		// 	'category_name' => 'features'
+		// ) );
+		// $features_query = new WP_Query( $features_args );
+		// if ( $features_query->have_posts() ) {
+		// 	while ( $features_query->have_posts() ) {
+		// 		$features_query->the_post();
+		// 		get_template_part( 'parts/article' );
+		// 		$already_used[] = get_the_ID();
+		// 	}
+		// }
+		// wp_reset_query();
+		
+		// $current_issue_bottom = array_splice( $current_issue_posts, 3);
+		foreach( $current_issue_posts as $post ) {
+			get_template_part( 'parts/article' );
+			// $already_used[] = get_the_ID();
 		}
 		wp_reset_query();
 	echo '</div>';
@@ -97,9 +102,9 @@ echo '<div class="readable">';
 				echo '<h2 class="section_header">Read more articles about ';
 					$feat_tag_url = add_query_arg( 'tag', $feat_tag->slug, $articles_url );
 					echo '<a href="' . $feat_tag_url . '">';
-						echo '<em>' . $feat_tag->name . '</em>.';
+						echo '<em>' . $feat_tag->name . '</em>';
 					echo '</a>';
-				echo '</h2>';
+				echo '.</h2>';
 				echo '<div class="loop grid two_col">';
 					$tagged_args = array(
 						'posts_per_page' => $tagged_amount,
@@ -120,8 +125,8 @@ echo '<div class="readable">';
 			echo '</section>';
 		}
 		echo '<section id="tags">';
+			echo '<h2 class="section_header">Checkout some recent tags.</h2>';
 			echo '<div class="commas tags">';
-				echo '<span class="no_comma">Checkout some recent tags:&nbsp;</span>';
 				$tags = get_recent_tags();
 				foreach( $tags as $tag ) {
 					echo '<span>';

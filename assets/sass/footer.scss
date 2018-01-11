@@ -2,11 +2,11 @@ footer#footer {
 	width: 100%;
 	padding: 1em 0;
   margin: 2em 0 2em 0;
-	.note {			
+	.note {
 		color: $medium;
 		display: table;
 		margin: auto;
-		padding: 1em 1em 0 1em;
+		padding: .25em 1em 0 1em;
 		text-align: center;
     @include revealerText;
 		@include smallText;

@@ -40,7 +40,7 @@ echo '<article class="cell ' . ( $thumb ? 'has_image' : 'no_image') . ' ' . $cat
 				echo '<div class="title">';
 					echo '<h2>';
 						if( $column ) {
-							echo '<em class="column">' . $column->name . '</em>: ';
+							echo '<span class="column">' . $column->name . '</span>: ';
 						}
 						echo $title;
 					echo '</h2>';

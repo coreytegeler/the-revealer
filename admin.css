@@ -279,3 +279,5 @@
     max-width: 50%;
     float: right;
     margin: 1em 0 1em 1em; }
+  .mce-content-body p {
+    max-width: 100%; }

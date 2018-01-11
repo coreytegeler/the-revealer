@@ -570,7 +570,8 @@ jQuery(function($) {
       }
     }
     if ($body.is('.search')) {
-      $('input#searchbox').focus();
+      console.log($('.search_header input#searchbox'));
+      $('.search_header input#searchbox').focus();
     }
     $window.on('resize', function() {
       fixLoops();

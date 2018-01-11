@@ -462,17 +462,9 @@ jQuery ($) ->
 
 		animateTexts = () ->
 			setTimeout () ->
-				# $('.glisten .word span').each (i, html) ->
-				# 	$word = $(html)
-				# 	word = html.innerText
-				# 	console.log html, word
-				# 	setTimeout () ->
-				# 		$word.addClass('animate')
-				# 	, i*50
 				$('.glisten').each (ri, wrap) ->
 					ri++
 					$wrap = $(wrap)
-					# words = $wrap.text().split(' ')
 					$words = $wrap.find('.word')
 					$wrap.empty()
 					$words.each ( i, word ) ->
@@ -520,7 +512,8 @@ jQuery ($) ->
 				$popup.addClass('show stuck')
 
 		if $body.is('.search')
-			$('input#searchbox').focus()
+			console.log $('.search_header input#searchbox')
+			$('.search_header input#searchbox').focus()
 
 		$window.on 'resize', () ->
 			fixLoops()

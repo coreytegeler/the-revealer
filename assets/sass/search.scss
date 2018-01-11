@@ -1,27 +1,13 @@
 body.search, body.tag, body.error404 {
 	#wrapper main {
-		width: 100%;
+		// width: 100%;
 		// padding-bottom: 0;
-		padding-left: 0;
-		padding-right: 0;
+		// padding-left: 0;
+		// padding-right: 0;
 	}
-	.search_header {
+	.section_header {
 		width: 100%;
 		margin: auto;
-		.text {
-			h1 {
-				text-align: left;
-				font-weight: $black;
-				em {
-					@include serifText;
-					@include mediumText;
-					font-weight: $regular;
-					&:focus {
-						outline: none;
-					}
-				}
-			}
-		}
 		#searchform {
 			width: 100%;
 			max-width: 40em;
@@ -34,12 +20,9 @@ body.search, body.tag, body.error404 {
 	}
 	.readable {
 		.goldbar {
-			margin-top: 4em;
+			margin: 2em 0;
 		}
 	}
-}
-#tags {
-	opacity: .75;
 }
 #searchform {
 	width: calc(100% - 4em);

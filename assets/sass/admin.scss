@@ -2,6 +2,9 @@
 .mce-content-body {
 	@include baseText;
 	@import 'content';
+	p {
+		max-width: 100%;
+	}
 }
 // .mce-content-body {
 // 	@include serifText;
