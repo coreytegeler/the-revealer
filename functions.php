@@ -61,6 +61,7 @@ function get_articles_page() {
   }
 }
 
+
 function wrap_words( $str ) {
   $str = preg_replace( '([a-zA-Z.,!?0-9]+(?![^<]*>))', '<span class="word">$0</span>', $str );
   return $str;
@@ -157,6 +158,36 @@ function get_recent_tags() {
   }
   wp_reset_query();
   return $tags;
+}
+
+
+function get_col_span( $id, $posts_query = null ) {
+  if( !$posts_query ) {
+    $posts_args = array(
+      'post_type' => 'post',
+      'posts_per_page' => -1,
+      'orderby' => 'date',
+      'order' => 'asc',
+      'tax_query' => array(
+        array(
+          'taxonomy' => 'columns',
+          'field' => 'id',
+          'terms' => $id
+        )
+      )
+    );
+    $posts_query = new WP_Query( $posts_args );
+  }
+  $post_count = $posts_query->post_count;
+  $first_date = $posts_query->posts[0]->post_date;
+  $last_date = $posts_query->posts[$post_count-1]->post_date;
+  $begin = date( 'F, Y', strtotime( $first_date ) );
+  if( $active ) {
+    $end = 'Present';
+  } else {
+    $end = date( 'F, Y', strtotime( $last_date ) );
+  }
+  return $begin . '&mdash;' . $end;
 }
 
 function urlify( $url ) {

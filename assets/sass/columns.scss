@@ -1,32 +1,38 @@
 .columns {
+	.column {
+		h3 {
+			@include serifText;
+			color: $medium;
+			font-weight: $regular;
+			z-index: 100;
+			.date {
+				margin-right: .5em;
+				font-style: italic;
+			}
+		}
+		h1 {
+			display: table;
+			@include serifText;
+			@include xLargeText;
+			font-weight: $regular;
+			transition: opacity 500ms $ease;
+		}
+		h2 {
+			@include serifText;
+		}
+		a {
+			text-decoration: none;
+			display: table;
+			&:hover {
+				opacity: .75;
+			}
+		}
+	}
 	.sections {
 		padding: 0 0 2em 0;
 		section {
 			a {
 				text-decoration: none;
-			}
-			h3 {
-				@include serifText;
-				color: $medium;
-				font-weight: $regular;
-				z-index: 100;
-				.date {
-					margin-right: .5em;
-					font-style: italic;
-				}
-				a {
-					
-				}
-			}
-			.text {
-				h1 {
-					@include serifText;
-					@include xLargeText;
-					font-weight: $regular;
-				}
-				h2 {
-					@include serifText;
-				}
 			}
 			&.articles {
 				.loop {

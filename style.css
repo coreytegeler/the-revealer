@@ -1265,7 +1265,7 @@ body.home main .loop .cell.newsletter {
     font-weight: 400; }
     body.home main .loop .cell.newsletter form label {
       width: 100%;
-      margin: 0 0 1em 0;
+      margin: 0;
       display: table; }
     body.home main .loop .cell.newsletter form .inputs {
       max-width: 20em; }
@@ -1276,7 +1276,8 @@ body.home main .loop .cell.cover .title, body.home main .loop .cell.newsletter .
   text-align: left;
   position: relative;
   z-index: 100;
-  padding: 0 0 .15em 0;
+  padding: 0;
+  margin: 0 0 .5em 0;
   font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif !important;
   font-weight: 400 !important;
   text-transform: lowercase !important;
@@ -1310,31 +1311,43 @@ body.home main .columns {
   body.home main .columns .column {
     width: 100%;
     display: table; }
-    body.home main .columns .column a {
-      padding: .5em 0;
-      text-decoration: none;
-      border-bottom: 1px solid #8f9da2; }
-      body.home main .columns .column a h1 {
-        padding: 0;
-        -webkit-transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
-        transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1); }
-        body.home main .columns .column a h1 span {
-          color: #8f9da2;
-          font-family: "Crimson Text", "Baskerville", times, serif;
-          font-weight: normal;
-          -webkit-transition: opacity 500ms cubic-bezier(0.19, 1, 0.22, 1);
-          transition: opacity 500ms cubic-bezier(0.19, 1, 0.22, 1); }
-      body.home main .columns .column a:hover h1 {
-        color: #8f9da2;
-        -webkit-transform: scale(1.005);
-        transform: scale(1.005); }
-        body.home main .columns .column a:hover h1 span {
-          opacity: .5; }
 
 body.home main #field_notes {
-  margin-top: 5em; }
+  margin-top: 5em;
+  position: relative; }
+  body.home main #field_notes .header_wrap {
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    pointer-events: none; }
+  body.home main #field_notes .section_header {
+    display: table;
+    margin: auto;
+    color: #346378;
+    font-family: "Overpass Mono", courier, monospace !important;
+    font-weight: 600 !important; }
+    body.home main #field_notes .section_header a {
+      color: #346378;
+      text-shadow: 0 0.03em 0 transparent, 0 0.06em 0 transparent, 0 -0.03em 0 transparent, 0 -0.06em 0 transparent, -0.03em 0.03em 0 transparent, -0.03em 0.06em 0 transparent, 0.03em 0.03em 0 transparent, 0.03em 0.06em 0 transparent, -0.03em 0 0 transparent, 0 -0.09em 0 transparent;
+      background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent)), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
+      background: linear-gradient(transparent, transparent), linear-gradient(transparent, transparent), linear-gradient(#fecf0c, #fecf0c);
+      background-position: 0 87%,100% 87%,0 92%;
+      background-repeat: no-repeat,no-repeat,repeat-x;
+      background-size: 0.05em 1px, 0.05em 1px, 1px 2px;
+      text-decoration: none; }
   body.home main #field_notes img {
     width: 100%; }
+  body.home main #field_notes .cell {
+    margin: 0; }
   body.home main #field_notes a.link_wrap .image {
     background-color: #f1f5f7;
     border-radius: 2em; }
@@ -1809,31 +1822,43 @@ body.about #wrapper main ul.parent {
     display: block;
     margin: auto !important; } }
 
+.columns .column h3 {
+  font-family: "Crimson Text", "Baskerville", times, serif;
+  font-weight: normal;
+  color: #8f9da2;
+  font-weight: 400;
+  z-index: 100; }
+  .columns .column h3 .date {
+    margin-right: .5em;
+    font-style: italic; }
+
+.columns .column h1 {
+  display: table;
+  font-family: "Crimson Text", "Baskerville", times, serif;
+  font-weight: normal;
+  font-size: 2.3em;
+  line-height: 1.1em;
+  font-weight: 400;
+  -webkit-transition: opacity 500ms cubic-bezier(0.19, 1, 0.22, 1);
+  transition: opacity 500ms cubic-bezier(0.19, 1, 0.22, 1); }
+  @media (max-width: 480px) {
+    .columns .column h1 {
+      font-size: 2em; } }
+
+.columns .column h2 {
+  font-family: "Crimson Text", "Baskerville", times, serif;
+  font-weight: normal; }
+
+.columns .column a {
+  text-decoration: none;
+  display: table; }
+  .columns .column a:hover {
+    opacity: .75; }
+
 .columns .sections {
   padding: 0 0 2em 0; }
   .columns .sections section a {
     text-decoration: none; }
-  .columns .sections section h3 {
-    font-family: "Crimson Text", "Baskerville", times, serif;
-    font-weight: normal;
-    color: #8f9da2;
-    font-weight: 400;
-    z-index: 100; }
-    .columns .sections section h3 .date {
-      margin-right: .5em;
-      font-style: italic; }
-  .columns .sections section .text h1 {
-    font-family: "Crimson Text", "Baskerville", times, serif;
-    font-weight: normal;
-    font-size: 2.3em;
-    line-height: 1.1em;
-    font-weight: 400; }
-    @media (max-width: 480px) {
-      .columns .sections section .text h1 {
-        font-size: 2em; } }
-  .columns .sections section .text h2 {
-    font-family: "Crimson Text", "Baskerville", times, serif;
-    font-weight: normal; }
   .columns .sections section.articles .loop article.cell {
     width: 100%;
     display: block; }
@@ -2237,11 +2262,9 @@ footer#footer {
     font-size: 1em;
     line-height: 1.3em; }
     footer#footer .note.newsletter {
+      font-size: inherit;
       padding: 1em;
       font-size: 1em; }
-      footer#footer .note.newsletter label {
-        font-size: 2em;
-        line-height: 1.1em; }
   footer#footer form {
     width: 100%; }
     footer#footer form .inputs {
@@ -2266,6 +2289,15 @@ footer#footer {
 
 .newsletter form {
   width: 100%; }
+  .newsletter form h1 {
+    font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif !important;
+    font-weight: 400 !important;
+    text-transform: lowercase !important;
+    font-size: 2.3em;
+    line-height: 1.1em; }
+    @media (max-width: 480px) {
+      .newsletter form h1 {
+        font-size: 2em; } }
   .newsletter form .inputs {
     display: -webkit-box;
     display: -ms-flexbox;

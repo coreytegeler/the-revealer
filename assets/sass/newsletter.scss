@@ -1,6 +1,10 @@
 .newsletter {
 	form {
 		width: 100%;
+		h1 {
+			@include revealerText;
+			@include xLargeText;
+		}
 		.inputs {
 		  display: flex;
 		  flex-direction: row;

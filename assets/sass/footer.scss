@@ -11,11 +11,9 @@ footer#footer {
     @include revealerText;
 		@include smallText;
     &.newsletter {
+      font-size: inherit;
       padding: 1em;
       font-size: 1em;
-      label {
-        @include largeText;
-      }
     }
 	}
   form {

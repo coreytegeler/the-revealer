@@ -28,34 +28,26 @@ echo '<div class="readable">';
 			$writer = get_field( 'writer', $column );
 			$active = get_field( 'active', $column );
 			$posts_args = array(
-				'post_type' => 'post',
-				'posts_per_page' => -1,
-				'orderby' => 'date',
-			  'order' => 'asc',
-			  'tax_query' => array(
-			  	array(
-						'taxonomy' => 'columns',
-						'field' => 'id',
-						'terms' => $id
-					)
-			  )
-			);
-			$posts_query = new WP_Query( $posts_args );
-			$post_count = $posts_query->post_count;
-			$first_date = $posts_query->posts[0]->post_date;
-			$last_date = $posts_query->posts[$post_count-1]->post_date;
-			$begin = date( 'F, Y', strtotime( $first_date ) );
-			if( $active ) {
-				$end = 'Present';
-			} else {
-				$end = date( 'F, Y', strtotime( $last_date ) );
-			}
+		    'post_type' => 'post',
+		    'posts_per_page' => -1,
+		    'orderby' => 'date',
+		    'order' => 'asc',
+		    'tax_query' => array(
+		      array(
+		        'taxonomy' => 'columns',
+		        'field' => 'id',
+		        'terms' => $id
+		      )
+		    )
+		  );
+		  $posts_query = new WP_Query( $posts_args );
+			$col_span = get_col_span( $id, $posts_query );
 			echo '<div class="sections column one_two" role="column">';
 				echo '<section>';
 					echo '<div class="text">';
-					echo '<h2 class="writer">' . $writer . '\'s</h3>';
+						echo '<h2 class="writer">' . $writer . '\'s</h3>';
 						echo '<h1 class="title"><em>' . $title . '</em></h1>';
-						echo '<h3 class="span">' . $begin . '&mdash;' . $end . '</h3>';
+						echo '<h3 class="span">' . $col_span . '</h3>';
 					echo '</div>';
 				echo '</section>';
 				echo '<section class="articles toggler">';
