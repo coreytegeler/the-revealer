@@ -28,7 +28,7 @@ $page_slug = $post->post_name;
 $og_type = 'website';
 if( is_home() ) {
 	$page_slug = 'home';
-} else if( is_search() || $page_slug == 'search' ) {
+} else if( is_search() ) {
 	$page_slug = 'search';
 } else if( is_404() ) {
 	$page_slug = '404';

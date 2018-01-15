@@ -78,17 +78,9 @@
 		}
 		&.left {
 			left: 0;
-			// background-image: url(images/left.svg);
-			// &:hover {
-			// 	cursor: w-resize;
-			// }
 		}
 		&.right {
 			right: 0;
-			// background-image: url(images/right.svg);
-			// &:hover {
-			// 	cursor: e-resize;
-			// }
 		}
 		&:hover {
 			opacity: 1;
@@ -98,28 +90,9 @@
 			}
 		}
 	}
-	.close_padding {
-		position: absolute;
-		right: 0;
-		top: 0;
-		padding: 1em;
-		display: table;
-		z-index: 600;
-		transition: opacity 600ms $ease;
-		.close.circle {
-			background-color: rgba($lightest,.9);
-			svg {
-				
-			}
-			&:hover {
-				cursor: pointer;
-				svg {
-					fill: $gold;
-				}
-			}
-		}
-		&:hover {
-			opacity: 1;
-		}
+	.close.circle {
+		right: 2em;
+		bottom: 2em;
+		z-index: 700;
 	}
 }

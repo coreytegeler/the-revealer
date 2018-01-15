@@ -8,23 +8,27 @@ body.discover, body.error404 {
     .inner {
       .tagline {
         // color: $lightest;
-        opacity: .75;
+        // opacity: .75;
+        color: $lightest;
       }
       #logo {
         svg {
-          // fill: $lightest;
+          fill: $lightest;
         }
         a.svg:hover {
           svg {
-            opacity: .5;
+            fill: $gold;
+            // opacity: .5;
           }
         }
       }
       nav {
         .link a {
+          color: $lightest;
           // color: $lightest;
           &:hover {
-            opacity: .5;
+            color: $gold;
+            // opacity: .5;
           }
         }
       }
@@ -41,7 +45,7 @@ body.discover, body.error404 {
 			margin-right: 0;
       padding-left: 0; 
       padding-right: 0;
-      color: $dark;
+      color: $lightest;
       .inner {
         position: relative;
         padding: 0 0 5em 0;
@@ -178,7 +182,7 @@ body.discover, body.error404 {
   		margin: auto;
   	}
 	}
-  .header {
+  .discover_more {
     width: 100%;
     padding: 0;
     position: relative;

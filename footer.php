@@ -1,12 +1,10 @@
 <?php
 global $post;
-global $pagename;
 
 echo '<div class="transport top circle">';
 	$up_svg = get_template_directory_uri() . '/assets/images/up.svg';
 	echo file_get_contents( $up_svg );
 echo '</div>';
-
 
 echo '</main>';
 if( is_single() ) {
@@ -14,19 +12,20 @@ if( is_single() ) {
 }
 echo '</div>';
 if( $post->post_name != 'discover' ) {
-	if( !is_404() && $post->post_name != 'search' ) {
+	if( !is_404() ) {
 		echo '<div id="discover" class="bottom">';
 			echo '<div class="inner">';
-				echo '<div class="header">';
+				echo '<div class="discover_more">';
 					echo '<div class="wrap">';
 						$discover_url = get_permalink( get_page_by_path( 'discover' ) );
-						echo '<a href="' . $discover_url . '">';
-							echo '<h3><div class="animation glisten bounce">';
-								echo wrap_words( 'discover  more' );
-							echo '</div></h3>';
-						echo '</a>';
+						if( $post->post_name != 'search' ) {
+							echo '<a href="' . $discover_url . '">';
+								echo '<h3><div class="animation glisten bounce">';
+									echo wrap_words( 'discover  more' );
+								echo '</div></h3>';
+							echo '</a>';
+						}
 					echo '</div>';
-					// echo '<div class="circle"></div>';
 				echo '</div>';
 				echo '<div class="loop discover xsmall grid">';
 					get_template_part( 'parts/discover' );
@@ -56,10 +55,17 @@ if( $post->post_name != 'discover' ) {
 	      echo '<div class="note small">' . get_sub_field( 'text' ) . '</div>';
 		  endwhile;
 		}
-		// if( $credit = get_field( 'credit', 'option' ) ) {
-		// 	echo '<div class="note" id="credit">' . $credit . '</div>';
-		// }
 	echo '</footer>';
+}
+
+if( !is_search() ) {
+	echo '<div class="seeker beyond">';
+		get_template_part( 'parts/seeker' );
+		echo '<div class="close circle">';
+			$x_svg = get_template_directory_uri() . '/assets/images/x.svg';
+			echo file_get_contents( $x_svg );
+		echo '</div>';
+	echo '</div>';
 }
 echo '<div id="isMobile"></div>';
 $missing_url = get_template_directory_uri() . '/assets/images/missing.svg';

@@ -216,13 +216,11 @@ echo '<div class="readable">';
 						$col_writer = get_field( 'writer', $col );
 						$col_url = add_query_arg( 'column', $col_slug, $page_url );
 						$col_span = get_col_span( $col_id );
-						echo '<div class="column">';
-							echo '<a href="' . $col_url . '" class="column">';
-								echo '<h2 class="writer">' . $col_writer . '\'s</h3>';
-								echo '<h1 class="title"><em>' . $col_title . '</em></h1>';
-								echo '<h3 class="span">' . $col_span . '</h3>';
-							echo '</a>';
-						echo '</div>';
+						echo '<a href="' . $col_url . '" class="column">';
+							echo '<h2 class="writer">' . $col_writer . '\'s</h3>';
+							echo '<h1 class="title"><em>' . $col_title . '</em></h1>';
+							echo '<h3 class="span">' . $col_span . '</h3>';
+						echo '</a>';
 					}
 				echo '</div>';
 			}

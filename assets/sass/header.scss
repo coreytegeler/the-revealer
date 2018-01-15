@@ -6,7 +6,7 @@ header#header {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 400;
+	z-index: 500;
 	transform: 0ms !important;
 	background: rgba($lightest,.98);
 	@include revealerText;
@@ -48,6 +48,9 @@ header#header {
     	line-height: inherit;
     }
 	}
+	.toggle {
+		display: none;
+	}
   .rows {
     padding: .5em 0;
   	display: flex;
@@ -69,6 +72,7 @@ header#header {
 	    nav {
 	  		display: table;
 	  		float: right;
+	  		padding: 0;
 				.link {
 					float: left;
 					display: inline;
@@ -137,7 +141,9 @@ header#header {
 		.inner {
 			width: calc(100% - 1em);
 	    margin: .5em .5em 0 .5em;
+	    padding: 0 0 .5em 0;
 	    display: block;
+	    position: relative;
 			#logo {
 				width: 100%;
 				max-width: $logoWidth;
@@ -154,14 +160,32 @@ header#header {
 			}
 			.rows {
 				width: 100%;
-				@include xSmallText;
 				.row {
 					width: auto;
 					display: table;
 					margin: auto;
 					text-align: center;
+					&.navigation {
+						width: 100%;
+						max-height: 0;
+						position: absolute;
+						left: 0;
+						top: 100%;
+						@include mediumShadow($lightest);
+						nav {
+							width: calc(100% - 1em);
+							padding: .5em;
+							background-color: $lightest;
+						}
+					}
 				}
 			}
+		}
+		.toggle {
+			background-color: transparent;
+			box-shadow: none;
+			bottom: -1em;
+			display: block;
 		}
 	}
 	@include xSmall {

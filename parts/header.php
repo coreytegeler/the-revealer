@@ -10,57 +10,36 @@ echo '<header class="main" id="header">';
 				echo file_get_contents( $logo_svg );
 				$about = get_page_by_path( 'about' )->post_content;
 			echo '</a>';
-			// echo '<span class="tagline">';
-			// 	echo '&nbsp;(' . get_bloginfo( 'description' ) . ')';
-			// 	if( $post->post_name == 'about' ) {
-			// 		echo '<span class="about">&nbsp;' . $about . '</span>';
-			// 	}
-			// echo '</span>';
+		echo '</div>';
+		echo '<div class="toggle" data-toggle="nav">';
+			echo '<div class="circle">';
+				$up_svg = get_template_directory_uri() . '/assets/images/up.svg';
+				echo file_get_contents( $up_svg );
+			echo '</div>';
 		echo '</div>';
 		echo '<div class="rows">';
 			echo '<div class="row tagline">';
 				echo get_bloginfo( 'description' );
 			echo '</div>';
-			echo '<div class="row navigation">';
+			echo '<div class="row navigation toggler" data-toggle="nav">';
 				if( has_nav_menu( 'navigation' ) ) {
 					$nav_links = wp_get_nav_menu_items( 'navigation' );
-					echo '<nav role="navigation">';
-						foreach ( (array) $nav_links as $link ) {
+					echo '<nav role="navigation" class="intra">';
+						foreach( $nav_links as $link ) {
 							$title = $link->title;
-							$slug = $link->slug;
 							$url = $link->url;
 							echo '<div class="link">';
-								echo '<a href="' . $url . '" data-slug="' . $slug . '">';
+								echo '<a href="' . $url . '" data-title="' . $title . '">';
 									echo $title;
 								echo '</a>';
 							echo '</div>';
 						}
 					echo '</nav>';
+					// get_template_part( 'parts/goldbar' );
 				}
 			echo '</div>';
-			// echo '<div class="row filters">';
-			// 	get_template_part( 'parts/filters' );
-			// echo '</div>';
 		echo '</div>';
 		get_template_part( 'parts/goldbar' );
 	echo '</div>';
 echo '</header>';
-	// if( is_archive() ) {
-	// 	$categories = get_categories( array(
-	//     'orderby' => 'name',
-	//     'order' => 'ASC',
-	// 		'exclude' => 1,
-	// 		'parent' => 0,
-	// 		'hide_empty' => true
-	// 	) );
-	// echo '<ul class="sub row">';
-	// 	foreach ( (array) $categories as $key => $cat ) {
-	// 		echo '<li>';
-	// 			$url = get_category_link( $cat->term_id );
-	// 			echo '<a class="conceal" href="' . $url . '">' . $cat->name . '</a>';
-	// 		echo '</li>';
-	// 	}
-	// echo '</ul>';
-	// }
-
 ?>

@@ -1,6 +1,6 @@
 jQuery(function($) {
   return $(function() {
-    var $alert, $body, $footer, $header, $headers, $logo, $main, $nav, $popup, $side, $window, $wrapper, animateText, animateTexts, assetsUrl, closeAlert, closePopup, dur, fixHeader, fixLoops, fixSide, fixToggler, hoverCell, isMobile, lastSideScroll, lastWeek, loadImage, now, popupObj, queryMore, setupArticle, shareWindow, sideScroll, siteUrl, sizeImages, themeUrl, toggleToggler, trackScroll, transport;
+    var $alert, $body, $footer, $header, $headers, $logo, $main, $nav, $popup, $side, $window, $wrapper, animateText, animateTexts, assetsUrl, closeAlert, closePopup, closeSeeker, dur, fixHeader, fixLoops, fixSide, fixToggler, hoverCell, isMobile, lastSideScroll, lastWeek, loadImage, now, popupObj, queryMore, setupArticle, shareWindow, sideScroll, siteUrl, sizeImages, themeUrl, toggleSeeker, toggleToggler, trackScroll, transport;
     $window = $(window);
     $body = $('body');
     $wrapper = $('#wrapper');
@@ -301,13 +301,14 @@ jQuery(function($) {
       return fixSide(e);
     };
     toggleToggler = function() {
-      var $inner, $toggle, $toggler, height;
+      var $intra, $toggle, $toggler, data, height;
       $toggle = $(this);
-      $toggler = $toggle.parents('.toggler');
-      $inner = $toggler.find('.inner');
+      data = $toggle.attr('data-toggle');
+      $toggler = $('.toggler').filter('[data-toggle="' + data + '"]');
+      $intra = $toggler.find('.intra');
       $toggler.toggleClass('toggled');
       if ($toggler.is('.toggled')) {
-        height = $inner[0].scrollHeight;
+        height = $intra[0].scrollHeight;
         return $toggler.css({
           maxHeight: height
         });
@@ -316,7 +317,7 @@ jQuery(function($) {
       }
     };
     fixToggler = function() {
-      return $('.toggler').each(function(i, toggler) {
+      return $('.toggler:not(.navigation)').each(function(i, toggler) {
         var $inner, $toggler;
         $toggler = $(toggler);
         $inner = $toggler.find('.inner');
@@ -442,6 +443,33 @@ jQuery(function($) {
       taglineWidth = $nav.find('.tagline').innerWidth();
       return linksWidth = $nav.find('.links').innerWidth();
     };
+    toggleSeeker = function(e) {
+      var $link, $seeker, title;
+      $link = $(this);
+      title = $link.data('title');
+      if (title !== 'Search') {
+        return;
+      }
+      e.preventDefault();
+      if (!$body.hasClass('search')) {
+        $seeker = $('.seeker.beyond');
+        $seeker.toggleClass('open');
+        if ($seeker.is('.open')) {
+          return $seeker.find('input').focus();
+        } else {
+          return $seeker.find('input').blur();
+        }
+      } else {
+        $seeker = $('.seeker:first-child');
+        return $seeker.find('input').focus();
+      }
+    };
+    closeSeeker = function(e) {
+      var $seeker;
+      console.log('!!');
+      $seeker = $('.seeker.beyond');
+      return $seeker.removeClass('open');
+    };
     closeAlert = function() {
       $alert.remove();
       fixHeader();
@@ -555,11 +583,13 @@ jQuery(function($) {
       }, 50 * index);
     };
     $('body').on('click touch', '.transport', transport);
-    $('body').on('click', '.toggler .toggle', toggleToggler);
+    $('body').on('click', '.toggle[data-toggle]', toggleToggler);
     $('body').on('click touch', '#alert .close', closeAlert);
     $('body').on('click touch', '#popup .close', closePopup);
     $('body').on('hover', '.cell .link_wrap', hoverCell);
     $('body').on('click', 'aside .share a.window', shareWindow);
+    $('body').on('click', 'header nav .link a', toggleSeeker);
+    $('body').on('click', '.seeker.beyond .close', closeSeeker);
     if ($popup.length) {
       popupObj = JSON.parse(localStorage.getItem('popup'));
       now = new Date().getTime();
@@ -570,7 +600,6 @@ jQuery(function($) {
       }
     }
     if ($body.is('.search')) {
-      console.log($('.search_header input#searchbox'));
       $('.search_header input#searchbox').focus();
     }
     $window.on('resize', function() {

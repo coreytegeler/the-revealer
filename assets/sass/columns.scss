@@ -20,12 +20,12 @@
 		h2 {
 			@include serifText;
 		}
-		a {
-			text-decoration: none;
-			display: table;
-			&:hover {
-				opacity: .75;
-			}
+	}
+	a.column {
+		text-decoration: none;
+		display: table;
+		&:hover {
+			opacity: .75;
 		}
 	}
 	.sections {
@@ -33,12 +33,17 @@
 		section {
 			a {
 				text-decoration: none;
+				transition: background-color 500ms $ease, color 500ms $ease;
 			}
 			&.articles {
 				.loop {
 					article.cell {
 						width: 100%;
 						display: block;
+						a:hover {
+							color: $light;
+							@include underline($gold, $lightest, 1px);
+						}
 					}
 				}
 			}

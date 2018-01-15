@@ -32,4 +32,5 @@ foreach( $rand_cells as $post ) {
 	get_template_part( 'parts/article', 'discover' );
 	wp_reset_postdata();
 }
+wp_reset_query();
 ?>

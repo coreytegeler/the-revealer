@@ -265,18 +265,19 @@ jQuery ($) ->
 
 		toggleToggler = () ->
 			$toggle = $(this)
-			$toggler = $toggle.parents('.toggler')
-			$inner = $toggler.find('.inner')
+			data = $toggle.attr('data-toggle')
+			$toggler = $('.toggler').filter('[data-toggle="'+data+'"]')
+			$intra = $toggler.find('.intra')
 			$toggler.toggleClass('toggled')
 			if $toggler.is('.toggled')
-				height = $inner[0].scrollHeight
+				height = $intra[0].scrollHeight
 				$toggler.css
 					maxHeight: height
 			else
 				$toggler.attr('style', '')
 
 		fixToggler = () ->
-		 	$('.toggler').each (i, toggler) ->
+		 	$('.toggler:not(.navigation)').each (i, toggler) ->
 		 		$toggler = $(toggler)
 		 		$inner = $toggler.find('.inner')
 		 		if $inner.innerHeight() <= $toggler.innerHeight() + 5
@@ -320,10 +321,6 @@ jQuery ($) ->
 					$cellImage = $cell.find('.image')
 					sizeImages($cellImage)
 				pseudo.onerror = (e) ->
-					# console.log this, e
-					# $missing.addClass('missing')
-					# $missing.html('<object type="image/svg+xml" data="'+siteUrl+'/assets/images/missing.svg"></object>')
-					# console.log $missing
 				pseudo.src = currentSrc
 
 			sizeImages($article.find('.content .image.load'))
@@ -397,6 +394,27 @@ jQuery ($) ->
 			taglineWidth = $nav.find('.tagline').innerWidth()
 			linksWidth = $nav.find('.links').innerWidth()
 			
+		toggleSeeker = (e) ->
+			$link = $(this)
+			title = $link.data('title')
+			if title != 'Search'
+				return
+			e.preventDefault()
+			if !$body.hasClass('search')
+				$seeker = $('.seeker.beyond')
+				$seeker.toggleClass('open')
+				if $seeker.is('.open')
+					$seeker.find('input').focus()
+				else 
+					$seeker.find('input').blur()
+			else
+				$seeker = $('.seeker:first-child')
+				$seeker.find('input').focus()
+
+		closeSeeker = (e) ->
+			console.log '!!'
+			$seeker = $('.seeker.beyond')
+			$seeker.removeClass('open')
 
 		closeAlert = () ->
 			$alert.remove()
@@ -496,11 +514,13 @@ jQuery ($) ->
 
 
 		$('body').on('click touch', '.transport', transport)
-		$('body').on('click', '.toggler .toggle', toggleToggler)
+		$('body').on('click', '.toggle[data-toggle]', toggleToggler)
 		$('body').on('click touch', '#alert .close', closeAlert)
 		$('body').on('click touch', '#popup .close', closePopup)
 		$('body').on('hover', '.cell .link_wrap', hoverCell)
 		$('body').on('click', 'aside .share a.window', shareWindow)
+		$('body').on('click', 'header nav .link a', toggleSeeker)
+		$('body').on('click', '.seeker.beyond .close', closeSeeker)
 		
 		if $popup.length
 			popupObj = JSON.parse(localStorage.getItem('popup'))
@@ -512,7 +532,6 @@ jQuery ($) ->
 				$popup.addClass('show stuck')
 
 		if $body.is('.search')
-			console.log $('.search_header input#searchbox')
 			$('.search_header input#searchbox').focus()
 
 		$window.on 'resize', () ->

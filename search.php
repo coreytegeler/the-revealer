@@ -4,7 +4,7 @@ get_header();
 global $query_string;
 // global $query_string;
 echo '<div class="readable">';
-	echo '<div class="max">';
+	echo '<div class="seeker">';
 		echo '<div class="search_header">';
 			get_search_form();
 
@@ -14,18 +14,18 @@ echo '<div class="readable">';
 				echo 'Here are the results for <em>' . get_search_query() . '</em>.';
 			echo '</h2>';
 		echo '</div>';
-		echo '<div class="loop posts four_col masonry">';
-			wp_parse_str( $query_string, $search_args );
-			$search_args['posts_per_page'] = $tagged_amount;
-			$search_query = new WP_Query( $search_args );
-			if ( $search_query->have_posts() ) {
-				while ( $search_query->have_posts() ) {
-					$search_query->the_post();
-					get_template_part( 'parts/article' );
-				}
-				wp_reset_query();
+	echo '</div>';
+	echo '<div class="loop posts four_col masonry">';
+		wp_parse_str( $query_string, $search_args );
+		$search_args['posts_per_page'] = $tagged_amount;
+		$search_query = new WP_Query( $search_args );
+		if ( $search_query->have_posts() ) {
+			while ( $search_query->have_posts() ) {
+				$search_query->the_post();
+				get_template_part( 'parts/article' );
 			}
-		echo '</div>';
+			wp_reset_query();
+		}
 	echo '</div>';
 echo '</div>';
 get_template_part( 'parts/pagination' );

@@ -50,9 +50,9 @@ echo '<div class="readable">';
 						echo '<h3 class="span">' . $col_span . '</h3>';
 					echo '</div>';
 				echo '</section>';
-				echo '<section class="articles toggler">';
+				echo '<section class="articles toggler" data-toggle="' . $slug . '">';
 					if ( $posts_query->have_posts() ) {
-						echo '<div class="loop posts list inner">';
+						echo '<div class="loop posts list intra">';
 							while ( $posts_query->have_posts() ) {
 								$posts_query->the_post();
 								$date = get_the_date();
@@ -65,13 +65,13 @@ echo '<div class="readable">';
 								echo '</article>';
 							}
 						echo '</div>';
-						echo '<div class="toggle">';
-							echo '<div class="circle">';
-								$up_svg = get_template_directory_uri() . '/assets/images/up.svg';
-								echo file_get_contents( $up_svg );
-							echo '</div>';
-						echo '</div>';
 					}
+					echo '<div class="toggle" data-toggle="' . $slug . '">';
+						echo '<div class="circle">';
+							$up_svg = get_template_directory_uri() . '/assets/images/up.svg';
+							echo file_get_contents( $up_svg );
+						echo '</div>';
+					echo '</div>';
 				echo '</section>';
 				wp_reset_query();
 			echo '</div>';
