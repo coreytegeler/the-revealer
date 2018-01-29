@@ -320,7 +320,7 @@ jQuery(function($) {
       return $('.toggler:not(.navigation)').each(function(i, toggler) {
         var $inner, $toggler;
         $toggler = $(toggler);
-        $inner = $toggler.find('.inner');
+        $inner = $toggler.find('.intra');
         if ($inner.innerHeight() <= $toggler.innerHeight() + 5) {
           return $toggler.addClass('toggled');
         } else {

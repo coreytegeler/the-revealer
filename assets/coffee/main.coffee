@@ -279,7 +279,7 @@ jQuery ($) ->
 		fixToggler = () ->
 		 	$('.toggler:not(.navigation)').each (i, toggler) ->
 		 		$toggler = $(toggler)
-		 		$inner = $toggler.find('.inner')
+		 		$inner = $toggler.find('.intra')
 		 		if $inner.innerHeight() <= $toggler.innerHeight() + 5
 		 			$toggler.addClass('toggled')
 		 		else

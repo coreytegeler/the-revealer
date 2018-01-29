@@ -5,11 +5,11 @@ $home_url = get_site_url();
 $missing_url = get_template_directory_uri() . '/assets/images/missing.svg';
 $missing_svg = file_get_contents( $missing_url );
 $issues = get_terms( array(
-  'taxonomy' => 'issues',
-  'hide_empty' => false,
-  'order' => 'desc',
-  'orderby' => 'meta_value',
-  'meta_key' => 'date'
+	'taxonomy' => 'issues',
+	'hide_empty' => false,
+	'order' => 'desc',
+	'orderby' => 'meta_value',
+	'meta_key' => 'date'
 ) );
 $current_issue = $issues[0];
 $current_issue_id = $current_issue->term_id;
@@ -18,14 +18,14 @@ $current_issue_url = get_term_link( $current_issue_id, 'issues' );
 $current_issue_args = array(
 	'post_type' => 'post',
 	'orderby' => 'date',
-  'order' => 'asc',
-  'tax_query' => array(
-  	array(
+	'order' => 'asc',
+	'tax_query' => array(
+		array(
 			'taxonomy' => 'issues',
 			'field' => 'id',
 			'terms' => $current_issue_id
 		)
-  )
+	)
 );
 
 $already_used = array();
@@ -33,6 +33,7 @@ $already_used = array();
 $features_amount = 1;
 $medium_amount = 15;
 $tagged_amount = 4;
+$tags_amount = 25;
 
 $articles_page = get_page_by_path( 'articles' );
 if( $articles_page ) {
@@ -63,33 +64,10 @@ echo '<div class="readable">';
 			get_template_part( 'parts/newsletter' );
 		echo '</div>';
 
-		// $current_issue_top = array_splice( $current_issue_posts, 0, 3);
-		// if( $current_issue_top ) {
-		// 	foreach( $current_issue_top as $post ) {
-		// 		get_template_part( 'parts/article' );
-		// 		// $already_used[] = get_the_ID();
-		// 	}
-		// }
-	// echo '</div>';
 
-		// $features_args = array_merge( $current_issue_args, array(
-		// 	'posts_per_page' => $features_amount,
-		// 	'category_name' => 'features'
-		// ) );
-		// $features_query = new WP_Query( $features_args );
-		// if ( $features_query->have_posts() ) {
-		// 	while ( $features_query->have_posts() ) {
-		// 		$features_query->the_post();
-		// 		get_template_part( 'parts/article' );
-		// 		$already_used[] = get_the_ID();
-		// 	}
-		// }
-		// wp_reset_query();
-		
-		// $current_issue_bottom = array_splice( $current_issue_posts, 3);
 		foreach( $current_issue_posts as $post ) {
 			get_template_part( 'parts/article' );
-			// $already_used[] = get_the_ID();
+			$already_used[] = $post->ID;
 		}
 		wp_reset_query();
 	echo '</div>';
@@ -110,7 +88,7 @@ echo '<div class="readable">';
 						'posts_per_page' => $tagged_amount,
 						'post_type' => 'post',
 						'post__not_in' => $already_used,
-					  'tag' => $feat_tag->slug
+						'tag' => $feat_tag->slug
 					);
 					$tagged_query = new WP_Query( $tagged_args );
 					if ( $tagged_query->have_posts() ) {
@@ -127,7 +105,7 @@ echo '<div class="readable">';
 		echo '<section id="tags">';
 			echo '<h2 class="section_header">Checkout some recent tags.</h2>';
 			echo '<div class="commas tags">';
-				$tags = get_recent_tags();
+				$tags = get_recent_tags( $tags_amount );
 				foreach( $tags as $tag ) {
 					echo '<span>';
 						$tag_url = add_query_arg( 'tag', $tag->slug, $articles_url );
@@ -149,16 +127,16 @@ echo '<div class="readable">';
 				$feat_col_args = array(
 					'post_type' => 'post',
 					'orderby' => 'date',
-				  'order' => 'asc',
+					'order' => 'asc',
 					'posts_per_page' => 1,
 					'post__not_in' => $already_used,
 					'tax_query' => array(
-				  	array(
+						array(
 							'taxonomy' => 'columns',
 							'field' => 'id',
 							'terms' => $feat_col->term_id
 						)
-				  )
+					)
 				);
 				$feat_col_query = new WP_Query( $feat_col_args );
 				if ( $feat_col_query->have_posts() ) {
@@ -202,17 +180,17 @@ echo '<div class="readable">';
 			echo ' from The Revealer</h2>';
 			$columns = get_terms( array(
 				'taxonomy' => 'columns',
-			  'orderby' => 'name',
-			  'order'   => 'ASC',
-		  	'meta_key' => 'active',
-		  	'meta_value' => 1
+				'orderby' => 'name',
+				'order'   => 'ASC',
+				'meta_key' => 'active',
+				'meta_value' => 1
 			) );
 			if( sizeof( $columns ) ) {
-				echo '<div class="columns">';
+				echo '<div class="columns-list">';
 					foreach( $columns as $col) {
 						$col_title = $col->name;
 						$col_slug = $col->slug;
-						$col_id = $col->cat_ID;
+						$col_id = $col->term_id;
 						$col_writer = get_field( 'writer', $col );
 						$col_url = add_query_arg( 'column', $col_slug, $page_url );
 						$col_span = get_col_span( $col_id );
@@ -230,7 +208,7 @@ echo '<div class="readable">';
 				$fn_header = get_field( 'home_header', $fn_page );
 				$fn_thumb_id = get_post_thumbnail_id( $fn_page );
 				$fn_thumb = wp_get_attachment_image_src( $fn_thumb_id, 'large' );
-				$fn_url = add_query_arg( 'category', 'field-notes', $page_url );
+				$fn_url = add_query_arg( 'category', 'field-notes', $articles_url );
 				$fn_thumb_url = $fn_thumb[0];
 				$fn_thumb_width = $fn_thumb[1];
 				$fn_thumb_height = $fn_thumb[2];
@@ -246,6 +224,36 @@ echo '<div class="readable">';
 						echo '</a>';
 					echo '</article>';
 				echo '</div>';
+
+				echo '<div class="loop list">';
+					$fn_args = array(
+						'post_type' => 'post',
+						'orderby' => 'date',
+						'order' => 'asc',
+						'posts_per_page' => 5,
+						'tax_query' => array(
+							array(
+								'taxonomy' => 'category',
+								'field' => 'slug',
+								'terms' => 'field-notes'
+							)
+						)
+					);
+					$fn_query = new WP_Query( $fn_args );
+					if ( $fn_query->have_posts() ) {
+						while ( $fn_query->have_posts() ) {
+							$fn_query->the_post();
+							echo '<article class="cell field-notes">';
+								echo '<a class="link_wrap" href="' . get_the_permalink() . '">';
+									echo '<span class="date">' . get_the_date() . '</span>';
+									echo '<span class="title">' . get_the_title() . '</span>';
+								echo '</a>';
+							echo '</article>';
+						}
+					}
+					wp_reset_query();
+				echo '</div>';
+
 			echo '</div>';
 		echo '</section>';
 	echo '</div>';
@@ -253,24 +261,24 @@ echo '<div class="readable">';
 	get_template_part( 'parts/goldbar' );
 
 	$past_issues = get_terms( array(
-	  'taxonomy' => 'issues',
-	  'hide_empty' => false,
-	  'orderby' => 'date',
-	  'order' => 'desc'
+		'taxonomy' => 'issues',
+		'hide_empty' => false,
+		'orderby' => 'date',
+		'order' => 'desc'
 	) );
 	$past_issue = $past_issues[1];
 	$past_issue_id = $past_issue->term_id;
 	$past_issue_args = array(
 		'post_type' => 'post',
 		'orderby' => 'date',
-	  'order' => 'asc',
-	  'tax_query' => array(
-	  	array(
+		'order' => 'asc',
+		'tax_query' => array(
+			array(
 				'taxonomy' => 'issues',
 				'field' => 'id',
 				'terms' => $past_issue_id
 			)
-	  )
+		)
 	);
 	$past_issue_args = array_merge( $past_issue_args, array(
 		'post__not_in' => $already_used

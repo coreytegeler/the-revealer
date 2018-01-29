@@ -135,7 +135,7 @@ function get_cat_list( $id, $link = false ) {
   return $html;
 }
 
-function get_recent_tags() {
+function get_recent_tags( $tags_count = null ) {
   global $wp_query;
   $tags = $used_tags = array();
   $articles_args = array(
@@ -146,7 +146,7 @@ function get_recent_tags() {
     while ( $wp_query->have_posts() ) {
       the_post();
       $post_tags = get_the_tags();
-      array_slice( $post_tags, 0, 5 );
+      $post_tags = array_slice( $post_tags, 0, 10 );
       foreach( $post_tags as $i => $tag ) {
         $slug = $tag->slug;
         if( $tag->count > 5 && !in_array( $slug, $used_tags ) ) {
@@ -157,6 +157,10 @@ function get_recent_tags() {
     }
   }
   wp_reset_query();
+  if( $tags_count ) {
+    shuffle( $tags );
+    $tags = array_slice( $tags, 0, $tags_count );
+  }
   return $tags;
 }
 

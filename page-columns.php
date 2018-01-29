@@ -4,7 +4,7 @@ Template Name: Columns
 */
 get_header();
 echo '<div class="readable">';
-	echo '<div class="columns">';
+	echo '<div class="columns-list">';
 		$paged = ( get_query_var('paged') ) ? get_query_var( 'paged' ) : 1;
 		$per_page = 10;
 		$offset = ( $paged - 1 ) * $per_page;
