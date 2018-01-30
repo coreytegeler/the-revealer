@@ -1413,6 +1413,21 @@ body.home main section {
     padding-top: 1em; }
   body.home main section#featured_columns .loop article {
     margin-bottom: 0; }
+  body.home main section#past_issue .loop article .title {
+    color: #346378; }
+    body.home main section#past_issue .loop article .title h4 {
+      font-family: "Crimson Text", "Baskerville", times, serif;
+      font-weight: normal; }
+  body.home main section#past_issue .loop article .writer {
+    color: #8f9da2;
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: .62em;
+    line-height: 1.4em; }
 
 @media (max-width: 1440px) {
   body.home main .loop#featured_tag .cell .wrap {

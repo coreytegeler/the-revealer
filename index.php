@@ -45,17 +45,16 @@ if( $articles_page ) {
 echo '<div class="readable">';
 	$current_issue_query = new WP_Query( $current_issue_args );
 	$current_issue_posts = $current_issue_query->posts;
-	// print_r( $current_issue_posts );
+	$current_issue_date = get_field( 'date', $current_issue );
 	echo '<div class="loop articles two_col grid" id="current_issue">';
 		echo '<div class="cell cover">';
 			echo '<div class="issue">';
 				echo '<div class="text">';
 					echo '<h2 class="lead">Read our current issue</h2>';
-					$issue_date = get_field( 'date', $current_issue );
 					echo '<h1 class="title">';
 						echo '<a href="' . $current_issue_url . '">' . $current_issue->name . '</a>';
 					echo '</h1>';	
-					echo '<h2 class="date">published ' . $issue_date . '</h2>';
+					echo '<h2 class="date">published ' . $urrent_issue_date . '</h2>';
 				echo '</div>';
 			echo '</div>';
 		echo '</div>';
@@ -268,6 +267,8 @@ echo '<div class="readable">';
 	) );
 	$past_issue = $past_issues[1];
 	$past_issue_id = $past_issue->term_id;
+	$past_issue_date = get_field( 'date', $past_issue );
+	$past_issue_url = get_term_link( $past_issue_id, 'issues' );
 	$past_issue_args = array(
 		'post_type' => 'post',
 		'orderby' => 'date',
@@ -292,7 +293,12 @@ echo '<div class="readable">';
 			} else {
 				$issues_url = get_site_url() . '/issues/';
 			}
-			echo '<h2 class="section_header">Catch up on our last issue, or explore our <a href="' . $issues_url . '">our archive</a>.</h2>';
+
+			echo '<h2 class="section_header">';
+				echo 'Catch up on our last issue published ';
+				echo '<a href="'.$past_issue_url.'">' . $past_issue_date . '</a>.</br>';
+				echo 'Or explore our <a href="' . $issues_url . '">our archive</a>.';
+			echo '</h2>';
 			echo '<div class="loop articles five_col grid">';
 				while ( $past_issue_query->have_posts() ) {
 					$past_issue_query->the_post();
@@ -303,6 +309,7 @@ echo '<div class="readable">';
 					$thumb_width = $thumb[1];
 					$thumb_height = $thumb[2];
 					$permalink = get_the_permalink();
+					$contributors = get_contributors_list( $post->ID, true, true );
 					echo '<article class="cell" role="article" style="' . $style . '">';
 						echo '<div class="wrap">';
 							echo '<div class="primary">';
@@ -321,6 +328,9 @@ echo '<div class="readable">';
 									echo '<div class="title">';
 										echo '<h4>' . $title . '</h4>';
 									echo '</div>';
+									if( $contributors ) {
+										echo '<h4 class="writer">' . $contributors . '</h4>';
+									}
 								echo '</a>';
 							echo '</div>';
 						echo '</div>';

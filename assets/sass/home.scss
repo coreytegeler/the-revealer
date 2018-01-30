@@ -169,6 +169,25 @@ body.home {
 					}
 				}
 			}
+			&#past_issue {
+				.loop {
+					article {
+						.title {
+							color: $dark;
+							h4 {
+								@include serifText;
+							}
+						}
+						.writer {
+							color: $medium;
+							word-break: break-word;
+					    hyphens: auto;
+							@include sansSerifText;
+							@include xxSmallText;
+						}
+					}
+				}
+			}
 		}
 		@include large {
 			.loop {
