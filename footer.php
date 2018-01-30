@@ -20,9 +20,9 @@ if( $post->post_name != 'discover' ) {
 						$discover_url = get_permalink( get_page_by_path( 'discover' ) );
 						if( $post->post_name != 'search' ) {
 							echo '<a href="' . $discover_url . '">';
-								echo '<h3><div class="animation glisten bounce">';
+								echo '<h2><div class="animation glisten bounce">';
 									echo wrap_words( 'discover  more' );
-								echo '</div></h3>';
+								echo '</div></h2>';
 							echo '</a>';
 						}
 					echo '</div>';

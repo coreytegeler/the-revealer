@@ -1,4 +1,4 @@
-body.discover, body.error404 {
+body.discover:not(.seeking), body.error404:not(.seeking) {
 	background-color: $gold;
 	header#header {
     background-color: transparent;
@@ -7,8 +7,6 @@ body.discover, body.error404 {
     }
     .inner {
       .tagline {
-        // color: $lightest;
-        // opacity: .75;
         color: $lightest;
       }
       #logo {
@@ -17,18 +15,15 @@ body.discover, body.error404 {
         }
         a.svg:hover {
           svg {
-            fill: $gold;
-            // opacity: .5;
+            opacity: .5;
           }
         }
       }
       nav {
         .link a {
           color: $lightest;
-          // color: $lightest;
           &:hover {
-            color: $gold;
-            // opacity: .5;
+            opacity: .5;
           }
         }
       }
@@ -198,7 +193,7 @@ body.discover, body.error404 {
         text-decoration: none;
         display: table;
       }
-      h3 {
+      h2 {
         @include revealerText;
         span {
           font-weight: $regular;
@@ -244,7 +239,7 @@ body.search {
   }
 }
 @include small {
-  body.discover {
+  body.discover:not(.seeking) {
     header#header .inner .rows .row.navigation {
       @include mediumShadow($gold);
       nav {

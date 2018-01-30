@@ -197,7 +197,7 @@ jQuery ($) ->
 			$readable = $('.readable')
 			if !$readable.length
 				return
-			if $body.is('.noscroll')
+			if $body.is('.seeking')
 				return false
 			winHeight = $window.innerHeight()
 			winScroll = $window.scrollTop()
@@ -404,7 +404,7 @@ jQuery ($) ->
 			e.preventDefault()
 			if !$body.hasClass('search')
 				$seeker = $('.seeker.beyond')
-				$body.toggleClass('noscroll')
+				$body.toggleClass('seeking')
 				$seeker.toggleClass('open')
 				if $seeker.is('.open')
 					$seeker.find('input[type="search"]').focus()

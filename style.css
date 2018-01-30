@@ -157,8 +157,10 @@ html, body {
   html ::selection, body ::selection {
     background: #fecf0c;
     opacity: 1; }
-  html.noscroll, body.noscroll {
-    overflow: hidden; }
+  html.seeking, body.seeking {
+    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: hidden; }
 
 body header#header, body #wrapper, body footer#footer, body #discover {
   opacity: 0; }
@@ -2178,37 +2180,37 @@ body.search .readable .goldbar, body.tag .readable .goldbar, body.error404 .read
     width: calc(100% - 1em);
     padding: 0 .5em; } }
 
-body.discover, body.error404 {
+body.discover:not(.seeking), body.error404:not(.seeking) {
   background-color: #fecf0c; }
-  body.discover header#header, body.error404 header#header {
+  body.discover:not(.seeking) header#header, body.error404:not(.seeking) header#header {
     background-color: transparent; }
-    body.discover header#header .bar, body.error404 header#header .bar {
+    body.discover:not(.seeking) header#header .bar, body.error404:not(.seeking) header#header .bar {
       display: none; }
-    body.discover header#header .inner .tagline, body.error404 header#header .inner .tagline {
+    body.discover:not(.seeking) header#header .inner .tagline, body.error404:not(.seeking) header#header .inner .tagline {
       color: #f1f5f7; }
-    body.discover header#header .inner #logo svg, body.error404 header#header .inner #logo svg {
+    body.discover:not(.seeking) header#header .inner #logo svg, body.error404:not(.seeking) header#header .inner #logo svg {
       fill: #f1f5f7; }
-    body.discover header#header .inner #logo a.svg:hover svg, body.error404 header#header .inner #logo a.svg:hover svg {
-      fill: #fecf0c; }
-    body.discover header#header .inner nav .link a, body.error404 header#header .inner nav .link a {
+    body.discover:not(.seeking) header#header .inner #logo a.svg:hover svg, body.error404:not(.seeking) header#header .inner #logo a.svg:hover svg {
+      opacity: .5; }
+    body.discover:not(.seeking) header#header .inner nav .link a, body.error404:not(.seeking) header#header .inner nav .link a {
       color: #f1f5f7; }
-      body.discover header#header .inner nav .link a:hover, body.error404 header#header .inner nav .link a:hover {
-        color: #fecf0c; }
-    body.discover header#header .inner .goldbar .solid, body.error404 header#header .inner .goldbar .solid {
+      body.discover:not(.seeking) header#header .inner nav .link a:hover, body.error404:not(.seeking) header#header .inner nav .link a:hover {
+        opacity: .5; }
+    body.discover:not(.seeking) header#header .inner .goldbar .solid, body.error404:not(.seeking) header#header .inner .goldbar .solid {
       background-color: #f1f5f7;
       -webkit-box-shadow: 0 0 0.25em 0.1em #f1f5f7;
       box-shadow: 0 0 0.25em 0.1em #f1f5f7; }
-  body.discover #wrapper main, body.error404 #wrapper main {
+  body.discover:not(.seeking) #wrapper main, body.error404:not(.seeking) #wrapper main {
     width: 100%;
     margin-left: 0;
     margin-right: 0;
     padding-left: 0;
     padding-right: 0;
     color: #f1f5f7; }
-    body.discover #wrapper main .inner, body.error404 #wrapper main .inner {
+    body.discover:not(.seeking) #wrapper main .inner, body.error404:not(.seeking) #wrapper main .inner {
       position: relative;
       padding: 0 0 5em 0; }
-      body.discover #wrapper main .inner .loader, body.error404 #wrapper main .inner .loader {
+      body.discover:not(.seeking) #wrapper main .inner .loader, body.error404:not(.seeking) #wrapper main .inner .loader {
         width: 100%;
         padding: 2em 0 4em 0;
         position: absolute;
@@ -2220,7 +2222,7 @@ body.discover, body.error404 {
         transition: transform 800ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-transform 800ms cubic-bezier(0.19, 1, 0.22, 1);
         -webkit-transform: translateY(10em);
         transform: translateY(10em); }
-        body.discover #wrapper main .inner .loader .circle, body.error404 #wrapper main .inner .loader .circle {
+        body.discover:not(.seeking) #wrapper main .inner .loader .circle, body.error404:not(.seeking) #wrapper main .inner .loader .circle {
           width: 8em;
           height: 8em;
           display: table;
@@ -2231,12 +2233,12 @@ body.discover, body.error404 {
           background-position: center;
           background-repeat: no-repeat;
           background-size: cover; }
-    body.discover #wrapper main.querying .loader, body.error404 #wrapper main.querying .loader {
+    body.discover:not(.seeking) #wrapper main.querying .loader, body.error404:not(.seeking) #wrapper main.querying .loader {
       -webkit-transform: translateY(0);
       transform: translateY(0); }
-  body.discover #discover, body.error404 #discover {
+  body.discover:not(.seeking) #discover, body.error404:not(.seeking) #discover {
     z-index: 300; }
-  body.discover .transport, body.error404 .transport {
+  body.discover:not(.seeking) .transport, body.error404:not(.seeking) .transport {
     -webkit-box-shadow: 0 0 0.5em 0.25em #f1f5f7;
     box-shadow: 0 0 0.5em 0.25em #f1f5f7;
     display: -webkit-box;
@@ -2343,11 +2345,11 @@ body.discover, body.error404 {
       #discover .discover_more .wrap a {
         text-decoration: none;
         display: table; }
-      #discover .discover_more .wrap h3 {
+      #discover .discover_more .wrap h2 {
         font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif !important;
         font-weight: 400 !important;
         text-transform: lowercase !important; }
-        #discover .discover_more .wrap h3 span {
+        #discover .discover_more .wrap h2 span {
           font-weight: 400;
           display: inline-block; }
   #discover.bottom {
@@ -2370,10 +2372,10 @@ body.search .header .shape {
   float: left; }
 
 @media (max-width: 768px) {
-  body.discover header#header .inner .rows .row.navigation {
+  body.discover:not(.seeking) header#header .inner .rows .row.navigation {
     -webkit-box-shadow: 0 0 0.5em 0.25em #fecf0c;
     box-shadow: 0 0 0.5em 0.25em #fecf0c; }
-    body.discover header#header .inner .rows .row.navigation nav {
+    body.discover:not(.seeking) header#header .inner .rows .row.navigation nav {
       background-color: #fecf0c !important; }
   #discover .loop .cell .wrap a, #discover .loop .cell .wrap .image, #discover .loop .cell .wrap .circle {
     width: 3em;

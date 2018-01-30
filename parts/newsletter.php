@@ -13,7 +13,7 @@ $newsletter_index++;
 	<?php if( is_front_page() ) {
 		echo '<h2 class="lead">and don\'t forget to</h2>';
 	} ?>
-	<label for="mce-EMAIL-<?php echo $newsletter_index; ?>"><h1 class="title"><?php the_field( 'newsletter_title', 'option' )?></h1></label>
+	<label for="mce-EMAIL-<?php echo $newsletter_index; ?>"><h2 class="title"><?php the_field( 'newsletter_title', 'option' )?></h2></label>
   <div id="mc_embed_signup_scroll" class="inputs">
 		<div class="field mc-field-group">
 			<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL-<?php echo $newsletter_index; ?>" placeholder="Enter your email">

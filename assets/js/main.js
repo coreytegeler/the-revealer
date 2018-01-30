@@ -237,7 +237,7 @@ jQuery(function($) {
       if (!$readable.length) {
         return;
       }
-      if ($body.is('.noscroll')) {
+      if ($body.is('.seeking')) {
         return false;
       }
       winHeight = $window.innerHeight();
@@ -456,7 +456,7 @@ jQuery(function($) {
       e.preventDefault();
       if (!$body.hasClass('search')) {
         $seeker = $('.seeker.beyond');
-        $body.toggleClass('noscroll');
+        $body.toggleClass('seeking');
         $seeker.toggleClass('open');
         if ($seeker.is('.open')) {
           return $seeker.find('input[type="search"]').focus();

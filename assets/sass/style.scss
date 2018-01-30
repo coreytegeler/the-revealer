@@ -21,8 +21,10 @@ html, body {
 		background: $gold;
 		opacity: 1;
 	}
-	&.noscroll {
+	&.seeking {
 		overflow: hidden;
+		overflow-y: hidden;
+		overflow-x: hidden;
 	}
 }
 body {
