@@ -237,6 +237,9 @@ jQuery(function($) {
       if (!$readable.length) {
         return;
       }
+      if ($body.is('.noscroll')) {
+        return false;
+      }
       winHeight = $window.innerHeight();
       winScroll = $window.scrollTop();
       scrollHeight = $body[0].scrollHeight;
@@ -453,15 +456,16 @@ jQuery(function($) {
       e.preventDefault();
       if (!$body.hasClass('search')) {
         $seeker = $('.seeker.beyond');
+        $body.toggleClass('noscroll');
         $seeker.toggleClass('open');
         if ($seeker.is('.open')) {
-          return $seeker.find('input').focus();
+          return $seeker.find('input[type="search"]').focus();
         } else {
-          return $seeker.find('input').blur();
+          return $seeker.find('input[type="search"]').blur();
         }
       } else {
         $seeker = $('.seeker:first-child');
-        return $seeker.find('input').focus();
+        return $seeker.find('input[type="search"]').focus();
       }
     };
     closeSeeker = function(e) {

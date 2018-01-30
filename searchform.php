@@ -15,6 +15,11 @@ echo '<div id="searchform">';
 			echo '<em>Search</em>';
 		  echo '<input type="search" id="searchbox" name="s" placeholder="' . $placeholder . '" required>';
 	  echo '</label>';
+	  echo '<div class="submit">';
+		  echo '<input type="submit" value=""/>';
+		  $right_svg = get_template_directory_uri() . '/assets/images/right.svg';
+			echo file_get_contents( $right_svg );
+		echo '</div>';
 	echo '</form>';
 echo '</div>';
 ?>

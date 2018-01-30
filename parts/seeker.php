@@ -2,7 +2,6 @@
 echo '<div class="search_header">';
 	get_template_part( 'parts/stats' );
 	get_search_form();
-
 	$discover_url = get_permalink( get_page_by_path( 'discover' ) );
 	echo '<div class="discover_more">';
 		echo '<div class="wrap">';
