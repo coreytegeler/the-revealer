@@ -1579,7 +1579,11 @@ body.single-post #wrapper, body.page-template-default #wrapper {
             text-align: center;
             padding: .2em;
             overflow: hidden;
-            white-space: nowrap; }
+            white-space: nowrap;
+            text-shadow: none;
+            background: none;
+            font-family: Helvetica, Arial, sans-serif;
+            font-weight: 400; }
             body.single-post #wrapper main .readable .content p a.ftn.super, body.single-post #wrapper main .readable .content .element a.ftn.super, body.page-template-default #wrapper main .readable .content p a.ftn.super, body.page-template-default #wrapper main .readable .content .element a.ftn.super {
               -webkit-transform: translateY(-0.5em);
               transform: translateY(-0.5em);
@@ -1587,15 +1591,16 @@ body.single-post #wrapper, body.page-template-default #wrapper {
               line-height: 1.4em;
               line-height: 1em; }
             body.single-post #wrapper main .readable .content p a.ftn.ref, body.single-post #wrapper main .readable .content .element a.ftn.ref, body.page-template-default #wrapper main .readable .content p a.ftn.ref, body.page-template-default #wrapper main .readable .content .element a.ftn.ref {
+              vertical-align: bottom;
               font-size: .8em;
               line-height: 1.2em;
               line-height: 1em; }
             body.single-post #wrapper main .readable .content p a.ftn:focus, body.single-post #wrapper main .readable .content .element a.ftn:focus, body.page-template-default #wrapper main .readable .content p a.ftn:focus, body.page-template-default #wrapper main .readable .content .element a.ftn:focus {
               outline: none;
-              background-color: #fecf0c; }
-              body.single-post #wrapper main .readable .content p a.ftn:focus:hover, body.single-post #wrapper main .readable .content .element a.ftn:focus:hover, body.page-template-default #wrapper main .readable .content p a.ftn:focus:hover, body.page-template-default #wrapper main .readable .content .element a.ftn:focus:hover {
-                color: #346378 !important;
-                border-color: #346378; }
+              background-color: #fecf0c !important; }
+            body.single-post #wrapper main .readable .content p a.ftn:hover, body.single-post #wrapper main .readable .content .element a.ftn:hover, body.page-template-default #wrapper main .readable .content p a.ftn:hover, body.page-template-default #wrapper main .readable .content .element a.ftn:hover {
+              color: #346378 !important;
+              border-color: #346378; }
       body.single-post #wrapper main .readable .content .image, body.page-template-default #wrapper main .readable .content .image {
         border: none; }
         body.single-post #wrapper main .readable .content .image img, body.page-template-default #wrapper main .readable .content .image img {

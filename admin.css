@@ -177,7 +177,11 @@
         text-align: center;
         padding: .2em;
         overflow: hidden;
-        white-space: nowrap; }
+        white-space: nowrap;
+        text-shadow: none;
+        background: none;
+        font-family: Helvetica, Arial, sans-serif;
+        font-weight: 400; }
         .mce-content-body p a.ftn.super, .mce-content-body .element a.ftn.super {
           -webkit-transform: translateY(-0.5em);
           transform: translateY(-0.5em);
@@ -185,15 +189,16 @@
           line-height: 1.4em;
           line-height: 1em; }
         .mce-content-body p a.ftn.ref, .mce-content-body .element a.ftn.ref {
+          vertical-align: bottom;
           font-size: .8em;
           line-height: 1.2em;
           line-height: 1em; }
         .mce-content-body p a.ftn:focus, .mce-content-body .element a.ftn:focus {
           outline: none;
-          background-color: #fecf0c; }
-          .mce-content-body p a.ftn:focus:hover, .mce-content-body .element a.ftn:focus:hover {
-            color: #346378 !important;
-            border-color: #346378; }
+          background-color: #fecf0c !important; }
+        .mce-content-body p a.ftn:hover, .mce-content-body .element a.ftn:hover {
+          color: #346378 !important;
+          border-color: #346378; }
   .mce-content-body .image {
     border: none; }
     .mce-content-body .image img {

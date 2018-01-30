@@ -28,22 +28,25 @@ p, .element {
 			padding: .2em;
 			overflow: hidden;
 			white-space: nowrap;
+			@include noUnderline();
+			@include sansSerifText;
 			&.super {
 		    transform: translateY(-.5em);
 		    @include xxSmallText;
 		    line-height: 1em;
 			}
 			&.ref {
+				vertical-align: bottom;
 				@include xSmallText;
 				line-height: 1em;
 			}
 			&:focus {
 				outline: none;
-				background-color: $gold;
-				&:hover {
-					color: $dark !important;
-					border-color: $dark;
-				}
+				background-color: $gold !important;
+			}
+			&:hover {
+				color: $dark !important;
+				border-color: $dark;
 			}
 		}
 		&:hover, &:hover * {
