@@ -53,17 +53,7 @@ echo '<article class="cell ' . ( $thumb ? 'has_image' : 'no_image') . ' ' . $cat
 				}
 			echo '</div>';
 			echo '<div class="blurb">';
-				$limit = 300;
-				$excerpt = wp_strip_all_tags( get_the_excerpt() );
-			  $excerpt = explode(' ', $excerpt, $limit);
-			  if (count( $excerpt ) >= $limit) {
-			    array_pop( $excerpt );
-			    $excerpt = implode( ' ', $excerpt ) . '...';
-			  } else {
-			    $excerpt = implode( ' ', $excerpt );
-			  }	
-			  $excerpt = preg_replace( '`[[^]]*]`', '', $excerpt );
-				echo $excerpt;
+				excerpt( 300 );
 			echo '</div>';
 		echo '</div>';
 	echo '</div>';

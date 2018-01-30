@@ -61,6 +61,18 @@ function get_articles_page() {
   }
 }
 
+function excerpt( $limit ) {
+  $excerpt = explode( ' ', get_the_excerpt( $post ), $limit );
+  if ( count( $excerpt ) >= $limit ) {
+    array_pop( $excerpt );
+    $excerpt = implode( ' ', $excerpt ) . '...';
+  } else {
+    $excerpt = implode( ' ' , $excerpt );
+  }	
+  $excerpt = preg_replace( '`[[^]]*]`', '', $excerpt);
+  echo $excerpt;
+}
+
 
 function wrap_words( $str ) {
   $str = preg_replace( '([a-zA-Z.,!?0-9]+(?![^<]*>))', '<span class="word">$0</span>', $str );

@@ -104,7 +104,7 @@ body.search, body.tag, body.error404 {
 				@include xLargeText;
 				@include serifText;
 				line-height: 1.3em;
-				transition: all 500ms $ease;
+				// transition: all 500ms $ease;
 				backface-visibility: hidden;
         pointer-events: all;
         @include xSmallShadow($gold);

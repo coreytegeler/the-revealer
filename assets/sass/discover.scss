@@ -215,7 +215,7 @@ body.discover, body.error404 {
       left: 0;
       form {
         max-width: $lineWidth;
-        input {
+        input[type="search"] {
           background: $lightest;
         }
       }
@@ -244,6 +244,14 @@ body.search {
   }
 }
 @include small {
+  body.discover {
+    header#header .inner .rows .row.navigation {
+      @include mediumShadow($gold);
+      nav {
+        background-color: $gold !important;
+      }
+    }
+  }
   #discover {
     .loop .cell .wrap {
       a, .image, .circle {
