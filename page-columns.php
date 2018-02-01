@@ -12,13 +12,14 @@ echo '<div class="readable">';
 		$columns = get_terms( array(
 		  'taxonomy' => 'columns',
 		  'hide_empty' => false,
-		  'orderby' => 'date',
 		  'order' => 'desc',
+			'orderby' => 'meta_value',
+			'meta_key' => 'date'
 		  'number' => $per_page,
 		  'offset' => $offset,
 		  'hide_empty' => 0
 		) );
-		echo next_posts_link( 'NEXT' );
+
 		foreach( $columns as $column ) {
 			$title = $column->name;
 			$slug = $column->slug;
@@ -31,7 +32,7 @@ echo '<div class="readable">';
 		    'post_type' => 'post',
 		    'posts_per_page' => -1,
 		    'orderby' => 'date',
-		    'order' => 'asc',
+		    'order' => 'desc',
 		    'tax_query' => array(
 		      array(
 		        'taxonomy' => 'columns',

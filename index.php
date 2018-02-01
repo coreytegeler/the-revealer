@@ -11,6 +11,7 @@ $issues = get_terms( array(
 	'orderby' => 'meta_value',
 	'meta_key' => 'date'
 ) );
+
 $current_issue = $issues[0];
 $current_issue_id = $current_issue->term_id;
 $current_issue_url = get_term_link( $current_issue_id, 'issues' );
@@ -256,20 +257,12 @@ echo '<div class="readable">';
 			echo '</div>';
 		echo '</section>';
 	echo '</div>';
-
-	get_template_part( 'parts/goldbar' );
-
-	$past_issues = get_terms( array(
-		'taxonomy' => 'issues',
-		'hide_empty' => false,
-		'orderby' => 'date',
-		'order' => 'desc'
-	) );
-	$past_issue = $past_issues[1];
-	$past_issue_id = $past_issue->term_id;
-	$past_issue_date = get_field( 'date', $past_issue );
-	$past_issue_url = get_term_link( $past_issue_id, 'issues' );
-	$past_issue_args = array(
+	
+	$last_issue = $issues[1];
+	$last_issue_id = $last_issue->term_id;
+	$last_issue_date = get_field( 'date', $last_issue );
+	$last_issue_url = get_term_link( $last_issue_id, 'issues' );
+	$last_issue_args = array(
 		'post_type' => 'post',
 		'orderby' => 'date',
 		'order' => 'asc',
@@ -277,16 +270,17 @@ echo '<div class="readable">';
 			array(
 				'taxonomy' => 'issues',
 				'field' => 'id',
-				'terms' => $past_issue_id
+				'terms' => $last_issue_id
 			)
 		)
 	);
-	$past_issue_args = array_merge( $past_issue_args, array(
+	$last_issue_args = array_merge( $last_issue_args, array(
 		'post__not_in' => $already_used
 	) );
-	$past_issue_query = new WP_Query( $past_issue_args );
-	if ( $past_issue_query->have_posts() ) {
-		echo '<section id="past_issue">';
+	$last_issue_query = new WP_Query( $last_issue_args );
+	if ( $last_issue_query->have_posts() ) {
+		get_template_part( 'parts/goldbar' );
+		echo '<section id="last_issue">';
 			$issues_page = get_page_by_path( 'issues' );
 			if( $issues_page ) {
 				$issues_url = get_permalink( $issues_page );
@@ -296,12 +290,12 @@ echo '<div class="readable">';
 
 			echo '<h2 class="section_header">';
 				echo 'Catch up on our last issue published ';
-				echo '<a href="'.$past_issue_url.'">' . $past_issue_date . '</a>.</br>';
+				echo '<a href="'.$last_issue_url.'">' . $last_issue_date . '</a>.</br>';
 				echo 'Or explore our <a href="' . $issues_url . '">our archive</a>.';
 			echo '</h2>';
 			echo '<div class="loop articles five_col grid">';
-				while ( $past_issue_query->have_posts() ) {
-					$past_issue_query->the_post();
+				while ( $last_issue_query->have_posts() ) {
+					$last_issue_query->the_post();
 					$title = $post->post_title;
 					$thumb_id = get_post_thumbnail_id();
 					$thumb = wp_get_attachment_image_src( $thumb_id, 'medium' );
