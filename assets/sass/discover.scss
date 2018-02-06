@@ -195,9 +195,12 @@ body.discover:not(.seeking), body.error404:not(.seeking) {
       }
       h2 {
         @include revealerText;
+        overflow: visible;
         span {
           font-weight: $regular;
           display: inline-block;
+          font-style: normal;
+          overflow: visible;
         }
       }
     }

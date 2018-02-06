@@ -1,6 +1,7 @@
 <?php
 get_header();
 global $post;
+$home = get_page_by_path( 'home' );
 $home_url = get_site_url();
 $missing_url = get_template_directory_uri() . '/assets/images/missing.svg';
 $missing_svg = file_get_contents( $missing_url );
@@ -72,17 +73,19 @@ echo '<div class="readable">';
 		wp_reset_query();
 	echo '</div>';
 	get_template_part( 'parts/goldbar' );
+
 	echo '<div class="sections one_one">';
+
 		if( $feat_tags = get_field( 'featured_tags', $current_issue ) ) {
 			echo '<section id="featured_tags">';
 				$feat_tag_i = array_rand( $feat_tags, 1 );
 				$feat_tag = $feat_tags[$feat_tag_i];
-				echo '<h2 class="section_header">Read more articles about ';
-					$feat_tag_url = add_query_arg( 'tag', $feat_tag->slug, $articles_url );
-					echo '<a href="' . $feat_tag_url . '">';
-						echo '<em>' . $feat_tag->name . '</em>';
-					echo '</a>';
-				echo '.</h2>';
+				$feat_tag_url = add_query_arg( 'tag', $feat_tag->slug, $articles_url );
+				$feat_tag_link = '<a href="' . $feat_tag_url . '"><em>' . $feat_tag->name . '</em></a>';
+				$feat_tag_header = get_field( 'featured_tag', $home );
+				$feat_tag_header = str_replace( '{tag}', $feat_tag_link, $feat_tag_header );
+
+				echo '<h2 class="section_header">' . $feat_tag_header . '</h2>';
 				echo '<div class="loop grid two_col">';
 					$tagged_args = array(
 						'posts_per_page' => $tagged_amount,
@@ -102,8 +105,10 @@ echo '<div class="readable">';
 				echo '</div>';
 			echo '</section>';
 		}
+
 		echo '<section id="tags">';
-			echo '<h2 class="section_header">Checkout some recent tags.</h2>';
+			$more_tags_header = get_field( 'more_tags', $home );
+			echo '<h2 class="section_header">' . $tags_header . '</h2>';
 			echo '<div class="commas tags">';
 				$tags = get_recent_tags( $tags_amount );
 				foreach( $tags as $tag ) {
@@ -143,19 +148,18 @@ echo '<div class="readable">';
 					$feat_col = get_the_terms( $feat_col_query->posts[0], 'columns' )[0];
 					$feat_col_name = $feat_col->name;
 					$feat_col_slug = $feat_col->slug;
-					$feat_col_writer = get_field( 'writer', $feat_col );
+					$feat_col_header = get_field( 'featured_column', $home );
+					
 					$feat_col_url = add_query_arg( 'column', $feat_col_slug, $page_url );
+					$feat_col_link = '<a href="' . $feat_col_url . '"><em>' . $feat_col_name . '</em></a>';
+					$feat_col_header = str_replace( '{column}', $feat_col_link, $feat_col_header );
 
-					echo '<h2 class="section_header">Another recent article from, ';
-						echo '<a href="' . $feat_col_url . '">';
-								echo '<em>' . $feat_col_name . '</em>';
-							echo '</a>';
-						echo ', a column by ';
-						$feat_col_url = $home_url . '/?s=' . urlencode( $feat_col_writer );
-						echo '<a href="' . $feat_col_url . '">';
-							echo '<em>' . $feat_col_writer . '</em>';
-						echo '</a>';
-					echo '.</h2>';
+					$feat_col_writer = get_field( 'writer', $feat_col );
+					$feat_col_writer_url = $home_url . '/?s=' . urlencode( $feat_col_writer );
+					$feat_col_writer_link = '<a href="' . $feat_col_writer_url . '"><em>' . $feat_col_writer . '</em></a>';
+					$feat_col_header = str_replace( '{writer}', $feat_col_writer_link, $feat_col_header );					
+
+					echo '<h2 class="section_header">' . $feat_col_header . '</h2>';
 					echo '<div class="loop articles one_col masonry">';
 						while ( $feat_col_query->have_posts() ) {
 							$feat_col_query->the_post();
@@ -175,9 +179,8 @@ echo '<div class="readable">';
 			} else {
 				$columns_url = get_site_url() . '/columns/';
 			}
-			echo '<h2 class="section_header">More ';
-				echo '<a href="' . $columns_url . '"><em>columns</em></a>';
-			echo ' from The Revealer</h2>';
+			$more_cols_header = get_field( 'more_columns', $home );
+			echo '<h2 class="section_header">' . $more_cols_header . '</h2>';
 			$columns = get_terms( array(
 				'taxonomy' => 'columns',
 				'orderby' => 'name',
@@ -205,7 +208,7 @@ echo '<div class="readable">';
 
 			echo '<div id="field_notes">';
 				$fn_page = get_page_by_path( 'field-notes' );
-				$fn_header = get_field( 'home_header', $fn_page );
+				$fn_header = get_field( 'f_notes', $home );
 				$fn_thumb_id = get_post_thumbnail_id( $fn_page );
 				$fn_thumb = wp_get_attachment_image_src( $fn_thumb_id, 'large' );
 				$fn_url = add_query_arg( 'category', 'field-notes', $articles_url );
@@ -258,11 +261,9 @@ echo '<div class="readable">';
 		echo '</section>';
 	echo '</div>';
 	
-	$last_issue = $issues[1];
-	$last_issue_id = $last_issue->term_id;
-	$last_issue_date = get_field( 'date', $last_issue );
-	$last_issue_url = get_term_link( $last_issue_id, 'issues' );
-	$last_issue_args = array(
+	$past_issue = $issues[1];
+	$past_issue_id = $past_issue->term_id;
+	$past_issue_args = array(
 		'post_type' => 'post',
 		'orderby' => 'date',
 		'order' => 'asc',
@@ -270,32 +271,32 @@ echo '<div class="readable">';
 			array(
 				'taxonomy' => 'issues',
 				'field' => 'id',
-				'terms' => $last_issue_id
+				'terms' => $past_issue_id
 			)
 		)
 	);
-	$last_issue_args = array_merge( $last_issue_args, array(
+	$past_issue_args = array_merge( $past_issue_args, array(
 		'post__not_in' => $already_used
 	) );
-	$last_issue_query = new WP_Query( $last_issue_args );
-	if ( $last_issue_query->have_posts() ) {
+	$past_issue_query = new WP_Query( $past_issue_args );
+	if ( $past_issue_query->have_posts() ) {
 		get_template_part( 'parts/goldbar' );
-		echo '<section id="last_issue">';
-			$issues_page = get_page_by_path( 'issues' );
-			if( $issues_page ) {
-				$issues_url = get_permalink( $issues_page );
-			} else {
-				$issues_url = get_site_url() . '/issues/';
-			}
+		echo '<section id="past_issue">';
+			$past_issue_header = get_field( 'past_issue', $home );
+			$past_issue_title = $past_issue->name;
+			$past_issue_date = get_field( 'date', $past_issue );
+			$past_issue_url = get_term_link( $past_issue_id, 'issues' );
 
-			echo '<h2 class="section_header">';
-				echo 'Catch up on our last issue published ';
-				echo '<a href="'.$last_issue_url.'">' . $last_issue_date . '</a>.</br>';
-				echo 'Or explore our <a href="' . $issues_url . '">our archive</a>.';
-			echo '</h2>';
+			$past_issue_title_link = '<a href="' . $past_issue_url . '"><em>' . $past_issue_title . '</em></a>';
+			$past_issue_date_link = '<a href="' . $past_issue_url . '"><em>' . $past_issue_date . '</em></a>';
+
+			$past_issue_header = str_replace( '{title}', $past_issue_title_link, $past_issue_header );
+			$past_issue_header = str_replace( '{date}', $past_issue_date_link, $past_issue_header );
+
+			echo '<h2 class="section_header">'.$past_issue_header.'</h2>';
 			echo '<div class="loop articles five_col grid">';
-				while ( $last_issue_query->have_posts() ) {
-					$last_issue_query->the_post();
+				while ( $past_issue_query->have_posts() ) {
+					$past_issue_query->the_post();
 					$title = $post->post_title;
 					$thumb_id = get_post_thumbnail_id();
 					$thumb = wp_get_attachment_image_src( $thumb_id, 'medium' );

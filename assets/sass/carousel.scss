@@ -49,6 +49,11 @@
 			    margin: auto;
 				}
 			}
+			.caption {
+				width: calc(100% - 2em);
+				@include xxSmallText();
+				padding: 1em;
+			}
 			&.current {
 				opacity: 1;
 				z-index: 500;
@@ -92,7 +97,7 @@
 	}
 	.close.circle {
 		right: 2em;
-		bottom: 2em;
+		top: 2em;
 		z-index: 700;
 	}
 }

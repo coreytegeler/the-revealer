@@ -6,7 +6,7 @@ get_header();
 echo '<div class="readable">';
 	echo '<div class="masonry issues loop three_col">';
 		$paged = ( get_query_var('paged') ) ? get_query_var( 'paged' ) : 1;
-		$per_page = -1;
+		$per_page = 0;
 		$offset = ( $paged - 1 ) * $per_page;
 		$issues = get_terms( array(
 		  'taxonomy' => 'issues',

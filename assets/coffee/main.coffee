@@ -13,9 +13,165 @@ jQuery ($) ->
 		$footer = $('footer')
 		$alert = $('#alert')
 		$popup = $('#popup')
+		$carousel = $('#carousel')
 		siteUrl = $body.attr('data-site-url')
 		themeUrl = siteUrl+'/wp-content/themes/therevealer'
 		assetsUrl = themeUrl+'/assets/'
+		transitionEnd = 'transitionend webkitTransitionEnd oTransitionEnd'
+
+		####################################
+		##############CAROUSEL##############
+		####################################
+		createCarousel = () ->
+			$article = $('article.readable')
+			$slides = $carousel.find('.slides')
+			if $article.length
+				$imgs = $article.find('img')
+				$imgs.each (i, img) ->
+					$image = $(img).parents('.image')
+					$caption = $image.find('.wp-caption-text')
+					$newImg = $(img).clone()
+					$(img).attr('data-index',i)
+					$slide = $('<div class="slide"></div>')
+					$wrap = $('<div class="wrap"></div>')
+					$slide.attr('data-index',i)
+					$wrap.append($newImg)
+					$slide.append($wrap)
+					if $caption.length && captionHtml = $caption.html()
+						$slide.append('<div class="caption">'+captionHtml+'</div>')
+					$slides.append($slide)
+					imgSrc = $newImg.attr('src')
+					if !imgSrc
+						return
+					imgSrcEnd = imgSrc.substring(imgSrc.lastIndexOf('-') + 1)
+					if !isNaN(parseInt(imgSrcEnd))
+						imgExt = imgSrc.substring(imgSrc.lastIndexOf('.') + 1)
+						fullImgSrc = imgSrc.replace('-'+imgSrcEnd, '') + '.' + imgExt
+						fullImg = new Image
+						fullImg.onload = (e) ->
+							$(img).attr('data-full', fullImgSrc)
+							# new Date().getTime()
+							$newImg.attr('src', fullImgSrc)
+						fullImg.src = fullImgSrc
+
+				if $imgs.length > 1
+					$carousel.addClass('slidable')
+
+		openCarousel = (e) ->
+			$carousel.imagesLoaded ->
+				$carousel.addClass 'loaded'
+			if $carousel.is('.opening')
+				e.preventDefault()
+				return
+			$carousel.addClass('opening')
+			$this = $(this)
+			href = $this.attr('href')
+			src = $this.attr('src')
+			if href
+				$img = $this.find('img')
+				if $img.length
+					isImage = true
+			else if src
+				$img = $this
+				isImage = true
+			else
+				isImage = false
+
+			index = $img.attr('data-index')
+			if isImage
+				if fullSrc = $img.attr('data-full')
+					src = fullSrc
+				if $thisSlide = $carousel.find('.slide[data-index="'+index+'"]')
+					$carousel.slide(null,$thisSlide)
+					$carousel.addClass('show')
+					e.preventDefault()
+
+			setTimeout () ->
+				$carousel.removeClass('opening')
+			, 500
+
+		closeCarousel = (e) ->
+			$carousel.removeClass('show')
+
+		resizeCarousel = () ->
+			windowWidth = $(window).innerWidth()
+			$slides = $carousel.find('.slide')
+			slidesLength = $slides.length
+			$slidesWrapper = $carousel.find('.slides')
+			$currentSlide = $carousel.find('.slide.current')
+			currentIndex = $currentSlide.index()
+			# $carousel.css width: windowWidth
+			$slidesWrapper.addClass 'static'
+			$slides.each (i, slide) ->
+				imageUrl = $(slide).find('.image').css('backgroundImage')
+				if imageUrl
+					imageUrl = imageUrl.replace('url(', '').replace(')', '').replace(/"/g, '')
+				else 
+					return
+				image = new Image
+				$slide = $(this)
+				image.onload = ->
+					width = image.width
+					height = image.height
+					ratio = width / height
+					if width >= height
+						$slide.addClass 'landscape'
+					else
+						$slide.addClass 'portrait'
+					if !parseInt($slide.css('width'))
+						$slide.css width: 'calc(100%/'+slidesLength+')'
+					if $slide.is('.current')  
+						fixCarouselHeight $slide
+				image.src = imageUrl
+
+		fixCarouselHeight = ($slide) ->
+			$caption = $slide.find('.caption')
+			captionHeight = $caption.innerHeight()
+			console.log captionHeight
+			# minHeight = $carousel.css('content').replace(/['"]+/g,'')
+			# height =  'calc('+minHeight+' + '+captionHeight+'px)'
+			# $carousel.transition
+				# 'height': height
+			# , 200, 'out'
+
+		clickCarouselArrow = () ->
+			$arrow = $(this)
+			direction = $arrow.attr('data-direction')
+			$carousel.slide(direction)
+
+		$.fn.slide = (direction, go) ->
+			$carousel = $(this)
+			$arrow = $carousel.find('.arrow.'+direction)
+			windowWidth = $(window).innerWidth()
+			$slidesWrapper = $carousel.find('.slides')
+			$currentSlide = $carousel.find('.slide.current')
+			currentIndex = $currentSlide.index()
+			$firstSlide = $carousel.find('.slide').first()
+			$lastSlide = $carousel.find('.slide').last()
+			$slidesWrapper.removeClass 'static'
+			if go
+				$nextSlide = $(go)
+			else if direction == 'left'
+				$nextSlide = $currentSlide.prev('.slide')
+				if !$nextSlide.length
+					$nextSlide = $lastSlide
+			else if direction == 'right'
+				$nextSlide = $currentSlide.next('.slide')
+				if !$nextSlide.length
+					$nextSlide = $firstSlide
+
+			fixCarouselHeight($nextSlide)
+			$arrow.addClass 'no'
+			$slidesWrapper.stop()
+			$currentSlide.removeClass 'current'
+			$nextSlide.addClass 'current'
+			$arrow.removeClass 'no'
+
+
+		####################################
+		###############IMAGES###############
+		####################################
+
 		sizeImages = (images) ->
 			if images
 				$images = $(images)
@@ -279,13 +435,13 @@ jQuery ($) ->
 				$toggler.attr('style', '')
 
 		fixToggler = () ->
-		 	$('.toggler:not(.navigation)').each (i, toggler) ->
-		 		$toggler = $(toggler)
-		 		$inner = $toggler.find('.intra')
-		 		if $inner.innerHeight() <= $toggler.innerHeight() + 5
-		 			$toggler.addClass('toggled')
-		 		else
-		 			$toggler.removeClass('toggled')
+			$('.toggler:not(.navigation)').each (i, toggler) ->
+				$toggler = $(toggler)
+				$inner = $toggler.find('.intra')
+				if $inner.innerHeight() <= $toggler.innerHeight() + 5
+					$toggler.addClass('toggled')
+				else
+					$toggler.removeClass('toggled')
 
 			
 
@@ -326,6 +482,8 @@ jQuery ($) ->
 				pseudo.src = currentSrc
 
 			sizeImages($article.find('.content .image.load'))
+			if $carousel.length
+				createCarousel()
 
 			links = $article.find('a[href]')
 			for link in links
@@ -415,7 +573,6 @@ jQuery ($) ->
 				$seeker.find('input[type="search"]').focus()
 
 		closeSeeker = (e) ->
-			console.log '!!'
 			$seeker = $('.seeker.beyond')
 			$seeker.removeClass('open')
 
@@ -509,21 +666,17 @@ jQuery ($) ->
 				$(html).addClass('animate')
 			, 50*index
 
-
-		# $('#logo svg path').each (i, path) ->
-		# 	setTimeout () ->
-		# 		$(path).addClass('animate')
-		# 	, i*50
-
+		$('body').on('click touch', 'article.readable a, article.readable img', openCarousel)
+		$('body').on('click touch', '#carousel .close', closeCarousel)
+		$('body').on 'click touch', '#carousel.loaded.slidable .arrow:not(.no)', clickCarouselArrow
 
 		$('body').on('click touch', '.transport', transport)
 		$('body').on('click', '.toggle[data-toggle]', toggleToggler)
 		$('body').on('click touch', '#alert .close', closeAlert)
 		$('body').on('click touch', '#popup .close', closePopup)
 		$('body').on('hover', '.cell .link_wrap', hoverCell)
-		$('body').on('click', 'aside .share a.window', shareWindow)
-		$('body').on('click', 'header nav .link a', toggleSeeker)
-		$('body').on('click', '.seeker.beyond .close', closeSeeker)
+		$('body').on('click touch', 'header nav .link a', toggleSeeker)
+		$('body').on('click touch', '.seeker.beyond .close', closeSeeker)
 		
 		if $popup.length
 			popupObj = JSON.parse(localStorage.getItem('popup'))

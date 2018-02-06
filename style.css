@@ -1004,10 +1004,6 @@ body.articles #wrapper aside {
         pointer-events: none; }
     .loop .cell.no_image .primary .label.categories {
       padding: 0; }
-    .loop .cell.no_image .secondary .title {
-      max-width: 20em;
-      display: table;
-      margin: auto; }
     .loop .cell .primary .link_wrap {
       margin: 0 0 .5em 0; }
     .loop .cell .secondary .title {
@@ -2348,10 +2344,13 @@ body.discover:not(.seeking), body.error404:not(.seeking) {
       #discover .discover_more .wrap h2 {
         font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif !important;
         font-weight: 400 !important;
-        text-transform: lowercase !important; }
+        text-transform: lowercase !important;
+        overflow: visible; }
         #discover .discover_more .wrap h2 span {
           font-weight: 400;
-          display: inline-block; }
+          display: inline-block;
+          font-style: normal;
+          overflow: visible; }
   #discover.bottom {
     padding: 3em 0; }
     #discover.bottom #searchform {
@@ -2649,6 +2648,11 @@ footer#footer {
           max-height: 100%;
           display: table;
           margin: auto; }
+      #carousel .slides .slide .caption {
+        width: calc(100% - 2em);
+        font-size: .62em;
+        line-height: 1.4em;
+        padding: 1em; }
       #carousel .slides .slide.current {
         opacity: 1;
         z-index: 500; }
@@ -2686,5 +2690,5 @@ footer#footer {
         fill: #fecf0c; }
   #carousel .close.circle {
     right: 2em;
-    bottom: 2em;
+    top: 2em;
     z-index: 700; }

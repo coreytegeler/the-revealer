@@ -1,6 +1,6 @@
 jQuery(function($) {
   return $(function() {
-    var $alert, $body, $footer, $header, $headers, $logo, $main, $nav, $popup, $side, $window, $wrapper, animateText, animateTexts, assetsUrl, closeAlert, closePopup, closeSeeker, dur, fixHeader, fixLoops, fixSide, fixToggler, hoverCell, isMobile, lastSideScroll, lastWeek, loadImage, now, popupObj, queryMore, setupArticle, shareWindow, sideScroll, siteUrl, sizeImages, themeUrl, toggleSeeker, toggleToggler, trackScroll, transport;
+    var $alert, $body, $carousel, $footer, $header, $headers, $logo, $main, $nav, $popup, $side, $window, $wrapper, animateText, animateTexts, assetsUrl, clickCarouselArrow, closeAlert, closeCarousel, closePopup, closeSeeker, createCarousel, dur, fixCarouselHeight, fixHeader, fixLoops, fixSide, fixToggler, hoverCell, isMobile, lastSideScroll, lastWeek, loadImage, now, openCarousel, popupObj, queryMore, resizeCarousel, setupArticle, shareWindow, sideScroll, siteUrl, sizeImages, themeUrl, toggleSeeker, toggleToggler, trackScroll, transitionEnd, transport;
     $window = $(window);
     $body = $('body');
     $wrapper = $('#wrapper');
@@ -14,9 +14,179 @@ jQuery(function($) {
     $footer = $('footer');
     $alert = $('#alert');
     $popup = $('#popup');
+    $carousel = $('#carousel');
     siteUrl = $body.attr('data-site-url');
     themeUrl = siteUrl + '/wp-content/themes/therevealer';
     assetsUrl = themeUrl + '/assets/';
+    transitionEnd = 'transitionend webkitTransitionEnd oTransitionEnd';
+    createCarousel = function() {
+      var $article, $imgs, $slides;
+      $article = $('article.readable');
+      $slides = $carousel.find('.slides');
+      if ($article.length) {
+        $imgs = $article.find('img');
+        $imgs.each(function(i, img) {
+          var $caption, $image, $newImg, $slide, $wrap, captionHtml, fullImg, fullImgSrc, imgExt, imgSrc, imgSrcEnd;
+          $image = $(img).parents('.image');
+          $caption = $image.find('.wp-caption-text');
+          $newImg = $(img).clone();
+          $(img).attr('data-index', i);
+          $slide = $('<div class="slide"></div>');
+          $wrap = $('<div class="wrap"></div>');
+          $slide.attr('data-index', i);
+          $wrap.append($newImg);
+          $slide.append($wrap);
+          if ($caption.length && (captionHtml = $caption.html())) {
+            $slide.append('<div class="caption">' + captionHtml + '</div>');
+          }
+          $slides.append($slide);
+          imgSrc = $newImg.attr('src');
+          if (!imgSrc) {
+            return;
+          }
+          imgSrcEnd = imgSrc.substring(imgSrc.lastIndexOf('-') + 1);
+          if (!isNaN(parseInt(imgSrcEnd))) {
+            imgExt = imgSrc.substring(imgSrc.lastIndexOf('.') + 1);
+            fullImgSrc = imgSrc.replace('-' + imgSrcEnd, '') + '.' + imgExt;
+            fullImg = new Image;
+            fullImg.onload = function(e) {
+              $(img).attr('data-full', fullImgSrc);
+              return $newImg.attr('src', fullImgSrc);
+            };
+            return fullImg.src = fullImgSrc;
+          }
+        });
+        if ($imgs.length > 1) {
+          return $carousel.addClass('slidable');
+        }
+      }
+    };
+    openCarousel = function(e) {
+      var $img, $this, $thisSlide, fullSrc, href, index, isImage, src;
+      $carousel.imagesLoaded(function() {
+        return $carousel.addClass('loaded');
+      });
+      if ($carousel.is('.opening')) {
+        e.preventDefault();
+        return;
+      }
+      $carousel.addClass('opening');
+      $this = $(this);
+      href = $this.attr('href');
+      src = $this.attr('src');
+      if (href) {
+        $img = $this.find('img');
+        if ($img.length) {
+          isImage = true;
+        }
+      } else if (src) {
+        $img = $this;
+        isImage = true;
+      } else {
+        isImage = false;
+      }
+      index = $img.attr('data-index');
+      if (isImage) {
+        if (fullSrc = $img.attr('data-full')) {
+          src = fullSrc;
+        }
+        if ($thisSlide = $carousel.find('.slide[data-index="' + index + '"]')) {
+          $carousel.slide(null, $thisSlide);
+          $carousel.addClass('show');
+          e.preventDefault();
+        }
+      }
+      return setTimeout(function() {
+        return $carousel.removeClass('opening');
+      }, 500);
+    };
+    closeCarousel = function(e) {
+      return $carousel.removeClass('show');
+    };
+    resizeCarousel = function() {
+      var $currentSlide, $slides, $slidesWrapper, currentIndex, slidesLength, windowWidth;
+      windowWidth = $(window).innerWidth();
+      $slides = $carousel.find('.slide');
+      slidesLength = $slides.length;
+      $slidesWrapper = $carousel.find('.slides');
+      $currentSlide = $carousel.find('.slide.current');
+      currentIndex = $currentSlide.index();
+      $slidesWrapper.addClass('static');
+      return $slides.each(function(i, slide) {
+        var $slide, image, imageUrl;
+        imageUrl = $(slide).find('.image').css('backgroundImage');
+        if (imageUrl) {
+          imageUrl = imageUrl.replace('url(', '').replace(')', '').replace(/"/g, '');
+        } else {
+          return;
+        }
+        image = new Image;
+        $slide = $(this);
+        image.onload = function() {
+          var height, ratio, width;
+          width = image.width;
+          height = image.height;
+          ratio = width / height;
+          if (width >= height) {
+            $slide.addClass('landscape');
+          } else {
+            $slide.addClass('portrait');
+          }
+          if (!parseInt($slide.css('width'))) {
+            $slide.css({
+              width: 'calc(100%/' + slidesLength + ')'
+            });
+          }
+          if ($slide.is('.current')) {
+            return fixCarouselHeight($slide);
+          }
+        };
+        return image.src = imageUrl;
+      });
+    };
+    fixCarouselHeight = function($slide) {
+      var $caption, captionHeight;
+      $caption = $slide.find('.caption');
+      captionHeight = $caption.innerHeight();
+      return console.log(captionHeight);
+    };
+    clickCarouselArrow = function() {
+      var $arrow, direction;
+      $arrow = $(this);
+      direction = $arrow.attr('data-direction');
+      return $carousel.slide(direction);
+    };
+    $.fn.slide = function(direction, go) {
+      var $arrow, $currentSlide, $firstSlide, $lastSlide, $nextSlide, $slidesWrapper, currentIndex, windowWidth;
+      $carousel = $(this);
+      $arrow = $carousel.find('.arrow.' + direction);
+      windowWidth = $(window).innerWidth();
+      $slidesWrapper = $carousel.find('.slides');
+      $currentSlide = $carousel.find('.slide.current');
+      currentIndex = $currentSlide.index();
+      $firstSlide = $carousel.find('.slide').first();
+      $lastSlide = $carousel.find('.slide').last();
+      $slidesWrapper.removeClass('static');
+      if (go) {
+        $nextSlide = $(go);
+      } else if (direction === 'left') {
+        $nextSlide = $currentSlide.prev('.slide');
+        if (!$nextSlide.length) {
+          $nextSlide = $lastSlide;
+        }
+      } else if (direction === 'right') {
+        $nextSlide = $currentSlide.next('.slide');
+        if (!$nextSlide.length) {
+          $nextSlide = $firstSlide;
+        }
+      }
+      fixCarouselHeight($nextSlide);
+      $arrow.addClass('no');
+      $slidesWrapper.stop();
+      $currentSlide.removeClass('current');
+      $nextSlide.addClass('current');
+      return $arrow.removeClass('no');
+    };
     sizeImages = function(images) {
       var $images;
       if (images) {
@@ -371,6 +541,9 @@ jQuery(function($) {
         pseudo.src = currentSrc;
       }
       sizeImages($article.find('.content .image.load'));
+      if ($carousel.length) {
+        createCarousel();
+      }
       links = $article.find('a[href]');
       for (k = 0, len1 = links.length; k < len1; k++) {
         link = links[k];
@@ -470,7 +643,6 @@ jQuery(function($) {
     };
     closeSeeker = function(e) {
       var $seeker;
-      console.log('!!');
       $seeker = $('.seeker.beyond');
       return $seeker.removeClass('open');
     };
@@ -586,14 +758,16 @@ jQuery(function($) {
         return $(html).addClass('animate');
       }, 50 * index);
     };
+    $('body').on('click touch', 'article.readable a, article.readable img', openCarousel);
+    $('body').on('click touch', '#carousel .close', closeCarousel);
+    $('body').on('click touch', '#carousel.loaded.slidable .arrow:not(.no)', clickCarouselArrow);
     $('body').on('click touch', '.transport', transport);
     $('body').on('click', '.toggle[data-toggle]', toggleToggler);
     $('body').on('click touch', '#alert .close', closeAlert);
     $('body').on('click touch', '#popup .close', closePopup);
     $('body').on('hover', '.cell .link_wrap', hoverCell);
-    $('body').on('click', 'aside .share a.window', shareWindow);
-    $('body').on('click', 'header nav .link a', toggleSeeker);
-    $('body').on('click', '.seeker.beyond .close', closeSeeker);
+    $('body').on('click touch', 'header nav .link a', toggleSeeker);
+    $('body').on('click touch', '.seeker.beyond .close', closeSeeker);
     if ($popup.length) {
       popupObj = JSON.parse(localStorage.getItem('popup'));
       now = new Date().getTime();
