@@ -1480,6 +1480,12 @@ body.single-post #wrapper, body.page-template-default #wrapper {
       text-align: center; }
     body.single-post #wrapper main .readable .lead .meta, body.page-template-default #wrapper main .readable .lead .meta {
       text-align: center; }
+    body.single-post #wrapper main .readable .lead .writers .writer::before, body.page-template-default #wrapper main .readable .lead .writers .writer::before {
+      content: ', '; }
+    body.single-post #wrapper main .readable .lead .writers .writer:first-of-type::before, body.page-template-default #wrapper main .readable .lead .writers .writer:first-of-type::before {
+      display: none; }
+    body.single-post #wrapper main .readable .lead .writers .writer:last-of-type::before, body.page-template-default #wrapper main .readable .lead .writers .writer:last-of-type::before {
+      content: ' & '; }
     body.single-post #wrapper main .readable .lead .header, body.page-template-default #wrapper main .readable .lead .header {
       padding: 0 0 .5em 0;
       font-family: "Crimson Text", "Baskerville", times, serif;

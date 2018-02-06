@@ -11,9 +11,6 @@ $categories = get_cat_list( $id, true );
 $column = get_the_terms( $post, 'columns' )[0];
 $column_url = add_query_arg( 'column', $column->slug, get_site_url() );
 $issue = get_the_terms( $post, 'issues' )[0];
-$writers = get_field( 'writers' );
-$contributors = get_contributors_list( $id, true, true );
-// $contributors = get_field( 'contributors' );
 $content = $post->post_content;
 $excerpt = wp_strip_all_tags( get_the_excerpt() );
 $tags = get_the_tags();
@@ -45,11 +42,11 @@ echo '<article class="post readable ' . $category_class . '">';
 			echo '<div class="meta">';
 				if( have_rows( 'writers' ) ) {
 					echo '<div class="row writers">';
-						echo '<span>by </span>';
+						echo 'by ';
 				    while( have_rows( 'writers') ) : the_row();
 							$writer_name = get_sub_field( 'name' );
 							$writer_url = get_sub_field( 'url' );
-							echo '<span>';
+							echo '<span class="writer">';
 								if( $writer_url ) {
 									echo '<a href="' . urlify( $writer_url ) . '">' . $writer_name . '</a>';
 								} else {
@@ -66,7 +63,7 @@ echo '<article class="post readable ' . $category_class . '">';
 						echo '<div class="row contributors">';
 							$contributor_name = get_sub_field( 'name' );
 							$contributor_url = get_sub_field( 'url' );
-							echo '<span>';
+							echo '<span class="contributor">';
 								echo $contributor_role . ' ';
 								if( $contributor_url ) {
 									echo '<a href="' . urlify( $contributor_url ) . '">' . $contributor_name . '</a>';
