@@ -1,6 +1,6 @@
 <?php
 global $post;
-
+$is_footer = true;
 echo '<div class="transport top circle">';
 	$up_svg = get_template_directory_uri() . '/assets/images/up.svg';
 	echo file_get_contents( $up_svg );
@@ -59,7 +59,7 @@ if( $post->post_name != 'discover' ) {
 }
 
 if( !is_search() ) {
-	echo '<div class="seeker beyond">';
+	echo '<div class="super seeker">';
 		get_template_part( 'parts/seeker' );
 		echo '<div class="close circle">';
 			$x_svg = get_template_directory_uri() . '/assets/images/x.svg';
@@ -67,7 +67,7 @@ if( !is_search() ) {
 		echo '</div>';
 	echo '</div>';
 }
-echo '<div id="isMobile"></div>';
+echo '<div id="is_mobile"></div>';
 $missing_url = get_template_directory_uri() . '/assets/images/missing.svg';
 $missing_svg = file_get_contents( $missing_url );
 echo '<div id="missingSvg" data-url="' . $missing_url . '">'.$missing_svg.'</div>';

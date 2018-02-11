@@ -3,9 +3,13 @@ body.articles #wrapper {
 		width: calc(100% - #{$sideWidth} - 4em);
 		padding: 0 2em 4em calc(#{$sideWidth} + 2em);
 	}
+	.filters.toggle {
+		display: none;
+	}
 	aside {
 		width: calc(#{$sideWidth} - 2em);
 		height: 100%;
+		max-height: 100%;
 		padding-left: 2em;
 		position: absolute;
 		left: 0;
@@ -23,6 +27,7 @@ body.articles #wrapper {
 		#filters {
 			padding: 2em 0 4em 0;
 			flex: 1;
+			max-height: 100%;
 			.filter {
 				padding: 0 0 2em 0;
 				h4 {
@@ -59,7 +64,7 @@ body.articles #wrapper {
 					&.selected {
 						a {
 							border-bottom: 1px solid $gold;
-							&:hover {
+							body.has_hover &:hover {
 								border-bottom-color: transparent;
 							}
 						}
@@ -87,40 +92,44 @@ body.articles #wrapper {
 		.transport.top {
 			display: flex;
 		}
-		main {
-			width: calc(100% - 4em);
-	    padding: .5em 2em 4em 2em;
-		}
-		aside {
-			width: calc(100% - 4em);
-			max-width: $lineWidth;
-			height: auto !important;
-			padding: .5em 2em 2em 2em;
-
-			margin: auto;
-			display: table;
-			position: static !important;
-			transform: 0 !important;
+		.loop.two_col .cell {
+			width: 100%;
 		}
 	}
 	@include small {
+		main {
+			width: calc(100% - 2em);
+			padding: 0 1em 2em 1em;
+		}
 		.loop {
 			max-width: 35em;
 			margin: auto;
 			display: table;
 		}
-		aside {
-			
-			
-			.content {
-				margin: 0;
-				padding: 0;
-				#filters {
-					.filter {
-						.list {
-							height: 0;
-						}
-					}
+		.filters.toggle {
+			display: block;
+			position: fixed;
+			left: 1em;
+			top: 1em;
+			z-index: 300;
+		}
+		.loop.two_col .cell {
+			width: calc(50% - 1.5em);
+		}
+		aside.toggler {
+			width: 100%;
+			height: auto !important;
+			max-height: 0;
+			margin: auto;
+			display: table;
+			position: static !important;
+			transform: 0 !important;
+			padding: 0;
+			#filters {
+				width: calc(100% - 4em);
+				padding: 3em 2em 2em 2em;
+				.commas span {
+					@include mediumText();
 				}
 			}
 		}

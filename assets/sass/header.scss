@@ -14,7 +14,6 @@ header#header {
   	width: calc(100% - 4em);
 		margin: 0 2em;
   	display: flex;
-  	// background: $lightest;
   	position: relative;
   }
   #logo {
@@ -74,10 +73,10 @@ header#header {
 	  		float: right;
 	  		padding: 0;
 				.link {
-					float: left;
+					float: right;
 					display: inline;
 					padding: 0;
-					margin: 0 .5em 0 0;
+					margin: 0 0 0 .5em;
 					list-style: none;
 					a {
 				    text-decoration: none;
@@ -101,32 +100,32 @@ header#header {
 		  		margin: auto;
 		  	}
 		  }
-		  &.filters {
-				// display: none;
-				.filter {
-					.toggle {
-						width: 100%;
-						user-select: none;
-						text-transform: lowercase;
-						@include xSmallText;
-						&:hover {
-							cursor: pointer;
-							color: $medium;
-						}
-					}
-					.list {
-						height: 0;
-						opacity: 0;
-						overflow: hidden;
-						color: $medium;
-						transition: height 500ms ease, opacity 500ms 30ms ease;
-						padding-left: .5em;
-						&.show {
-							opacity: 1;
-						}
-					}
-				}
-			}
+		 //  &.filters {
+			// 	// display: none;
+			// 	.filter {
+			// 		.toggle {
+			// 			width: 100%;
+			// 			user-select: none;
+			// 			text-transform: lowercase;
+			// 			@include xSmallText;
+			// 			&:hover {
+			// 				cursor: pointer;
+			// 				color: $medium;
+			// 			}
+			// 		}
+			// 		.list {
+			// 			height: 0;
+			// 			opacity: 0;
+			// 			overflow: hidden;
+			// 			color: $medium;
+			// 			transition: height 500ms ease, opacity 500ms 30ms ease;
+			// 			padding-left: .5em;
+			// 			&.show {
+			// 				opacity: 1;
+			// 			}
+			// 		}
+			// 	}
+			// }
 		}
 	}
 	.goldbar {
@@ -139,17 +138,16 @@ header#header {
 	}
 	@include small {
 		.inner {
-			width: calc(100% - 1em);
-	    margin: .5em .5em 0 .5em;
-	    padding: 0 0 .5em 0;
+			width: calc(100% - 2em);
+	    padding: .5em;
+	    margin: 0 .5em;
 	    display: block;
 	    position: relative;
 			#logo {
-				width: 100%;
-				max-width: $logoWidth;
+				width: calc(100% - 3em);
 				padding: 0;
-				margin: auto;
 				a.svg {
+					margin: 0;
 					svg {
 						width: 100%;
 						display: block;
@@ -160,11 +158,16 @@ header#header {
 			}
 			.rows {
 				width: 100%;
+				display: block;
 				.row {
 					width: auto;
 					display: table;
-					margin: auto;
+					margin: 0;
 					text-align: center;
+					&.tagline {
+						width: calc(100% - 3em);
+						text-align: left;
+					}
 					&.navigation {
 						width: 100%;
 						max-height: 0;
@@ -176,16 +179,29 @@ header#header {
 							width: calc(100% - 1em);
 							padding: .5em;
 							background-color: $lightest;
+							.link {
+								margin: 0 .5em 0 0;
+								float: left;
+							}
 						}
 					}
 				}
 			}
 		}
 		.toggle {
+			display: table;
+	    position: absolute;
+			bottom: .85em;
+			right: .5em;
+			left: auto;
+			display: block;
 			background-color: transparent;
 			box-shadow: none;
-			bottom: -1em;
-			display: block;
+			border: none;
+			.circle {
+				box-shadow: none !important;
+				background-color: transparent;
+			}
 		}
 	}
 	@include xSmall {

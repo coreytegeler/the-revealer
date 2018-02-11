@@ -56,15 +56,17 @@ echo '<div class="readable">';
 					echo '<h1 class="title">';
 						echo '<a href="' . $current_issue_url . '">' . $current_issue->name . '</a>';
 					echo '</h1>';	
-					echo '<h2 class="date">published ' . $urrent_issue_date . '</h2>';
+					echo '<h2 class="date">published ' . $current_issue_date . '</h2>';
 				echo '</div>';
 			echo '</div>';
 		echo '</div>';
 
 		echo '<div class="cell newsletter">';
-			get_template_part( 'parts/newsletter' );
+			echo '<div class="text">';
+				echo '<h2 class="lead">' . get_field( 'above_newsletter_title', 'option' ) . '</h2>';
+				get_template_part( 'parts/newsletter' );
+			echo '</div>';
 		echo '</div>';
-
 
 		foreach( $current_issue_posts as $post ) {
 			get_template_part( 'parts/article' );
@@ -108,7 +110,7 @@ echo '<div class="readable">';
 
 		echo '<section id="tags">';
 			$more_tags_header = get_field( 'more_tags', $home );
-			echo '<h2 class="section_header">' . $tags_header . '</h2>';
+			echo '<h2 class="section_header">' . $more_tags_header . '</h2>';
 			echo '<div class="commas tags">';
 				$tags = get_recent_tags( $tags_amount );
 				foreach( $tags as $tag ) {

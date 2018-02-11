@@ -5,7 +5,7 @@ echo '<div class="readable">';
 		echo '<div class="max">';
 			$categories = get_categories( array(
 			    'orderby' => 'name',
-			    'order'   => 'ASC'
+			    'order'   => 'DESC'
 			) );
 			foreach( $categories as $category ) {
 				$title = $category->name;

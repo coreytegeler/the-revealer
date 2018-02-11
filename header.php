@@ -71,8 +71,6 @@ if( $publisher_name = get_field( 'publisher_name', 'option' ) ) {
 	echo '<meta name="Publisher" content="' . $publisher_name . '">';
 }
 echo '<link rel="profile" href="http://gmpg.org/xfn/11">';
-
-
 echo '<meta property="og:title" content="' . $og_title . '" />';
 echo '<meta property="og:type" content="' . $og_type .  '" />';
 if( $og_type == 'article' ) {
@@ -83,9 +81,11 @@ if( $og_type == 'article' ) {
 	echo '<meta property="article:section" content="Religion" />';
 	echo '<meta property="article:tag" content="' . get_tags_list() . '" />';
 }
-echo '<meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />';
-echo '<meta property="og:image" content="http://ia.media-imdb.com/images/rock.jpg" />';
-echo '<script type="text/javascript" src="' . get_template_directory_uri() . '/MyFontsWebfontsKit.js"/>';
+echo '<meta property="og:url" content="' . get_the_permalink() . '" />';
+if( $thumb = wp_get_attachment_image_src( $thumb_id, 'large' ) ) {
+	$thumb_url = $thumb[0];
+	echo '<meta property="og:image" content="' . $thumb_url . '" />';
+}
 wp_head();
 ?>
 </head>

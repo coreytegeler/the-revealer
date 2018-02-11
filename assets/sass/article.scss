@@ -113,9 +113,9 @@ body.single-post, body.page-template-default {
 								p {
 									margin: 0;
 								}	
-								a, a:hover {
+								a, body.has_hover a:hover {
 									@include noUnderline();
-									text-decoration: underline;
+									text-decoration: underline !important;
 								}
 							}
 						}
@@ -212,6 +212,7 @@ body.single-post, body.page-template-default {
 					img, div {
 						&.aligncenter, &.alignleft, &.alignright {
 							width: 100%;
+							max-width: 100%;
 						}
 					}
 				}

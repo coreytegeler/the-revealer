@@ -10,6 +10,7 @@ html, body {
 	@include baseText;
 	color: $dark;
 	background: $lightest;
+	overflow: hidden;
 	overflow-x: hidden;
 	overflow-y: scroll;
 	-webkit-overflow-scrolling: touch;
@@ -21,10 +22,11 @@ html, body {
 		background: $gold;
 		opacity: 1;
 	}
-	&.seeking {
-		overflow: hidden;
-		overflow-y: hidden;
-		overflow-x: hidden;
+	&.no_scroll  {
+		overflow: hidden !important;
+		overflow-y: hidden !important;
+		overflow-x: hidden !important;
+		-webkit-overflow-scrolling: auto !important;
 	}
 }
 body {
@@ -54,7 +56,7 @@ p {
 		display: inline;
 		position: relative;
 		@include underline($light, $lightest);
-		&:hover {
+		body.has_hover &:hover {
 			color: $medium;
 			@include underline($gold, $lightest);
 		}
@@ -88,6 +90,7 @@ em, i {
 }
 input {
 	@include sansSerifText;
+	-webkit-appearance: none;
 	transition: box-shadow 1000ms $ease;
 	&:focus {
 		outline-color: $gold;
@@ -164,13 +167,13 @@ input {
 	bottom: 2em;
 	z-index: 300;
 	display: none;
-	&:hover {
+	body.has_hover &:hover {
 		cursor: pointer;
 		@include largeShadow($lightest);
 	}
 	svg {
-		width: 75%;
-		height: 75%;
+		width: 70%;
+		height: 70%;
     display: table;
     margin: auto;
     fill: $medium;
@@ -230,8 +233,7 @@ input {
 				duration: 3000ms;
 			}
 		}
-	}
-		
+	}	
 }
 .section_header {
 	font-weight: $regular;
@@ -246,7 +248,7 @@ input {
 		transition: color 500ms $ease;
 		display: inline;
 		@include underline($gold);
-		&:hover {
+		body.has_hover &:hover {
 			color: $gold;
 		}
 	}
@@ -262,7 +264,7 @@ input {
 			color: $dark;
 			transition: color 500ms $ease;
 			@include underline($gold);
-			&:hover {
+			body.has_hover &:hover {
 				color: $gold;
 				@include underline($gold);
 			}
@@ -279,7 +281,7 @@ input {
 			a {
 				color: $medium;
 				@include noUnderline();
-				&:hover {
+				body.has_hover &:hover {
 					@include underline($gold);
 				}
 			}
@@ -300,55 +302,36 @@ input {
 		flex-wrap: wrap;
 		padding-bottom: 2em;
 	}
-	span {
-		&.label {
-			padding: 0 .25em 0 0;
-			&::after {
-				content: '';
-			}
-		}
-		&.tag {
-			@include xxSmallText;
-			a {
-				font-style: italic;
-				color: $medium;
-				&:hover {
-					color: $dark;
-				}
-			}
-		}
-	}
-	&.toggled {
-		.toggle {
-			pointer-events: none;
-			box-shadow: none;
-			.circle {
-				opacity: 0;	
-			}
+	.toggle {
+		width: 100%;
+		height: 1em;
+		left: 0;
+		bottom: 0;
+		background-color: $lightest;
+		border-top: 1px solid rgba($medium,.1);
+		z-index: 100;
+		@include mediumShadow($lightest);
+		.circle {
+			position: absolute;
+			width: 1em;
+			height: 1em;
+			left: calc(50% - .5em);
+			top: -.5em;
 		}
 	}
 }
 .toggle {
-	width: 100%;
-	height: 1em;
 	position: absolute;
-	left: 0;
-	bottom: 0;
-	background-color: $lightest;
-	border-top: 1px solid rgba($medium,.1);
-	z-index: 100;
-	@include mediumShadow($lightest);
 	.circle {
-		width: 1em;
-		height: 1em;
-		position: absolute;
-		left: calc(50% - .5em);
-		top: -.5em;
-		transform: rotate(180deg);
-		transition: opacity 500ms $ease, box-shadow 500ms $ease;;
 		@include mediumShadow(rgba($gold,.5));
+		transition: opacity 500ms $ease, box-shadow 500ms $ease;;
 	}
-	&:hover {
+	&.toggled {
+		.circle {
+			transform: rotate(180deg) !important;
+		}
+	}
+	body.has_hover &:hover {
 		cursor: pointer;
 		.circle {
 			@include mediumShadow($gold);
@@ -390,9 +373,8 @@ input {
     margin: auto;
     fill: $medium;
 	}
-	&:hover {
+	body.has_hover &:hover {
 		@include largeShadow($lightest);
-    transform: scale(1.09);
 	}
 	&.close {
 		background-color: rgba($lightest,.9);
@@ -400,7 +382,7 @@ input {
 		svg {
 			transition: fill 500ms $ease;
 		}
-		&:hover {
+		body.has_hover &:hover {
 			cursor: pointer;
 			svg {
 				fill: $gold;
@@ -430,7 +412,7 @@ input {
 		}
 	}
 }
-#isMobile {
+#is_mobile {
 	display: none;
 	content: '0';
 }
@@ -442,12 +424,12 @@ input {
 }
 
 @include large {
-	#isMobile {
+	#is_mobile {
 		content: 'large';
 	}
 }
 @include medium {
-	#isMobile {
+	#is_mobile {
 		content: 'medium';
 	}
 }
@@ -459,7 +441,7 @@ input {
 			padding: 0 1em 2em 1em;
 			.readable {
 				width: 100%;
-				padding-right: 0;
+				padding: 3em 0 0 0;
 				.pagination {
 					.paginate {
 						.circle {
@@ -491,7 +473,7 @@ input {
 					display: table;
 					padding: 1em 0;
 					img {
-						width: auto !important;
+						width: 100% !important;
 						max-width: 100% !important;
 						display: table !important;
 						margin: auto !important;
@@ -508,7 +490,7 @@ input {
 		right: 1em;
 		bottom: 1em;
 	}
-	#isMobile {
+	#is_mobile {
 		content: 'small';
 		content: '1';
 	}
@@ -516,14 +498,14 @@ input {
 @include xSmall {
 	#wrapper, #wrapper.split, #wrapper.full {
 		main {
-			width: calc(100% - 1em);
-	    padding: .5em .5em 4em .5em;
+			width: calc(100% - 2em);
+	    padding: .5em 1em 4em 1em;
 	    .pagination .paginate .text {
 	    	display: none;
 	    }
 		}
 	}
-	#isMobile {
+	#is_mobile {
 		content: 'xSmall';
 	}
 }

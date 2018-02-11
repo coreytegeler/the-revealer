@@ -9,10 +9,6 @@ body.home {
 					position: relative;
 					background: $lighter;
 					.issue {
-						.text {
-							width: calc(100% - 2em);
-							padding: 2em 1em;
-						}
 						.goldbar {
 							margin: 0;
 						}
@@ -41,8 +37,8 @@ body.home {
 				&.newsletter {
 					background-color: $lighterGold;
 					form {
-				    width: calc(100% - 2em);
-				    padding: 2em 1em;
+				    // width: calc(100% - 2em);
+				    // padding: 2em 1em;
 				    @include revealerText;
 						font-weight: $regular;
 						label {
@@ -61,6 +57,10 @@ body.home {
 				}
 				&.cover, &.newsletter {
 					// margin-bottom: 2em !important;
+					.text {
+						width: calc(100% - 2em);
+						padding: 2em 1em;
+					}
 					.title {
 						color: $dark;
 						font-weight: $regular;
@@ -84,9 +84,6 @@ body.home {
 				}
 			}
 			&#current_issue_top, &#current_issue {
-				.cell {
-					margin-bottom: 4em;
-				}
 			}
 		}
 		.columns {
@@ -213,6 +210,16 @@ body.home {
 				padding: 2em 0;
 			}
 			.loop {
+				&.articles {
+					.cell.cover, .cell.newsletter {
+						width: 100%;
+						margin-right: 0 !important;
+						margin-left: 0 !important;
+					}
+					.cell.cover {
+						margin-bottom: 0 !important;
+					}
+				}
 				&#featured_tag {
 					.cell {
 						.wrap {
@@ -225,6 +232,17 @@ body.home {
 							}
 						}
 					}
+				}
+			}
+		}
+		@include xSmall {
+			padding-top: 0 !important;
+			.readable {
+				padding-top: 0 !important
+			}
+			.loop {
+				.cell.cover {
+					margin-bottom: 0 !important; 
 				}
 			}
 		}

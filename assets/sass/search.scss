@@ -28,11 +28,11 @@ body.search, body.tag, body.error404 {
 		#searchform {
 			width: 100%;
 			max-width: 40em;
-			// padding: 3em 0 5em 0;
+			padding: 0;
 			margin: auto;
 		}
 	}
-	&.beyond {
+	&.super {
 		height: 100vh;
 		position: fixed;
 		left: 0;
@@ -40,6 +40,11 @@ body.search, body.tag, body.error404 {
 		z-index: 500;
 		transition: opacity 500ms $ease, top 0ms 550ms ease;
 		opacity: 0;
+		.search_header {
+			width: calc(100% - 2em);
+	    margin: auto;
+	    padding: 1em;
+		}
 		&.open {
 			top: 0;
 			opacity: 1;
@@ -73,7 +78,6 @@ body.search, body.tag, body.error404 {
 				left: -99999%;
 			}
 			&::before {
-				display: none;
 	    	width: 100%;
 				height: 100%;
 				position: absolute;
@@ -104,11 +108,10 @@ body.search, body.tag, body.error404 {
 				@include xLargeText;
 				@include serifText;
 				line-height: 1.3em;
-				// transition: all 500ms $ease;
 				backface-visibility: hidden;
         pointer-events: all;
         @include xSmallShadow($gold);
-				&:focus, &:hover {
+				&:focus, body.has_hover &:hover {
 	      	outline: none;
 	      }
 			}
@@ -138,12 +141,12 @@ body.search, body.tag, body.error404 {
 		    border: none;
 		    background: transparent;
 		    pointer-events: all;
-		    &:focus, &:hover {
+		    &:focus, body.has_hover &:hover {
 	      	outline: none;
 	      	cursor: pointer;
 	      }
 			}
-			&:focus, &:hover {
+			&:focus, body.has_hover &:hover {
 				svg {
 	      	fill: $dark;
 	      }
@@ -155,5 +158,17 @@ body.search, body.tag, body.error404 {
 	#searchform {
 		width: calc(100% - 1em);
 		padding: 0 .5em;
+		form {
+			.submit {
+				display: none;
+			}
+		}
 	}
-}
+	.super.seeker {
+		font-size: 13px;
+		.close {
+			right: 1em;
+			bottom: 1em;
+		}
+	}
+}	

@@ -4,27 +4,11 @@
 	@import 'content';
 	p {
 		max-width: 100%;
+		a {
+			@include underline($gold, white);
+			&:hover {
+				@include underline($gold, white);
+			}
+		}
 	}
 }
-// .mce-content-body {
-// 	@include serifText;
-// 	h1, h2, h3, h4 {
-// 		max-width: $lineWidth;
-// 		@include serifText;
-// 		font-weight: $regular;
-// 		margin: auto;
-// 		padding: 1em 0;
-// 	}
-// 	h1 {
-// 		@include largeText;
-// 	}
-// 	h2, h3, h4 {
-// 		@include xMediumText;
-// 	}
-// 	blockquote {
-// 		max-width: calc(#{$lineWidth} - 2em);
-// 		margin-left: auto;
-// 		margin-right: auto;
-// 		font-style: italic;
-// 	}
-// }

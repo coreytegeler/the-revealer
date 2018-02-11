@@ -17,9 +17,9 @@ function revealer_enqueue() {
   wp_enqueue_script( 'imagesloaded' );
   wp_enqueue_script( 'transit' );
   wp_enqueue_script( 'masonry' );
-  wp_enqueue_script( 'main', '' );
+  wp_enqueue_script( 'main', '2.5' );
   wp_enqueue_style( 'normalize', get_template_directory_uri() . '/assets/css/normalize.css' );
-  wp_enqueue_style( 'style', get_stylesheet_uri(), '', 2.0 );
+  wp_enqueue_style( 'style', get_stylesheet_uri(), '', '2.6.1' );
 }
 add_action( 'wp_enqueue_scripts', 'revealer_enqueue' );
 
@@ -303,6 +303,49 @@ function register_issues() {
   ));
 }
 add_action( 'init', 'register_issues' );
+
+function edit_issues_admin_columns( $columns ) {
+  $columns['issue_date'] = 'Published Date';
+  return $columns;
+}
+add_filter( 'manage_edit-issues_columns', 'edit_issues_admin_columns' );
+
+function populate_issues_date_column( $value, $column_name, $term_id ) {
+  $issue = get_term( $term_id, 'issues' );
+  switch( $column_name ) {
+    case 'issue_date': 
+      $value = get_field( 'date', $issue );
+      break;
+    default:
+      break;
+  }
+  return $value;    
+}
+add_filter( 'manage_issues_custom_column', 'populate_issues_date_column', 10, 3 );
+
+function register_sortable_issues_date_column( $columns ) {
+  $columns['date'] = 'issue_date';
+  return $columns;
+}
+add_filter('manage_edit-issues_sortable_columns', 'register_sortable_issues_date_column');
+
+function sort_issues_by_date($pieces, $taxonomies, $args) {
+  global $pagenow;
+  if(!is_admin()) {
+    return $pieces;
+  }
+  if(is_admin() && $pagenow == 'edit-tags.php' && $taxonomies[0] == 'issues') {
+    $orderby = isset($_REQUEST['orderby']) ? trim(wp_unslash($_REQUEST['orderby'])) : 'issue_date';
+    $order   = isset($_REQUEST['order'])   ? trim(wp_unslash($_REQUEST['order']))   : 'DESC';
+    if($orderby == 'issue-date') {
+      $pieces['join']   .= " INNER JOIN wp_options AS opt ON opt.option_name = concat('issue_',t.term_id,'_".$orderby."')";
+      $pieces['orderby'] = "ORDER BY opt.option_value";
+      $pieces['order']   = $order;
+    }
+  }
+  return $pieces;
+}
+add_filter('terms_clauses', 'sort_issues_by_date', 10, 3);
 
 function customize_menu() {
   add_menu_page( 'Issues', 'Issues', 'edit_posts', 'edit-tags.php?taxonomy=issues', '', 'dashicons-book-alt', 5 );

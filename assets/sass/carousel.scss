@@ -1,15 +1,17 @@
 #carousel {
 	width: 100%;
 	height: 100%;
+	min-height: 100vh;
 	position: fixed;
 	left: -99999%;
 	top: 0;
 	z-index: 800;
 	margin: auto;
 	padding: 0;
-	overflow: visible;
+	overflow-x: visible;
+	overflow-y: hidden;
 	background: rgba($lightest, .99);
-	display: table;
+	display: block;
 	opacity: 0;
 	transition: opacity 500ms 100ms $ease;
 	user-select: none;
@@ -87,7 +89,7 @@
 		&.right {
 			right: 0;
 		}
-		&:hover {
+		body.has_hover &:hover {
 			opacity: 1;
 			cursor: pointer;
 			svg {
@@ -98,6 +100,12 @@
 	.close.circle {
 		right: 2em;
 		top: 2em;
-		z-index: 700;
+		z-index: 900;
+	}
+	@include small {
+		.close.circle {
+			right: 1em;
+			top: 1em;
+		}
 	}
 }

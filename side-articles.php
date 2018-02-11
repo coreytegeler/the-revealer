@@ -1,3 +1,3 @@
 <?php
-	get_template_part( 'parts/filters' );
+get_template_part( 'parts/filters' );
 ?>

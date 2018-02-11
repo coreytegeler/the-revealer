@@ -1,5 +1,11 @@
 <?php
-echo '<aside>';
+echo '<div class="toggle filters" data-toggle="filters">';
+	echo '<div class="circle">';
+		$burger_svg = get_template_directory_uri() . '/assets/images/burger.svg';
+		echo file_get_contents( $burger_svg );
+	echo '</div>';
+echo '</div>';
+echo '<aside class="toggler" data-toggle="filters">';
 	$articles_url = get_articles_page();
 	$cat_param = $_GET['category'];
 	$year_param = $_GET['y'];
@@ -20,7 +26,7 @@ echo '<aside>';
 	if( $tag_param ) {
 		$page_url = add_query_arg( 'tag', $tag_param, $page_url );
 	}
-	echo '<div id="filters">';
+	echo '<div id="filters" class="intra">';
 		echo '<div class="filter categories">';
 			echo '<div class="label">Categories</div>';
 			$categories = get_categories( array(

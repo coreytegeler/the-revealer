@@ -92,7 +92,7 @@ body.about {
 						text-decoration: none;
 						@include xSmallText;
 						border-bottom: 1px solid $gold;
-						&:hover {
+						body.has_hover &:hover {
 							color: $gold;
 						}
 					}

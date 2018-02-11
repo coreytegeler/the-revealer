@@ -429,8 +429,8 @@
 	.loop {
 		&.two_col {
 			.cell {
-				width: 100% !important;
-				margin: 0 auto 3em auto !important;
+				// width: 50% !important;
+				// margin: 0 auto 3em auto !important;
 				.secondary {
 					.title {
 						max-width: 100%;
@@ -489,7 +489,7 @@
 		&.one_col, &.two_col, &.three_col, &.four_col, &.five_col {
 			.cell, article,  &.grid .cell,  &.grid article {
 				width: 100% !important;
-				margin-bottom: 2em !important;
+				margin-bottom: 6em !important;
 				margin-right: 0 !important;
 				margin-left: 0 !important;
 			}

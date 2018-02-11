@@ -263,6 +263,8 @@
       font-size: 1em;
       line-height: 1.5em;
       text-align: left; }
+      .mce-content-body .wp-caption .wp-caption-text a, .mce-content-body .wp-caption p a, .mce-content-body .wp-caption figcaption a, .mce-content-body figure.wp-block-image .wp-caption-text a, .mce-content-body figure.wp-block-image p a, .mce-content-body figure.wp-block-image figcaption a {
+        display: inline; }
     .mce-content-body .wp-caption:first-child, .mce-content-body figure.wp-block-image:first-child {
       margin-top: 0; }
   .mce-content-body img {
@@ -286,3 +288,19 @@
     margin: 1em 0 1em 1em; }
   .mce-content-body p {
     max-width: 100%; }
+    .mce-content-body p a {
+      text-shadow: 0 0.03em 0 white, 0 0.06em 0 white, 0 -0.03em 0 white, 0 -0.06em 0 white, -0.03em 0.03em 0 white, -0.03em 0.06em 0 white, 0.03em 0.03em 0 white, 0.03em 0.06em 0 white, -0.03em 0 0 white, 0 -0.09em 0 white;
+      background: -webkit-gradient(linear, left top, left bottom, from(white), to(white)), -webkit-gradient(linear, left top, left bottom, from(white), to(white)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
+      background: linear-gradient(white, white), linear-gradient(white, white), linear-gradient(#fecf0c, #fecf0c);
+      background-position: 0 87%,100% 87%,0 92%;
+      background-repeat: no-repeat,no-repeat,repeat-x;
+      background-size: 0.05em 1px, 0.05em 1px, 1px 0.05em;
+      text-decoration: none; }
+      .mce-content-body p a:hover {
+        text-shadow: 0 0.03em 0 white, 0 0.06em 0 white, 0 -0.03em 0 white, 0 -0.06em 0 white, -0.03em 0.03em 0 white, -0.03em 0.06em 0 white, 0.03em 0.03em 0 white, 0.03em 0.06em 0 white, -0.03em 0 0 white, 0 -0.09em 0 white;
+        background: -webkit-gradient(linear, left top, left bottom, from(white), to(white)), -webkit-gradient(linear, left top, left bottom, from(white), to(white)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
+        background: linear-gradient(white, white), linear-gradient(white, white), linear-gradient(#fecf0c, #fecf0c);
+        background-position: 0 87%,100% 87%,0 92%;
+        background-repeat: no-repeat,no-repeat,repeat-x;
+        background-size: 0.05em 1px, 0.05em 1px, 1px 0.05em;
+        text-decoration: none; }

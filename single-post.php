@@ -153,8 +153,7 @@ echo '</article>';
 related_posts();
 
 echo '<div class="carousel" id="carousel">';
-	echo '<div class="slides">';
-	echo '</div>';
+	echo '<div class="slides"></div>';
 	$left_svg = get_template_directory_uri() . '/assets/images/left.svg';
 	$right_svg = get_template_directory_uri() . '/assets/images/right.svg';
 	echo '<div class="arrow left" data-direction="left">' . file_get_contents( $left_svg ) . '</div>';

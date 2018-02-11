@@ -1,6 +1,6 @@
 jQuery(function($) {
   return $(function() {
-    var $alert, $body, $carousel, $footer, $header, $headers, $logo, $main, $nav, $popup, $side, $window, $wrapper, animateText, animateTexts, assetsUrl, clickCarouselArrow, closeAlert, closeCarousel, closePopup, closeSeeker, createCarousel, dur, fixCarouselHeight, fixHeader, fixLoops, fixSide, fixToggler, hoverCell, isMobile, lastSideScroll, lastWeek, loadImage, now, openCarousel, popupObj, queryMore, resizeCarousel, setupArticle, shareWindow, sideScroll, siteUrl, sizeImages, themeUrl, toggleSeeker, toggleToggler, trackScroll, transitionEnd, transport;
+    var $alert, $body, $carousel, $footer, $header, $headers, $logo, $main, $nav, $popup, $seeker, $side, $window, $wrapper, animateText, animateTexts, assetsUrl, clickCarouselArrow, closeAlert, closeCarousel, closePopup, closeSeeker, createCarousel, dur, fixCarouselHeight, fixHeader, fixLoops, fixSide, fixToggler, hoverCell, isMobile, lastSideScroll, lastWeek, loadImage, now, openCarousel, popupObj, queryMore, resizeCarousel, setupArticle, shareWindow, sideScroll, siteUrl, sizeImages, themeUrl, toggleSeeker, toggleToggler, trackScroll, transitionEnd, transport, watchForHover;
     $window = $(window);
     $body = $('body');
     $wrapper = $('#wrapper');
@@ -14,6 +14,7 @@ jQuery(function($) {
     $footer = $('footer');
     $alert = $('#alert');
     $popup = $('#popup');
+    $seeker = $('.super.seeker');
     $carousel = $('#carousel');
     siteUrl = $body.attr('data-site-url');
     themeUrl = siteUrl + '/wp-content/themes/therevealer';
@@ -70,6 +71,7 @@ jQuery(function($) {
         e.preventDefault();
         return;
       }
+      $body.addClass('no_scroll');
       $carousel.addClass('opening');
       $this = $(this);
       href = $this.attr('href');
@@ -101,6 +103,7 @@ jQuery(function($) {
       }, 500);
     };
     closeCarousel = function(e) {
+      $body.removeClass('no_scroll');
       return $carousel.removeClass('show');
     };
     resizeCarousel = function() {
@@ -404,11 +407,8 @@ jQuery(function($) {
     trackScroll = function(e) {
       var $readable, alertHeight, belowThresh, headerBottom, innerHeight, isBottom, pageBottom, pageEnd, pageHeight, pageTop, popupObj, scrollHeight, top, winHeight, winScroll;
       $readable = $('.readable');
-      if (!$readable.length) {
+      if (!$readable.length || $body.is('.no_scroll')) {
         return;
-      }
-      if ($body.is('.seeking')) {
-        return false;
       }
       winHeight = $window.innerHeight();
       winScroll = $window.scrollTop();
@@ -482,12 +482,18 @@ jQuery(function($) {
       $toggler.toggleClass('toggled');
       if ($toggler.is('.toggled')) {
         height = $intra[0].scrollHeight;
-        return $toggler.css({
+        $toggler.css({
           maxHeight: height
         });
+        if ($toggle.is('.filters')) {
+          $('html,body').animate({
+            scrollTop: 0
+          });
+        }
       } else {
-        return $toggler.attr('style', '');
+        $toggler.attr('style', '');
       }
+      return $toggle.toggleClass('toggled');
     };
     fixToggler = function() {
       return $('.toggler:not(.navigation)').each(function(i, toggler) {
@@ -502,14 +508,12 @@ jQuery(function($) {
       });
     };
     setupArticle = function() {
-      var $article, $content, $elems, $inlineImg, $link, $wpImg, currentSrc, goodTags, hasImages, href, inlineImg, inlineImgs, j, k, len, len1, link, links, name, pseudo, replace, split;
+      var $article, $content, $inlineImg, $link, $wpImg, currentSrc, hasImages, href, inlineImg, inlineImgs, j, k, len, len1, link, links, name, pseudo, replace, split;
       if (!$body.is('.single-post, .page-template-default')) {
         return;
       }
       $article = $('article.readable');
       $content = $article.find('.text .content');
-      goodTags = 'p,a,em,img,blockquote,object,.wp-caption-text,.wp-caption,.image';
-      $elems = $content.find('*:not(' + goodTags + ')').contents();
       inlineImgs = $content.find('img');
       hasImages = false;
       for (j = 0, len = inlineImgs.length; j < len; j++) {
@@ -607,11 +611,23 @@ jQuery(function($) {
       return $cell.toggleClass('hover');
     };
     fixHeader = function() {
-      var linksHeight, linksWidth, taglineHeight, taglineWidth, topHeight;
+      var $filtersToggle, linksHeight, linksWidth, taglineHeight, taglineWidth, topHeight, windowHeight;
+      windowHeight = $window.innerHeight();
       topHeight = Math.ceil($header.outerHeight());
       $wrapper.css({
         marginTop: topHeight
       });
+      if ($filtersToggle = $('.toggle.filters')) {
+        $filtersToggle.css({
+          y: topHeight
+        });
+      }
+      if ($seeker) {
+        $seeker.css({
+          height: windowHeight - topHeight,
+          marginTop: topHeight
+        });
+      }
       $body.addClass('initd');
       $side.addClass('fixed');
       taglineHeight = $nav.find('.tagline').innerHeight();
@@ -620,7 +636,7 @@ jQuery(function($) {
       return linksWidth = $nav.find('.links').innerWidth();
     };
     toggleSeeker = function(e) {
-      var $link, $seeker, title;
+      var $link, title;
       $link = $(this);
       title = $link.data('title');
       if (title !== 'Search') {
@@ -628,8 +644,8 @@ jQuery(function($) {
       }
       e.preventDefault();
       if (!$body.hasClass('search')) {
-        $seeker = $('.seeker.beyond');
-        $body.toggleClass('seeking');
+        $body.toggleClass('no_scroll');
+        $('.toggled[data-toggle="nav"]').removeClass('toggled').attr('style', '');
         $seeker.toggleClass('open');
         if ($seeker.is('.open')) {
           return $seeker.find('input[type="search"]').focus();
@@ -642,8 +658,7 @@ jQuery(function($) {
       }
     };
     closeSeeker = function(e) {
-      var $seeker;
-      $seeker = $('.seeker.beyond');
+      $seeker = $('.super.seeker');
       return $seeker.removeClass('open');
     };
     closeAlert = function() {
@@ -660,7 +675,7 @@ jQuery(function($) {
       });
     };
     isMobile = function() {
-      return parseInt($('#isMobile').css('content').replace(/['"]+/g, ''));
+      return parseInt($('#is_mobile').css('content').replace(/['"]+/g, ''));
     };
     window.discovered = [];
     queryMore = function() {
@@ -758,16 +773,16 @@ jQuery(function($) {
         return $(html).addClass('animate');
       }, 50 * index);
     };
-    $('body').on('click touch', 'article.readable a, article.readable img', openCarousel);
-    $('body').on('click touch', '#carousel .close', closeCarousel);
-    $('body').on('click touch', '#carousel.loaded.slidable .arrow:not(.no)', clickCarouselArrow);
-    $('body').on('click touch', '.transport', transport);
-    $('body').on('click', '.toggle[data-toggle]', toggleToggler);
-    $('body').on('click touch', '#alert .close', closeAlert);
-    $('body').on('click touch', '#popup .close', closePopup);
+    $('body').on('click touchend', 'article.readable a, article.readable img', openCarousel);
+    $('body').on('click touchend', '#carousel .close', closeCarousel);
+    $('body').on('click touchend', '#carousel.loaded.slidable .arrow:not(.no)', clickCarouselArrow);
+    $('body').on('click touchend', '.transport', transport);
+    $('body').on('click touchend', '.toggle[data-toggle]', toggleToggler);
+    $('body').on('click touchend', '#alert .close', closeAlert);
+    $('body').on('click touchend', '#popup .close', closePopup);
     $('body').on('hover', '.cell .link_wrap', hoverCell);
-    $('body').on('click touch', 'header nav .link a', toggleSeeker);
-    $('body').on('click touch', '.seeker.beyond .close', closeSeeker);
+    $('body').on('click touchend', 'header nav .link a', toggleSeeker);
+    $('body').on('click touchend', '.super.seeker .close', closeSeeker);
     if ($popup.length) {
       popupObj = JSON.parse(localStorage.getItem('popup'));
       now = new Date().getTime();
@@ -792,6 +807,30 @@ jQuery(function($) {
       return fixHeader();
     });
     setupArticle();
-    return animateTexts();
+    animateTexts();
+    watchForHover = function() {
+      var disableHover, enableHover, hasHoverClass, lastTouchTime, updateLastTouchTime;
+      hasHoverClass = false;
+      lastTouchTime = 0;
+      enableHover = function() {
+        if (new Date() - lastTouchTime < 500) {
+          return;
+        }
+        $body.addClass('has_hover');
+        return hasHoverClass = true;
+      };
+      disableHover = function() {
+        $body.removeClass('has_hover');
+        return hasHoverClass = false;
+      };
+      updateLastTouchTime = function() {
+        return lastTouchTime = new Date();
+      };
+      document.addEventListener('touchstart', updateLastTouchTime, true);
+      document.addEventListener('touchstart', disableHover, true);
+      document.addEventListener('mousemove', enableHover, true);
+      return enableHover();
+    };
+    return watchForHover();
   });
 });

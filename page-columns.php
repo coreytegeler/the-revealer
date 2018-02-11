@@ -5,17 +5,11 @@ Template Name: Columns
 get_header();
 echo '<div class="readable">';
 	echo '<div class="columns-list">';
-		$paged = ( get_query_var('paged') ) ? get_query_var( 'paged' ) : 1;
-		$per_page = 10;
-		$offset = ( $paged - 1 ) * $per_page;
 
 		$columns = get_terms( array(
 		  'taxonomy' => 'columns',
 		  'hide_empty' => false,
-		  'order' => 'desc',
-			'orderby' => 'title',
-		  'number' => $per_page,
-		  'offset' => $offset,
+		  'number' => 0,
 		  'hide_empty' => 0
 		) );
 
@@ -68,8 +62,8 @@ echo '<div class="readable">';
 					}
 					echo '<div class="toggle" data-toggle="' . $slug . '">';
 						echo '<div class="circle">';
-							$up_svg = get_template_directory_uri() . '/assets/images/up.svg';
-							echo file_get_contents( $up_svg );
+							$down_svg = get_template_directory_uri() . '/assets/images/down.svg';
+							echo file_get_contents( $down_svg );
 						echo '</div>';
 					echo '</div>';
 				echo '</section>';
@@ -79,6 +73,5 @@ echo '<div class="readable">';
 		wp_reset_query();
 	echo '</div>';
 echo '</div>';
-get_template_part( 'parts/pagination' );
 get_footer();
 ?>

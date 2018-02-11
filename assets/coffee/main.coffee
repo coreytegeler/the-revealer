@@ -13,6 +13,7 @@ jQuery ($) ->
 		$footer = $('footer')
 		$alert = $('#alert')
 		$popup = $('#popup')
+		$seeker = $('.super.seeker')
 		$carousel = $('#carousel')
 		siteUrl = $body.attr('data-site-url')
 		themeUrl = siteUrl+'/wp-content/themes/therevealer'
@@ -63,6 +64,7 @@ jQuery ($) ->
 			if $carousel.is('.opening')
 				e.preventDefault()
 				return
+			$body.addClass('no_scroll')
 			$carousel.addClass('opening')
 			$this = $(this)
 			href = $this.attr('href')
@@ -91,6 +93,7 @@ jQuery ($) ->
 			, 500
 
 		closeCarousel = (e) ->
+			$body.removeClass('no_scroll')
 			$carousel.removeClass('show')
 
 		resizeCarousel = () ->
@@ -351,10 +354,8 @@ jQuery ($) ->
 
 		trackScroll = (e) ->
 			$readable = $('.readable')
-			if !$readable.length
+			if !$readable.length || $body.is('.no_scroll')
 				return
-			if $body.is('.seeking')
-				return false
 			winHeight = $window.innerHeight()
 			winScroll = $window.scrollTop()
 			scrollHeight = $body[0].scrollHeight
@@ -391,15 +392,6 @@ jQuery ($) ->
 					else
 						top = 0
 					$wrapper.removeClass('bottom')
-					# PROGRESS BAR
-					# $header.find('.bar').each (i, bar) ->
-					# 	$bar = $(this)
-					# 	if $bar.is('.prog')
-					# 		barWidth = $(bar).innerWidth()
-					# 		progress = winScroll * barWidth / pageEnd
-					# 		$bar.find('.solid').css
-					# 			width: progress
-
 				
 			belowThresh = pageEnd/4 - winScroll <= 0
 			if $popup.length && !$popup.is('.stuck')
@@ -431,8 +423,13 @@ jQuery ($) ->
 				height = $intra[0].scrollHeight
 				$toggler.css
 					maxHeight: height
+				if $toggle.is('.filters')
+					$('html,body').animate
+						scrollTop: 0
 			else
 				$toggler.attr('style', '')
+
+			$toggle.toggleClass('toggled')
 
 		fixToggler = () ->
 			$('.toggler:not(.navigation)').each (i, toggler) ->
@@ -452,8 +449,6 @@ jQuery ($) ->
 				return
 			$article = $('article.readable')
 			$content = $article.find('.text .content')
-			goodTags = 'p,a,em,img,blockquote,object,.wp-caption-text,.wp-caption,.image'
-			$elems = $content.find('*:not('+goodTags+')').contents()
 			inlineImgs = $content.find('img')
 			hasImages = false
 			for inlineImg in inlineImgs
@@ -544,9 +539,17 @@ jQuery ($) ->
 			$cell.toggleClass('hover')
 
 		fixHeader = () ->
+			windowHeight = $window.innerHeight()
 			topHeight = Math.ceil($header.outerHeight())
 			$wrapper.css
 				marginTop: topHeight
+			if $filtersToggle = $('.toggle.filters')
+				$filtersToggle.css
+					y: topHeight
+			if $seeker
+				$seeker.css
+					height: windowHeight - topHeight
+					marginTop: topHeight
 			$body.addClass('initd')
 			$side.addClass('fixed')
 			taglineHeight = $nav.find('.tagline').innerHeight()
@@ -561,8 +564,8 @@ jQuery ($) ->
 				return
 			e.preventDefault()
 			if !$body.hasClass('search')
-				$seeker = $('.seeker.beyond')
-				$body.toggleClass('seeking')
+				$body.toggleClass('no_scroll')
+				$('.toggled[data-toggle="nav"]').removeClass('toggled').attr('style', '')
 				$seeker.toggleClass('open')
 				if $seeker.is('.open')
 					$seeker.find('input[type="search"]').focus()
@@ -573,7 +576,7 @@ jQuery ($) ->
 				$seeker.find('input[type="search"]').focus()
 
 		closeSeeker = (e) ->
-			$seeker = $('.seeker.beyond')
+			$seeker = $('.super.seeker')
 			$seeker.removeClass('open')
 
 		closeAlert = () ->
@@ -589,7 +592,7 @@ jQuery ($) ->
 				$popup.addClass('stuck')
 
 		isMobile = () ->
-			return parseInt($('#isMobile').css('content').replace(/['"]+/g, ''))
+			return parseInt($('#is_mobile').css('content').replace(/['"]+/g, ''))
 
 		window.discovered = []
 		queryMore = () ->
@@ -666,17 +669,17 @@ jQuery ($) ->
 				$(html).addClass('animate')
 			, 50*index
 
-		$('body').on('click touch', 'article.readable a, article.readable img', openCarousel)
-		$('body').on('click touch', '#carousel .close', closeCarousel)
-		$('body').on 'click touch', '#carousel.loaded.slidable .arrow:not(.no)', clickCarouselArrow
+		$('body').on('click touchend', 'article.readable a, article.readable img', openCarousel)
+		$('body').on('click touchend', '#carousel .close', closeCarousel)
+		$('body').on 'click touchend', '#carousel.loaded.slidable .arrow:not(.no)', clickCarouselArrow
 
-		$('body').on('click touch', '.transport', transport)
-		$('body').on('click', '.toggle[data-toggle]', toggleToggler)
-		$('body').on('click touch', '#alert .close', closeAlert)
-		$('body').on('click touch', '#popup .close', closePopup)
+		$('body').on('click touchend', '.transport', transport)
+		$('body').on('click touchend', '.toggle[data-toggle]', toggleToggler)
+		$('body').on('click touchend', '#alert .close', closeAlert)
+		$('body').on('click touchend', '#popup .close', closePopup)
 		$('body').on('hover', '.cell .link_wrap', hoverCell)
-		$('body').on('click touch', 'header nav .link a', toggleSeeker)
-		$('body').on('click touch', '.seeker.beyond .close', closeSeeker)
+		$('body').on('click touchend', 'header nav .link a', toggleSeeker)
+		$('body').on('click touchend', '.super.seeker .close', closeSeeker)
 		
 		if $popup.length
 			popupObj = JSON.parse(localStorage.getItem('popup'))
@@ -704,3 +707,28 @@ jQuery ($) ->
 
 		setupArticle()
 		animateTexts()
+
+		watchForHover = () ->
+			hasHoverClass = false
+			lastTouchTime = 0
+
+			enableHover = () ->
+				if (new Date() - lastTouchTime < 500)
+					return
+				$body.addClass('has_hover')
+				hasHoverClass = true
+
+			disableHover = () ->
+				$body.removeClass('has_hover')
+				hasHoverClass = false
+
+			updateLastTouchTime = () ->
+				lastTouchTime = new Date()
+
+			document.addEventListener('touchstart', updateLastTouchTime, true)
+			document.addEventListener('touchstart', disableHover, true)
+			document.addEventListener('mousemove', enableHover, true)
+			enableHover()
+
+		watchForHover()
+
