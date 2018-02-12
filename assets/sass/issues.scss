@@ -1,4 +1,4 @@
-.issues {
+.loop.issues, .loop.issue {
 	.issue {
 		color: $dark;
 		background: $lighter;
@@ -37,17 +37,17 @@
 			}
 		}
 		@include medium {
-			a.link_wrap .text {
+			.text {
 				font-size: 3vw;
 			}
 		}
 		@include small {
-			a.link_wrap .text {
+			.text {
 				font-size: 4vw;
 			}
 		}
 		@include xSmall {
-			a.link_wrap .text {
+			.text {
 				font-size: 8vw;
 			}
 		}

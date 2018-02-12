@@ -73,10 +73,10 @@ header#header {
 	  		float: right;
 	  		padding: 0;
 				.link {
-					float: right;
+					float: left;
 					display: inline;
 					padding: 0;
-					margin: 0 0 0 .5em;
+					margin: 0 .5em 0 0;
 					list-style: none;
 					a {
 				    text-decoration: none;
@@ -92,6 +92,12 @@ header#header {
 						margin: 0;
 					}
 				}
+				&.mobile_nav {
+	  			display: none;
+	  			.link {
+
+	  			}
+	  		}
 			}
 		  &.break {
 		  	flex-direction: column;
@@ -100,32 +106,6 @@ header#header {
 		  		margin: auto;
 		  	}
 		  }
-		 //  &.filters {
-			// 	// display: none;
-			// 	.filter {
-			// 		.toggle {
-			// 			width: 100%;
-			// 			user-select: none;
-			// 			text-transform: lowercase;
-			// 			@include xSmallText;
-			// 			&:hover {
-			// 				cursor: pointer;
-			// 				color: $medium;
-			// 			}
-			// 		}
-			// 		.list {
-			// 			height: 0;
-			// 			opacity: 0;
-			// 			overflow: hidden;
-			// 			color: $medium;
-			// 			transition: height 500ms ease, opacity 500ms 30ms ease;
-			// 			padding-left: .5em;
-			// 			&.show {
-			// 				opacity: 1;
-			// 			}
-			// 		}
-			// 	}
-			// }
 		}
 	}
 	.goldbar {
@@ -174,14 +154,18 @@ header#header {
 						position: absolute;
 						left: 0;
 						top: 100%;
-						@include mediumShadow($lightest);
+						@include mediumShadow($gold);
 						nav {
-							width: calc(100% - 1em);
-							padding: .5em;
-							background-color: $lightest;
-							.link {
-								margin: 0 .5em 0 0;
-								float: left;
+							display: none;
+							&.mobile_nav {
+								display: flex;
+								width: calc(100% - 1em);
+								padding: .5em;
+								background-color: $gold;
+								.link {
+									margin: 0 .5em 0 0;
+									float: left;
+								}
 							}
 						}
 					}

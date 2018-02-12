@@ -61,11 +61,15 @@ body.articles #wrapper {
 				color: $medium;
 				span {
 					@include serifText;
+					a {
+						@include noUnderline;
+					}
 					&.selected {
 						a {
-							border-bottom: 1px solid $gold;
+							@include underline($gold);
 							body.has_hover &:hover {
-								border-bottom-color: transparent;
+								color: $gold;
+								@include noUnderline;
 							}
 						}
 					}

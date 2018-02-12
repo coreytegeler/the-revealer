@@ -1,10 +1,12 @@
 <?php
 global $post;
-$is_footer = true;
-echo '<div class="transport top circle">';
-	$up_svg = get_template_directory_uri() . '/assets/images/up.svg';
-	echo file_get_contents( $up_svg );
-echo '</div>';
+
+if( is_single() ) {
+	echo '<div class="transport top circle">';
+		$up_svg = get_template_directory_uri() . '/assets/images/up.svg';
+		echo file_get_contents( $up_svg );
+	echo '</div>';
+}
 
 echo '</main>';
 if( is_single() ) {

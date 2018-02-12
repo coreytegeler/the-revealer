@@ -57,6 +57,15 @@ body.single-post, body.page-template-default {
 							}
 						}
 					}
+					.excerpt {
+						padding: 1em 0;
+						text-align: center;
+						margin: auto;
+						color: $medium;
+						h2 {
+							@include serifText;
+						}
+					}
 					.header {
 						padding: 0 0 .5em 0;
 						@include serifText;
@@ -81,15 +90,6 @@ body.single-post, body.page-template-default {
 					max-width: $maxWidth;
 					display: block;
 					margin: auto;
-					.excerpt {
-						padding: 1em 0;
-						text-align: center;
-						margin: auto;
-						color: $medium;
-						h2 {
-							@include serifText;
-						}
-					}
 					#alert {
 						width: 100%;
 						max-width: $lineWidth;

@@ -46,3 +46,8 @@ footer#footer {
     }
   }
 }
+@include small {
+  footer#footer .note {
+    @include xSmallText;
+  }
+}

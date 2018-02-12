@@ -338,7 +338,6 @@ echo '<div class="readable">';
 		echo '</section>';
 	}
 	wp_reset_query();
-
 	get_template_part( 'parts/pagination' );
 
 echo '</div>';

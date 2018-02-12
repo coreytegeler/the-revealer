@@ -29,9 +29,11 @@ echo '<aside class="toggler" data-toggle="filters">';
 	echo '<div id="filters" class="intra">';
 		echo '<div class="filter categories">';
 			echo '<div class="label">Categories</div>';
+			$exclude_cat_id = get_cat_ID( 'undefined' );
 			$categories = get_categories( array(
 			  'orderby' => 'name',
-			  'order'   => 'ASC'
+			  'order'   => 'ASC',
+			  'exclude' => $exclude_cat_id
 			) );
 			echo '<div class="commas categories">';
 				if( sizeof( $categories ) ) {

@@ -23,7 +23,7 @@ echo '<div class="readable">';
 	);
 	$posts_query = new WP_Query( $posts_args );
 	$post_count = $posts_query->post_count;
-	echo '<div class="masonry issues loop three_col">';
+	echo '<div class="masonry issue loop three_col">';
 		echo '<div class="cell issue" role="issue">';
 			echo '<div class="text">';
 				echo '<h1 class="title">' . $title . '</h1>';

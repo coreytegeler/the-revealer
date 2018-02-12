@@ -1,17 +1,18 @@
 body.discover:not(.seeking), body.error404:not(.seeking) {
 	background-color: $gold;
 	header#header {
-    background-color: transparent;
+    background-color: $gold;
+    @include mediumShadow($gold);
     .bar {
       display: none;
     }
     .inner {
       .tagline {
-        color: $lightest;
+        color: white;
       }
       #logo {
         svg {
-          fill: $lightest;
+          fill: white;
         }
         a.svg:hover {
           svg {
@@ -21,15 +22,15 @@ body.discover:not(.seeking), body.error404:not(.seeking) {
       }
       nav {
         .link a {
-          color: $lightest;
+          color: white;
           &:hover {
             opacity: .5;
           }
         }
       }
       .goldbar .solid {
-        background-color: $lightest;
-        box-shadow: 0 0 .25em .1em $lightest;
+        background-color: white;
+        box-shadow: 0 0 .25em .1em white;
       }
     }
 	}
@@ -40,7 +41,7 @@ body.discover:not(.seeking), body.error404:not(.seeking) {
 			margin-right: 0;
       padding-left: 0; 
       padding-right: 0;
-      color: $lightest;
+      color: white;
       .inner {
         position: relative;
         padding: 0 0 5em 0;
@@ -57,7 +58,7 @@ body.discover:not(.seeking), body.error404:not(.seeking) {
             height: 8em;
             display: table;
             margin: auto;
-            @include mediumShadow($lightest);
+            @include mediumShadow(white);
             background: {
               image: url(images/loading1.gif);
               position: center;
@@ -76,10 +77,9 @@ body.discover:not(.seeking), body.error404:not(.seeking) {
 	}
   #discover {
     z-index: 300;
-    // min-height: 100vh;
   }
   .transport {
-    @include mediumShadow($lightest);
+    @include mediumShadow(white);
     display: flex;
   }
 }
@@ -108,7 +108,6 @@ body.discover:not(.seeking), body.error404:not(.seeking) {
         margin: auto;
         text-align: center; 
         pointer-events: none;
-        // mix-blend-mode: darken;
         a {
           width: 5em;
           height: 5em;
@@ -125,12 +124,12 @@ body.discover:not(.seeking), body.error404:not(.seeking) {
             transition: transform 800ms $ease;
           }
           &:focus {
-            outline-color: $lightest;
+            outline-color: white;
           }
           &:hover {
             .image, .circle {
               transform: scale(1.05);
-              @include largeShadow($lightest);
+              @include largeShadow(white);
             }
             .title {
               transform: scale(1.05);
@@ -141,13 +140,13 @@ body.discover:not(.seeking), body.error404:not(.seeking) {
           width: 5em;
           height: 5em;
           border-radius: 50%;
-          @include mediumShadow($lightest);
+          @include mediumShadow(white);
           // box-shadow: inset 0 0 .25em .5em $gold;
           background-position: center;
           background-size: cover;
           &.load, &.loading {
             background-image: none !important;
-            background-color: $lightest;
+            background-color: white;
           }
           &.loaded {
             // background-color: $gold; 
@@ -157,7 +156,7 @@ body.discover:not(.seeking), body.error404:not(.seeking) {
           width: 5em;
           height: 5em;
           z-index: 1;
-          @include mediumShadow($lightest);
+          @include mediumShadow(white);
         }
       }
       &:nth-child(12n+1),&:nth-child(12n+2), &:nth-child(12n+3), &:nth-child(12n+4), &:nth-child(12n+5), &:nth-child(12n+6) {
@@ -214,7 +213,7 @@ body.discover:not(.seeking), body.error404:not(.seeking) {
       form {
         max-width: $lineWidth;
         input[type="search"] {
-          background: $lightest;
+          background: white;
         }
       }
     }
@@ -242,11 +241,13 @@ body.search {
   }
 }
 @include small {
-  body.discover:not(.seeking) {
-    header#header .inner .rows .row.navigation {
-      @include mediumShadow($gold);
-      nav {
-        background-color: $gold !important;
+  body.discover:not(.seeking), body.error404:not(.seeking) {
+    header#header {
+      .inner .rows .row.navigation {
+        
+        nav {
+          background-color: $gold !important;
+        }
       }
     }
   }
@@ -260,7 +261,8 @@ body.search {
   }
 }
 body.error404 {
- .newsletter form .inputs input {
-    @include xSmallShadow($lightest); 
+  .seeker {
+    background: transparent;
+    margin-bottom: 2em;
   }
 }

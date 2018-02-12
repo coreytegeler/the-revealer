@@ -19,7 +19,7 @@ function revealer_enqueue() {
   wp_enqueue_script( 'masonry' );
   wp_enqueue_script( 'main', '2.5' );
   wp_enqueue_style( 'normalize', get_template_directory_uri() . '/assets/css/normalize.css' );
-  wp_enqueue_style( 'style', get_stylesheet_uri(), '', '2.6.1' );
+  wp_enqueue_style( 'style', get_stylesheet_uri(), '', '2.6.6' );
 }
 add_action( 'wp_enqueue_scripts', 'revealer_enqueue' );
 

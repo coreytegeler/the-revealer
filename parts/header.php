@@ -23,9 +23,21 @@ echo '<header class="main" id="header">';
 			echo '</div>';
 			echo '<div class="row navigation toggler" data-toggle="nav">';
 				if( has_nav_menu( 'navigation' ) ) {
-					$nav_links = wp_get_nav_menu_items( 'navigation' );
-					echo '<nav role="navigation" class="intra">';
-						foreach( $nav_links as $link ) {
+					$nav_menu_items = wp_get_nav_menu_items( 'navigation' );
+					echo '<nav role="navigation">';
+						foreach( $nav_menu_items as $link ) {
+							$title = $link->title;
+							$url = $link->url;
+							echo '<div class="link">';
+								echo '<a href="' . $url . '" data-title="' . $title . '">';
+									echo $title;
+								echo '</a>';
+							echo '</div>';
+						}
+					echo '</nav>';
+
+					echo '<nav role="navigation" class="mobile_nav intra">';
+						foreach( $nav_menu_items as $link ) {
 							$title = $link->title;
 							$url = $link->url;
 							echo '<div class="link">';
