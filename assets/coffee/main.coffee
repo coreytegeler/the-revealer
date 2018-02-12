@@ -205,7 +205,7 @@ jQuery ($) ->
 					else
 						src = $image.attr('data-src')
 
-					src = src.replace('http://', 'https://')
+					# src = src.replace('http://', 'https://')
 					image = new Image()
 					image.onload = (e) ->
 						img = e.target

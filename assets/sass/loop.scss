@@ -406,14 +406,14 @@
 	.loop {
 		&.four_col {
 			.cell {
-				width: calc(100%/2 - .5em);
-				margin-bottom: 1em;
+				width: calc(100%/2 - 1.5em);
+				margin-bottom: 3em;
 			}
 		}
 		&.three_col {
 			.cell {
-				width: calc(100%/2 - .5em);
-				margin-bottom: 1em;
+				width: calc(100%/2 - 1.5em);
+				margin-bottom: 3em;
 			}
 		}
 	}

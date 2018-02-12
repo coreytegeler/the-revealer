@@ -225,7 +225,6 @@ jQuery(function($) {
           } else {
             src = $image.attr('data-src');
           }
-          src = src.replace('http://', 'https://');
           image = new Image();
           image.onload = function(e) {
             var img;

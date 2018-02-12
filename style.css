@@ -28,6 +28,7 @@ Version: 2.0
 /* @import must be at top of file, otherwise CSS will not work */
 @import '//hello.myfonts.net/count/355426';
 @import 'https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600,600i,700,700i';
+@import 'https://fonts.googleapis.com/css?family=Overpass+Mono:400,600,700&subset=latin-ext';
 @font-face {
   font-family: 'ClarendonBTWXX-Roman';
   src: url("./assets/webfonts/355426_0_0.eot");
@@ -1238,11 +1239,11 @@ body.articles #wrapper aside {
 
 @media (max-width: 1024px) {
   .loop.four_col .cell {
-    width: calc(100%/2 - .5em);
-    margin-bottom: 1em; }
+    width: calc(100%/2 - 1.5em);
+    margin-bottom: 3em; }
   .loop.three_col .cell {
-    width: calc(100%/2 - .5em);
-    margin-bottom: 1em; } }
+    width: calc(100%/2 - 1.5em);
+    margin-bottom: 3em; } }
 
 @media (max-width: 768px) {
   .loop.two_col .cell .secondary .title {
@@ -1387,7 +1388,7 @@ body.home main #field_notes {
   body.home main #field_notes img {
     width: 100%; }
   body.home main #field_notes .cell {
-    margin: 0 !important; }
+    margin: 0 0 .5em 0 !important; }
   body.home main #field_notes a.link_wrap .image {
     background-color: #f1f5f7;
     border-radius: 2em; }
@@ -2020,34 +2021,50 @@ body.about #wrapper main ul.parent {
   .loop.issues .issue svg, .loop.issue .issue svg {
     width: 100%;
     height: auto; }
-  .loop.issues .issue .text, .loop.issue .issue .text {
+  .loop.issues .issue a.link_wrap, .loop.issue .issue a.link_wrap {
     width: calc(100% - 2em);
-    padding: .5em 1em;
+    height: calc(100% - 1.5em);
+    padding: .5em 1em 1em 1em;
     position: absolute;
     left: 0;
     top: 0;
-    font-size: 2vw;
-    line-height: 1.2em; }
-    .loop.issues .issue .text h1.title, .loop.issue .issue .text h1.title {
-      font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif !important;
-      font-weight: 400 !important;
-      text-transform: lowercase !important;
-      color: inherit !important;
-      word-break: break-word; }
-    .loop.issues .issue .text h3.date, .loop.issue .issue .text h3.date {
-      color: inherit !important;
-      font-style: italic; }
-  .loop.issues .issue a.link_wrap, .loop.issue .issue a.link_wrap {
     color: #346378;
     background: #eaedee;
     -webkit-transition: color 1500ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 1500ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: color 1500ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 1500ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: color 1500ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 1500ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: color 1500ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 1500ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 1500ms cubic-bezier(0.19, 1, 0.22, 1); }
+    transition: color 1500ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 1500ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 1500ms cubic-bezier(0.19, 1, 0.22, 1);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    overflow: hidden; }
     .loop.issues .issue a.link_wrap:hover, .loop.issues .issue a.link_wrap.hover, .loop.issues .issue a.link_wrap:focus, .loop.issue .issue a.link_wrap:hover, .loop.issue .issue a.link_wrap.hover, .loop.issue .issue a.link_wrap:focus {
       color: #346378;
       -webkit-box-shadow: 0 0 5em 0 #fecf0c;
       box-shadow: 0 0 5em 0 #fecf0c; }
+  .loop.issues .issue .text, .loop.issue .issue .text {
+    font-size: 2vw;
+    line-height: 1em;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1; }
+    .loop.issues .issue .text h1.title, .loop.issue .issue .text h1.title {
+      font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif !important;
+      font-weight: 400 !important;
+      text-transform: lowercase !important;
+      color: inherit !important;
+      word-break: break-word;
+      line-height: 1em; }
+    .loop.issues .issue .text h3.date, .loop.issue .issue .text h3.date {
+      color: inherit !important;
+      font-style: italic; }
+  .loop.issues .issue .image, .loop.issue .issue .image {
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important; }
   @media (max-width: 1024px) {
     .loop.issues .issue .text, .loop.issue .issue .text {
       font-size: 3vw; } }
@@ -2056,7 +2073,7 @@ body.about #wrapper main ul.parent {
       font-size: 4vw; } }
   @media (max-width: 480px) {
     .loop.issues .issue .text, .loop.issue .issue .text {
-      font-size: 8vw; } }
+      font-size: 6vw; } }
 
 body.search:not(.search-results) #wrapper main, body.tag:not(.search-results) #wrapper main, body.error404:not(.search-results) #wrapper main {
   width: 100%;

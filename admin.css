@@ -22,6 +22,7 @@
 /* @import must be at top of file, otherwise CSS will not work */
 @import '//hello.myfonts.net/count/355426';
 @import 'https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600,600i,700,700i';
+@import 'https://fonts.googleapis.com/css?family=Overpass+Mono:400,600,700&subset=latin-ext';
 @font-face {
   font-family: 'ClarendonBTWXX-Roman';
   src: url("./assets/webfonts/355426_0_0.eot");

@@ -2,12 +2,7 @@
 get_header();
 $issue = $wp_query->get_queried_object();
 echo '<div class="readable">';
-	// echo '<div class="issues rows">';
-	$title = $issue->name;
-	$slug = $issue->slug;
 	$id = $issue->term_id;
-	$link = '';
-	$date = get_field( 'date', $issue );
 	$posts_args = array(
 		'post_type' => 'post',
 		'posts_per_page' => -1,
@@ -22,16 +17,8 @@ echo '<div class="readable">';
 	  )
 	);
 	$posts_query = new WP_Query( $posts_args );
-	$post_count = $posts_query->post_count;
 	echo '<div class="masonry issue loop three_col">';
-		echo '<div class="cell issue" role="issue">';
-			echo '<div class="text">';
-				echo '<h1 class="title">' . $title . '</h1>';
-				echo '<h3 class="date">published ' . $date . '</h3>';
-			echo '</div>';
-			$mag_svg = get_template_directory_uri() . '/assets/images/mag.svg';
-			echo file_get_contents( $mag_svg );
-		echo '</div>';
+		get_template_part( 'parts/issue-cover' );
 		if ( $posts_query->have_posts() ) {
 			while ( $posts_query->have_posts() ) {
 				$posts_query->the_post();

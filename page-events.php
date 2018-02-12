@@ -8,8 +8,8 @@ $events_args = array(
 	'post_type' => 'event',
 	'paged' => $paged,
 	'orderby' => 'date',
-	'order' => 'asc',
-	'posts_per_page' => 25
+	'order' => 'desc',
+	'posts_per_page' => -1
 );
 
 echo '<div class="readable">';
