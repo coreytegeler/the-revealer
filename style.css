@@ -2520,6 +2520,8 @@ footer#footer {
     @media (max-width: 480px) {
       .newsletter form h1 {
         font-size: 2em; } }
+  .newsletter form h1, .newsletter form h2 {
+    font-style: normal; }
   .newsletter form .inputs {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -2763,3 +2765,33 @@ footer#footer {
     #carousel .close.circle {
       right: 1em;
       top: 1em; } }
+
+@media print {
+  html, body {
+    background-color: white !important; }
+  header#header {
+    position: relative !important;
+    -webkit-transform: none !important;
+    transform: none !important;
+    background-color: white !important; }
+    header#header #logo {
+      width: 100% !important; }
+      header#header #logo .svg {
+        display: table !important;
+        margin: auto !important; }
+    header#header .tagline {
+      display: table !important;
+      margin: auto !important;
+      text-align: center !important; }
+    header#header .toggle {
+      display: none !important; }
+  #wrapper {
+    margin: 0 !important; }
+  #discover.bottom {
+    display: none !important; }
+  #popup, #related, .social.share, .transport.top {
+    display: none !important; }
+  footer#footer {
+    background-color: white !important; }
+    footer#footer .newsletter, footer#footer .social {
+      display: none !important; } }

@@ -1,0 +1,40 @@
+@media print {
+	html, body {
+		background-color: white !important;
+	}
+	header#header {
+		position: relative !important;
+		transform: none !important;
+		background-color: white !important;
+		#logo {
+			width: 100% !important;
+			.svg {
+				display: table !important;
+				margin: auto !important;
+			}
+		}
+		.tagline {
+			display: table !important;
+			margin: auto !important;
+			text-align: center !important;
+		}
+		.toggle {
+			display: none !important;
+		}
+	}
+	#wrapper {
+		margin: 0 !important;
+	}
+	#discover.bottom {
+		display: none !important;
+	}
+	#popup, #related, .social.share, .transport.top {
+		display: none !important;
+	}
+	footer#footer {
+		background-color: white !important;
+		.newsletter, .social {
+			display: none !important;
+		}
+	}
+}

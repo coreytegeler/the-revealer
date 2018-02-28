@@ -5,6 +5,9 @@
 			@include revealerText;
 			@include xLargeText;
 		}
+		h1, h2 {
+			font-style: normal;
+		}
 		.inputs {
 		  display: flex;
 		  flex-direction: row;
