@@ -968,8 +968,6 @@ body.articles #wrapper aside {
         padding: 0 0 .25em 0;
         text-align: center;
         color: #8f9da2; }
-        .loop .cell .label.categories .field-notes {
-          font-weight: 800 !important; }
       .loop .cell .label.column {
         font-size: 1.2em;
         line-height: 1.4em; }
@@ -1060,18 +1058,6 @@ body.articles #wrapper aside {
       line-height: 1.1em; }
       .loop .cell .secondary .blurb strong {
         font-weight: normal; }
-    .loop .cell.field-notes {
-      font-family: "Overpass Mono", courier, monospace !important;
-      font-weight: 600 !important;
-      font-size: .85em; }
-      .loop .cell.field-notes * {
-        font-family: "Overpass Mono", courier, monospace !important;
-        font-weight: 600 !important; }
-      .loop .cell.field-notes .blurb {
-        font-style: normal;
-        font-weight: 600; }
-      .loop .cell.field-notes .label.categories {
-        font-size: 1em; }
   .loop.one .cell {
     width: 100%;
     margin: 0 0 2em 0; }
@@ -1371,9 +1357,7 @@ body.home main #field_notes {
   body.home main #field_notes .section_header {
     display: table;
     margin: auto;
-    color: #346378;
-    font-family: "Overpass Mono", courier, monospace !important;
-    font-weight: 600 !important; }
+    color: #346378; }
     body.home main #field_notes .section_header a {
       color: #346378;
       text-shadow: 0 0.03em 0 transparent, 0 0.06em 0 transparent, 0 -0.03em 0 transparent, 0 -0.06em 0 transparent, -0.03em 0.03em 0 transparent, -0.03em 0.06em 0 transparent, 0.03em 0.03em 0 transparent, 0.03em 0.06em 0 transparent, -0.03em 0 0 transparent, 0 -0.09em 0 transparent;
@@ -1766,16 +1750,6 @@ body.single-post #wrapper, body.page-template-default #wrapper {
       padding: 1em; }
       body.single-post #wrapper main .readable .foot .share.social svg, body.page-template-default #wrapper main .readable .foot .share.social svg {
         margin-bottom: -.1em; }
-    body.single-post #wrapper main .readable.field-notes, body.page-template-default #wrapper main .readable.field-notes {
-      font-family: "Overpass Mono", courier, monospace !important;
-      font-weight: 600 !important; }
-      body.single-post #wrapper main .readable.field-notes h1, body.page-template-default #wrapper main .readable.field-notes h1 {
-        letter-spacing: -.05em; }
-      body.single-post #wrapper main .readable.field-notes h1, body.single-post #wrapper main .readable.field-notes h2, body.single-post #wrapper main .readable.field-notes h3, body.single-post #wrapper main .readable.field-notes h4 strong, body.page-template-default #wrapper main .readable.field-notes h1, body.page-template-default #wrapper main .readable.field-notes h2, body.page-template-default #wrapper main .readable.field-notes h3, body.page-template-default #wrapper main .readable.field-notes h4 strong {
-        font-weight: 700; }
-      body.single-post #wrapper main .readable.field-notes *, body.page-template-default #wrapper main .readable.field-notes * {
-        font-family: "Overpass Mono", courier, monospace !important;
-        font-weight: 600 !important; }
   body.single-post #wrapper main #related, body.page-template-default #wrapper main #related {
     width: 100%;
     display: table; }

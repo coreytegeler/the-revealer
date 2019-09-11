@@ -24,7 +24,7 @@ var dest = {
   webfonts: './assets/webfonts/'
 }
 
-gulp.task('compile-sass', function() {
+function compileSass()  {
   var options = {
     use: [rupture(), autoprefixer()],
     compress: argv.prod ? true : false
@@ -43,34 +43,26 @@ gulp.task('compile-sass', function() {
     log('Sass done');
     if (argv.prod) log('CSS minified');
   });
-});
+}
 
-gulp.task('compile-coffee', function() {
-  gulp.src(['./assets/coffee/carousel.coffee', './assets/coffee/main.coffee'])
+function compileCoffee()  {
+  return gulp.src('./assets/coffee/main.coffee')
     .pipe(coffee({bare: true}))
     .pipe(gulp.dest(dest.js))
   .on('end', function() {
     log('Coffee done');
     if (argv.prod) log('JS minified');
   });
-});
+}
 
-gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['compile-sass']);
-  gulp.watch(paths.coffee, ['compile-coffee']);
-});
+function watchFiles()  {
+  gulp.watch(paths.sass, compileSass);
+  gulp.watch(paths.coffee, compileCoffee);
+}
 
 
-gulp.task('default', [
-  'compile-sass',
-  'compile-coffee',
-  'watch'
-]);
-
-gulp.task('prod', [
-  'compile-sass',
-  'compile-coffee'
-]);
+gulp.task('default', gulp.parallel(compileSass, compileCoffee, watchFiles));
+gulp.task('prod', gulp.parallel(compileSass, compileCoffee));
 
 function log(message) {
   gutil.log(gutil.colors.bold.green(message));

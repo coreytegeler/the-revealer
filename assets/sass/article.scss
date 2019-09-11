@@ -180,18 +180,6 @@ body.single-post, body.page-template-default {
 						// display: table;
 					}
 				}
-				&.field-notes {
-					@include monoText;
-					h1 {
-						letter-spacing: -.05em;
-					}
-					h1, h2, h3, h4 strong {
-						font-weight: 700;
-					}
-					* {
-						@include monoText;
-					}
-				}
 			}
 			#related {
 				width: 100%;

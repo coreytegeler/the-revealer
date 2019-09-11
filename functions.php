@@ -181,7 +181,7 @@ function get_col_span( $id, $posts_query = null ) {
       'post_type' => 'post',
       'posts_per_page' => -1,
       'orderby' => 'date',
-      'order' => 'asc',
+      'order' => 'desc',
       'tax_query' => array(
         array(
           'taxonomy' => 'columns',
@@ -192,9 +192,11 @@ function get_col_span( $id, $posts_query = null ) {
     );
     $posts_query = new WP_Query( $posts_args );
   }
+  $column = get_term( $id, 'columns' );
+  $active = get_field( 'active', $column );
   $post_count = $posts_query->post_count;
-  $first_date = $posts_query->posts[0]->post_date;
-  $last_date = $posts_query->posts[$post_count-1]->post_date;
+  $first_date = $posts_query->posts[$post_count-1]->post_date;
+  $last_date = $posts_query->posts[0]->post_date;
   $begin = date( 'F, Y', strtotime( $first_date ) );
   if( $active ) {
     $end = 'Present';

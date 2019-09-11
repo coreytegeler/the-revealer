@@ -23,9 +23,6 @@
 				padding: 0 0 .25em 0;
 				text-align: center;
 				color: $medium;
-				.field-notes {
-					font-weight: $black !important;
-				}
 			}
 			&.column {
 				@include mediumText;
@@ -136,20 +133,6 @@
 				strong {
 					font-weight: normal;
 				}
-			}
-		}
-		&.field-notes {
-			@include monoText;
-	    font-size: .85em;
-			* {
-				@include monoText;
-			}
-			.blurb {
-				font-style: normal;
-				font-weight: 600;
-			}
-			.label.categories {
-				font-size: 1em;
 			}
 		}
 	}

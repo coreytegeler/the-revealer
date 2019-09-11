@@ -37,7 +37,7 @@ echo '<div class="readable">';
 								if( $links = $person['links'] ) {
 									echo '<div class="links">';
 										foreach( $links as $link ) {
-											echo '<a href="' . $link['url'] . '" target="_blank">' . $link['title'] . '</a>';
+											echo '<a href="' . $link['link'] . '" target="_blank">' . $link['title'] . '</a>';
 										}
 									echo '</div>';
 								}

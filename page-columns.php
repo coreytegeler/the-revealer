@@ -20,7 +20,6 @@ echo '<div class="readable">';
 			$link = '';
 			$date = get_field( 'date', $column );
 			$writer = get_field( 'writer', $column );
-			$active = get_field( 'active', $column );
 			$posts_args = array(
 		    'post_type' => 'post',
 		    'posts_per_page' => -1,

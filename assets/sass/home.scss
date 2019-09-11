@@ -101,7 +101,6 @@ body.home {
 				display: table;
 				margin: auto;
 				color: $dark;
-				@include monoText;
 				a {
 					color: $dark;
 					@include underline($gold, transparent, 2px);
