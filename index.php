@@ -174,93 +174,93 @@ echo '<div class="readable">';
 			echo '</section>';
 		}
 
-		echo '<section id="columns">';
-			$columns_page = get_page_by_path( 'columns' );
-			if( $columns_page ) {
-				$columns_url = get_permalink( $columns_page );
-			} else {
-				$columns_url = get_site_url() . '/columns/';
-			}
-			$more_cols_header = get_field( 'more_columns', $home );
-			echo '<h2 class="section_header">' . $more_cols_header . '</h2>';
-			$columns = get_terms( array(
-				'taxonomy' => 'columns',
-				'orderby' => 'name',
-				'order'   => 'ASC',
-				'meta_key' => 'active',
-				'meta_value' => 1
-			) );
-			if( sizeof( $columns ) ) {
-				echo '<div class="columns-list">';
-					foreach( $columns as $col) {
-						$col_title = $col->name;
-						$col_slug = $col->slug;
-						$col_id = $col->term_id;
-						$col_writer = get_field( 'writer', $col );
-						$col_url = add_query_arg( 'column', $col_slug, $page_url );
-						$col_span = get_col_span( $col_id );
-						echo '<a href="' . $col_url . '" class="column">';
-							echo '<h2 class="writer">' . $col_writer . '\'s</h3>';
-							echo '<h1 class="title"><em>' . $col_title . '</em></h1>';
-							echo '<h3 class="span">' . $col_span . '</h3>';
-						echo '</a>';
-					}
-				echo '</div>';
-			}
+		// echo '<section id="columns">';
+		// 	$columns_page = get_page_by_path( 'columns' );
+		// 	if( $columns_page ) {
+		// 		$columns_url = get_permalink( $columns_page );
+		// 	} else {
+		// 		$columns_url = get_site_url() . '/columns/';
+		// 	}
+		// 	$more_cols_header = get_field( 'more_columns', $home );
+		// 	echo '<h2 class="section_header">' . $more_cols_header . '</h2>';
+		// 	$columns = get_terms( array(
+		// 		'taxonomy' => 'columns',
+		// 		'orderby' => 'name',
+		// 		'order'   => 'ASC',
+		// 		'meta_key' => 'active',
+		// 		'meta_value' => 1
+		// 	) );
+		// 	if( sizeof( $columns ) ) {
+		// 		echo '<div class="columns-list">';
+		// 			foreach( $columns as $col) {
+		// 				$col_title = $col->name;
+		// 				$col_slug = $col->slug;
+		// 				$col_id = $col->term_id;
+		// 				$col_writer = get_field( 'writer', $col );
+		// 				$col_url = add_query_arg( 'column', $col_slug, $page_url );
+		// 				$col_span = get_col_span( $col_id );
+		// 				echo '<a href="' . $col_url . '" class="column">';
+		// 					echo '<h2 class="writer">' . $col_writer . '\'s</h3>';
+		// 					echo '<h1 class="title"><em>' . $col_title . '</em></h1>';
+		// 					echo '<h3 class="span">' . $col_span . '</h3>';
+		// 				echo '</a>';
+		// 			}
+		// 		echo '</div>';
+		// 	}
 
-			echo '<div id="field_notes">';
-				$fn_page = get_page_by_path( 'field-notes' );
-				$fn_header = get_field( 'f_notes', $home );
-				$fn_thumb_id = get_post_thumbnail_id( $fn_page );
-				$fn_thumb = wp_get_attachment_image_src( $fn_thumb_id, 'large' );
-				$fn_url = add_query_arg( 'category', 'field-notes', $articles_url );
-				$fn_thumb_url = $fn_thumb[0];
-				$fn_thumb_width = $fn_thumb[1];
-				$fn_thumb_height = $fn_thumb[2];
-				echo '<div class="header_wrap">';
-					echo '<h2 class="section_header">' . $fn_header . '</h2>';
-				echo '</div>';
-				echo '<div class="loop grid one_col">';
-					echo '<article class="cell">';
-						echo '<a class="link_wrap" href="' . $fn_url . '">';
-							echo '<div class="image load">';
-								echo '<img data-src="'.$fn_thumb_url.'" data-width="'.$fn_thumb_width.'" data-height="'.$fn_thumb_height.'"/>';
-							echo '</div>';
-						echo '</a>';
-					echo '</article>';
-				echo '</div>';
+		// 	echo '<div id="field_notes">';
+		// 		$fn_page = get_page_by_path( 'field-notes' );
+		// 		$fn_header = get_field( 'f_notes', $home );
+		// 		$fn_thumb_id = get_post_thumbnail_id( $fn_page );
+		// 		$fn_thumb = wp_get_attachment_image_src( $fn_thumb_id, 'large' );
+		// 		$fn_url = add_query_arg( 'category', 'field-notes', $articles_url );
+		// 		$fn_thumb_url = $fn_thumb[0];
+		// 		$fn_thumb_width = $fn_thumb[1];
+		// 		$fn_thumb_height = $fn_thumb[2];
+		// 		echo '<div class="header_wrap">';
+		// 			echo '<h2 class="section_header">' . $fn_header . '</h2>';
+		// 		echo '</div>';
+		// 		echo '<div class="loop grid one_col">';
+		// 			echo '<article class="cell">';
+		// 				echo '<a class="link_wrap" href="' . $fn_url . '">';
+		// 					echo '<div class="image load">';
+		// 						echo '<img data-src="'.$fn_thumb_url.'" data-width="'.$fn_thumb_width.'" data-height="'.$fn_thumb_height.'"/>';
+		// 					echo '</div>';
+		// 				echo '</a>';
+		// 			echo '</article>';
+		// 		echo '</div>';
 
-				echo '<div class="loop list">';
-					$fn_args = array(
-						'post_type' => 'post',
-						'orderby' => 'date',
-						'order' => 'asc',
-						'posts_per_page' => 5,
-						'tax_query' => array(
-							array(
-								'taxonomy' => 'category',
-								'field' => 'slug',
-								'terms' => 'field-notes'
-							)
-						)
-					);
-					$fn_query = new WP_Query( $fn_args );
-					if ( $fn_query->have_posts() ) {
-						while ( $fn_query->have_posts() ) {
-							$fn_query->the_post();
-							echo '<article class="cell field-notes">';
-								echo '<a class="link_wrap" href="' . get_the_permalink() . '">';
-									echo '<span class="date">' . get_the_date() . '</span>';
-									echo '<span class="title">' . get_the_title() . '</span>';
-								echo '</a>';
-							echo '</article>';
-						}
-					}
-					wp_reset_query();
-				echo '</div>';
+		// 		echo '<div class="loop list">';
+		// 			$fn_args = array(
+		// 				'post_type' => 'post',
+		// 				'orderby' => 'date',
+		// 				'order' => 'asc',
+		// 				'posts_per_page' => 5,
+		// 				'tax_query' => array(
+		// 					array(
+		// 						'taxonomy' => 'category',
+		// 						'field' => 'slug',
+		// 						'terms' => 'field-notes'
+		// 					)
+		// 				)
+		// 			);
+		// 			$fn_query = new WP_Query( $fn_args );
+		// 			if ( $fn_query->have_posts() ) {
+		// 				while ( $fn_query->have_posts() ) {
+		// 					$fn_query->the_post();
+		// 					echo '<article class="cell field-notes">';
+		// 						echo '<a class="link_wrap" href="' . get_the_permalink() . '">';
+		// 							echo '<span class="date">' . get_the_date() . '</span>';
+		// 							echo '<span class="title">' . get_the_title() . '</span>';
+		// 						echo '</a>';
+		// 					echo '</article>';
+		// 				}
+		// 			}
+		// 			wp_reset_query();
+		// 		echo '</div>';
 
-			echo '</div>';
-		echo '</section>';
+		// 	echo '</div>';
+		// echo '</section>';
 	echo '</div>';
 	
 	$past_issue = $issues[1];
