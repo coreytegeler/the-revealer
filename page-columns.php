@@ -50,7 +50,7 @@ echo '<div class="readable">';
 								$posts_query->the_post();
 								$date = get_the_date();
 								$permalink = get_permalink();
-								echo '<article class="cell" role="article" style="' . $style . '" data-id="' . get_the_ID() . '">';
+								echo '<article class="column" role="article" style="' . $style . '" data-id="' . get_the_ID() . '">';
 									echo '<h3>';
 										echo '<em class="date">' . $date . '</em>';
 										echo '<a class="title" href="' . $permalink . '">' . get_the_title() . '</a>';

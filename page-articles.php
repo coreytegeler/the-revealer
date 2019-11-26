@@ -11,7 +11,7 @@ if( !$paged ) {
 $articles_args = array(
 	'post_type' => 'post',
 	'paged' => $paged,
-	'posts_per_page' => 25
+	'posts_per_page' => 24
 );
 
 $tax_query = array();
@@ -38,10 +38,11 @@ if( sizeof( $tax_query ) ) {
 
 query_posts( $articles_args );
 echo '<div class="readable">';
-	echo '<div class="loop articles two_col masonry">';
+	echo '<div class="loop articles row">';
 		if ( $wp_query->have_posts() ) {
 			while ( $wp_query->have_posts() ) {
 				the_post();
+				set_query_var( 'col_size', 'col-12 col-sm-6 col-md-12 col-lg-4' );
 				get_template_part( 'parts/article' );
 			}
 		} else {

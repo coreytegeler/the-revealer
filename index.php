@@ -48,9 +48,9 @@ echo '<div class="readable">';
 	$current_issue_query = new WP_Query( $current_issue_args );
 	$current_issue_posts = $current_issue_query->posts;
 	$current_issue_date = get_field( 'date', $current_issue );
-	echo '<div class="loop articles two_col grid" id="current_issue">';
-		echo '<div class="cell cover">';
-			echo '<div class="issue">';
+	echo '<div class="loop row articles" id="home_top">';
+		echo '<div class="col col-12 col-md-6 cover">';
+			echo '<div class="inner issue">';
 				echo '<div class="text">';
 					echo '<h2 class="lead">Read our current issue</h2>';
 					echo '<h1 class="title">';
@@ -61,14 +61,17 @@ echo '<div class="readable">';
 			echo '</div>';
 		echo '</div>';
 
-		echo '<div class="cell newsletter">';
-			echo '<div class="text">';
-				echo '<h2 class="lead">' . get_field( 'above_newsletter_title', 'option' ) . '</h2>';
+		echo '<div class="col col-12 col-md-6 newsletter">';
+			echo '<div class="inner text">';
 				get_template_part( 'parts/newsletter' );
 			echo '</div>';
 		echo '</div>';
 
+	echo '</div>';
+
+	echo '<div class="loop articles row" id="current_issue">';
 		foreach( $current_issue_posts as $post ) {
+			set_query_var( 'col_size', 'col-12 col-sm-6 col-lg-4' );
 			get_template_part( 'parts/article' );
 			$already_used[] = $post->ID;
 		}
@@ -88,17 +91,21 @@ echo '<div class="readable">';
 				$feat_tag_header = str_replace( '{tag}', $feat_tag_link, $feat_tag_header );
 
 				echo '<h2 class="section_header">' . $feat_tag_header . '</h2>';
-				echo '<div class="loop grid two_col">';
+				echo '<div class="loop grid row">';
 					$tagged_args = array(
 						'posts_per_page' => $tagged_amount,
 						'post_type' => 'post',
 						'post__not_in' => $already_used,
-						'tag' => $feat_tag->slug
+						'tag' => $feat_tag->slug,
+						'date_query' => array (
+							'after' => 'December 31, 2012',
+						)
 					);
 					$tagged_query = new WP_Query( $tagged_args );
 					if ( $tagged_query->have_posts() ) {
 						while ( $tagged_query->have_posts() ) {
 							$tagged_query->the_post();
+							set_query_var( 'col_size', 'col-12 col-sm-6 col-md-12 col-lg-6' );
 							get_template_part( 'parts/article' );
 							$already_used[] = get_the_ID();
 						}
@@ -165,6 +172,7 @@ echo '<div class="readable">';
 					echo '<div class="loop articles one_col masonry">';
 						while ( $feat_col_query->have_posts() ) {
 							$feat_col_query->the_post();
+							set_query_var( 'col_size', 'col-12 col-sm-6 col-md-12 col-lg-6' );
 							get_template_part( 'parts/article' );
 							$already_used[] = get_the_ID();
 						}
@@ -221,7 +229,7 @@ echo '<div class="readable">';
 		// 			echo '<h2 class="section_header">' . $fn_header . '</h2>';
 		// 		echo '</div>';
 		// 		echo '<div class="loop grid one_col">';
-		// 			echo '<article class="cell">';
+		// 			echo '<article class="col">';
 		// 				echo '<a class="link_wrap" href="' . $fn_url . '">';
 		// 					echo '<div class="image load">';
 		// 						echo '<img data-src="'.$fn_thumb_url.'" data-width="'.$fn_thumb_width.'" data-height="'.$fn_thumb_height.'"/>';
@@ -248,7 +256,7 @@ echo '<div class="readable">';
 		// 			if ( $fn_query->have_posts() ) {
 		// 				while ( $fn_query->have_posts() ) {
 		// 					$fn_query->the_post();
-		// 					echo '<article class="cell field-notes">';
+		// 					echo '<article class="col field-notes">';
 		// 						echo '<a class="link_wrap" href="' . get_the_permalink() . '">';
 		// 							echo '<span class="date">' . get_the_date() . '</span>';
 		// 							echo '<span class="title">' . get_the_title() . '</span>';
@@ -296,7 +304,7 @@ echo '<div class="readable">';
 			$past_issue_header = str_replace( '{date}', $past_issue_date_link, $past_issue_header );
 
 			echo '<h2 class="section_header">'.$past_issue_header.'</h2>';
-			echo '<div class="loop articles five_col grid">';
+			echo '<div class="articles loop row">';
 				while ( $past_issue_query->have_posts() ) {
 					$past_issue_query->the_post();
 					$title = $post->post_title;
@@ -307,7 +315,7 @@ echo '<div class="readable">';
 					$thumb_height = $thumb[2];
 					$permalink = get_the_permalink();
 					$contributors = get_contributors_list( $post->ID, true, true );
-					echo '<article class="cell" role="article" style="' . $style . '">';
+					echo '<article class="col col-12 col-sm-6 col-lg-4" role="article" style="' . $style . '">';
 						echo '<div class="wrap">';
 							echo '<div class="primary">';
 								echo '<a class="link_wrap" href="' . $permalink . '">';

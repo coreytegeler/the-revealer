@@ -6,7 +6,7 @@ $id = $issue->term_id;
 $issue_url = get_term_link( $id, 'issues' );
 $date = get_field( 'date', $issue );
 $thumb = get_field( 'featured_image', $issue );
-echo '<div class="cell issue" role="issue">';
+echo '<div class="col ' . ( $col_size ? $col_size : 'col-12') . ' issue" role="issue">';
 	echo '<a class="link_wrap" href="' . $issue_url . '">';
 		echo '<div class="text">';
 			echo '<h1 class="title">' . $title . '</h1>';
@@ -23,7 +23,7 @@ echo '<div class="cell issue" role="issue">';
 			echo '</div>';
 		}
 	echo '</a>';
-	$mag_svg = get_template_directory_uri() . '/assets/images/mag.svg';
-	echo file_get_contents( $mag_svg );
+	// $mag_svg = get_template_directory_uri() . '/assets/images/mag.svg';
+	// echo file_get_contents( $mag_svg );
 echo '</div>';
 ?>

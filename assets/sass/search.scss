@@ -42,8 +42,8 @@ body.search, body.tag, body.error404 {
 		opacity: 0;
 		.search_header {
 			width: calc(100% - 2em);
-	    margin: auto;
-	    padding: 1em;
+			margin: auto;
+			padding: 1em;
 		}
 		&.open {
 			top: 0;
@@ -78,19 +78,19 @@ body.search, body.tag, body.error404 {
 				left: -99999%;
 			}
 			&::before {
-	    	width: 100%;
+			width: 100%;
 				height: 100%;
 				position: absolute;
 				left: 0;
 				top: 0;
 				margin: 0;
 				border-radius: 1em;
-	    	content: '';
-	    	display: inline-block;
-	    	@include xLargeText;
-	    	// @include xLargeShadow($gold);
-	    	z-index: 0;
-	    }
+			content: '';
+			display: inline-block;
+			@include xLargeText;
+			// @include xLargeShadow($gold);
+			z-index: 0;
+		}
 		}
 		input {
 			&#searchbox {
@@ -109,48 +109,48 @@ body.search, body.tag, body.error404 {
 				@include serifText;
 				line-height: 1.3em;
 				backface-visibility: hidden;
-        pointer-events: all;
-        @include xSmallShadow($gold);
+		pointer-events: all;
+		@include xSmallShadow($gold);
 				&:focus, body.has_hover &:hover {
-	      	outline: none;
-	      }
+			outline: none;
+		  }
 			}
 		}
 		.submit {
 			position: absolute;
-	    right: 0;
-	    top: 0;
-	    height: 4.6em;
-	    width: 4.6em;
-	    border-radius: 100%;
-	    pointer-events: all;
-	    svg {
-	    	width: 60%;
-	    	height: 60%;
-	    	margin: 20%;
-	    	fill: $medium;
-	    	pointer-events: all;
-	    	transition: fill 500ms $ease;
-	    }
+		right: 0;
+		top: 0;
+		height: 4.6em;
+		width: 4.6em;
+		border-radius: 100%;
+		pointer-events: all;
+		svg {
+			width: 60%;
+			height: 60%;
+			margin: 20%;
+			fill: $medium;
+			pointer-events: all;
+			transition: fill 500ms $ease;
+		}
 			input[type="submit"] {
 				width: 100%;
 				height: 100%;
 				position: absolute;
-		    left: 0;
-		    top: 0;
-		    border: none;
-		    background: transparent;
-		    pointer-events: all;
-		    &:focus, body.has_hover &:hover {
-	      	outline: none;
-	      	cursor: pointer;
-	      }
+			left: 0;
+			top: 0;
+			border: none;
+			background: transparent;
+			pointer-events: all;
+			&:focus, body.has_hover &:hover {
+			outline: none;
+			cursor: pointer;
+		  }
 			}
 			&:focus, body.has_hover &:hover {
 				svg {
-	      	fill: $dark;
-	      }
-      }
+			fill: $dark;
+		  }
+	  }
 		}
 	}
 }

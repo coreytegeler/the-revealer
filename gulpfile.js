@@ -61,7 +61,7 @@ function watchFiles()  {
 }
 
 
-gulp.task('default', gulp.parallel(compileSass, compileCoffee, watchFiles));
+gulp.task('dev', gulp.parallel(compileSass, compileCoffee, watchFiles));
 gulp.task('prod', gulp.parallel(compileSass, compileCoffee));
 
 function log(message) {

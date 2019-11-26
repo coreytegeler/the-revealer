@@ -10,18 +10,13 @@ html, body {
 	@include baseText;
 	color: $dark;
 	background: $lightest;
-	overflow: hidden;
+	// overflow: hidden;
 	overflow-x: hidden;
-	overflow-y: scroll;
 	-webkit-overflow-scrolling: touch;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
 	visibility: visible;
-	::selection {
-		background: $gold;
-		opacity: 1;
-	}
 	&.no_scroll  {
 		overflow: hidden !important;
 		overflow-y: hidden !important;
@@ -29,7 +24,26 @@ html, body {
 		-webkit-overflow-scrolling: auto !important;
 	}
 }
+html {
+	overflow-y: scroll !important;
+}
 body {
+	::selection {
+		background: $gold;
+		opacity: 1;
+	}
+	// ::-webkit-scrollbar {
+	//   width: 5px;
+	// }
+	// ::-webkit-scrollbar-track {
+	//   background: $lighter;
+	// }
+	// ::-webkit-scrollbar-thumb {
+	//   background: rgba($medium,.5);
+	// }
+	// ::-webkit-scrollbar-thumb:hover {
+	//   background: $medium;
+	// }
 	header#header, #wrapper, footer#footer, #discover {
 		opacity: 0;
 	}
@@ -146,7 +160,7 @@ input {
 	position: relative;
 	main {
 		position: relative;
-    width: calc(100% - 4em);
+    width: 100%;
     padding: .5em 2em 4em 2em;
 		.max {
 			max-width: #{$maxWidth * 2};
@@ -419,9 +433,6 @@ input {
 #missingSvg {
 	display: none;
 }
-::-webkit-scrollbar {
-    width: 0px;
-}
 
 @include large {
 	#is_mobile {
@@ -437,7 +448,6 @@ input {
 	#wrapper {
 		display: block;
 		main {
-			width: calc(100% - 2em);
 			padding: 0 1em 2em 1em;
 			.readable {
 				width: 100%;
@@ -498,7 +508,6 @@ input {
 @include xSmall {
 	#wrapper, #wrapper.split, #wrapper.full {
 		main {
-			width: calc(100% - 2em);
 	    padding: .5em 1em 4em 1em;
 	    .pagination .paginate .link_text {
 	    	display: none;

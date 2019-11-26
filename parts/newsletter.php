@@ -10,7 +10,11 @@ $newsletter_index++;
 ?>
 
 <form action="https://therevealer.us4.list-manage.com/subscribe/post?u=0d33df8173d96b4ebcfdb732d&amp;id=0f729dc19c" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-	<label for="mce-EMAIL-<?php echo $newsletter_index; ?>"><h2 class="title"><?php the_field( 'newsletter_title', 'option' )?></h2></label>
+	<label for="mce-EMAIL-<?php echo $newsletter_index; ?>">
+		<h2 class="title">
+			<?php the_field( 'newsletter_title', 'option' )?>
+		</h2>
+	</label>
   <div id="mc_embed_signup_scroll" class="inputs">
 		<div class="field mc-field-group">
 			<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL-<?php echo $newsletter_index; ?>" placeholder="Enter your email">

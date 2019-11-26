@@ -9,7 +9,7 @@ $thumb_height = $thumb[2];
 $link = get_field( 'link' );
 $date = get_field( 'event_date' );
 $i = $wp_query->current_post;
-echo '<article class="cell event">';
+echo '<article class="col ' . ( $col_size ? $col_size : 'col-12') . ' event">';
 	echo '<div class="wrap">';
 		echo '<div class="primary">';
 			echo '<a class="link_wrap" target="_blank" href="' . $link . '">';

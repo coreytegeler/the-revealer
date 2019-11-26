@@ -1,6 +1,6 @@
 body.articles #wrapper {
 	main {
-		width: calc(100% - #{$sideWidth} - 4em);
+		width: 100%;
 		padding: 0 2em 4em calc(#{$sideWidth} + 2em);
 	}
 	.filters.toggle {
@@ -96,19 +96,10 @@ body.articles #wrapper {
 		.transport.top {
 			display: flex;
 		}
-		.loop.two_col .cell {
-			width: 100%;
-		}
 	}
 	@include small {
 		main {
-			width: calc(100% - 2em);
 			padding: 0 1em 2em 1em;
-		}
-		.loop {
-			max-width: 35em;
-			margin: auto;
-			display: table;
 		}
 		.filters.toggle {
 			display: block;
@@ -116,9 +107,6 @@ body.articles #wrapper {
 			left: 1em;
 			top: 1em;
 			z-index: 300;
-		}
-		.loop.two_col .cell {
-			width: calc(50% - 1.5em);
 		}
 		aside.toggler {
 			width: 100%;
@@ -130,7 +118,7 @@ body.articles #wrapper {
 			transform: 0 !important;
 			padding: 0;
 			#filters {
-				width: calc(100% - 4em);
+				width: 100%;
 				padding: 3em 2em 2em 2em;
 				.commas span {
 					@include mediumText();

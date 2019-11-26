@@ -57,35 +57,37 @@ echo '<title>' . $page_title . '</title>';
 echo '<meta charset="' . get_bloginfo( 'charset' ) . '">';
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
 echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
-if( $writer = get_field( 'writer' ) ) {
-	echo '<meta name="author" content="' . $writer . '">';
-}
-echo '<meta name="subject" content="Subject">';
-if( $description = get_bloginfo( 'description' ) ) {
-	echo '<meta name="Description" content="' . $description. '">';
-}
-echo '<meta name="Classification" content="Classification ">';
-echo '<meta name="Language" content="English">';
-echo '<meta name="Designer" content="Corey Tegeler">';
-if( $publisher_name = get_field( 'publisher_name', 'option' ) ) {
-	echo '<meta name="Publisher" content="' . $publisher_name . '">';
-}
-echo '<link rel="profile" href="http://gmpg.org/xfn/11">';
-echo '<meta property="og:title" content="' . $og_title . '" />';
-echo '<meta property="og:type" content="' . $og_type .  '" />';
-if( $og_type == 'article' ) {
-	$article_id = $post->ID;
-	echo '<meta property="article:published_time" content="' . get_the_date( 'c' ) . '" />';
-	echo '<meta property="article:modified_time" content="' . get_the_modified_date( 'c' ) . '" />';
-	echo '<meta property="article:author" content="' . get_contributors_list( $article_id, true, true ) . '" />';
-	echo '<meta property="article:section" content="Religion" />';
-	echo '<meta property="article:tag" content="' . get_tags_list() . '" />';
-}
-echo '<meta property="og:url" content="' . get_the_permalink() . '" />';
-if( $thumb = wp_get_attachment_image_src( $thumb_id, 'large' ) ) {
-	$thumb_url = $thumb[0];
-	echo '<meta property="og:image" content="' . $thumb_url . '" />';
-}
+
+
+// if( $writer = get_field( 'writer' ) ) {
+// 	echo '<meta name="author" content="' . $writer . '">';
+// }
+// echo '<meta name="subject" content="Subject">';
+// if( $description = get_bloginfo( 'description' ) ) {
+// 	echo '<meta name="Description" content="' . $description. '">';
+// }
+// echo '<meta name="Classification" content="Classification ">';
+// echo '<meta name="Language" content="English">';
+// echo '<meta name="Designer" content="Corey Tegeler">';
+// if( $publisher_name = get_field( 'publisher_name', 'option' ) ) {
+// 	echo '<meta name="Publisher" content="' . $publisher_name . '">';
+// }
+// echo '<link rel="profile" href="http://gmpg.org/xfn/11">';
+// echo '<meta property="og:title" content="' . $og_title . '" />';
+// echo '<meta property="og:type" content="' . $og_type .  '" />';
+// if( $og_type == 'article' ) {
+// 	$article_id = $post->ID;
+// 	echo '<meta property="article:published_time" content="' . get_the_date( 'c' ) . '" />';
+// 	echo '<meta property="article:modified_time" content="' . get_the_modified_date( 'c' ) . '" />';
+// 	echo '<meta property="article:author" content="' . get_contributors_list( $article_id, true, true ) . '" />';
+// 	echo '<meta property="article:section" content="Religion" />';
+// 	echo '<meta property="article:tag" content="' . get_tags_list() . '" />';
+// }
+// echo '<meta property="og:url" content="' . get_the_permalink() . '" />';
+// if( $thumb = wp_get_attachment_image_src( $thumb_id, 'large' ) ) {
+// 	$thumb_url = $thumb[0];
+// 	echo '<meta property="og:image" content="' . $thumb_url . '" />';
+// }
 wp_head();
 ?>
 </head>

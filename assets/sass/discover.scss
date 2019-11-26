@@ -102,6 +102,7 @@ body.discover:not(.seeking), body.error404:not(.seeking) {
       margin: 0 !important;
       opacity: 0;
       transition: opacity 1000ms $ease !important;
+      float: left;
       .wrap {
         display: table;
         padding: 0;

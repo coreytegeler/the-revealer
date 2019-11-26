@@ -3,87 +3,88 @@ body.home {
 		.goldbar {
 			margin: 3em 0;
 		}
-		.loop {
-			.cell {
-				&.cover {
-					position: relative;
-					background: $lighter;
-					.issue {
-						.goldbar {
-							margin: 0;
+		#home_top {
+			margin-bottom: 5rem;
+		}
+		.cover {
+			position: relative;
+			.inner {
+				background: $lighter;
+			}
+			.issue .goldbar {
+				margin: 0;
+			}
+			.title {
+				margin-bottom: .25em;
+			}
+			.date {
+				color: $medium;
+				@include serifText;
+				font-style: italic;
+			}
+			.loop {
+				padding-top: 1em;
+				.col {
+					.image {
+						background-color: $dark;
+						img {
+							filter: grayscale(1);
+							mix-blend-mode: screen;
 						}
-					}
-					.title {
-						margin-bottom: .25em;
-					}
-					.date {
-						color: $medium;
-						@include serifText;
-						font-style: italic;
-					}
-					.loop {
-						padding-top: 1em;
-						.cell {
-							.image {
-								background-color: $dark;
-								img {
-									filter: grayscale(1);
-									mix-blend-mode: screen;
-								}
-							}
-						}
-					}
-				}
-				&.newsletter {
-					background-color: $lighterGold;
-					form {
-				    // width: calc(100% - 2em);
-				    // padding: 2em 1em;
-				    @include revealerText;
-						font-weight: $regular;
-						label {
-							width: 100%;
-							margin: 0;
-							display: table;
-						}
-						.title {
-							margin-bottom: .5em;
-						}
-						.inputs {
-							max-width: 20em;
-							// margin: auto;
-						}
-					}
-				}
-				&.cover, &.newsletter {
-					// margin-bottom: 2em !important;
-					.text {
-						width: calc(100% - 2em);
-						padding: 2em 1em;
-					}
-					.title {
-						color: $dark;
-						font-weight: $regular;
-						text-align: left;
-						position: relative;
-						z-index: 100;
-						padding: 0;
-						@include revealerText;
-						@include xLargeText;
-						a {
-							text-decoration: none;
-							&:hover {
-								@include underline($gold, $lighter, 3px);
-							}
-						}
-					}
-					.lead {
-						color: $medium;
-						@include revealerText;
 					}
 				}
 			}
-			&#current_issue_top, &#current_issue {
+		}
+		.newsletter {
+			.inner {
+				background-color: $lighterGold;
+			}
+			form {
+		    // width: calc(100% - 2em);
+		    // padding: 2em 1em;
+		    @include revealerText;
+				font-weight: $regular;
+				label {
+					width: 100%;
+					margin: 0;
+					display: table;
+				}
+				.title {
+					margin-bottom: .5em;
+				}
+				.inputs {
+					max-width: 20em;
+					// margin: auto;
+				}
+			}
+		}
+		.cover, .newsletter {
+			.text {
+				width: 100%;
+				padding: 2em 1em;
+			}
+			.inner {
+				height: 100%;
+			}
+			.title {
+				color: $dark;
+				font-weight: $regular;
+				text-align: left;
+				position: relative;
+				z-index: 100;
+				padding: 0;
+				@include revealerText;
+				@include xLargeText;
+				a {
+					text-decoration: none;
+					&:hover {
+						@include underline($gold, $lighter, 3px);
+					}
+				}
+			}
+			.lead {
+				color: $medium;
+				@include revealerText;
 			}
 		}
 		.columns {
@@ -112,7 +113,7 @@ body.home {
 			img {
 				width: 100%;
 			}
-			.cell {
+			.col {
 				margin: 0 0 .5em 0 !important;
 			}
 			a.link_wrap {
@@ -191,7 +192,7 @@ body.home {
 		@include large {
 			.loop {
 				&#featured_tag {
-					.cell {
+					.col {
 						.wrap {
 							display: block;
 							.primary, .secondary {
@@ -213,17 +214,17 @@ body.home {
 			}
 			.loop {
 				&.articles {
-					.cell.cover, .cell.newsletter {
+					.col.cover, .col.newsletter {
 						width: 100%;
 						margin-right: 0 !important;
 						margin-left: 0 !important;
 					}
-					.cell.cover {
+					.col.cover {
 						margin-bottom: 0 !important;
 					}
 				}
 				&#featured_tag {
-					.cell {
+					.col {
 						.wrap {
 							display: block;
 							.primary {
@@ -243,7 +244,7 @@ body.home {
 				padding-top: 0 !important
 			}
 			.loop {
-				.cell.cover {
+				.col.cover {
 					margin-bottom: 0 !important; 
 				}
 			}

@@ -1,8 +1,8 @@
 header#header {
 	width: 100%;
 	height: auto;
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -10,20 +10,19 @@ header#header {
 	transform: 0ms !important;
 	background: rgba($lightest,.98);
 	@include revealerText;
-  .inner {
-  	width: calc(100% - 4em);
+	.inner {
 		margin: 0 2em;
-  	display: flex;
-  	position: relative;
-  }
-  #logo {
+		display: flex;
+		position: relative;
+	}
+	#logo {
 		display: flex;
 		align-content: center;
 		padding: 0 2em 0 0;
 		a.svg {
 			display: table;
 			margin: auto;
-	    text-decoration: none;
+			text-decoration: none;
 			svg {
 				width: calc(#{$logoWidth} - 1em);
 				max-width: 50vw;
@@ -43,35 +42,39 @@ header#header {
 			margin-bottom: 1em;
 		}
 		em {
-    	font-size: inherit;
-    	line-height: inherit;
-    }
+			font-size: inherit;
+			line-height: inherit;
+		}
 	}
 	.toggle {
 		display: none;
 	}
-  .rows {
-    padding: .5em 0;
-  	display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    flex-grow: 1;
-    font-style: normal;
-    font-weight: $black;
-    text-transform: uppercase;
+	.rows {
+		padding: .5em 0;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		flex-grow: 1;
+		font-style: normal;
+		font-weight: $black;
+		text-transform: uppercase;
 		font-weight: $regular;
-    .tagline {
-    	color: $medium;
-    	flex: 1;
-    	text-transform: lowercase;
-    	@include xSmallText;
-    }
-    .navigation {
-    	width: 100%;
-	    nav {
-	  		display: table;
-	  		float: right;
-	  		padding: 0;
+		.row {
+			margin-left: 0;
+			margin-right: 0;
+		}
+		.tagline {
+			color: $medium;
+			flex: 1;
+			text-transform: lowercase;
+			@include xSmallText;
+		}
+		.navigation {
+			width: 100%;
+			nav {
+				display: table;
+				float: right;
+				padding: 0;
 				.link {
 					float: left;
 					display: inline;
@@ -79,33 +82,33 @@ header#header {
 					margin: 0 .5em 0 0;
 					list-style: none;
 					a {
-				    text-decoration: none;
-				    font-style: normal;
-				    transition: color 500ms $ease, opacity 500ms $ease;
-				    text-transform: lowercase;
-				    // color: $lightest;
-				    &:hover {
-				    	color: $medium;
-				    }
+						text-decoration: none;
+						font-style: normal;
+						transition: color 500ms $ease, opacity 500ms $ease;
+						text-transform: lowercase;
+						// color: $lightest;
+						&:hover {
+							color: $medium;
+						}
 					}
 					&:last-child {
 						margin: 0;
 					}
 				}
 				&.mobile_nav {
-	  			display: none;
-	  			.link {
+					display: none;
+					.link {
 
-	  			}
-	  		}
+					}
+				}
 			}
-		  &.break {
-		  	flex-direction: column;
-		  	.tagline, .links {
-		  		display: table;
-		  		margin: auto;
-		  	}
-		  }
+			&.break {
+				flex-direction: column;
+				.tagline, .links {
+					display: table;
+					margin: auto;
+				}
+			}
 		}
 	}
 	.goldbar {
@@ -118,11 +121,10 @@ header#header {
 	}
 	@include small {
 		.inner {
-			width: calc(100% - 2em);
-	    padding: .5em;
-	    margin: 0 .5em;
-	    display: block;
-	    position: relative;
+			padding: .5em;
+			margin: 0 .5em;
+			display: block;
+			position: relative;
 			#logo {
 				width: calc(100% - 3em);
 				padding: 0;
@@ -150,7 +152,7 @@ header#header {
 					}
 					&.navigation {
 						width: 100%;
-						max-height: 0;
+						// max-height: 0;
 						position: absolute;
 						left: 0;
 						top: 100%;
@@ -159,7 +161,7 @@ header#header {
 							display: none;
 							&.mobile_nav {
 								display: flex;
-								width: calc(100% - 1em);
+								width: 100%;
 								padding: .5em;
 								background-color: $gold;
 								.link {
@@ -174,7 +176,7 @@ header#header {
 		}
 		.toggle {
 			display: table;
-	    position: absolute;
+			position: absolute;
 			bottom: .85em;
 			right: .5em;
 			left: auto;

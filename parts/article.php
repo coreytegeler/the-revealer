@@ -17,7 +17,7 @@ $categories = get_cat_list( $article_id );
 foreach( get_the_category( $id ) as $i => $cat ) {
 	$category_class .= $cat->slug.' ';
 }
-echo '<article class="cell ' . ( $thumb ? 'has_image' : 'no_image') . ' ' . $category_class . '" role="article" style="' . $style . '" data-id="' . $article_id . '">';
+echo '<article class="col ' . ( $col_size ? $col_size : 'col-12') . ' ' . ( $thumb ? 'has_image' : 'no_image') . ' ' . $category_class . '" role="article" style="' . $style . '" data-id="' . $article_id . '">';
 	echo '<div class="wrap">';
 		echo '<div class="primary">';
 			if( $categories ) {
