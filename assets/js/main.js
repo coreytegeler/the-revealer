@@ -500,9 +500,9 @@ jQuery(function($) {
         $toggler = $(toggler);
         $inner = $toggler.find('.intra');
         if ($inner.innerHeight() <= $toggler.innerHeight() + 5) {
-          return $toggler.addClass('toggled');
+          return $toggler.addClass('no-toggle');
         } else {
-          return $toggler.removeClass('toggled');
+          return $toggler.removeClass('no-toggle');
         }
       });
     };

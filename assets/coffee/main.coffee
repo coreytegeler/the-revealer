@@ -436,9 +436,9 @@ jQuery ($) ->
 				$toggler = $(toggler)
 				$inner = $toggler.find('.intra')
 				if $inner.innerHeight() <= $toggler.innerHeight() + 5
-					$toggler.addClass('toggled')
+					$toggler.addClass('no-toggle')
 				else
-					$toggler.removeClass('toggled')
+					$toggler.removeClass('no-toggle')
 
 			
 

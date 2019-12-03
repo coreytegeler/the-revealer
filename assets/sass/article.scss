@@ -53,7 +53,8 @@ body.single-post, body.page-template-default {
 								display: none;
 							}
 							&:last-of-type::before {
-								content: ' & ';
+								content: '&';
+								margin: 0 .25em;
 							}
 						}
 					}

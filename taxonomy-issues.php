@@ -17,11 +17,13 @@ echo '<div class="readable">';
 	  )
 	);
 	$posts_query = new WP_Query( $posts_args );
-	echo '<div class="masonry issue loop three_col">';
+	echo '<div class="loop articles row issue">';
+		set_query_var( 'col_size', 'col-12 col-sm-6 col-lg-4' );
 		get_template_part( 'parts/issue-cover' );
 		if ( $posts_query->have_posts() ) {
 			while ( $posts_query->have_posts() ) {
 				$posts_query->the_post();
+				set_query_var( 'col_size', 'col-12 col-sm-6 col-lg-4' );
 				get_template_part( 'parts/article' );
 			}
 		}

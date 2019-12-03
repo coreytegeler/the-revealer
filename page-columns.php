@@ -23,7 +23,7 @@ echo '<div class="readable">';
 			$posts_args = array(
 		    'post_type' => 'post',
 		    'posts_per_page' => -1,
-		    'orderby' => 'date',
+		    'orderby' => 'tax_position',
 		    'order' => 'desc',
 		    'tax_query' => array(
 		      array(

@@ -42,7 +42,7 @@ echo '<article class="post readable ' . $category_class . '">';
 			echo '<div class="meta">';
 				if( have_rows( 'writers' ) ) {
 					echo '<div class="row writers">';
-						echo 'by ';
+						echo 'by&nbsp;';
 				    while( have_rows( 'writers') ) : the_row();
 							$writer_name = get_sub_field( 'name' );
 							$writer_url = get_sub_field( 'url' );

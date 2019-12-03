@@ -333,6 +333,11 @@ input {
 			top: -.5em;
 		}
 	}
+	&.no-toggle {
+		.toggle {
+			display: none;
+		}
+	}
 }
 .toggle {
 	position: absolute;
