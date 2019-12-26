@@ -7,13 +7,14 @@ echo '<div class="toggle filters" data-toggle="filters">';
 echo '</div>';
 echo '<aside class="toggler" data-toggle="filters">';
 	$articles_url = get_articles_page();
-	$cat_param = $_GET['category'];
-	$year_param = $_GET['y'];
-	$col_param = $_GET['column'];
-	$tag_param = $_GET['tag'];
+	$cat_param = isset( $_GET['category'] ) ? $_GET['category'] : null;
+	$year_param = isset( $_GET['y'] ) ? $_GET['y'] : null;
+	$col_param = isset( $_GET['column'] ) ? $_GET['column'] : null;
+	$tag_param = isset( $_GET['tag'] ) ? $_GET['tag'] : null;
 	if( $cat_id = get_query_var( 'cat' ) ) {
 		$cat_param = get_category( $cat_id, false )->slug;
 	}
+	$page_url = '';
 	if( $cat_param ) {
 		$page_url = add_query_arg( 'category', $cat_param, $page_url );
 	}

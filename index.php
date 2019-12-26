@@ -16,12 +16,22 @@ $issues = get_terms( array(
 $current_issue = $issues[0];
 $current_issue_id = $current_issue->term_id;
 $current_issue_url = get_term_link( $current_issue_id, 'issues' );
+$current_issue_date = get_field( 'date', $current_issue );
+
+$current_issue_thumb = get_field( 'featured_image', $current_issue );
+$current_issue_thumb_id = $current_issue_thumb['ID'];
+// $current_issue_thumb_id = get_post_thumbnail_id( $current_issue_id );
+$current_issue_thumb = wp_get_attachment_image_src( $current_issue_thumb_id, 'large' );
+$current_issue_thumb_url = $current_issue_thumb[0];
+$current_issue_thumb_width = $current_issue_thumb[1];
+$current_issue_thumb_height = $current_issue_thumb[2];
 
 $current_issue_args = array(
 	'post_type' => 'post',
 	'orderby' => 'date',
 	'order' => 'asc',
 	'tax_query' => array(
+		'relation' => 'AND',
 		array(
 			'taxonomy' => 'issues',
 			'field' => 'id',
@@ -30,11 +40,24 @@ $current_issue_args = array(
 	)
 );
 
+
+$current_issue_query = new WP_Query( $current_issue_args );
+$current_issue_posts = $current_issue_query->posts;
+
+foreach ( $current_issue_posts as $index => $current_issue_post ) {
+	foreach( get_the_category( $current_issue_post ) as $cat ) {
+		if( $cat->slug == 'editors-letter' ) {
+			$editors_letter = $current_issue_post;
+			array_splice( $current_issue_posts, $index, 1 );
+		}
+	}
+}
+
 $already_used = array();
 
 $features_amount = 1;
 $medium_amount = 15;
-$tagged_amount = 4;
+$tagged_amount = 6;
 $tags_amount = 25;
 
 $articles_page = get_page_by_path( 'articles' );
@@ -45,23 +68,41 @@ if( $articles_page ) {
 }
 
 echo '<div class="readable">';
-	$current_issue_query = new WP_Query( $current_issue_args );
-	$current_issue_posts = $current_issue_query->posts;
-	$current_issue_date = get_field( 'date', $current_issue );
+	
 	echo '<div class="loop row articles" id="home_top">';
-		echo '<div class="col col-12 col-md-6 cover">';
+		echo '<div class="col col-12 col-xl-8 cover">';
 			echo '<div class="inner issue">';
-				echo '<div class="text">';
-					echo '<h2 class="lead">Read our current issue</h2>';
-					echo '<h1 class="title">';
-						echo '<a href="' . $current_issue_url . '">' . $current_issue->name . '</a>';
-					echo '</h1>';	
-					echo '<h2 class="date">published ' . $current_issue_date . '</h2>';
+				echo '<div class="row">';
+					echo '<div class="col col-auto">';
+						echo '<a href="' . $current_issue_url . '">';
+							echo '<img class="cover-img" src="'.$current_issue_thumb_url.'"/>';
+						echo '</a>';
+					echo '</div>';
+					echo '<div class="col">';
+						echo '<div class="issue_wrap">';
+							echo '<a href="' . $current_issue_url . '">';
+								echo '<h2 class="lead">Read our current issue</h2>';
+								echo '<h1 class="title"><span>';
+									echo $current_issue->name;
+								echo '</span></h1>';	
+								echo '<h2 class="date">published ' . $current_issue_date . '</h2>';
+							echo '</a>';
+
+							if( isset( $editors_letter ) ) {
+								echo '<div class="editors_letter">';
+									echo '<h2><a href="' . get_permalink( $editors_letter ) . '">';
+										echo 'Read this issue\'s editor\'s letter: <strong>' . $editors_letter->post_title . '</strong>';
+									echo '</a></h2>';
+								echo '</div>';
+							}
+
+						echo '</div>';
+					echo '</div>';
 				echo '</div>';
 			echo '</div>';
 		echo '</div>';
 
-		echo '<div class="col col-12 col-md-6 newsletter">';
+		echo '<div class="col col-12 col-xl-4 newsletter">';
 			echo '<div class="inner text">';
 				get_template_part( 'parts/newsletter' );
 			echo '</div>';
@@ -70,69 +111,74 @@ echo '<div class="readable">';
 	echo '</div>';
 
 	echo '<div class="loop articles row" id="current_issue">';
-		foreach( $current_issue_posts as $post ) {
+		foreach( $current_issue_posts as $current_issue_post ) {
 			set_query_var( 'col_size', 'col-12 col-sm-6 col-lg-4' );
+			set_query_var( 'article', $current_issue_post );
 			get_template_part( 'parts/article' );
-			$already_used[] = $post->ID;
+			$already_used[] = $current_issue_post->ID;
 		}
 		wp_reset_query();
 	echo '</div>';
 	get_template_part( 'parts/goldbar' );
 
-	echo '<div class="sections one_one">';
+	echo '<div class="sections row">';
 
 		if( $feat_tags = get_field( 'featured_tags', $current_issue ) ) {
-			echo '<section id="featured_tags">';
-				$feat_tag_i = array_rand( $feat_tags, 1 );
-				$feat_tag = $feat_tags[$feat_tag_i];
-				$feat_tag_url = add_query_arg( 'tag', $feat_tag->slug, $articles_url );
-				$feat_tag_link = '<a href="' . $feat_tag_url . '"><em>' . $feat_tag->name . '</em></a>';
-				$feat_tag_header = get_field( 'featured_tag', $home );
-				$feat_tag_header = str_replace( '{tag}', $feat_tag_link, $feat_tag_header );
+			echo '<div class="col col-12 col-lg-6 col-xl-8">';
+				echo '<section id="featured_tags">';
+					$feat_tag_i = array_rand( $feat_tags, 1 );
+					$feat_tag = $feat_tags[$feat_tag_i];
+					$feat_tag_url = add_query_arg( 'tag', $feat_tag->slug, $articles_url );
+					$feat_tag_link = '<a href="' . $feat_tag_url . '"><em>' . $feat_tag->name . '</em></a>';
+					$feat_tag_header = get_field( 'featured_tag', $home );
+					$feat_tag_header = str_replace( '{tag}', $feat_tag_link, $feat_tag_header );
 
-				echo '<h2 class="section_header">' . $feat_tag_header . '</h2>';
-				echo '<div class="loop grid row">';
-					$tagged_args = array(
-						'posts_per_page' => $tagged_amount,
-						'post_type' => 'post',
-						'post__not_in' => $already_used,
-						'tag' => $feat_tag->slug,
-						'date_query' => array (
-							'after' => 'December 31, 2012',
-						)
-					);
-					$tagged_query = new WP_Query( $tagged_args );
-					if ( $tagged_query->have_posts() ) {
-						while ( $tagged_query->have_posts() ) {
-							$tagged_query->the_post();
-							set_query_var( 'col_size', 'col-12 col-sm-6 col-md-12 col-lg-6' );
-							get_template_part( 'parts/article' );
-							$already_used[] = get_the_ID();
+					echo '<h2 class="section_header">' . $feat_tag_header . '</h2>';
+					echo '<div class="loop grid row">';
+						$tagged_args = array(
+							'posts_per_page' => $tagged_amount,
+							'post_type' => 'post',
+							'post__not_in' => $already_used,
+							'tag' => $feat_tag->slug,
+							'date_query' => array (
+								'after' => 'December 31, 2012',
+							)
+						);
+						$tagged_query = new WP_Query( $tagged_args );
+						if ( $tagged_query->have_posts() ) {
+							while ( $tagged_query->have_posts() ) {
+								$tagged_query->the_post();
+								set_query_var( 'col_size', 'col-12 col-sm-6 col-lg-6 col-xl-4' );
+								get_template_part( 'parts/article' );
+								$already_used[] = get_the_ID();
+							}
 						}
-					}
-					wp_reset_query();
-				echo '</div>';
-			echo '</section>';
+						wp_reset_query();
+					echo '</div>';
+				echo '</section>';
+			echo '</div>';
 		}
 
-		echo '<section id="tags">';
-			$more_tags_header = get_field( 'more_tags', $home );
-			echo '<h2 class="section_header">' . $more_tags_header . '</h2>';
-			echo '<div class="commas tags">';
-				$tags = get_recent_tags( $tags_amount );
-				foreach( $tags as $tag ) {
-					echo '<span>';
-						$tag_url = add_query_arg( 'tag', $tag->slug, $articles_url );
-						echo '<a href="' . $tag_url . '" class="tag">' . $tag->name . '</a>';
+		echo '<div class="col col-12 col-lg-6 col-xl-4">';
+			echo '<section id="tags">';
+				$more_tags_header = get_field( 'more_tags', $home );
+				echo '<h2 class="section_header">' . $more_tags_header . '</h2>';
+				echo '<div class="commas tags">';
+					$tags = get_recent_tags( $tags_amount );
+					foreach( $tags as $tag ) {
+						echo '<span>';
+							$tag_url = add_query_arg( 'tag', $tag->slug, $articles_url );
+							echo '<a href="' . $tag_url . '" class="tag">' . $tag->name . '</a>';
+						echo '</span>';
+					}
+					$tag_page = get_page_by_path( 'tags' );
+					$tag_page_url = get_permalink( $tag_page->ID );
+					echo '<span class="no_comma no_line">';
+						echo '<a href="' . $tag_page_url . '">and more</a>.';
 					echo '</span>';
-				}
-				$tag_page = get_page_by_path( 'tags' );
-				$tag_page_url = get_permalink( $tag_page->ID );
-				echo '<span class="no_comma no_line">';
-					echo '<a href="' . $tag_page_url . '">and more</a>.';
-				echo '</span>';
-			echo '</div>';
-		echo '</section>';
+				echo '</div>';
+			echo '</section>';
+		echo '</div>';
 
 		if( $feat_cols = get_field( 'featured_columns', $current_issue ) ) {
 			echo '<section id="featured_columns">';
@@ -309,13 +355,13 @@ echo '<div class="readable">';
 					$past_issue_query->the_post();
 					$title = $post->post_title;
 					$thumb_id = get_post_thumbnail_id();
-					$thumb = wp_get_attachment_image_src( $thumb_id, 'medium' );
+					$thumb = wp_get_attachment_image_src( $thumb_id, 'large' );
 					$thumb_url = $thumb[0];
 					$thumb_width = $thumb[1];
 					$thumb_height = $thumb[2];
 					$permalink = get_the_permalink();
 					$contributors = get_contributors_list( $post->ID, true, true );
-					echo '<article class="col col-12 col-sm-6 col-lg-4" role="article" style="' . $style . '">';
+					echo '<article class="col col-6 col-sm-4 col-lg-3" role="article">';
 						echo '<div class="wrap">';
 							echo '<div class="primary">';
 								echo '<a class="link_wrap" href="' . $permalink . '">';

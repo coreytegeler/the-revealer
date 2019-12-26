@@ -17,7 +17,8 @@ $rand_post_args = array(
 	)
 );
 
-if( $discovered = $_POST['discovered'] ) {
+if( isset( $_POST['discovered'] ) ) {
+	$discovered = $_POST['discovered'];
 	$rand_post_args = array_merge( $rand_post_args, array(
 			'post__not_in' => $discovered
 	) );

@@ -9,21 +9,17 @@ $date = get_the_date();
 $issue = get_field( 'issue' );
 $categories = get_cat_list( $id, true );
 $column = get_the_terms( $post, 'columns' )[0];
-$column_url = add_query_arg( 'column', $column->slug, get_site_url() );
 $issue = get_the_terms( $post, 'issues' )[0];
-$content = $post->post_content;
-$excerpt = wp_strip_all_tags( get_the_excerpt() );
 $tags = get_the_tags();
 $permalink = get_the_permalink();
 
 $articles_url = get_articles_page();
 
-$content = $post->post_content;
-$content = apply_filters( 'the_content', $content );
+$content = apply_filters( 'the_content', $post->post_content );
 $content = str_replace( ']]>', ']]&gt;', $content );
 $stripped_content = strip_tags( $content );
 $excerpt = wp_strip_all_tags( get_the_excerpt() );
-
+$category_class = '';
 foreach( get_the_category( $id ) as $i => $cat ) {
 	$category_class .= $cat->slug.' ';
 }

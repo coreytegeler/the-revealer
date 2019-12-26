@@ -21,7 +21,7 @@
 		    @include xSmallShadow($gold);
 		    transition: box-shadow 500ms $ease, transform 500ms $ease;
 		    &[type="email"] {
-		      width: calc(100% - .5em);
+		      width: 100%;
 		      background: $lightest;
 		      border-radius: 1em 0 0 1em;
 		      @include serifText;

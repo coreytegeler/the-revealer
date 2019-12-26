@@ -573,7 +573,7 @@ input {
   #is_mobile {
     content: 'large'; } }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   #is_mobile {
     content: 'medium'; } }
 
@@ -901,7 +901,7 @@ body.articles #wrapper aside {
       top: auto !important;
       bottom: 0; }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   body.articles #wrapper .transport.top {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -978,17 +978,31 @@ body.articles #wrapper aside {
     -webkit-transition: background-color 800ms cubic-bezier(0.19, 1, 0.22, 1), opacity 800ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 800ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: background-color 800ms cubic-bezier(0.19, 1, 0.22, 1), opacity 800ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 800ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: background-color 800ms cubic-bezier(0.19, 1, 0.22, 1), opacity 800ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 800ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: background-color 800ms cubic-bezier(0.19, 1, 0.22, 1), opacity 800ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 800ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 800ms cubic-bezier(0.19, 1, 0.22, 1); }
+    transition: background-color 800ms cubic-bezier(0.19, 1, 0.22, 1), opacity 800ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 800ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 800ms cubic-bezier(0.19, 1, 0.22, 1);
+    position: relative;
+    overflow: hidden; }
     .loop .cell .image img, .loop .col .image img {
       width: 100%;
       max-width: 100%;
       height: auto;
+      position: absolute;
+      left: 0;
+      top: 0;
       margin: 0 auto;
       display: table;
       opacity: 0; }
+      .loop .cell .image img.narrow, .loop .col .image img.narrow {
+        width: auto;
+        max-width: unset;
+        max-height: 100%;
+        height: 100%; }
     .loop .cell .image img, .loop .cell .image svg, .loop .col .image img, .loop .col .image svg {
       -webkit-transition: opacity 500ms cubic-bezier(0.19, 1, 0.22, 1);
       transition: opacity 500ms cubic-bezier(0.19, 1, 0.22, 1); }
+    .loop .cell .image:not(.missing), .loop .col .image:not(.missing) {
+      padding-bottom: 75%; }
+    .loop .cell .image.loaded, .loop .col .image.loaded {
+      background-color: transparent; }
     .loop .cell .image.loaded img, .loop .cell .image.loaded svg, .loop .cell .image.loaded object, .loop .cell .image.missing img, .loop .cell .image.missing svg, .loop .cell .image.missing object, .loop .col .image.loaded img, .loop .col .image.loaded svg, .loop .col .image.loaded object, .loop .col .image.missing img, .loop .col .image.missing svg, .loop .col .image.missing object {
       opacity: 1; }
   .loop .cell .missing, .loop .col .missing {
@@ -1186,20 +1200,56 @@ body.home main .goldbar {
 
 body.home main #home_top {
   margin-bottom: 5rem; }
+  body.home main #home_top .inner {
+    padding: 1em; }
 
 body.home main .cover {
-  position: relative; }
+  position: relative;
+  font-family: "Crimson Text", "Baskerville", times, serif;
+  font-weight: normal; }
   body.home main .cover .inner {
-    background: #eaedee; }
+    background: #eaedee;
+    overflow: hidden; }
   body.home main .cover .issue .goldbar {
     margin: 0; }
+  body.home main .cover .cover-img {
+    width: 10rem;
+    -webkit-box-shadow: 0 0 5em 1em #fecf0c;
+    box-shadow: 0 0 5em 1em #fecf0c; }
+  body.home main .cover a {
+    text-decoration: none; }
   body.home main .cover .title {
-    margin-bottom: .25em; }
+    font-size: 3.5em;
+    line-height: 1.1em; }
+    @media (max-width: 480px) {
+      body.home main .cover .title {
+        font-size: 3em; } }
+    body.home main .cover .title span {
+      text-shadow: 0 0.03em 0 #eaedee, 0 0.06em 0 #eaedee, 0 -0.03em 0 #eaedee, 0 -0.06em 0 #eaedee, -0.03em 0.03em 0 #eaedee, -0.03em 0.06em 0 #eaedee, 0.03em 0.03em 0 #eaedee, 0.03em 0.06em 0 #eaedee, -0.03em 0 0 #eaedee, 0 -0.09em 0 #eaedee;
+      background: -webkit-gradient(linear, left top, left bottom, from(#eaedee), to(#eaedee)), -webkit-gradient(linear, left top, left bottom, from(#eaedee), to(#eaedee)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
+      background: linear-gradient(#eaedee, #eaedee), linear-gradient(#eaedee, #eaedee), linear-gradient(#fecf0c, #fecf0c);
+      background-position: 0 87%,100% 87%,0 92%;
+      background-repeat: no-repeat,no-repeat,repeat-x;
+      background-size: 0.05em 1px, 0.05em 1px, 1px 3px;
+      text-decoration: none;
+      text-shadow: none !important; }
   body.home main .cover .date {
     color: #8f9da2;
-    font-family: "Crimson Text", "Baskerville", times, serif;
-    font-weight: normal;
     font-style: italic; }
+  body.home main .cover .issue_wrap {
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between; }
+  body.home main .cover .editors_letter a:hover strong {
+    text-decoration: underline; }
   body.home main .cover .loop {
     padding-top: 1em; }
     body.home main .cover .loop .col .image {
@@ -1222,9 +1272,18 @@ body.home main .newsletter form {
     margin: 0;
     display: table; }
   body.home main .newsletter form .title {
-    margin-bottom: .5em; }
+    margin-bottom: .5em;
+    font-size: 2.3em;
+    line-height: 1.1em; }
+    @media (max-width: 480px) {
+      body.home main .newsletter form .title {
+        font-size: 2em; } }
   body.home main .newsletter form .inputs {
     max-width: 20em; }
+
+@media (max-width: 1200px) {
+  body.home main .newsletter {
+    display: none !important; } }
 
 body.home main .cover .text, body.home main .newsletter .text {
   width: 100%;
@@ -1242,22 +1301,9 @@ body.home main .cover .title, body.home main .newsletter .title {
   padding: 0;
   font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif !important;
   font-weight: 400 !important;
-  text-transform: lowercase !important;
-  font-size: 2.3em;
-  line-height: 1.1em; }
-  @media (max-width: 480px) {
-    body.home main .cover .title, body.home main .newsletter .title {
-      font-size: 2em; } }
+  text-transform: lowercase !important; }
   body.home main .cover .title a, body.home main .newsletter .title a {
     text-decoration: none; }
-    body.home main .cover .title a:hover, body.home main .newsletter .title a:hover {
-      text-shadow: 0 0.03em 0 #eaedee, 0 0.06em 0 #eaedee, 0 -0.03em 0 #eaedee, 0 -0.06em 0 #eaedee, -0.03em 0.03em 0 #eaedee, -0.03em 0.06em 0 #eaedee, 0.03em 0.03em 0 #eaedee, 0.03em 0.06em 0 #eaedee, -0.03em 0 0 #eaedee, 0 -0.09em 0 #eaedee;
-      background: -webkit-gradient(linear, left top, left bottom, from(#eaedee), to(#eaedee)), -webkit-gradient(linear, left top, left bottom, from(#eaedee), to(#eaedee)), -webkit-gradient(linear, left top, left bottom, from(#fecf0c), to(#fecf0c));
-      background: linear-gradient(#eaedee, #eaedee), linear-gradient(#eaedee, #eaedee), linear-gradient(#fecf0c, #fecf0c);
-      background-position: 0 87%,100% 87%,0 92%;
-      background-repeat: no-repeat,no-repeat,repeat-x;
-      background-size: 0.05em 1px, 0.05em 1px, 1px 3px;
-      text-decoration: none; }
 
 body.home main .cover .lead, body.home main .newsletter .lead {
   color: #8f9da2;
@@ -1680,7 +1726,7 @@ body.single-post #wrapper, body.page-template-default #wrapper {
     body.single-post #wrapper main #related .section_header, body.page-template-default #wrapper main #related .section_header {
       padding-bottom: 1em; }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   body.single-post #wrapper main article.readable .text img.aligncenter, body.single-post #wrapper main article.readable .text img.alignleft, body.single-post #wrapper main article.readable .text img.alignright, body.single-post #wrapper main article.readable .text div.aligncenter, body.single-post #wrapper main article.readable .text div.alignleft, body.single-post #wrapper main article.readable .text div.alignright, body.page-template-default #wrapper main article.readable .text img.aligncenter, body.page-template-default #wrapper main article.readable .text img.alignleft, body.page-template-default #wrapper main article.readable .text img.alignright, body.page-template-default #wrapper main article.readable .text div.aligncenter, body.page-template-default #wrapper main article.readable .text div.alignleft, body.page-template-default #wrapper main article.readable .text div.alignright {
     width: 100%;
     max-width: 100%; }
@@ -1803,7 +1849,7 @@ body.about #wrapper main ul.parent {
     body.about #wrapper main ul.parent.about li .body h2 {
       text-align: left; }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   body.about #wrapper main ul.parent {
     height: auto !important; }
     body.about #wrapper main ul.parent li.cell {
@@ -1889,10 +1935,6 @@ body.about #wrapper main ul.parent {
     width: 100%;
     float: left;
     display: table; }
-    .sections section:nth-of-type(odd) {
-      padding-right: 2em; }
-    .sections section:nth-of-type(even) {
-      padding-left: 2em; }
   .sections.one_one section {
     width: calc(50% - 2em); }
   .sections.one_two section:first-child {
@@ -1903,7 +1945,7 @@ body.about #wrapper main ul.parent {
     width: calc(66.666% - 2em); }
   .sections.two_one section:last-child {
     width: calc(33.333% - 2em); }
-  @media (max-width: 1024px) {
+  @media (max-width: 1200px) {
     .sections.one_two section {
       width: 100% !important;
       padding: 0 0 1em 0; } }
@@ -1914,7 +1956,7 @@ body.about #wrapper main ul.parent {
   font-weight: normal;
   position: relative;
   margin-bottom: 3rem; }
-  .loop.issues .issue a.link_wrap, .loop.issue .issue a.link_wrap {
+  .loop.issues .issue .link_wrap, .loop.issue .issue .link_wrap {
     width: 100%;
     height: 100%;
     padding: .5em 1em 1em 1em;
@@ -1932,16 +1974,13 @@ body.about #wrapper main ul.parent {
     -ms-flex-direction: column;
     flex-direction: column;
     overflow: hidden; }
-    .loop.issues .issue a.link_wrap:hover, .loop.issues .issue a.link_wrap.hover, .loop.issues .issue a.link_wrap:focus, .loop.issue .issue a.link_wrap:hover, .loop.issue .issue a.link_wrap.hover, .loop.issue .issue a.link_wrap:focus {
-      color: #346378;
-      -webkit-box-shadow: 0 0 5em 0 #fecf0c;
-      box-shadow: 0 0 5em 0 #fecf0c; }
+  .loop.issues .issue a.link_wrap:hover, .loop.issues .issue a.link_wrap.hover, .loop.issues .issue a.link_wrap:focus, .loop.issue .issue a.link_wrap:hover, .loop.issue .issue a.link_wrap.hover, .loop.issue .issue a.link_wrap:focus {
+    color: #346378;
+    -webkit-box-shadow: 0 0 5em 0 #fecf0c;
+    box-shadow: 0 0 5em 0 #fecf0c; }
   .loop.issues .issue .text, .loop.issue .issue .text {
     font-size: 2vw;
-    line-height: 1em;
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1; }
+    line-height: 1em; }
     .loop.issues .issue .text h1.title, .loop.issue .issue .text h1.title {
       font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif !important;
       font-weight: 400 !important;
@@ -1952,12 +1991,13 @@ body.about #wrapper main ul.parent {
     .loop.issues .issue .text h3.date, .loop.issue .issue .text h3.date {
       color: inherit !important;
       font-style: italic; }
+    .loop.issues .issue .text:last-child, .loop.issue .issue .text:last-child {
+      padding-bottom: 80%; }
   .loop.issues .issue .image, .loop.issue .issue .image {
     -webkit-box-shadow: none !important;
-    box-shadow: none !important; }
-    .loop.issues .issue .image:empty, .loop.issue .issue .image:empty {
-      padding-bottom: 70%; }
-  @media (max-width: 1024px) {
+    box-shadow: none !important;
+    margin-top: 1rem; }
+  @media (max-width: 1200px) {
     .loop.issues .issue .text, .loop.issue .issue .text {
       font-size: 3vw; } }
   @media (max-width: 768px) {
@@ -2437,7 +2477,7 @@ footer#footer {
       transition: box-shadow 500ms cubic-bezier(0.19, 1, 0.22, 1), transform 500ms cubic-bezier(0.19, 1, 0.22, 1);
       transition: box-shadow 500ms cubic-bezier(0.19, 1, 0.22, 1), transform 500ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 500ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-transform 500ms cubic-bezier(0.19, 1, 0.22, 1); }
       .newsletter form .inputs input[type="email"] {
-        width: calc(100% - .5em);
+        width: 100%;
         background: #f1f5f7;
         border-radius: 1em 0 0 1em;
         font-family: "Crimson Text", "Baskerville", times, serif;

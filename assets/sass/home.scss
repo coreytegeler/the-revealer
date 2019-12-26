@@ -5,22 +5,52 @@ body.home {
 		}
 		#home_top {
 			margin-bottom: 5rem;
+			.inner {
+				padding: 1em;
+			}
 		}
 		.cover {
 			position: relative;
+			@include serifText;
 			.inner {
 				background: $lighter;
+		    overflow: hidden;
 			}
 			.issue .goldbar {
 				margin: 0;
 			}
+			.cover-img {
+				width: 10rem;
+				@include xLargeShadow($gold);
+			}
+			a {
+				text-decoration: none;
+			}
 			.title {
-				margin-bottom: .25em;
+				@include xxLargeText;
+				span {
+					@include underline($gold, $lighter, 3px);
+					text-shadow: none !important;
+				}
 			}
 			.date {
 				color: $medium;
-				@include serifText;
 				font-style: italic;
+			}
+			.issue_wrap {
+		    height: 100%;
+		    display: flex;
+		    flex-direction: column;
+		    justify-content: space-between;
+			}
+			.editors_letter {
+				a {
+					&:hover strong {
+						// @include underline($gold, $lighter, 3px);
+						// text-shadow: none !important;
+						text-decoration: underline;
+					}
+				}
 			}
 			.loop {
 				padding-top: 1em;
@@ -51,11 +81,15 @@ body.home {
 				}
 				.title {
 					margin-bottom: .5em;
+					@include xLargeText;
 				}
 				.inputs {
 					max-width: 20em;
 					// margin: auto;
 				}
+			}
+			@include medium {
+				display: none !important;
 			}
 		}
 		.cover, .newsletter {
@@ -74,12 +108,8 @@ body.home {
 				z-index: 100;
 				padding: 0;
 				@include revealerText;
-				@include xLargeText;
 				a {
 					text-decoration: none;
-					&:hover {
-						@include underline($gold, $lighter, 3px);
-					}
 				}
 			}
 			.lead {

@@ -5,8 +5,8 @@ if( $query_string ) {
 	wp_parse_str( $query_string, $search_args );
 }
 echo '<div id="searchform">';
-	echo '<form action="' . get_bloginfo('siteurl') . '" method="get">';
-		if( isset( $search_args ) && $search_args['s']) {
+	echo '<form action="' . get_bloginfo('url') . '" method="get">';
+		if( isset( $search_args ) && isset( $search_args['s'] ) ) {
 			$placeholder = 'Seeking something else?';
 		} else {
 			$placeholder = 'Seeking something?';

@@ -60,10 +60,10 @@
 		float: left;
 		display: table;
 		&:nth-of-type(odd) {
-			padding-right: 2em;
+			// padding-right: 2em;
 		}
 		&:nth-of-type(even) {
-			padding-left: 2em;
+			// padding-left: 2em;
 		}
 	}
 	&.one_one {

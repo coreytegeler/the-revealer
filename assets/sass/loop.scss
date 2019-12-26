@@ -49,16 +49,33 @@
 			display: block;
 			background-color: $lighter;
 			transition: background-color 800ms $ease, opacity 800ms $ease, box-shadow 800ms $ease;
+			position: relative;
+			overflow: hidden;
 			img {
 				width: 100%;
 				max-width: 100%;
 				height: auto;
+				position: absolute;
+				left: 0;
+				top: 0;
 				margin: 0 auto;
 				display: table;
 				opacity: 0;
+				&.narrow {
+					width: auto;
+					max-width: unset;
+					max-height: 100%;
+					height: 100%;
+				}
 			}
 			img, svg {
 				transition: opacity 500ms $ease;
+			}
+			&:not(.missing) {
+				padding-bottom: 75%;
+			}
+			&.loaded {
+				background-color: transparent;
 			}
 			&.loaded, &.missing {
 				img, svg, object {

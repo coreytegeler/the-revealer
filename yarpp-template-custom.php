@@ -11,6 +11,7 @@ if ( have_posts() ) {
 			while ( have_posts() ) {
 				the_post();
 				set_query_var( 'col_size', 'col-12 col-sm-6 col-lg-3' );
+				set_query_var( 'article', $post );
 				get_template_part( 'parts/article' );
 			}
 			wp_reset_query();
