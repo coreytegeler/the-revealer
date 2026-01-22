@@ -3,12 +3,12 @@
 Template Name: Category
 */
 get_header();
-$cat_param = $_GET['category'];
+$cat_param = $_GET['category'] ?? null;
 if( $cat_id = get_query_var( 'cat' ) ) {
 	$cat_param = get_category( $cat_id, false )->slug;
 }
-$year_param = $_GET['y'];
-$column_param = $_GET['column'];
+$year_param = $_GET['y'] ?? null;
+$column_param = $_GET['column'] ?? null;
 // $paged = $_GET['page'];
 $paged = get_query_var( 'paged' );
 if( !$paged ) {
@@ -22,21 +22,20 @@ $articles_args = array(
 
 
 $tax_query = array();
-if( $cat_param && sizeof( $cat_param ) ) {
+if( !empty( $cat_param ) ) {
 	$articles_args['category_name'] = $cat_param;
 }
-if( $year_param && sizeof( $year_param ) ) {
+if( !empty( $year_param ) ) {
 	$articles_args['year'] = $year_param;
 }
-if( $column_param && sizeof( $column_param ) ) {
+if( !empty( $column_param ) ) {
 	$tax_query[] = array(
 		'taxonomy' => 'columns',
 		'field' => 'slug',
-	  'terms' => $column_param,
+		'terms' => $column_param,
   );
 }
-
-if( $tax_query && sizeof( $tax_query ) ) {
+if( !empty( $tax_query ) ) {
 	$articles_args['tax_query'] = $tax_query;
 }
 
