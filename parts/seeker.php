@@ -8,7 +8,7 @@ echo '<div class="search_header">';
 			echo '<div class="shape"></div>';
 			echo '<div class="shape"></div>';
 			echo '<a class="stats" href="' . $discover_url . '">';
-				echo '<h1><div class="animation glisten bounce">' . wrap_words( 'discover more' ) . '</div></h1>';
+				echo '<h2><div class="animation glisten bounce">' . wrap_words( 'discover more' ) . '</div></h2>';
 			echo '</a>';
 		echo '</div>';
 	echo '</div>';

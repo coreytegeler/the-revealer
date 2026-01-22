@@ -6,11 +6,21 @@ $id = $issue->term_id;
 $issue_url = get_term_link( $id, 'issues' );
 $date = get_field( 'date', $issue );
 $thumb = get_field( 'featured_image', $issue );
+$special = get_field( 'special', $issue );
+$special_title = get_field( 'special_title', $issue );
 echo '<div class="col ' . ( $col_size ? $col_size : 'col-12') . ' issue" role="issue">';
+	if( $special ) {
+		echo '<div class="label special">Special Issue</div>';
+	}
 	echo !isset( $no_link ) ? '<a class="link_wrap" href="' . $issue_url . '">' : '<div class="link_wrap">';
 		echo '<div class="text">';
-			echo '<h1 class="title">' . $title . '</h1>';
-			echo '<h3 class="date">published ' . $date . '</h3>';
+			echo '<hgroup>';
+				echo '<h2 class="title">' . $title . '</h2>';
+				if( $special && $special_title ) {
+					echo '<div class="subtitle">' . $special_title . '</div>';
+				}
+			echo '</hgroup>';
+			echo '<div class="date">' . $date . '</div>';
 		echo '</div>';
 		if( $thumb ) {
 			$thumb_id = $thumb['ID'];

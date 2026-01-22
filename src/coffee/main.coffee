@@ -130,12 +130,6 @@ jQuery ($) ->
 		fixCarouselHeight = ($slide) ->
 			$caption = $slide.find('.caption')
 			captionHeight = $caption.innerHeight()
-			console.log captionHeight
-			# minHeight = $carousel.css('content').replace(/['"]+/g,'')
-			# height =  'calc('+minHeight+' + '+captionHeight+'px)'
-			# $carousel.transition
-				# 'height': height
-			# , 200, 'out'
 
 		clickCarouselArrow = () ->
 			$arrow = $(this)
@@ -205,7 +199,6 @@ jQuery ($) ->
 					else
 						src = $image.attr('data-src')
 
-					# src = src.replace('http://', 'https://')
 					image = new Image()
 					image.onload = (e) ->
 						img = e.target
@@ -224,10 +217,9 @@ jQuery ($) ->
 					image.onerror = (e) ->
 						img = e.target
 						loadImage($image)
-					image.src = src
+					if !$parent.is(".post") && src
+						image.src = src
 				$loop = $image.parents('.loop')[0]
-				# if $loop.length && $loop.is('.masonry')
-				# 		$masonry.masonry()
 
 			$('article.readable .wp-caption').each (i, elem) ->
 				$img = $(elem).find('img')
@@ -272,22 +264,13 @@ jQuery ($) ->
 							$missingCell = $cell
 						else
 							$missingCell = $(this)
-						if $missingImg = $missingCell.find('img')
-							$missingImg.remove()
-						$missingImage = $missingCell.find('.image')
-						missingUrl = $('#missingSvg').attr('data-url')
-						$missingCell.load missingUrl, null, () ->
-							$missingCell.addClass('missing')
+						$missingCell.addClass('missing')
 						if $cell.length
 							$cell.addClass('show')
 					if $loop = $img.parents('.masonry:eq(0)')
 						fixLoops($loop)
 			if $img.length
 				$img.attr('src', src)
-			else
-				$image.css
-					backgroundImage: 'url('+src+')'
-
 
 		fixLoops = ($loops, $cells) ->
 			if !$loops
@@ -308,6 +291,7 @@ jQuery ($) ->
 						transitionDuration: 0,
 						percentPosition: true,
 						fitWidth: true
+					$loop.masonry('layout')
 				if $cells && $cells.length
 					if isMasonry
 						$loop.masonry('appended', $cells)
@@ -342,15 +326,6 @@ jQuery ($) ->
 			$side.css
 				height: sideHeight,
 				top: headerHeight
-
-			# sideTop = $side.position().top
-			# sideHeight = $side.innerHeight()
-			# sideScroll = $side.scrollTop()
-			# sideScrollHeight = $side[0].scrollHeight
-			# sideScrolled = sideHeight + sideScroll
-			# sideRemain = sideScrollHeight - sideScrolled
-			# scrollDiff = sideRemain - mainRemain
-			# nextSideScroll = scrollDiff
 
 		trackScroll = (e) ->
 			$readable = $('.readable')
@@ -439,9 +414,6 @@ jQuery ($) ->
 					$toggler.addClass('no-toggle')
 				else
 					$toggler.removeClass('no-toggle')
-
-			
-
 
 		# alters and appends article body text to make posts more dynamic
 		setupArticle = () ->
@@ -604,7 +576,9 @@ jQuery ($) ->
 						id = $cell.attr('data-id')
 						discovered.push(id)
 				i = 0
-				while i < 50
+
+				cellCount = if $body.is('.search') then 48 else 12;
+				while i < cellCount
 					$cell = $('<div class="cell discover thumb empty"><div class="wrap"><div class="circle"></div></div></div>')
 					$loop.append($cell)
 					i++
@@ -662,24 +636,32 @@ jQuery ($) ->
 					$spans.each (si, span) ->
 						animateText(span, si)
 					$wrap.addClass('show')
-			, 400
+			, 1000
 
 		animateText = (html, index) ->
 			setTimeout () ->
 				$(html).addClass('animate')
 			, 50*index
 
-		$('body').on('click touchend', 'article.readable a, article.readable img', openCarousel)
-		$('body').on('click touchend', '#carousel .close', closeCarousel)
-		$('body').on 'click touchend', '#carousel.loaded.slidable .arrow:not(.no)', clickCarouselArrow
+		$('body').on('click', 'article.readable a, article.readable img', openCarousel)
+		# $('body').on('click touchend', '#carousel .close', closeCarousel)
+		$('body').on('click', '#carousel .close', closeCarousel)
+		# $('body').on 'click touchend', '#carousel.loaded.slidable .arrow:not(.no)', clickCarouselArrow
+		$('body').on 'click', '#carousel.loaded.slidable .arrow:not(.no)', clickCarouselArrow
 
-		$('body').on('click touchend', '.transport', transport)
-		$('body').on('click touchend', '.toggle[data-toggle]', toggleToggler)
-		$('body').on('click touchend', '#alert .close', closeAlert)
-		$('body').on('click touchend', '#popup .close', closePopup)
+		# $('body').on('click touchend', '.transport', transport)
+		$('body').on('click', '.transport', transport)
+		# $('body').on('click touchend', '.toggle[data-toggle]', toggleToggler)
+		$('body').on('click', '.toggle[data-toggle]', toggleToggler)
+		# $('body').on('click touchend', '#alert .close', closeAlert)
+		$('body').on('click', '#alert .close', closeAlert)
+		# $('body').on('click touchend', '#popup .close', closePopup)
+		$('body').on('click', '#popup .close', closePopup)
 		$('body').on('hover', '.cell .link_wrap', hoverCell)
-		$('body').on('click touchend', 'header nav .link a', toggleSeeker)
-		$('body').on('click touchend', '.super.seeker .close', closeSeeker)
+		# $('body').on('click touchend', 'header nav .link a', toggleSeeker)
+		$('body').on('click', 'header nav .link a', toggleSeeker)
+		# $('body').on('click touchend', '.super.seeker .close', closeSeeker)
+		$('body').on('click', '.super.seeker .close', closeSeeker)
 		
 		if $popup.length
 			popupObj = JSON.parse(localStorage.getItem('popup'))
@@ -692,6 +674,9 @@ jQuery ($) ->
 
 		if $body.is('.search')
 			$('.search_header input#searchbox').focus()
+
+		if !$body.is('.discover')
+			queryMore()
 
 		$window.on 'resize', () ->
 			fixLoops()

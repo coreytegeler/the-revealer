@@ -1,68 +1,89 @@
-var argv = require('yargs').argv;
-var gulpif = require('gulp-if');
-var rename = require('gulp-rename');
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var plumber = require('gulp-plumber');
-var sass = require('gulp-sass');
-var coffee = require('gulp-coffee');
-var rupture = require('rupture');
-var autoprefixer = require('gulp-autoprefixer');
-var htmlmin = require('gulp-htmlmin');
-var replace = require('gulp-replace');
-var htmlreplace = require('gulp-html-replace');
+const argv = require('yargs').argv;
+const gulp = require('gulp');
+const gutil = require('gulp-util');
+const sass = require('gulp-sass')(require('sass'));
+const coffee = require('gulp-coffee');
+const zip = require('gulp-zip');
 
-var paths = {
-  sass: './assets/sass/*.scss',
-  coffee: './assets/coffee/*.coffee',
+const paths = {
+  sass: './src/sass/*.scss',
+  coffee: './src/coffee/*.coffee',
 }
 
-var dest = {
+const dest = {
   css: './',
   js: './assets/js/',
   images: './assets/images/',
   webfonts: './assets/webfonts/'
 }
 
-function compileSass()  {
-  var options = {
-    use: [rupture(), autoprefixer()],
-    compress: argv.prod ? true : false
+function compileSass() {
+  const options = {
   };
-  return gulp.src(['./assets/sass/admin.scss', './assets/sass/style.scss'])
-    .pipe(plumber())
-    .pipe(sass(options))
-    .pipe(replace('images/', dest.images))
-    .pipe(replace('webfonts/', dest.webfonts))
-    .pipe(autoprefixer({
-      browsers: ['last 2 versions'],
-      cascade: false
-    }))
+  return gulp.src([
+    './src/sass/admin.scss',
+    './src/sass/style.scss'
+  ])
+    .pipe(sass(options).on('error', sass.logError))
     .pipe(gulp.dest(dest.css))
-  .on('end', function() {
-    log('Sass done');
-    if (argv.prod) log('CSS minified');
-  });
+    .on('end', function () {
+      log('Sass done');
+      if (argv.prod) log('CSS minified');
+    });
 }
 
-function compileCoffee()  {
-  return gulp.src('./assets/coffee/main.coffee')
-    .pipe(coffee({bare: true}))
+function compileCoffee() {
+  return gulp.src('./src/coffee/main.coffee')
+    .pipe(coffee({ bare: true }))
     .pipe(gulp.dest(dest.js))
-  .on('end', function() {
-    log('Coffee done');
-    if (argv.prod) log('JS minified');
-  });
+    .on('end', function () {
+      log('Coffee done');
+      if (argv.prod) log('JS minified');
+    });
 }
 
-function watchFiles()  {
+function watchFiles() {
   gulp.watch(paths.sass, compileSass);
   gulp.watch(paths.coffee, compileCoffee);
 }
 
+function packageTheme() {
+  return gulp.src([
+    '**/*',
+    '!node_modules/**',
+    '!src/**',
+    '!.git/**',
+    '!.gitignore',
+    '!.DS_Store',
+    '!gulpfile.js',
+    '!package.json',
+    '!package-lock.json',
+    '!*.zip',
+    '!error_log'
+  ], { base: '..' })
+    .pipe(zip('the-revealer-wp-theme.zip'))
+    .pipe(gulp.dest('.'))
+    .on('end', function () {
+      log('Theme packaged successfully!');
+    });
+}
 
-gulp.task('dev', gulp.parallel(compileSass, compileCoffee, watchFiles));
-gulp.task('prod', gulp.parallel(compileSass, compileCoffee));
+
+gulp.task('dev', gulp.parallel(
+  compileSass,
+  compileCoffee,
+  watchFiles
+));
+
+gulp.task('prod', gulp.parallel(
+  compileSass,
+  compileCoffee
+));
+
+gulp.task('package', gulp.series(
+  gulp.parallel(compileSass, compileCoffee),
+  packageTheme
+));
 
 function log(message) {
   gutil.log(gutil.colors.bold.green(message));

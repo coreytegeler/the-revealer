@@ -3,11 +3,11 @@
 Template Name: Events
 */
 get_header();
-$paged = get_query_var( 'paged' );
+$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 $events_args = array(
 	'post_type' => 'event',
 	'paged' => $paged,
-	'posts_per_page' => -1,
+	'posts_per_page' => 12,
 	'order' => 'DESC',
 	'orderby' => 'meta_value',
 	'meta_key' => 'event_date'
@@ -23,9 +23,9 @@ echo '<div class="readable">';
 				get_template_part( 'parts/event' );
 			}
 		}
+		get_template_part( 'parts/pagination' );
 		wp_reset_query();
 	echo '</div>';
 echo '</div>';
-get_template_part( 'parts/pagination' );
 get_footer();
 ?>

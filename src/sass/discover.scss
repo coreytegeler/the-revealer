@@ -60,7 +60,7 @@ body.discover:not(.seeking), body.error404:not(.seeking) {
             margin: auto;
             @include mediumShadow(white);
             background: {
-              image: url(images/loading1.gif);
+              image: url(assets/images/loading1.gif);
               position: center;
               repeat: no-repeat;
               size: cover;
@@ -120,6 +120,7 @@ body.discover:not(.seeking), body.error404:not(.seeking) {
           pointer-events: all;
           .image, .circle {
             transition: transform 500ms $ease, box-shadow 800ms $ease, opacity 500ms $ease;
+            background-color: white;
           }
           .title {
             transition: transform 800ms $ease;

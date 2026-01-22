@@ -2,7 +2,7 @@
 // show_admin_bar( false );
 
 function revealer_enqueue() {
-	$ver = '2.7.8';
+	$ver = '2.8.15';
 	wp_register_script( 'jquery', get_template_directory_uri() . '/assets/js/jquery-3.2.1.min.js' );
 	wp_register_script( 'imagesloaded', get_template_directory_uri() . '/assets/js/imagesloaded.js' );
 	wp_register_script( 'transit', get_template_directory_uri() . '/assets/js/transit.js' );
@@ -94,7 +94,7 @@ function get_contributors_list( $id, $show_writers = false, $show_contributors =
 			$contributors[] = get_sub_field( 'name' );
 		endwhile;
 	}
-	return implode( $contributors, ', ' );
+	return implode( ', ', $contributors );
 }
 
 function get_tags_list() {
@@ -105,7 +105,7 @@ function get_tags_list() {
 		}
 		
 	}
-	return implode( $tags_array, ', ' ); 
+	return implode( ', ', $tags_array ); 
 }
 
 function get_cat_list( $id, $link = false ) {
@@ -141,7 +141,6 @@ function get_cat_list( $id, $link = false ) {
 				$html .= ', ';
 			}
 		}
-		// print_r( $categories );
 	}
 	return $html;
 }
@@ -207,6 +206,24 @@ function get_col_span( $id, $posts_query = null ) {
 	return $begin . '&mdash;' . $end;
 }
 
+function get_svg( $filename ) {
+	// $ch = curl_init($url);
+	// curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	// curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	// curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+	// curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+	// $data = curl_exec($ch);
+	// curl_close($ch);
+	// return $data;
+	$filepath = get_template_directory() . '/assets/images/' . $filename . '.svg';
+	if ( file_exists( $filepath) ) {
+		$content = file_get_contents( $filepath );
+		return $content;
+	} else {
+		return '<span data-src="' . $filepath . '"></span>';
+	}
+}
+
 function urlify( $url ) {
 	if ( !preg_match( '~^(?:f|ht)tps?://~i', $url ) ) {
 		$url = 'http://' . $url;
@@ -235,10 +252,27 @@ function add_query_vars( $vars ){
 	$vars[] .= 'year';
 	$vars[] .= 'tag';
 	$vars[] .= 'column';
-	// $vars[] .= 'page';
 	return $vars;
 }
 add_filter( 'query_vars', 'add_query_vars' );
+
+function register_podcasts() {
+	register_post_type( 'podcast',
+		array(
+			'labels' => array(
+				'name' => __( 'Podcast' ),
+				'singular_name' => __( 'Podcast Episode' )
+			),
+			'menu_position' => 5,
+			'menu_icon' => 'dashicons-microphone',
+			'public' => true,
+			'has_archive' => false,
+			'show_in_rest' => true,
+			'supports' => array('title', 'thumbnail', 'editor')
+		)
+	);
+}
+add_action( 'init', 'register_podcasts' );
 
 function register_events() {
 	register_post_type( 'event',
@@ -356,14 +390,18 @@ function customize_menu() {
 }
 add_action( 'admin_menu', 'customize_menu' );
 
-if( function_exists('acf_add_options_page') ) {
-	acf_add_options_page(); 
-}
-
 function register_nav() {
 	register_nav_menu( 'navigation', __( 'Navigation' ) );
 }
 add_action( 'init', 'register_nav' );
+
+
+function add_options() {
+	if( function_exists('acf_add_options_page') ) {
+		acf_add_options_page(); 
+	}
+}
+add_action( 'init', 'add_options' );
 
 function add_custom_tax_filters() {
 	global $typenow;
@@ -424,8 +462,9 @@ function add_admin_styles() {
 add_action( 'init', 'add_admin_styles' );
 
 if( function_exists( 'add_theme_support' ) ) {
-	add_theme_support( 'post-thumbnails', array( 'post', 'page', 'event' ) );
+	add_theme_support( 'post-thumbnails', array( 'post', 'page', 'event', 'podcast' ) );
 	add_image_size( 'article-thumb', 800, 600, true );
+	add_image_size( 'article-og', 1200, 630, true );
 }
 
 function add_custom_sizes_names_choose( $sizes ) {

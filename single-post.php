@@ -6,10 +6,9 @@ $thumb = get_the_post_thumbnail_url( $post );
 $slug = $post->post_name;
 $id = $post->ID;
 $date = get_the_date();
-$issue = get_field( 'issue' );
 $categories = get_cat_list( $id, true );
-$column = get_the_terms( $post, 'columns' )[0];
-$issue = get_the_terms( $post, 'issues' )[0];
+$columns = get_the_terms( $post, 'columns' );
+$issues = get_the_terms( $post, 'issues' );
 $tags = get_the_tags();
 $permalink = get_the_permalink();
 
@@ -27,8 +26,8 @@ echo '<article class="post readable ' . $category_class . '">';
 	echo '<div class="text">';
 		echo '<div class="lead">';
 			echo '<div class="header">';
-				if( $column ) {
-					echo '<h1 class="label column">' . $column->name . '</h1>';
+				if( $columns ) {
+					echo '<h1 class="label column">' . $columns[0]->name . '</h1>';
 				}
 				echo '<h1 class="title">';
 					echo $title;
@@ -87,19 +86,20 @@ echo '<article class="post readable ' . $category_class . '">';
 				echo '</div>';
 				// echo '<div class="close">';
 				// 	$x_svg_url = get_template_directory_uri() . '/assets/images/x.svg';
-				// 	$x_svg = file_get_contents( $x_svg_url );
+				// 	$x_svg = get_svg( $x_svg_url );
 				// 	echo '<div class="circle">' . $x_svg . '</div>';
 				// echo '</div>';
 			echo '</div>';
 		}
 		
 		echo '<div class="content">';
-			echo $content;
+			echo wpautop( $content );
 		echo '</div>';
 
 		echo '<div class="foot">';
 			echo '<div class="meta">';
-				if( $issue && $issue_name = $issue->name ) {
+				if( $issues ) {
+					$issue_name = $issues[0]->name;
 					echo '<div class="row issue commas">';
 						echo '<span class="no_comma">Issue:&nbsp;</span>';
 						echo '<span><a href="#">' . $issue_name . '</a></span>';
@@ -132,13 +132,20 @@ echo '<article class="post readable ' . $category_class . '">';
 				echo '<div class="social share">';
 					echo '<div class="rows links">';
 						echo '<span>Share this article on </span>';
-						$fb_svg = get_template_directory_uri() . '/assets/images/facebook.svg';
-						$twitter_svg = get_template_directory_uri() . '/assets/images/twitter.svg';
-						echo '<a href="https://www.facebook.com/sharer/sharer.php?sdk=joey&u=' . $permalink . '">' . file_get_contents( $fb_svg ) . '</a>';
+						echo '<a href="https://www.facebook.com/sharer/sharer.php?u=' . urlencode( $permalink ) . '" title="Facebook" target="_blank">' . get_svg( 'facebook' ) . '</a>';
 						echo '<span> or </span>';
-						echo '<a href="https://twitter.com/share?url=' . $permalink . '">' . file_get_contents( $twitter_svg ) . '</a>';
+						// echo '<a href="https://twitter.com/share?url=' . urlencode( $permalink ) . '" target="_blank">' . get_svg( 'twitter' ) . '</a>';
+						echo '<a href="https://bsky.app/intent/compose?text=' . urlencode( $permalink ) . '" title="Bluesky" target="_blank">' . get_svg( 'bluesky' ) . '</a>';
 					echo '</div>';
 				echo '</div>';
+
+				echo '<div class="donate share">';
+					echo '<p>';
+						echo 'Support The Revealer’s work with a <a href="https://www.givecampus.com/campaigns/25897/donations/new?designation=centerforreligionandmediafund&" target="_blank">tax-deductible gift</a> to the Center for Religion and Media at NYU';
+					echo '</p>';
+				echo '</div>';
+
+
 			echo '</div>';
 		echo '</div>';
 
@@ -146,17 +153,14 @@ echo '<article class="post readable ' . $category_class . '">';
 	// get_template_part( 'parts/pagination' );
 echo '</article>';
 
-related_posts();
+yarpp_related();
 
 echo '<div class="carousel" id="carousel">';
 	echo '<div class="slides"></div>';
-	$left_svg = get_template_directory_uri() . '/assets/images/left.svg';
-	$right_svg = get_template_directory_uri() . '/assets/images/right.svg';
-	echo '<div class="arrow left" data-direction="left">' . file_get_contents( $left_svg ) . '</div>';
-	echo '<div class="arrow right" data-direction="right">' . file_get_contents( $right_svg ) . '</div>';
+	echo '<div class="arrow left" data-direction="left">' . get_svg( 'left' ) . '</div>';
+	echo '<div class="arrow right" data-direction="right">' . get_svg( 'right' ) . '</div>';
 	echo '<div class="close circle">';
-		$x_svg = get_template_directory_uri() . '/assets/images/x.svg';
-		echo file_get_contents( $x_svg );
+		echo get_svg( 'x' );
 	echo '</div>';
 echo '</div>';
 get_footer();

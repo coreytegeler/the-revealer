@@ -93,8 +93,7 @@ Version: 2.1.1
     transform: translateY(0);
   }
 }
-html,
-body {
+html, body {
   font-family: Helvetica, Arial, sans-serif;
   font-weight: 400;
   font-size: 20px;
@@ -109,13 +108,11 @@ body {
   visibility: visible;
 }
 @media (max-width: 768px) {
-  html,
-  body {
+  html, body {
     font-size: 18px;
   }
 }
-html.no_scroll,
-body.no_scroll {
+html.no_scroll, body.no_scroll {
   overflow: hidden !important;
   overflow-y: hidden !important;
   overflow-x: hidden !important;
@@ -206,8 +203,7 @@ h4 {
   margin: 0;
 }
 
-em,
-i {
+em, i {
   font-style: italic;
 }
 
@@ -262,32 +258,9 @@ input:focus {
   font-weight: 400 !important;
   text-transform: lowercase !important;
 }
-.page-title {
-  margin-bottom: 0.25em;
-  font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif !important;
-  font-weight: 400 !important;
-  text-transform: lowercase !important;
-  font-size: 3rem;
-  line-height: 1.1em;
-}
-.page-title.center {
-  text-align: center;
-}
-
-.sr-only {
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
-}
-
 #wrapper {
   width: 100%;
   position: relative;
-  margin-top: 68px;
 }
 #wrapper main {
   position: relative;
@@ -510,7 +483,7 @@ body.has_hover .toggle:hover .circle {
   margin: auto;
   display: block;
 }
-.stats h2 {
+.stats h1 {
   text-align: center;
   font-style: normal;
   transform: translateY(0);
@@ -658,14 +631,10 @@ body.has_hover .circle.close:hover svg {
   }
 }
 @media (max-width: 480px) {
-  #wrapper main,
-  #wrapper.split main,
-  #wrapper.full main {
+  #wrapper main, #wrapper.split main, #wrapper.full main {
     padding: 0.5em 1em 4em 1em;
   }
-  #wrapper main .pagination .paginate .link_text,
-  #wrapper.split main .pagination .paginate .link_text,
-  #wrapper.full main .pagination .paginate .link_text {
+  #wrapper main .pagination .paginate .link_text, #wrapper.split main .pagination .paginate .link_text, #wrapper.full main .pagination .paginate .link_text {
     display: none;
   }
   #is_mobile {
@@ -890,7 +859,9 @@ body.articles #wrapper aside .content {
   padding: 2em 0;
 }
 body.articles #wrapper aside #filters {
-  padding: 2.5em 0 4em 0;
+  padding: 2em 0 4em 0;
+  flex: 1;
+  max-height: 100%;
 }
 body.articles #wrapper aside #filters .filter {
   padding: 0 0 2em 0;
@@ -1004,13 +975,11 @@ body.articles #wrapper aside.bottom aside {
 .loop.row article {
   margin-bottom: 5em;
 }
-.loop .cell,
-.loop .col {
+.loop .cell, .loop .col {
   transition: none;
   position: relative;
 }
-.loop .cell .label,
-.loop .col .label {
+.loop .cell .label, .loop .col .label {
   width: 100%;
   position: absolute;
   left: 0;
@@ -1018,9 +987,7 @@ body.articles #wrapper aside.bottom aside {
   display: table;
   margin: auto;
 }
-.loop .cell .label.categories, .loop .cell .label.special,
-.loop .col .label.categories,
-.loop .col .label.special {
+.loop .cell .label.categories, .loop .col .label.categories {
   text-transform: uppercase;
   font-weight: 400;
   font-size: 0.8em;
@@ -1029,33 +996,21 @@ body.articles #wrapper aside.bottom aside {
   text-align: center;
   color: #8f9da2;
 }
-.loop .cell .label.column,
-.loop .col .label.column {
+.loop .cell .label.column, .loop .col .label.column {
   font-size: 1.2em;
   line-height: 1.4em;
 }
-.loop .cell a.link_wrap,
-.loop .col a.link_wrap {
+.loop .cell a.link_wrap, .loop .col a.link_wrap {
   text-decoration: none;
   display: block;
 }
-.loop .cell a.link_wrap:hover .image,
-.loop .cell a.link_wrap:hover .missing, .loop .cell a.link_wrap:focus .image,
-.loop .cell a.link_wrap:focus .missing,
-.loop .col a.link_wrap:hover .image,
-.loop .col a.link_wrap:hover .missing,
-.loop .col a.link_wrap:focus .image,
-.loop .col a.link_wrap:focus .missing {
+.loop .cell a.link_wrap:hover .image, .loop .cell a.link_wrap:hover .missing, .loop .cell a.link_wrap:focus .image, .loop .cell a.link_wrap:focus .missing, .loop .col a.link_wrap:hover .image, .loop .col a.link_wrap:hover .missing, .loop .col a.link_wrap:focus .image, .loop .col a.link_wrap:focus .missing {
   box-shadow: 0 0 5em 0 #fecf0c;
 }
-.loop .cell.hover .image,
-.loop .cell.hover .missing,
-.loop .col.hover .image,
-.loop .col.hover .missing {
+.loop .cell.hover .image, .loop .cell.hover .missing, .loop .col.hover .image, .loop .col.hover .missing {
   box-shadow: 0 0 5em 0 #fecf0c;
 }
-.loop .cell .image,
-.loop .col .image {
+.loop .cell .image, .loop .col .image {
   width: 100%;
   margin: 0;
   padding-bottom: 75%;
@@ -1068,8 +1023,7 @@ body.articles #wrapper aside.bottom aside {
   background-repeat: no-repeat;
   background-size: cover;
 }
-.loop .cell .image img,
-.loop .col .image img {
+.loop .cell .image img, .loop .col .image img {
   width: 100%;
   max-width: 100%;
   height: auto;
@@ -1080,50 +1034,30 @@ body.articles #wrapper aside.bottom aside {
   display: table;
   opacity: 0;
 }
-.loop .cell .image img.narrow,
-.loop .col .image img.narrow {
+.loop .cell .image img.narrow, .loop .col .image img.narrow {
   width: auto;
   max-width: unset;
   max-height: 100%;
   height: 100%;
 }
-.loop .cell .image img,
-.loop .cell .image svg,
-.loop .col .image img,
-.loop .col .image svg {
+.loop .cell .image img, .loop .cell .image svg, .loop .col .image img, .loop .col .image svg {
   transition: opacity 500ms cubic-bezier(0.19, 1, 0.22, 1);
 }
-.loop .cell .image.missing,
-.loop .col .image.missing {
+.loop .cell .image.missing, .loop .col .image.missing {
   background-image: url(images/missing.svg) !important;
 }
-.loop .cell .image.loaded,
-.loop .col .image.loaded {
+.loop .cell .image.loaded, .loop .col .image.loaded {
   background-color: transparent;
 }
-.loop .cell .image.loaded img,
-.loop .cell .image.loaded svg,
-.loop .cell .image.loaded object, .loop .cell .image.missing img,
-.loop .cell .image.missing svg,
-.loop .cell .image.missing object,
-.loop .col .image.loaded img,
-.loop .col .image.loaded svg,
-.loop .col .image.loaded object,
-.loop .col .image.missing img,
-.loop .col .image.missing svg,
-.loop .col .image.missing object {
+.loop .cell .image.loaded img, .loop .cell .image.loaded svg, .loop .cell .image.loaded object, .loop .cell .image.missing img, .loop .cell .image.missing svg, .loop .cell .image.missing object, .loop .col .image.loaded img, .loop .col .image.loaded svg, .loop .col .image.loaded object, .loop .col .image.missing img, .loop .col .image.missing svg, .loop .col .image.missing object {
   opacity: 1;
 }
-.loop .cell .missing,
-.loop .col .missing {
+.loop .cell .missing, .loop .col .missing {
   height: 100%;
   background-color: #eaedee;
   display: table;
 }
-.loop .cell .missing svg,
-.loop .cell .missing object,
-.loop .col .missing svg,
-.loop .col .missing object {
+.loop .cell .missing svg, .loop .cell .missing object, .loop .col .missing svg, .loop .col .missing object {
   width: 100%;
   height: auto;
   fill: #8f9da2;
@@ -1131,20 +1065,16 @@ body.articles #wrapper aside.bottom aside {
   display: table;
   pointer-events: none;
 }
-.loop .cell.no_image .primary .label.categories,
-.loop .col.no_image .primary .label.categories {
+.loop .cell.no_image .primary .label.categories, .loop .col.no_image .primary .label.categories {
   padding: 0;
 }
-.loop .cell .primary .link_wrap,
-.loop .col .primary .link_wrap {
+.loop .cell .primary .link_wrap, .loop .col .primary .link_wrap {
   margin: 0 0 0.5em 0;
 }
-.loop .cell .secondary .title,
-.loop .col .secondary .title {
+.loop .cell .secondary .title, .loop .col .secondary .title {
   transition: color 500ms cubic-bezier(0.19, 1, 0.22, 1);
 }
-.loop .cell .secondary .title h2,
-.loop .col .secondary .title h2 {
+.loop .cell .secondary .title h2, .loop .col .secondary .title h2 {
   width: 100%;
   text-align: left;
   margin: 0;
@@ -1153,35 +1083,29 @@ body.articles #wrapper aside.bottom aside {
   word-break: break-word;
   hyphens: auto;
 }
-.loop .cell .secondary .title h2 span.column,
-.loop .col .secondary .title h2 span.column {
+.loop .cell .secondary .title h2 span.column, .loop .col .secondary .title h2 span.column {
   font-weight: 600;
 }
-.loop .cell .secondary .meta,
-.loop .col .secondary .meta {
+.loop .cell .secondary .meta, .loop .col .secondary .meta {
   width: 100%;
   padding-top: 0.5em;
   color: #8f9da2;
   font-size: 0.8em;
   line-height: 1.2em;
 }
-.loop .cell .secondary .meta a,
-.loop .col .secondary .meta a {
+.loop .cell .secondary .meta a, .loop .col .secondary .meta a {
   color: #8f9da2;
   display: inline;
   font-size: inherit;
   text-decoration: none;
 }
-.loop .cell .secondary .meta .writer,
-.loop .col .secondary .meta .writer {
+.loop .cell .secondary .meta .writer, .loop .col .secondary .meta .writer {
   padding-left: 0.5em;
 }
-.loop .cell .secondary .meta .date,
-.loop .col .secondary .meta .date {
+.loop .cell .secondary .meta .date, .loop .col .secondary .meta .date {
   opacity: 0.5;
 }
-.loop .cell .secondary .blurb,
-.loop .col .secondary .blurb {
+.loop .cell .secondary .blurb, .loop .col .secondary .blurb {
   width: 100%;
   display: table;
   margin: auto;
@@ -1192,8 +1116,7 @@ body.articles #wrapper aside.bottom aside {
   font-weight: normal;
   line-height: 1.1em;
 }
-.loop .cell .secondary .blurb strong,
-.loop .col .secondary .blurb strong {
+.loop .cell .secondary .blurb strong, .loop .col .secondary .blurb strong {
   font-weight: normal;
 }
 .loop.one .cell {
@@ -1375,14 +1298,9 @@ body.home main .cover .title {
   font-size: 3.5em;
   line-height: 1.1em;
 }
-@media (max-width: 768px) {
-  body.home main .cover .title {
-    font-size: 2em;
-  }
-}
 @media (max-width: 480px) {
   body.home main .cover .title {
-    font-size: 1.5em;
+    font-size: 3em;
   }
 }
 body.home main .cover .title span {
@@ -1475,10 +1393,6 @@ body.home main .cover .lead, body.home main .newsletter .lead {
   font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif !important;
   font-weight: 400 !important;
   text-transform: lowercase !important;
-  font-size: 1.2em;
-  line-height: 1.4em;
-  font-weight: normal;
-  margin: 0;
 }
 body.home main .columns {
   width: 100%;
@@ -1619,146 +1533,112 @@ body.home main .pagination .paginate em {
     margin-bottom: 0 !important;
   }
 }
-
-body.single #wrapper,
-body.page-template-default #wrapper {
+body.single #wrapper, body.page-template-default #wrapper {
   padding-bottom: 2em;
 }
-body.single #wrapper .max,
-body.page-template-default #wrapper .max {
+body.single #wrapper .max, body.page-template-default #wrapper .max {
   max-width: 650px;
   margin: auto;
 }
-body.single #wrapper main .readable,
-body.page-template-default #wrapper main .readable {
+body.single #wrapper main .readable, body.page-template-default #wrapper main .readable {
   width: 100%;
   padding: 2em 0 0 0;
   opacity: 0;
 }
-body.single #wrapper main .readable.show,
-body.page-template-default #wrapper main .readable.show {
+body.single #wrapper main .readable.show, body.page-template-default #wrapper main .readable.show {
   opacity: 1;
 }
-body.single #wrapper main .readable.show .text .content,
-body.page-template-default #wrapper main .readable.show .text .content {
+body.single #wrapper main .readable.show .text .content, body.page-template-default #wrapper main .readable.show .text .content {
   transition: opacity 500ms 500ms cubic-bezier(0.19, 1, 0.22, 1);
   opacity: 1;
 }
-body.single #wrapper main .readable .max,
-body.page-template-default #wrapper main .readable .max {
-  margin: 0;
+body.single #wrapper main .readable .max, body.page-template-default #wrapper main .readable .max {
+  /* margin: 0; */
 }
-body.single #wrapper main .readable .lead .meta,
-body.single #wrapper main .readable .foot .meta,
-body.page-template-default #wrapper main .readable .lead .meta,
-body.page-template-default #wrapper main .readable .foot .meta {
+body.single #wrapper main .readable .lead .meta, body.single #wrapper main .readable .foot .meta, body.page-template-default #wrapper main .readable .lead .meta, body.page-template-default #wrapper main .readable .foot .meta {
   max-width: 650px;
+  display: table;
   margin: auto;
   padding: 0.5em 0;
-  display: flex;
-  flex-direction: column;
   font-size: 0.8em;
   line-height: 1.2em;
 }
-body.single #wrapper main .readable .lead .meta a,
-body.single #wrapper main .readable .foot .meta a,
-body.page-template-default #wrapper main .readable .lead .meta a,
-body.page-template-default #wrapper main .readable .foot .meta a {
+body.single #wrapper main .readable .lead .meta a, body.single #wrapper main .readable .foot .meta a, body.page-template-default #wrapper main .readable .lead .meta a, body.page-template-default #wrapper main .readable .foot .meta a {
   text-decoration: none;
   color: #8f9da2;
 }
-body.single #wrapper main .readable .lead .meta .row,
-body.single #wrapper main .readable .foot .meta .row,
-body.page-template-default #wrapper main .readable .lead .meta .row,
-body.page-template-default #wrapper main .readable .foot .meta .row {
+body.single #wrapper main .readable .lead .meta .row, body.single #wrapper main .readable .foot .meta .row, body.page-template-default #wrapper main .readable .lead .meta .row, body.page-template-default #wrapper main .readable .foot .meta .row {
   color: #346378;
-  margin: 0 auto;
   padding: 0.15em 0;
+  margin: 0;
+}
+body.single #wrapper main .readable .lead .column, body.page-template-default #wrapper main .readable .lead .column {
   text-align: center;
 }
-body.single #wrapper main .readable .lead .column,
-body.page-template-default #wrapper main .readable .lead .column {
+body.single #wrapper main .readable .lead .meta, body.page-template-default #wrapper main .readable .lead .meta {
   text-align: center;
 }
-body.single #wrapper main .readable .lead .meta,
-body.page-template-default #wrapper main .readable .lead .meta {
-  text-align: center;
-}
-body.single #wrapper main .readable .lead .writers .writer::before,
-body.page-template-default #wrapper main .readable .lead .writers .writer::before {
+body.single #wrapper main .readable .lead .writers .writer::before, body.page-template-default #wrapper main .readable .lead .writers .writer::before {
   content: ", ";
 }
-body.single #wrapper main .readable .lead .writers .writer:first-of-type::before,
-body.page-template-default #wrapper main .readable .lead .writers .writer:first-of-type::before {
+body.single #wrapper main .readable .lead .writers .writer:first-of-type::before, body.page-template-default #wrapper main .readable .lead .writers .writer:first-of-type::before {
   display: none;
 }
-body.single #wrapper main .readable .lead .writers .writer:last-of-type::before,
-body.page-template-default #wrapper main .readable .lead .writers .writer:last-of-type::before {
+body.single #wrapper main .readable .lead .writers .writer:last-of-type::before, body.page-template-default #wrapper main .readable .lead .writers .writer:last-of-type::before {
   content: "&";
   margin: 0 0.25em;
 }
-body.single #wrapper main .readable .lead .excerpt,
-body.page-template-default #wrapper main .readable .lead .excerpt {
+body.single #wrapper main .readable .lead .excerpt, body.page-template-default #wrapper main .readable .lead .excerpt {
   padding: 1em 0;
   text-align: center;
   margin: auto;
   color: #8f9da2;
 }
-body.single #wrapper main .readable .lead .excerpt h2,
-body.page-template-default #wrapper main .readable .lead .excerpt h2 {
+body.single #wrapper main .readable .lead .excerpt h2, body.page-template-default #wrapper main .readable .lead .excerpt h2 {
   font-family: "Crimson Text", "Baskerville", times, serif;
   font-weight: normal;
 }
-body.single #wrapper main .readable .lead .header,
-body.page-template-default #wrapper main .readable .lead .header {
+body.single #wrapper main .readable .lead .header, body.page-template-default #wrapper main .readable .lead .header {
   padding: 0 0 0.5em 0;
   font-family: "Crimson Text", "Baskerville", times, serif;
   font-weight: normal;
 }
-body.single #wrapper main .readable .lead .header h1,
-body.page-template-default #wrapper main .readable .lead .header h1 {
+body.single #wrapper main .readable .lead .header h1, body.page-template-default #wrapper main .readable .lead .header h1 {
   font-size: 2.3em;
   line-height: 1.1em;
 }
 @media (max-width: 480px) {
-  body.single #wrapper main .readable .lead .header h1,
-  body.page-template-default #wrapper main .readable .lead .header h1 {
+  body.single #wrapper main .readable .lead .header h1, body.page-template-default #wrapper main .readable .lead .header h1 {
     font-size: 2em;
   }
 }
-body.single #wrapper main .readable .lead .header h1.title,
-body.page-template-default #wrapper main .readable .lead .header h1.title {
+body.single #wrapper main .readable .lead .header h1.title, body.page-template-default #wrapper main .readable .lead .header h1.title {
   width: 100%;
   text-align: center;
   margin: 0;
-  hyphens: auto;
+  text-transform: none;
   font-size: 3.5em;
   line-height: 1.1em;
 }
 @media (max-width: 768px) {
-  body.single #wrapper main .readable .lead .header h1.title,
-  body.page-template-default #wrapper main .readable .lead .header h1.title {
+  body.single #wrapper main .readable .lead .header h1.title, body.page-template-default #wrapper main .readable .lead .header h1.title {
     font-size: 2em;
   }
 }
 @media (max-width: 480px) {
-  body.single #wrapper main .readable .lead .header h1.title,
-  body.page-template-default #wrapper main .readable .lead .header h1.title {
-    font-size: 1.5em;
+  body.single #wrapper main .readable .lead .header h1.title, body.page-template-default #wrapper main .readable .lead .header h1.title {
+    font-size: 1em;
   }
 }
-body.single #wrapper main .readable .lead .header h1.title span,
-body.page-template-default #wrapper main .readable .lead .header h1.title span {
+body.single #wrapper main .readable .lead .header h1.title span, body.page-template-default #wrapper main .readable .lead .header h1.title span {
   opacity: 0.2;
 }
-body.single #wrapper main .readable .text,
-body.page-template-default #wrapper main .readable .text {
+body.single #wrapper main .readable .text, body.page-template-default #wrapper main .readable .text {
   max-width: 950px;
   display: block;
   margin: auto;
 }
-body.single #wrapper main .readable .text #alert,
-body.page-template-default #wrapper main .readable .text #alert {
+body.single #wrapper main .readable .text #alert, body.page-template-default #wrapper main .readable .text #alert {
   width: 100%;
   max-width: 650px;
   display: table;
@@ -1767,39 +1647,31 @@ body.page-template-default #wrapper main .readable .text #alert {
   position: relative;
   overflow: hidden;
 }
-body.single #wrapper main .readable .text #alert *,
-body.page-template-default #wrapper main .readable .text #alert * {
+body.single #wrapper main .readable .text #alert *, body.page-template-default #wrapper main .readable .text #alert * {
   color: #86a1ad;
   border-bottom-color: #eaedee;
 }
-body.single #wrapper main .readable .text #alert .message,
-body.page-template-default #wrapper main .readable .text #alert .message {
+body.single #wrapper main .readable .text #alert .message, body.page-template-default #wrapper main .readable .text #alert .message {
   width: 100%;
   text-align: center;
   line-height: 1em;
 }
-body.single #wrapper main .readable .text #alert .message .archive_alert,
-body.page-template-default #wrapper main .readable .text #alert .message .archive_alert {
+body.single #wrapper main .readable .text #alert .message .archive_alert, body.page-template-default #wrapper main .readable .text #alert .message .archive_alert {
   padding: 0.5em;
   font-size: 0.8em;
   line-height: 1.2em;
   font-family: Helvetica, Arial, sans-serif;
   font-weight: 400;
 }
-body.single #wrapper main .readable .text #alert .message .archive_alert p,
-body.page-template-default #wrapper main .readable .text #alert .message .archive_alert p {
+body.single #wrapper main .readable .text #alert .message .archive_alert p, body.page-template-default #wrapper main .readable .text #alert .message .archive_alert p {
   margin: 0;
 }
-body.single #wrapper main .readable .text #alert .message .archive_alert a,
-body.single #wrapper main .readable .text #alert .message .archive_alert body.has_hover a:hover,
-body.page-template-default #wrapper main .readable .text #alert .message .archive_alert a,
-body.page-template-default #wrapper main .readable .text #alert .message .archive_alert body.has_hover a:hover {
+body.single #wrapper main .readable .text #alert .message .archive_alert a, body.single #wrapper main .readable .text #alert .message .archive_alert body.has_hover a:hover, body.page-template-default #wrapper main .readable .text #alert .message .archive_alert a, body.page-template-default #wrapper main .readable .text #alert .message .archive_alert body.has_hover a:hover {
   text-shadow: none;
   background: none;
   text-decoration: underline !important;
 }
-body.single #wrapper main .readable .content,
-body.page-template-default #wrapper main .readable .content {
+body.single #wrapper main .readable .content, body.page-template-default #wrapper main .readable .content {
   opacity: 0;
   padding: 2em 0;
   max-width: 650px;
@@ -1807,12 +1679,10 @@ body.page-template-default #wrapper main .readable .content {
   margin-right: auto;
   /*@include serifText;*/
 }
-body.single #wrapper main .readable .content *,
-body.page-template-default #wrapper main .readable .content * {
+body.single #wrapper main .readable .content *, body.page-template-default #wrapper main .readable .content * {
   color: #346378 !important;
 }
-body.single #wrapper main .readable .content a,
-body.page-template-default #wrapper main .readable .content a {
+body.single #wrapper main .readable .content a, body.page-template-default #wrapper main .readable .content a {
   text-shadow: 0 0.03em 0 #f1f5f7, 0 0.06em 0 #f1f5f7, 0 -0.03em 0 #f1f5f7, 0 -0.06em 0 #f1f5f7, -0.03em 0.03em 0 #f1f5f7, -0.03em 0.06em 0 #f1f5f7, 0.03em 0.03em 0 #f1f5f7, 0.03em 0.06em 0 #f1f5f7, -0.03em 0 0 #f1f5f7, 0 -0.09em 0 #f1f5f7;
   background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#86a1ad, #86a1ad);
   background-position: 0 87%, 100% 87%, 0 92%;
@@ -1820,8 +1690,7 @@ body.page-template-default #wrapper main .readable .content a {
   background-size: 0.05em 1px, 0.05em 1px, 1px 0.05em;
   text-decoration: none;
 }
-body.single #wrapper main .readable .content a:hover,
-body.page-template-default #wrapper main .readable .content a:hover {
+body.single #wrapper main .readable .content a:hover, body.page-template-default #wrapper main .readable .content a:hover {
   color: #8f9da2;
   text-shadow: 0 0.03em 0 #f1f5f7, 0 0.06em 0 #f1f5f7, 0 -0.03em 0 #f1f5f7, 0 -0.06em 0 #f1f5f7, -0.03em 0.03em 0 #f1f5f7, -0.03em 0.06em 0 #f1f5f7, 0.03em 0.03em 0 #f1f5f7, 0.03em 0.06em 0 #f1f5f7, -0.03em 0 0 #f1f5f7, 0 -0.09em 0 #f1f5f7;
   background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#fecf0c, #fecf0c);
@@ -1830,9 +1699,7 @@ body.page-template-default #wrapper main .readable .content a:hover {
   background-size: 0.05em 1px, 0.05em 1px, 1px 0.05em;
   text-decoration: none;
 }
-body.single #wrapper main .readable .content p, body.single #wrapper main .readable .content .element,
-body.page-template-default #wrapper main .readable .content p,
-body.page-template-default #wrapper main .readable .content .element {
+body.single #wrapper main .readable .content p, body.single #wrapper main .readable .content .element, body.page-template-default #wrapper main .readable .content p, body.page-template-default #wrapper main .readable .content .element {
   font-size: 20px;
   line-height: 1.4em;
   max-width: 650px;
@@ -1841,20 +1708,14 @@ body.page-template-default #wrapper main .readable .content .element {
   padding: 0 !important;
 }
 @media (max-width: 768px) {
-  body.single #wrapper main .readable .content p, body.single #wrapper main .readable .content .element,
-  body.page-template-default #wrapper main .readable .content p,
-  body.page-template-default #wrapper main .readable .content .element {
+  body.single #wrapper main .readable .content p, body.single #wrapper main .readable .content .element, body.page-template-default #wrapper main .readable .content p, body.page-template-default #wrapper main .readable .content .element {
     font-size: 18px;
   }
 }
-body.single #wrapper main .readable .content p a, body.single #wrapper main .readable .content .element a,
-body.page-template-default #wrapper main .readable .content p a,
-body.page-template-default #wrapper main .readable .content .element a {
+body.single #wrapper main .readable .content p a, body.single #wrapper main .readable .content .element a, body.page-template-default #wrapper main .readable .content p a, body.page-template-default #wrapper main .readable .content .element a {
   color: #346378;
 }
-body.single #wrapper main .readable .content p a.ftn, body.single #wrapper main .readable .content .element a.ftn,
-body.page-template-default #wrapper main .readable .content p a.ftn,
-body.page-template-default #wrapper main .readable .content .element a.ftn {
+body.single #wrapper main .readable .content p a.ftn, body.single #wrapper main .readable .content .element a.ftn, body.page-template-default #wrapper main .readable .content p a.ftn, body.page-template-default #wrapper main .readable .content .element a.ftn {
   min-width: 1em;
   height: 1em;
   display: inline-block;
@@ -1870,48 +1731,34 @@ body.page-template-default #wrapper main .readable .content .element a.ftn {
   font-family: Helvetica, Arial, sans-serif;
   font-weight: 400;
 }
-body.single #wrapper main .readable .content p a.ftn.super, body.single #wrapper main .readable .content .element a.ftn.super,
-body.page-template-default #wrapper main .readable .content p a.ftn.super,
-body.page-template-default #wrapper main .readable .content .element a.ftn.super {
+body.single #wrapper main .readable .content p a.ftn.super, body.single #wrapper main .readable .content .element a.ftn.super, body.page-template-default #wrapper main .readable .content p a.ftn.super, body.page-template-default #wrapper main .readable .content .element a.ftn.super {
   transform: translateY(-0.5em);
   font-size: 0.62em;
   line-height: 1.4em;
   line-height: 1em;
 }
-body.single #wrapper main .readable .content p a.ftn.ref, body.single #wrapper main .readable .content .element a.ftn.ref,
-body.page-template-default #wrapper main .readable .content p a.ftn.ref,
-body.page-template-default #wrapper main .readable .content .element a.ftn.ref {
+body.single #wrapper main .readable .content p a.ftn.ref, body.single #wrapper main .readable .content .element a.ftn.ref, body.page-template-default #wrapper main .readable .content p a.ftn.ref, body.page-template-default #wrapper main .readable .content .element a.ftn.ref {
   vertical-align: bottom;
   font-size: 0.8em;
   line-height: 1.2em;
   line-height: 1em;
 }
-body.single #wrapper main .readable .content p a.ftn:focus, body.single #wrapper main .readable .content .element a.ftn:focus,
-body.page-template-default #wrapper main .readable .content p a.ftn:focus,
-body.page-template-default #wrapper main .readable .content .element a.ftn:focus {
+body.single #wrapper main .readable .content p a.ftn:focus, body.single #wrapper main .readable .content .element a.ftn:focus, body.page-template-default #wrapper main .readable .content p a.ftn:focus, body.page-template-default #wrapper main .readable .content .element a.ftn:focus {
   outline: none;
   background-color: #fecf0c !important;
 }
-body.single #wrapper main .readable .content p a.ftn:hover, body.single #wrapper main .readable .content .element a.ftn:hover,
-body.page-template-default #wrapper main .readable .content p a.ftn:hover,
-body.page-template-default #wrapper main .readable .content .element a.ftn:hover {
+body.single #wrapper main .readable .content p a.ftn:hover, body.single #wrapper main .readable .content .element a.ftn:hover, body.page-template-default #wrapper main .readable .content p a.ftn:hover, body.page-template-default #wrapper main .readable .content .element a.ftn:hover {
   color: #346378 !important;
   border-color: #346378;
 }
-body.single #wrapper main .readable .content .image,
-body.page-template-default #wrapper main .readable .content .image {
+body.single #wrapper main .readable .content .image, body.page-template-default #wrapper main .readable .content .image {
   border: none;
 }
-body.single #wrapper main .readable .content .image img,
-body.page-template-default #wrapper main .readable .content .image img {
+body.single #wrapper main .readable .content .image img, body.page-template-default #wrapper main .readable .content .image img {
   display: table;
   margin: auto;
 }
-body.single #wrapper main .readable .content h1, body.single #wrapper main .readable .content h2, body.single #wrapper main .readable .content h3, body.single #wrapper main .readable .content h4,
-body.page-template-default #wrapper main .readable .content h1,
-body.page-template-default #wrapper main .readable .content h2,
-body.page-template-default #wrapper main .readable .content h3,
-body.page-template-default #wrapper main .readable .content h4 {
+body.single #wrapper main .readable .content h1, body.single #wrapper main .readable .content h2, body.single #wrapper main .readable .content h3, body.single #wrapper main .readable .content h4, body.page-template-default #wrapper main .readable .content h1, body.page-template-default #wrapper main .readable .content h2, body.page-template-default #wrapper main .readable .content h3, body.page-template-default #wrapper main .readable .content h4 {
   max-width: 650px;
   font-family: "Crimson Text", "Baskerville", times, serif;
   font-weight: normal;
@@ -1919,40 +1766,27 @@ body.page-template-default #wrapper main .readable .content h4 {
   margin: auto;
   padding: 1em 0;
 }
-body.single #wrapper main .readable .content h1 *, body.single #wrapper main .readable .content h2 *, body.single #wrapper main .readable .content h3 *, body.single #wrapper main .readable .content h4 *,
-body.page-template-default #wrapper main .readable .content h1 *,
-body.page-template-default #wrapper main .readable .content h2 *,
-body.page-template-default #wrapper main .readable .content h3 *,
-body.page-template-default #wrapper main .readable .content h4 * {
+body.single #wrapper main .readable .content h1 *, body.single #wrapper main .readable .content h2 *, body.single #wrapper main .readable .content h3 *, body.single #wrapper main .readable .content h4 *, body.page-template-default #wrapper main .readable .content h1 *, body.page-template-default #wrapper main .readable .content h2 *, body.page-template-default #wrapper main .readable .content h3 *, body.page-template-default #wrapper main .readable .content h4 * {
   font-weight: 400;
 }
-body.single #wrapper main .readable .content h1,
-body.page-template-default #wrapper main .readable .content h1 {
+body.single #wrapper main .readable .content h1, body.page-template-default #wrapper main .readable .content h1 {
   font-size: 2em;
   line-height: 1.1em;
 }
-body.single #wrapper main .readable .content h2, body.single #wrapper main .readable .content h3, body.single #wrapper main .readable .content h4,
-body.page-template-default #wrapper main .readable .content h2,
-body.page-template-default #wrapper main .readable .content h3,
-body.page-template-default #wrapper main .readable .content h4 {
+body.single #wrapper main .readable .content h2, body.single #wrapper main .readable .content h3, body.single #wrapper main .readable .content h4, body.page-template-default #wrapper main .readable .content h2, body.page-template-default #wrapper main .readable .content h3, body.page-template-default #wrapper main .readable .content h4 {
   font-size: 1.5em;
   line-height: 1.1em;
 }
 @media (max-width: 480px) {
-  body.single #wrapper main .readable .content h2, body.single #wrapper main .readable .content h3, body.single #wrapper main .readable .content h4,
-  body.page-template-default #wrapper main .readable .content h2,
-  body.page-template-default #wrapper main .readable .content h3,
-  body.page-template-default #wrapper main .readable .content h4 {
+  body.single #wrapper main .readable .content h2, body.single #wrapper main .readable .content h3, body.single #wrapper main .readable .content h4, body.page-template-default #wrapper main .readable .content h2, body.page-template-default #wrapper main .readable .content h3, body.page-template-default #wrapper main .readable .content h4 {
     font-size: 1.2em;
     line-height: 1.4em;
   }
 }
-body.single #wrapper main .readable .content iframe,
-body.page-template-default #wrapper main .readable .content iframe {
+body.single #wrapper main .readable .content iframe, body.page-template-default #wrapper main .readable .content iframe {
   width: 100%;
 }
-body.single #wrapper main .readable .content blockquote,
-body.page-template-default #wrapper main .readable .content blockquote {
+body.single #wrapper main .readable .content blockquote, body.page-template-default #wrapper main .readable .content blockquote {
   max-width: calc(650px - 2em);
   margin-left: auto;
   margin-right: auto;
@@ -1962,8 +1796,7 @@ body.page-template-default #wrapper main .readable .content blockquote {
   font-size: 1em;
   line-height: 1.3em;
 }
-body.single #wrapper main .readable .content blockquote *,
-body.page-template-default #wrapper main .readable .content blockquote * {
+body.single #wrapper main .readable .content blockquote *, body.page-template-default #wrapper main .readable .content blockquote * {
   font-family: "Crimson Text", "Baskerville", times, serif;
   font-weight: normal;
   font-weight: normal;
@@ -1971,9 +1804,7 @@ body.page-template-default #wrapper main .readable .content blockquote * {
   color: #346378;
   text-decoration: none;
 }
-body.single #wrapper main .readable .content .wp-caption, body.single #wrapper main .readable .content figure.wp-block-image,
-body.page-template-default #wrapper main .readable .content .wp-caption,
-body.page-template-default #wrapper main .readable .content figure.wp-block-image {
+body.single #wrapper main .readable .content .wp-caption, body.single #wrapper main .readable .content figure.wp-block-image, body.page-template-default #wrapper main .readable .content .wp-caption, body.page-template-default #wrapper main .readable .content figure.wp-block-image {
   color: #8f9da2;
   max-width: 100%;
   padding: 2em 0;
@@ -1983,24 +1814,14 @@ body.page-template-default #wrapper main .readable .content figure.wp-block-imag
   font-size: 0.62em;
   line-height: 1.4em;
 }
-body.single #wrapper main .readable .content .wp-caption a, body.single #wrapper main .readable .content figure.wp-block-image a,
-body.page-template-default #wrapper main .readable .content .wp-caption a,
-body.page-template-default #wrapper main .readable .content figure.wp-block-image a {
+body.single #wrapper main .readable .content .wp-caption a, body.single #wrapper main .readable .content figure.wp-block-image a, body.page-template-default #wrapper main .readable .content .wp-caption a, body.page-template-default #wrapper main .readable .content figure.wp-block-image a {
   display: inline-table;
 }
-body.single #wrapper main .readable .content .wp-caption img, body.single #wrapper main .readable .content figure.wp-block-image img,
-body.page-template-default #wrapper main .readable .content .wp-caption img,
-body.page-template-default #wrapper main .readable .content figure.wp-block-image img {
+body.single #wrapper main .readable .content .wp-caption img, body.single #wrapper main .readable .content figure.wp-block-image img, body.page-template-default #wrapper main .readable .content .wp-caption img, body.page-template-default #wrapper main .readable .content figure.wp-block-image img {
   max-width: 100%;
   height: auto;
 }
-body.single #wrapper main .readable .content .wp-caption .wp-caption-text, body.single #wrapper main .readable .content .wp-caption p, body.single #wrapper main .readable .content .wp-caption figcaption, body.single #wrapper main .readable .content figure.wp-block-image .wp-caption-text, body.single #wrapper main .readable .content figure.wp-block-image p, body.single #wrapper main .readable .content figure.wp-block-image figcaption,
-body.page-template-default #wrapper main .readable .content .wp-caption .wp-caption-text,
-body.page-template-default #wrapper main .readable .content .wp-caption p,
-body.page-template-default #wrapper main .readable .content .wp-caption figcaption,
-body.page-template-default #wrapper main .readable .content figure.wp-block-image .wp-caption-text,
-body.page-template-default #wrapper main .readable .content figure.wp-block-image p,
-body.page-template-default #wrapper main .readable .content figure.wp-block-image figcaption {
+body.single #wrapper main .readable .content .wp-caption .wp-caption-text, body.single #wrapper main .readable .content .wp-caption p, body.single #wrapper main .readable .content .wp-caption figcaption, body.single #wrapper main .readable .content figure.wp-block-image .wp-caption-text, body.single #wrapper main .readable .content figure.wp-block-image p, body.single #wrapper main .readable .content figure.wp-block-image figcaption, body.page-template-default #wrapper main .readable .content .wp-caption .wp-caption-text, body.page-template-default #wrapper main .readable .content .wp-caption p, body.page-template-default #wrapper main .readable .content .wp-caption figcaption, body.page-template-default #wrapper main .readable .content figure.wp-block-image .wp-caption-text, body.page-template-default #wrapper main .readable .content figure.wp-block-image p, body.page-template-default #wrapper main .readable .content figure.wp-block-image figcaption {
   width: 100%;
   max-width: 100%;
   padding: 0.5em 0 0 0 !important;
@@ -2009,200 +1830,122 @@ body.page-template-default #wrapper main .readable .content figure.wp-block-imag
   line-height: 1.5em;
   text-align: left;
 }
-body.single #wrapper main .readable .content .wp-caption .wp-caption-text a, body.single #wrapper main .readable .content .wp-caption p a, body.single #wrapper main .readable .content .wp-caption figcaption a, body.single #wrapper main .readable .content figure.wp-block-image .wp-caption-text a, body.single #wrapper main .readable .content figure.wp-block-image p a, body.single #wrapper main .readable .content figure.wp-block-image figcaption a,
-body.page-template-default #wrapper main .readable .content .wp-caption .wp-caption-text a,
-body.page-template-default #wrapper main .readable .content .wp-caption p a,
-body.page-template-default #wrapper main .readable .content .wp-caption figcaption a,
-body.page-template-default #wrapper main .readable .content figure.wp-block-image .wp-caption-text a,
-body.page-template-default #wrapper main .readable .content figure.wp-block-image p a,
-body.page-template-default #wrapper main .readable .content figure.wp-block-image figcaption a {
+body.single #wrapper main .readable .content .wp-caption .wp-caption-text a, body.single #wrapper main .readable .content .wp-caption p a, body.single #wrapper main .readable .content .wp-caption figcaption a, body.single #wrapper main .readable .content figure.wp-block-image .wp-caption-text a, body.single #wrapper main .readable .content figure.wp-block-image p a, body.single #wrapper main .readable .content figure.wp-block-image figcaption a, body.page-template-default #wrapper main .readable .content .wp-caption .wp-caption-text a, body.page-template-default #wrapper main .readable .content .wp-caption p a, body.page-template-default #wrapper main .readable .content .wp-caption figcaption a, body.page-template-default #wrapper main .readable .content figure.wp-block-image .wp-caption-text a, body.page-template-default #wrapper main .readable .content figure.wp-block-image p a, body.page-template-default #wrapper main .readable .content figure.wp-block-image figcaption a {
   display: inline;
 }
-body.single #wrapper main .readable .content .wp-caption:first-child, body.single #wrapper main .readable .content figure.wp-block-image:first-child,
-body.page-template-default #wrapper main .readable .content .wp-caption:first-child,
-body.page-template-default #wrapper main .readable .content figure.wp-block-image:first-child {
+body.single #wrapper main .readable .content .wp-caption:first-child, body.single #wrapper main .readable .content figure.wp-block-image:first-child, body.page-template-default #wrapper main .readable .content .wp-caption:first-child, body.page-template-default #wrapper main .readable .content figure.wp-block-image:first-child {
   margin-top: 0;
 }
-body.single #wrapper main .readable .content img,
-body.page-template-default #wrapper main .readable .content img {
+body.single #wrapper main .readable .content img, body.page-template-default #wrapper main .readable .content img {
   width: auto;
   max-width: 100%;
   height: auto;
 }
-body.single #wrapper main .readable .content img.aligncenter, body.single #wrapper main .readable .content div.aligncenter,
-body.page-template-default #wrapper main .readable .content img.aligncenter,
-body.page-template-default #wrapper main .readable .content div.aligncenter {
+body.single #wrapper main .readable .content img.aligncenter, body.single #wrapper main .readable .content div.aligncenter, body.page-template-default #wrapper main .readable .content img.aligncenter, body.page-template-default #wrapper main .readable .content div.aligncenter {
   max-width: 100%;
   clear: both;
   margin: 2em auto;
 }
-body.single #wrapper main .readable .content img.aligncenter a, body.single #wrapper main .readable .content div.aligncenter a,
-body.page-template-default #wrapper main .readable .content img.aligncenter a,
-body.page-template-default #wrapper main .readable .content div.aligncenter a {
+body.single #wrapper main .readable .content img.aligncenter a, body.single #wrapper main .readable .content div.aligncenter a, body.page-template-default #wrapper main .readable .content img.aligncenter a, body.page-template-default #wrapper main .readable .content div.aligncenter a {
   display: table;
   margin: auto;
 }
-body.single #wrapper main .readable .content img.alignleft, body.single #wrapper main .readable .content div.alignleft,
-body.page-template-default #wrapper main .readable .content img.alignleft,
-body.page-template-default #wrapper main .readable .content div.alignleft {
+body.single #wrapper main .readable .content img.alignleft, body.single #wrapper main .readable .content div.alignleft, body.page-template-default #wrapper main .readable .content img.alignleft, body.page-template-default #wrapper main .readable .content div.alignleft {
   max-width: 50%;
   float: left;
   margin: 1em 1em 1em 0;
 }
-body.single #wrapper main .readable .content img.alignright, body.single #wrapper main .readable .content div.alignright,
-body.page-template-default #wrapper main .readable .content img.alignright,
-body.page-template-default #wrapper main .readable .content div.alignright {
+body.single #wrapper main .readable .content img.alignright, body.single #wrapper main .readable .content div.alignright, body.page-template-default #wrapper main .readable .content img.alignright, body.page-template-default #wrapper main .readable .content div.alignright {
   max-width: 50%;
   float: right;
   margin: 1em 0 1em 1em;
 }
-body.single #wrapper main .readable .content .image.missing,
-body.page-template-default #wrapper main .readable .content .image.missing {
+body.single #wrapper main .readable .content .image.missing, body.page-template-default #wrapper main .readable .content .image.missing {
   width: 100% !important;
   height: auto !important;
   display: table;
   border: 1px solid #86a1ad;
 }
-body.single #wrapper main .readable .content .image.missing a,
-body.page-template-default #wrapper main .readable .content .image.missing a {
+body.single #wrapper main .readable .content .image.missing a, body.page-template-default #wrapper main .readable .content .image.missing a {
   width: 100%;
   height: 100%;
 }
-body.single #wrapper main .readable .content .image.missing img,
-body.page-template-default #wrapper main .readable .content .image.missing img {
+body.single #wrapper main .readable .content .image.missing img, body.page-template-default #wrapper main .readable .content .image.missing img {
   display: none;
 }
-body.single #wrapper main .readable .content .image.missing svg,
-body.page-template-default #wrapper main .readable .content .image.missing svg {
+body.single #wrapper main .readable .content .image.missing svg, body.page-template-default #wrapper main .readable .content .image.missing svg {
   width: 100%;
   height: auto;
   display: table;
   fill: #8f9da2;
 }
-body.single #wrapper main .readable .content img.emoji,
-body.page-template-default #wrapper main .readable .content img.emoji {
-  display: inline-block;
-  height: 1em !important;
-  width: auto;
-}
-body.single #wrapper main .readable .gallery-item img,
-body.page-template-default #wrapper main .readable .gallery-item img {
+body.single #wrapper main .readable .gallery-item img, body.page-template-default #wrapper main .readable .gallery-item img {
   border: 0;
 }
-body.single #wrapper main .readable .foot .meta,
-body.page-template-default #wrapper main .readable .foot .meta {
+body.single #wrapper main .readable .foot .meta, body.page-template-default #wrapper main .readable .foot .meta {
   width: 100%;
   padding: 2em 0 0 0;
 }
-body.single #wrapper main .readable .foot .share.social,
-body.page-template-default #wrapper main .readable .foot .share.social {
+body.single #wrapper main .readable .foot .share.social, body.page-template-default #wrapper main .readable .foot .share.social {
   font-family: "Crimson Text", "Baskerville", times, serif;
   font-weight: normal;
   font-size: 2em;
   line-height: 1.1em;
   padding: 1em;
 }
-body.single #wrapper main .readable .foot .share.social svg,
-body.page-template-default #wrapper main .readable .foot .share.social svg {
+body.single #wrapper main .readable .foot .share.social svg, body.page-template-default #wrapper main .readable .foot .share.social svg {
   margin-bottom: -0.1em;
 }
-body.single #wrapper main .readable .foot .share.donate,
-body.page-template-default #wrapper main .readable .foot .share.donate {
-  font-family: "Crimson Text", "Baskerville", times, serif;
-  font-weight: normal;
-  font-size: 2em;
-  line-height: 1.1em;
-  text-align: center;
-  max-width: 460px;
-  margin: 0 auto;
-  padding: 0;
-}
-body.single #wrapper main .readable .foot .share.donate p,
-body.page-template-default #wrapper main .readable .foot .share.donate p {
-  display: block;
-}
-body.single #wrapper main .readable .foot .share.donate a,
-body.page-template-default #wrapper main .readable .foot .share.donate a {
-  text-shadow: 0 0.03em 0 #f1f5f7, 0 0.06em 0 #f1f5f7, 0 -0.03em 0 #f1f5f7, 0 -0.06em 0 #f1f5f7, -0.03em 0.03em 0 #f1f5f7, -0.03em 0.06em 0 #f1f5f7, 0.03em 0.03em 0 #f1f5f7, 0.03em 0.06em 0 #f1f5f7, -0.03em 0 0 #f1f5f7, 0 -0.09em 0 #f1f5f7;
-  background: linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#f1f5f7, #f1f5f7), linear-gradient(#fecf0c, #fecf0c);
-  background-position: 0 87%, 100% 87%, 0 92%;
-  background-repeat: no-repeat, no-repeat, repeat-x;
-  background-size: 0.05em 1px, 0.05em 1px, 1px 0.05em;
-  text-decoration: none;
-}
-body.single #wrapper main #related,
-body.page-template-default #wrapper main #related {
+body.single #wrapper main #related, body.page-template-default #wrapper main #related {
   width: 100%;
   display: table;
 }
-body.single #wrapper main #related .goldbar,
-body.page-template-default #wrapper main #related .goldbar {
+body.single #wrapper main #related .goldbar, body.page-template-default #wrapper main #related .goldbar {
   margin: 3em 0;
 }
-body.single #wrapper main #related .section_header,
-body.page-template-default #wrapper main #related .section_header {
+body.single #wrapper main #related .section_header, body.page-template-default #wrapper main #related .section_header {
   padding-bottom: 1em;
 }
 @media (max-width: 1200px) {
-  body.single #wrapper main article.readable .text img.aligncenter, body.single #wrapper main article.readable .text img.alignleft, body.single #wrapper main article.readable .text img.alignright,
-  body.single #wrapper main article.readable .text div.aligncenter,
-  body.single #wrapper main article.readable .text div.alignleft,
-  body.single #wrapper main article.readable .text div.alignright,
-  body.page-template-default #wrapper main article.readable .text img.aligncenter,
-  body.page-template-default #wrapper main article.readable .text img.alignleft,
-  body.page-template-default #wrapper main article.readable .text img.alignright,
-  body.page-template-default #wrapper main article.readable .text div.aligncenter,
-  body.page-template-default #wrapper main article.readable .text div.alignleft,
-  body.page-template-default #wrapper main article.readable .text div.alignright {
+  body.single #wrapper main article.readable .text img.aligncenter, body.single #wrapper main article.readable .text img.alignleft, body.single #wrapper main article.readable .text img.alignright, body.single #wrapper main article.readable .text div.aligncenter, body.single #wrapper main article.readable .text div.alignleft, body.single #wrapper main article.readable .text div.alignright, body.page-template-default #wrapper main article.readable .text img.aligncenter, body.page-template-default #wrapper main article.readable .text img.alignleft, body.page-template-default #wrapper main article.readable .text img.alignright, body.page-template-default #wrapper main article.readable .text div.aligncenter, body.page-template-default #wrapper main article.readable .text div.alignleft, body.page-template-default #wrapper main article.readable .text div.alignright {
     width: 100%;
     max-width: 100%;
   }
-  body.single #wrapper main #related,
-  body.page-template-default #wrapper main #related {
+  body.single #wrapper main #related, body.page-template-default #wrapper main #related {
     width: calc(100% - 4em);
     padding: 0 2em;
   }
 }
-body.single .transport.top,
-body.page-template-default .transport.top {
+body.single .transport.top, body.page-template-default .transport.top {
   display: flex;
 }
 @media (max-width: 768px) {
-  body.single #wrapper aside .images,
-  body.single #wrapper aside .tags,
-  body.page-template-default #wrapper aside .images,
-  body.page-template-default #wrapper aside .tags {
+  body.single #wrapper aside .images, body.single #wrapper aside .tags, body.page-template-default #wrapper aside .images, body.page-template-default #wrapper aside .tags {
     display: none !important;
   }
-  body.single #wrapper main article.readable,
-  body.page-template-default #wrapper main article.readable {
+  body.single #wrapper main article.readable, body.page-template-default #wrapper main article.readable {
     width: 100%;
     padding-right: 0;
     padding-left: 0;
   }
-  body.single #wrapper main article.readable .lead .title h1,
-  body.page-template-default #wrapper main article.readable .lead .title h1 {
+  body.single #wrapper main article.readable .lead .title h1, body.page-template-default #wrapper main article.readable .lead .title h1 {
     font-size: 2.3em;
     line-height: 1.1em;
   }
 }
 @media (max-width: 768px) and (max-width: 480px) {
-  body.single #wrapper main article.readable .lead .title h1,
-  body.page-template-default #wrapper main article.readable .lead .title h1 {
+  body.single #wrapper main article.readable .lead .title h1, body.page-template-default #wrapper main article.readable .lead .title h1 {
     font-size: 2em;
   }
 }
 @media (max-width: 768px) {
-  body.single #wrapper main article.readable .lead .excerpt,
-  body.page-template-default #wrapper main article.readable .lead .excerpt {
+  body.single #wrapper main article.readable .lead .excerpt, body.page-template-default #wrapper main article.readable .lead .excerpt {
     text-align: left;
   }
-  body.single #wrapper main article.readable .max,
-  body.page-template-default #wrapper main article.readable .max {
+  body.single #wrapper main article.readable .max, body.page-template-default #wrapper main article.readable .max {
     margin: auto;
   }
-  body.single #wrapper main #related,
-  body.page-template-default #wrapper main #related {
+  body.single #wrapper main #related, body.page-template-default #wrapper main #related {
     width: 100%;
     padding: 0;
   }
@@ -2211,19 +1954,7 @@ body.page-template-default .transport.top {
 body.page-template-default #wrapper main .readable {
   opacity: 1;
 }
-body.page-template-default #wrapper main .readable .max {
-  margin-left: auto;
-  margin-right: auto;
-}
 
-body.about #wrapper main .body {
-  font-family: "Crimson Text", "Baskerville", times, serif;
-  font-weight: normal;
-  font-size: 1.2em;
-  line-height: 1.4em;
-  max-width: 800px;
-  margin: 0 auto;
-}
 body.about #wrapper main ul.parent {
   width: 100%;
   max-width: 100%;
@@ -2443,59 +2174,13 @@ body.about #wrapper main ul.parent.about li .body h2 {
   }
 }
 
-body.page-template-page-issues #wrapper main .max,
-body.page-template-page-special-issues #wrapper main .max {
-  max-width: 1400px;
-  display: table;
-  margin: auto;
-}
-body.page-template-page-issues .page-title-wrapper,
-body.page-template-page-special-issues .page-title-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-}
-body.page-template-page-issues .page-title-wrapper h1,
-body.page-template-page-special-issues .page-title-wrapper h1 {
-  margin-bottom: 0;
-}
-
-.body {
-  margin-top: 1rem;
-  margin-bottom: 4rem;
-  max-width: 950px;
-  display: table;
-  font-family: "Crimson Text", "Baskerville", times, serif;
-  font-weight: normal;
-}
-
-.special-note {
-  font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif !important;
-  font-weight: 400 !important;
-  text-transform: lowercase !important;
-}
-.special-note a {
-  color: #8f9da2;
-  transition: color 500ms cubic-bezier(0.19, 1, 0.22, 1);
-}
-.special-note a:hover {
-  color: #346378;
-}
-
 .loop.issues .issue, .loop.issue .issue {
   color: #346378;
   font-family: "Crimson Text", "Baskerville", times, serif;
   font-weight: normal;
   position: relative;
   margin-bottom: 3rem;
-  aspect-ratio: 1/1.2;
-}
-.loop.issues .issue .label, .loop.issue .issue .label {
-  font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif !important;
-  font-weight: 400 !important;
-  text-transform: lowercase !important;
+  min-height: 37vw;
 }
 .loop.issues .issue .link_wrap, .loop.issue .issue .link_wrap {
   width: 100%;
@@ -2513,14 +2198,10 @@ body.page-template-page-special-issues .page-title-wrapper h1 {
   box-shadow: 0 0 5em 0 #fecf0c;
 }
 .loop.issues .issue .text, .loop.issue .issue .text {
-  font-size: 3vw;
+  font-size: 2vw;
   line-height: 1em;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
-.loop.issues .issue .text h2.title, .loop.issue .issue .text h2.title {
+.loop.issues .issue .text h1.title, .loop.issue .issue .text h1.title {
   font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif !important;
   font-weight: 400 !important;
   text-transform: lowercase !important;
@@ -2528,30 +2209,30 @@ body.page-template-page-special-issues .page-title-wrapper h1 {
   word-break: break-word;
   line-height: 1em;
 }
-.loop.issues .issue .text .subtitle, .loop.issue .issue .text .subtitle {
-  font-family: ClarendonBTWXX-Roman, Helvetica, Arial, sans-serif !important;
-  font-weight: 400 !important;
-  text-transform: lowercase !important;
-  color: #8f9da2;
-}
-.loop.issues .issue .text .date, .loop.issue .issue .text .date {
+.loop.issues .issue .text h3.date, .loop.issue .issue .text h3.date {
   color: inherit !important;
   font-style: italic;
-}
-@media (max-width: 991px) {
-  .loop.issues .issue .text, .loop.issue .issue .text {
-    font-size: 4vw;
-  }
-}
-@media (max-width: 575px) {
-  .loop.issues .issue .text, .loop.issue .issue .text {
-    font-size: 8vw;
-  }
 }
 .loop.issues .issue .image, .loop.issue .issue .image {
   box-shadow: none !important;
   margin-top: 1rem;
 }
+@media (max-width: 1200px) {
+  .loop.issues .issue .text, .loop.issue .issue .text {
+    font-size: 3vw;
+  }
+}
+@media (max-width: 768px) {
+  .loop.issues .issue .text, .loop.issue .issue .text {
+    font-size: 4vw;
+  }
+}
+@media (max-width: 480px) {
+  .loop.issues .issue .text, .loop.issue .issue .text {
+    font-size: 6vw;
+  }
+}
+
 .podcast-links {
   font-family: "Crimson Text", "Baskerville", times, serif;
   font-weight: normal;
@@ -2838,7 +2519,7 @@ body.discover:not(.seeking) #wrapper main .inner .loader .circle, body.error404:
   display: table;
   margin: auto;
   box-shadow: 0 0 0.5em 0.25em white;
-  background-image: url(assets/images/loading1.gif);
+  background-image: url(images/loading1.gif);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

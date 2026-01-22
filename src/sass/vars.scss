@@ -1,3 +1,4 @@
+@use 'sass:math';
 @import 'webfonts';
 ///////////////////////////////////////////////////////////////
 ///////////////////////////COLORS//////////////////////////////
@@ -62,8 +63,11 @@ $lightest: #f1f5f7;
 @mixin xxLargeText {
 	font-size: 3.5em;
 	line-height: 1.1em;
+	@include small {
+		font-size: 2em;
+	}
 	@include xSmall {
-		font-size: 3em;
+		font-size: 1.5em;
 	}
 }
 ///////////////////////////////////////////////////////////////
@@ -195,9 +199,9 @@ $ease: cubic-bezier(0.19, 1, 0.22, 1);
 ///////////////////////////////////////////////////////////////
 @mixin underline($color:inherit, $bg:$lightest, $width:.05em) {
 	$space: .03em;
-	$half: #{$space/2};
-	$double: #{$space*2};
-	$triple: #{$space*3};
+	$half: math.div($space, 2);
+	$double: $space * 2;
+	$triple: $space * 3;
 	text-shadow: 0 $space 0 $bg, 0 $double 0 $bg, 0  -#{$space} 0 $bg, 0 -#{$double} 0 $bg, -#{$space} $space 0 $bg, -#{$space} $double 0 $bg, $space $space 0 $bg, $space $double 0 $bg, -#{$space} 0 0 $bg, 0 -#{$triple} 0 $bg;
 	background: linear-gradient($bg,$bg),linear-gradient($bg,$bg),linear-gradient($color,$color);
 	background-position: 0 87%,100% 87%,0 92%;

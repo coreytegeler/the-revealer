@@ -1,23 +1,17 @@
 <?php
 /*
-Template Name: Page
+Template Name: About
 */
 global $post;
-$title = $post->post_title;
 get_header();
-echo '<article class="readable show">';
-	echo '<div class="text">';
-		echo '<div class="lead">';
-			echo '<div class="header">';
-				echo '<h1 class="title">';
-					echo $title;
-				echo '</h1>';
-			echo '</div>';
-		echo '</div>';
-		echo '<div class="content">';
-			the_content();
+$title = $post->post_title;
+$content = apply_filters( 'the_content', $post->post_content );
+echo '<div class="readable">';
+	echo '<div class="max">';
+		echo '<div class="body">';
+			echo '<h1 class="page-title">' . $title . '</h1>';
+			echo $content;
 		echo '</div>';
 	echo '</div>';
-echo '</article>';
 get_footer();
 ?>

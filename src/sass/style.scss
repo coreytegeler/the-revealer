@@ -2,10 +2,12 @@
 Theme Name: The Revealer
 Author: Corey Tegeler
 Author URI: http://coreytegeler.com
-Version: 2.0
+Version: 2.1.1
 */
 @import 'vars';
-html, body {
+
+html,
+body {
 	@include sansSerifText;
 	@include baseText;
 	color: $dark;
@@ -17,21 +19,27 @@ html, body {
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
 	visibility: visible;
-	&.no_scroll  {
+
+	&.no_scroll {
 		overflow: hidden !important;
 		overflow-y: hidden !important;
 		overflow-x: hidden !important;
 		-webkit-overflow-scrolling: auto !important;
 	}
 }
+
 html {
 	overflow-y: scroll !important;
 }
+
 body {
+	overflow-y: hidden;
+
 	::selection {
 		background: $gold;
 		opacity: 1;
 	}
+
 	// ::-webkit-scrollbar {
 	//   width: 5px;
 	// }
@@ -44,72 +52,88 @@ body {
 	// ::-webkit-scrollbar-thumb:hover {
 	//   background: $medium;
 	// }
-	header#header, #wrapper, footer#footer, #discover {
-		opacity: 0;
-	}
-	&.initd {
-		header#header, #wrapper, footer#footer, #discover {
-			opacity: 1;
-		}
-	}
+	// header#header, #wrapper, footer#footer, #discover {
+	// 	opacity: 0;
+	// }
+	// &.initd {
+	// 	header#header, #wrapper, footer#footer, #discover {
+	// 		opacity: 1;
+	// 	}
+	// }
 }
+
 a {
 	color: $dark;
+
 	&:focus {
 		outline-color: $gold;
 	}
 }
+
 p {
 	margin: 0 0 1em 0;
-  word-break: break-word;
+	word-break: break-word;
+
 	&:last-of-type {
 		margin: 0;
 	}
+
 	a {
 		text-decoration: none;
 		display: inline;
 		position: relative;
 		@include underline($light, $lightest);
+
 		body.has_hover &:hover {
 			color: $medium;
 			@include underline($gold, $lightest);
 		}
 	}
+
 	strong {
 		font-weight: $bold;
 	}
 }
+
 h1 {
 	@include largeText;
 	font-weight: normal;
 	margin: 0;
 }
+
 h2 {
 	@include xMediumText;
 	font-weight: normal;
 	margin: 0;
 }
+
 h3 {
 	@include smallText;
 	font-weight: normal;
 	margin: 0;
 }
+
 h4 {
 	@include xSmallText;
 	font-weight: normal;
 	margin: 0;
 }
-em, i {
+
+em,
+i {
 	font-style: italic;
 }
+
 input {
 	@include sansSerifText;
 	-webkit-appearance: none;
 	transition: box-shadow 1000ms $ease;
+
 	&:focus {
 		outline-color: $gold;
 	}
 }
+
 .max {
 	width: 100%;
 	max-width: $maxWidth;
@@ -117,10 +141,12 @@ input {
 	margin: auto;
 	padding: 0;
 }
+
 .bar {
 	width: 100%;
 	height: .5em;
 	position: relative;
+
 	.solid {
 		width: 100%;
 		height: .5em;
@@ -129,17 +155,22 @@ input {
 		top: 0;
 		background: $dark;
 	}
+
 	&.fixed .solid {
 		position: fixed;
 	}
+
 	&.top {
 		margin-bottom: 2em;
 	}
+
 	&.bottom {
 		margin-top: 2em;
 	}
 }
+
 .label {
+
 	// color: $medium;
 	&.column {
 		@include serifText;
@@ -147,25 +178,53 @@ input {
 		font-weight: $bold;
 		// font-weight: $regular;
 	}
+
 	&.categories {
 		@include revealerText;
+
 		// font-weight: $bold;
 		.feature {
 			// font-weight: $black;
 		}
 	}
 }
+
+.page-title {
+	margin-bottom: 0.25em;
+	@include revealerText;
+	font-size: 3rem;
+	line-height: 1.1em;
+
+	&.center {
+		text-align: center;
+	}
+}
+
+.sr-only {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
 #wrapper {
 	width: 100%;
 	position: relative;
+	margin-top: 68px;
+
 	main {
 		position: relative;
-    width: 100%;
-    padding: .5em 2em 4em 2em;
+		width: 100%;
+		padding: .5em 2em 4em 2em;
+
 		.max {
 			max-width: #{$maxWidth * 2};
 			position: relative;
 		}
+
 		.readable {
 			width: 100%;
 			min-height: 100vh;
@@ -175,26 +234,31 @@ input {
 		}
 	}
 }
+
 .transport.top {
 	position: fixed;
 	right: 2em;
 	bottom: 2em;
 	z-index: 300;
 	display: none;
+
 	body.has_hover &:hover {
 		cursor: pointer;
 		@include largeShadow($lightest);
 	}
+
 	svg {
 		width: 70%;
 		height: 70%;
-    display: table;
-    margin: auto;
-    fill: $medium;
+		display: table;
+		margin: auto;
+		fill: $medium;
 	}
 }
+
 .animation {
 	opacity: 0;
+
 	.animate {
 		animation: {
 			direction: forward;
@@ -202,37 +266,48 @@ input {
 			timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
 		}
 	}
+
 	.word {
 		display: inline-block;
+
 		&::after {
 			content: ' ';
 			white-space: pre;
 		}
+
 		.char {
 			display: inline-block;
 		}
+
 		&:last-child::after {
 			content: '';
 		}
 	}
+
 	&.show {
 		opacity: 1;
 	}
+
 	&.glisten {
 		display: flex;
+
 		span {
 			opacity: 0.75;
 		}
+
 		.animate {
 			opacity: 1;
+
 			animation: {
 				name: glisten;
 				duration: 10000ms;
 			}
 		}
 	}
+
 	&.bounce {
 		transition: opacity 1000ms $ease;
+
 		.animate {
 			animation: {
 				name: bounce;
@@ -240,6 +315,7 @@ input {
 			}
 		}
 	}
+
 	&.bounce.glisten {
 		.animate {
 			animation: {
@@ -247,8 +323,9 @@ input {
 				duration: 3000ms;
 			}
 		}
-	}	
+	}
 }
+
 .section_header {
 	font-weight: $regular;
 	color: $dark;
@@ -256,75 +333,91 @@ input {
 	@include largeText;
 	padding-bottom: .5em;
 	text-align: center;
+
 	a {
 		text-decoration: none;
 		color: $dark;
 		transition: color 500ms $ease;
 		display: inline;
 		@include underline($gold);
+
 		body.has_hover &:hover {
 			color: $gold;
 		}
 	}
 }
+
 .commas {
 	display: flex;
 	flex-wrap: wrap;
+
 	span {
 		display: inline-block;
+
 		// color: $medium;
 		a {
 			display: inline;
 			color: $dark;
 			transition: color 500ms $ease;
 			@include underline($gold);
+
 			body.has_hover &:hover {
 				color: $gold;
 				@include underline($gold);
 			}
 		}
+
 		&::after {
 			display: inline;
 			content: ',';
 			margin-right: .3em;
 		}
-		&.no_comma::after, &:last-child::after {
+
+		&.no_comma::after,
+		&:last-child::after {
 			display: none;
 		}
+
 		&.no_line {
 			a {
 				color: $medium;
 				@include noUnderline();
+
 				body.has_hover &:hover {
 					@include underline($gold);
 				}
 			}
 		}
+
 		&.empty {
 			opacity: .5;
 		}
 	}
 }
+
 .toggler {
 	max-height: 15em;
 	overflow: hidden;
 	position: relative;
 	display: block !important;
 	transition: max-height 800ms $ease !important;
+
 	.intra {
 		display: flex;
 		flex-wrap: wrap;
 		padding-bottom: 2em;
 	}
+
 	.toggle {
 		width: 100%;
 		height: 1em;
 		left: 0;
 		bottom: 0;
 		background-color: $lightest;
-		border-top: 1px solid rgba($medium,.1);
+		border-top: 1px solid rgba($medium, .1);
 		z-index: 100;
 		@include mediumShadow($lightest);
+
 		.circle {
 			position: absolute;
 			width: 1em;
@@ -333,108 +426,132 @@ input {
 			top: -.5em;
 		}
 	}
+
 	&.no-toggle {
 		.toggle {
 			display: none;
 		}
 	}
 }
+
 .toggle {
 	position: absolute;
+
 	.circle {
-		@include mediumShadow(rgba($gold,.5));
-		transition: opacity 500ms $ease, box-shadow 500ms $ease;;
+		@include mediumShadow(rgba($gold, .5));
+		transition: opacity 500ms $ease, box-shadow 500ms $ease;
+		;
 	}
+
 	&.toggled {
 		.circle {
 			transform: rotate(180deg) !important;
 		}
 	}
+
 	body.has_hover &:hover {
 		cursor: pointer;
+
 		.circle {
 			@include mediumShadow($gold);
 		}
 	}
 }
+
 .stats {
-  align-content: center;
-  margin: 0 auto 2em auto;
-  text-align: right;
-  display: table;
-  .animation {
-  	margin: auto;
-  	display: block;
-  }
-	h1 {
+	align-content: center;
+	margin: 0 auto 2em auto;
+	text-align: right;
+	display: table;
+
+	.animation {
+		margin: auto;
+		display: block;
+	}
+
+	h2 {
 		text-align: center;
 		font-style: normal;
 		transform: translateY(0);
 		@include revealerText;
 	}
 }
+
 .circle {
 	width: 1.5em;
-  height: 1.5em;
-  border-radius: 50%;
-  background: $lightest;
-  display: flex;
-  transition: transform 500ms $ease, box-shadow 800ms $ease, transform 800ms $ease;
-  @include mediumShadow($gold);
-  span {
+	height: 1.5em;
+	border-radius: 50%;
+	background: $lightest;
+	display: flex;
+	transition: transform 500ms $ease, box-shadow 800ms $ease, transform 800ms $ease;
+	@include mediumShadow($gold);
+
+	span {
 		display: table;
 		margin: auto;
 	}
+
 	svg {
 		width: auto;
-    height: 75%;
-    display: table;
-    margin: auto;
-    fill: $medium;
+		height: 75%;
+		display: table;
+		margin: auto;
+		fill: $medium;
 	}
+
 	body.has_hover &:hover {
 		@include largeShadow($lightest);
 	}
+
 	&.close {
-		background-color: rgba($lightest,.9);
+		background-color: rgba($lightest, .9);
 		position: absolute;
+
 		svg {
 			transition: fill 500ms $ease;
 		}
+
 		body.has_hover &:hover {
 			cursor: pointer;
+
 			svg {
 				fill: $gold;
 			}
 		}
 	}
 }
+
 .goldbar {
 	width: 100%;
 	height: 1px;
 	position: relative;
 	padding: 0;
 	opacity: .98;
+
 	.solid {
 		width: 100%;
 		height: 1px;
 		position: absolute;
-    top: 0;
+		top: 0;
 		border-radius: .125em;
 		background: $gold;
 		box-shadow: 0 0 .25em .1em $gold;
+
 		&::before {
 			content: '';
 		}
+
 		&::after {
 			content: '';
 		}
 	}
 }
+
 #is_mobile {
 	display: none;
 	content: '0';
 }
+
 #missingSvg {
 	display: none;
 }
@@ -444,19 +561,24 @@ input {
 		content: 'large';
 	}
 }
+
 @include medium {
 	#is_mobile {
 		content: 'medium';
 	}
 }
+
 @include small {
 	#wrapper {
 		display: block;
+
 		main {
 			padding: 0 1em 2em 1em;
+
 			.readable {
 				width: 100%;
 				padding: 3em 0 0 0;
+
 				.pagination {
 					.paginate {
 						.circle {
@@ -466,6 +588,7 @@ input {
 					}
 				}
 			}
+
 			.split_box {
 				section {
 					width: 100%;
@@ -474,19 +597,23 @@ input {
 			}
 		}
 	}
+
 	body.single-post {
 		main {
 			article.readable {
 				margin: auto;
 				padding-top: 2em;
+
 				.wp-caption {
 					width: 100% !important;
 					float: none !important;
 				}
+
 				.image {
 					width: 100%;
 					display: table;
 					padding: 1em 0;
+
 					img {
 						width: 100% !important;
 						max-width: 100% !important;
@@ -498,27 +625,36 @@ input {
 			}
 		}
 	}
+
 	.section_header {
 		@include xLargeText;
 	}
+
 	.transport.top {
 		right: 1em;
 		bottom: 1em;
 	}
+
 	#is_mobile {
 		content: 'small';
 		content: '1';
 	}
 }
+
 @include xSmall {
-	#wrapper, #wrapper.split, #wrapper.full {
+
+	#wrapper,
+	#wrapper.split,
+	#wrapper.full {
 		main {
-	    padding: .5em 1em 4em 1em;
-	    .pagination .paginate .link_text {
-	    	display: none;
-	    }
+			padding: .5em 1em 4em 1em;
+
+			.pagination .paginate .link_text {
+				display: none;
+			}
 		}
 	}
+
 	#is_mobile {
 		content: 'xSmall';
 	}
@@ -533,6 +669,7 @@ input {
 @import 'about';
 @import 'columns';
 @import 'issues';
+@import 'podcast';
 @import 'search';
 @import 'discover';
 @import 'tags';
