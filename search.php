@@ -24,6 +24,7 @@ echo '<div class="readable">';
 			while ( $search_query->have_posts() ) {
 				$search_query->the_post();
 				set_query_var( 'col_size', 'col-12 col-sm-6 col-lg-4' );
+				set_query_var( 'article', $post );
 				get_template_part( 'parts/article' );
 			}
 			wp_reset_query();

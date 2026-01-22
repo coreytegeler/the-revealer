@@ -1,20 +1,17 @@
 <?php
 global $post;
-$page_type = $post->post_type;
 echo '<header class="main" id="header">';
 	echo '<div class="inner">';
 		echo '<div id="logo">';
-			$logo_svg = get_template_directory_uri() . '/assets/images/logo.svg';
 			$home_url = get_site_url();
 			echo '<a class="svg" href="' . $home_url . '">';
-				echo file_get_contents( $logo_svg );
+				echo get_svg( 'logo' );
 				$about = get_page_by_path( 'about' )->post_content;
 			echo '</a>';
 		echo '</div>';
 		echo '<div class="toggle" data-toggle="nav">';
 			echo '<div class="circle">';
-				$down_svg = get_template_directory_uri() . '/assets/images/down.svg';
-				echo file_get_contents( $down_svg );
+				echo get_svg( 'down' );
 			echo '</div>';
 		echo '</div>';
 		echo '<div class="rows">';

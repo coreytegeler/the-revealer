@@ -37,12 +37,6 @@ echo '<div class="readable">';
 							echo '</div>';
 						echo '</a>';
 						echo '<div class="excerpt"><em>' . $description . '</em></div>';
-						echo '<div class="info">';
-							// echo '<div class="meta">';
-							// echo '<div class="meta">';
-								// echo '<span>' . $count . ' Posts</span>';
-							// echo '</div>';
-						echo '</div>';
 					echo '</div>';
 				echo '</div>';
 			}

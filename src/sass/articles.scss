@@ -3,9 +3,11 @@ body.articles #wrapper {
 		width: 100%;
 		padding: 0 2em 4em calc(#{$sideWidth} + 2em);
 	}
+
 	.filters.toggle {
 		display: none;
 	}
+
 	aside {
 		width: calc(#{$sideWidth} - 2em);
 		height: 100%;
@@ -15,75 +17,90 @@ body.articles #wrapper {
 		left: 0;
 		top: 0;
 		display: flex;
-	  flex-direction: column;
-	  overflow-y: scroll;
-	  z-index: 300;
-	  -webkit-overflow-scrolling: touch;
+		flex-direction: column;
+		overflow-y: scroll;
+		z-index: 300;
+		-webkit-overflow-scrolling: touch;
+
 		.content {
 			// flex: 1;
 			margin: 0 0 1em 0;
 			padding: 2em 0;
 		}
+
 		#filters {
-			padding: 2em 0 4em 0;
-			flex: 1;
-			max-height: 100%;
+			padding: 2.5em 0 4em 0;
 			.filter {
 				padding: 0 0 2em 0;
+
 				h4 {
 					font-weight: $black;
 					display: inline;
 					margin-right: .5em;
+
 					&::after {
 						content: ' ';
 					}
 				}
+
 				a {
 					@include xSmallText;
 					text-decoration: none;
 					color: $medium;
 				}
+
 				.label {
 					width: 100%;
 					padding: 0;
 					user-select: none;
 					// font-weight: $black;
 					@include revealerText;
+
 					.more {
 						font-weight: $regular;
 					}
 				}
+
 				&:last-child {
 					padding: 0;
 				}
 			}
+
 			.commas {
 				color: $medium;
+
 				span {
 					@include serifText;
+
 					a {
 						@include noUnderline;
 					}
+
 					&.selected {
 						a {
 							@include underline($gold);
+
 							body.has_hover &:hover {
 								color: $gold;
 								@include noUnderline;
 							}
 						}
 					}
+
 					&.more {
 						font-style: italic;
 					}
 				}
 			}
 		}
+
 		&.fixed {
 			position: fixed;
 		}
+
 		&.bottom {
 			position: relative;
+
 			aside {
 				height: 100vh;
 				position: absolute;
@@ -92,15 +109,18 @@ body.articles #wrapper {
 			}
 		}
 	}
+
 	@include medium {
 		.transport.top {
 			display: flex;
 		}
 	}
+
 	@include small {
 		main {
 			padding: 0 1em 2em 1em;
 		}
+
 		.filters.toggle {
 			display: block;
 			position: fixed;
@@ -108,6 +128,7 @@ body.articles #wrapper {
 			top: 1em;
 			z-index: 300;
 		}
+
 		aside.toggler {
 			width: 100%;
 			height: auto !important;
@@ -117,9 +138,11 @@ body.articles #wrapper {
 			position: static !important;
 			transform: 0 !important;
 			padding: 0;
+
 			#filters {
 				width: 100%;
 				padding: 3em 2em 2em 2em;
+
 				.commas span {
 					@include mediumText();
 				}

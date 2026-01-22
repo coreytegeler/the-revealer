@@ -3,28 +3,19 @@ get_header();
 global $post;
 $home = get_page_by_path( 'home' );
 $home_url = get_site_url();
-$missing_url = get_template_directory_uri() . '/assets/images/missing.svg';
-$missing_svg = file_get_contents( $missing_url );
+
 $issues = get_terms( array(
 	'taxonomy' => 'issues',
 	'hide_empty' => false,
 	'order' => 'desc',
 	'orderby' => 'meta_value',
-	'meta_key' => 'date'
+	'meta_key' => 'date',
+	'posts_per_page' => 2
 ) );
 
 $current_issue = $issues[0];
 $current_issue_id = $current_issue->term_id;
 $current_issue_url = get_term_link( $current_issue_id, 'issues' );
-$current_issue_date = get_field( 'date', $current_issue );
-
-$current_issue_thumb = get_field( 'featured_image', $current_issue );
-$current_issue_thumb_id = $current_issue_thumb['ID'];
-// $current_issue_thumb_id = get_post_thumbnail_id( $current_issue_id );
-$current_issue_thumb = wp_get_attachment_image_src( $current_issue_thumb_id, 'large' );
-$current_issue_thumb_url = $current_issue_thumb[0];
-$current_issue_thumb_width = $current_issue_thumb[1];
-$current_issue_thumb_height = $current_issue_thumb[2];
 
 $current_issue_args = array(
 	'post_type' => 'post',
@@ -40,25 +31,11 @@ $current_issue_args = array(
 	)
 );
 
-
 $current_issue_query = new WP_Query( $current_issue_args );
 $current_issue_posts = $current_issue_query->posts;
-
-foreach ( $current_issue_posts as $index => $current_issue_post ) {
-	foreach( get_the_category( $current_issue_post ) as $cat ) {
-		if( $cat->slug == 'editors-letter' ) {
-			$editors_letter = $current_issue_post;
-			array_splice( $current_issue_posts, $index, 1 );
-		}
-	}
-}
+$current_issue_date = get_field( 'date', $current_issue );
 
 $already_used = array();
-
-$features_amount = 1;
-$medium_amount = 15;
-$tagged_amount = 6;
-$tags_amount = 25;
 
 $articles_page = get_page_by_path( 'articles' );
 if( $articles_page ) {
@@ -68,41 +45,21 @@ if( $articles_page ) {
 }
 
 echo '<div class="readable">';
-	
+	echo '<h1 class="sr-only">The Revealer</h1>';
 	echo '<div class="loop row articles" id="home_top">';
-		echo '<div class="col col-12 col-xl-8 cover">';
+		echo '<div class="col col-12 col-md-6 cover">';
 			echo '<div class="inner issue">';
-				echo '<div class="row">';
-					echo '<div class="col col-auto">';
-						echo '<a href="' . $current_issue_url . '">';
-							echo '<img class="cover-img" src="'.$current_issue_thumb_url.'"/>';
-						echo '</a>';
-					echo '</div>';
-					echo '<div class="col">';
-						echo '<div class="issue_wrap">';
-							echo '<a href="' . $current_issue_url . '">';
-								echo '<h2 class="lead">Read our current issue</h2>';
-								echo '<h1 class="title"><span>';
-									echo $current_issue->name;
-								echo '</span></h1>';	
-								echo '<h2 class="date">published ' . $current_issue_date . '</h2>';
-							echo '</a>';
-
-							if( isset( $editors_letter ) ) {
-								echo '<div class="editors_letter">';
-									echo '<h2><a href="' . get_permalink( $editors_letter ) . '">';
-										echo 'Read this issue\'s editor\'s letter: <strong>' . $editors_letter->post_title . '</strong>';
-									echo '</a></h2>';
-								echo '</div>';
-							}
-
-						echo '</div>';
-					echo '</div>';
+				echo '<div class="text">';
+					echo '<div class="lead">Read our current issue</div>';
+					echo '<div class="title">';
+						echo '<a href="' . $current_issue_url . '">' . $current_issue->name . '</a>';
+					echo '</div>';	
+					echo '<h2 class="date">published ' . $current_issue_date . '</h2>';
 				echo '</div>';
 			echo '</div>';
 		echo '</div>';
 
-		echo '<div class="col col-12 col-xl-4 newsletter">';
+		echo '<div class="col col-12 col-md-6 newsletter">';
 			echo '<div class="inner text">';
 				get_template_part( 'parts/newsletter' );
 			echo '</div>';
@@ -111,11 +68,11 @@ echo '<div class="readable">';
 	echo '</div>';
 
 	echo '<div class="loop articles row" id="current_issue">';
-		foreach( $current_issue_posts as $current_issue_post ) {
+		foreach( $current_issue_posts as $post ) {
 			set_query_var( 'col_size', 'col-12 col-sm-6 col-lg-4' );
-			set_query_var( 'article', $current_issue_post );
+			set_query_var( 'article', $post );
 			get_template_part( 'parts/article' );
-			$already_used[] = $current_issue_post->ID;
+			$already_used[] = $post->ID;
 		}
 		wp_reset_query();
 	echo '</div>';
@@ -136,7 +93,7 @@ echo '<div class="readable">';
 					echo '<h2 class="section_header">' . $feat_tag_header . '</h2>';
 					echo '<div class="loop grid row">';
 						$tagged_args = array(
-							'posts_per_page' => $tagged_amount,
+							'posts_per_page' => 6,
 							'post_type' => 'post',
 							'post__not_in' => $already_used,
 							'tag' => $feat_tag->slug,
@@ -149,6 +106,7 @@ echo '<div class="readable">';
 							while ( $tagged_query->have_posts() ) {
 								$tagged_query->the_post();
 								set_query_var( 'col_size', 'col-12 col-sm-6 col-lg-6 col-xl-4' );
+								set_query_var( 'article', $post );
 								get_template_part( 'parts/article' );
 								$already_used[] = get_the_ID();
 							}
@@ -164,7 +122,7 @@ echo '<div class="readable">';
 				$more_tags_header = get_field( 'more_tags', $home );
 				echo '<h2 class="section_header">' . $more_tags_header . '</h2>';
 				echo '<div class="commas tags">';
-					$tags = get_recent_tags( $tags_amount );
+					$tags = get_recent_tags( 25 );
 					foreach( $tags as $tag ) {
 						echo '<span>';
 							$tag_url = add_query_arg( 'tag', $tag->slug, $articles_url );
@@ -227,94 +185,6 @@ echo '<div class="readable">';
 				wp_reset_query();
 			echo '</section>';
 		}
-
-		// echo '<section id="columns">';
-		// 	$columns_page = get_page_by_path( 'columns' );
-		// 	if( $columns_page ) {
-		// 		$columns_url = get_permalink( $columns_page );
-		// 	} else {
-		// 		$columns_url = get_site_url() . '/columns/';
-		// 	}
-		// 	$more_cols_header = get_field( 'more_columns', $home );
-		// 	echo '<h2 class="section_header">' . $more_cols_header . '</h2>';
-		// 	$columns = get_terms( array(
-		// 		'taxonomy' => 'columns',
-		// 		'orderby' => 'name',
-		// 		'order'   => 'ASC',
-		// 		'meta_key' => 'active',
-		// 		'meta_value' => 1
-		// 	) );
-		// 	if( sizeof( $columns ) ) {
-		// 		echo '<div class="columns-list">';
-		// 			foreach( $columns as $col) {
-		// 				$col_title = $col->name;
-		// 				$col_slug = $col->slug;
-		// 				$col_id = $col->term_id;
-		// 				$col_writer = get_field( 'writer', $col );
-		// 				$col_url = add_query_arg( 'column', $col_slug, $page_url );
-		// 				$col_span = get_col_span( $col_id );
-		// 				echo '<a href="' . $col_url . '" class="column">';
-		// 					echo '<h2 class="writer">' . $col_writer . '\'s</h3>';
-		// 					echo '<h1 class="title"><em>' . $col_title . '</em></h1>';
-		// 					echo '<h3 class="span">' . $col_span . '</h3>';
-		// 				echo '</a>';
-		// 			}
-		// 		echo '</div>';
-		// 	}
-
-		// 	echo '<div id="field_notes">';
-		// 		$fn_page = get_page_by_path( 'field-notes' );
-		// 		$fn_header = get_field( 'f_notes', $home );
-		// 		$fn_thumb_id = get_post_thumbnail_id( $fn_page );
-		// 		$fn_thumb = wp_get_attachment_image_src( $fn_thumb_id, 'large' );
-		// 		$fn_url = add_query_arg( 'category', 'field-notes', $articles_url );
-		// 		$fn_thumb_url = $fn_thumb[0];
-		// 		$fn_thumb_width = $fn_thumb[1];
-		// 		$fn_thumb_height = $fn_thumb[2];
-		// 		echo '<div class="header_wrap">';
-		// 			echo '<h2 class="section_header">' . $fn_header . '</h2>';
-		// 		echo '</div>';
-		// 		echo '<div class="loop grid one_col">';
-		// 			echo '<article class="col">';
-		// 				echo '<a class="link_wrap" href="' . $fn_url . '">';
-		// 					echo '<div class="image load">';
-		// 						echo '<img data-src="'.$fn_thumb_url.'" data-width="'.$fn_thumb_width.'" data-height="'.$fn_thumb_height.'"/>';
-		// 					echo '</div>';
-		// 				echo '</a>';
-		// 			echo '</article>';
-		// 		echo '</div>';
-
-		// 		echo '<div class="loop list">';
-		// 			$fn_args = array(
-		// 				'post_type' => 'post',
-		// 				'orderby' => 'date',
-		// 				'order' => 'asc',
-		// 				'posts_per_page' => 5,
-		// 				'tax_query' => array(
-		// 					array(
-		// 						'taxonomy' => 'category',
-		// 						'field' => 'slug',
-		// 						'terms' => 'field-notes'
-		// 					)
-		// 				)
-		// 			);
-		// 			$fn_query = new WP_Query( $fn_args );
-		// 			if ( $fn_query->have_posts() ) {
-		// 				while ( $fn_query->have_posts() ) {
-		// 					$fn_query->the_post();
-		// 					echo '<article class="col field-notes">';
-		// 						echo '<a class="link_wrap" href="' . get_the_permalink() . '">';
-		// 							echo '<span class="date">' . get_the_date() . '</span>';
-		// 							echo '<span class="title">' . get_the_title() . '</span>';
-		// 						echo '</a>';
-		// 					echo '</article>';
-		// 				}
-		// 			}
-		// 			wp_reset_query();
-		// 		echo '</div>';
-
-		// 	echo '</div>';
-		// echo '</section>';
 	echo '</div>';
 	
 	$past_issue = $issues[1];
@@ -356,21 +226,16 @@ echo '<div class="readable">';
 					$title = $post->post_title;
 					$thumb_id = get_post_thumbnail_id();
 					$thumb = wp_get_attachment_image_src( $thumb_id, 'large' );
-					$thumb_url = $thumb[0];
-					$thumb_width = $thumb[1];
-					$thumb_height = $thumb[2];
+					$thumb_url = is_array( $thumb ) ? $thumb[0] : false;
+					$thumb_width = is_array( $thumb ) ? $thumb[1] : false;
+					$thumb_height = is_array( $thumb ) ? $thumb[2] : false;
 					$permalink = get_the_permalink();
 					$contributors = get_contributors_list( $post->ID, true, true );
 					echo '<article class="col col-6 col-sm-4 col-lg-3" role="article">';
 						echo '<div class="wrap">';
 							echo '<div class="primary">';
 								echo '<a class="link_wrap" href="' . $permalink . '">';
-									echo '<div class="' . ( $thumb ? 'image load' : 'missing') . '">';
-										if ( $thumb ) {
-											echo '<img data-src="'.$thumb_url.'" data-width="'.$thumb_width.'" data-height="'.$thumb_height.'"/>';
-										} else {
-											echo $missing_svg;
-										}
+									echo '<div class="image load" ' . ( $thumb_url ? 'style="background-image: url(' . $thumb_url . ')"' : '' ) . '>';
 									echo '</div>';
 								echo '</a>';
 							echo '</div>';

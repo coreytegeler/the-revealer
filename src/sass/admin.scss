@@ -1,0 +1,14 @@
+@import 'vars';
+.mce-content-body {
+	@include baseText;
+	@import 'content';
+	p {
+		max-width: 100%;
+		a {
+			@include underline($gold, white);
+			&:hover {
+				@include underline($gold, white);
+			}
+		}
+	}
+}

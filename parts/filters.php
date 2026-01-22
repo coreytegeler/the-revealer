@@ -1,8 +1,7 @@
 <?php
 echo '<div class="toggle filters" data-toggle="filters">';
 	echo '<div class="circle">';
-		$burger_svg = get_template_directory_uri() . '/assets/images/burger.svg';
-		echo file_get_contents( $burger_svg );
+		echo get_svg( 'burger' );
 	echo '</div>';
 echo '</div>';
 echo '<aside class="toggler" data-toggle="filters">';
@@ -30,11 +29,13 @@ echo '<aside class="toggler" data-toggle="filters">';
 	echo '<div id="filters" class="intra">';
 		echo '<div class="filter categories">';
 			echo '<div class="label">Categories</div>';
-			$exclude_cat_id = get_cat_ID( 'undefined' );
 			$categories = get_categories( array(
 			  'orderby' => 'name',
 			  'order'   => 'ASC',
-			  'exclude' => $exclude_cat_id
+			  'exclude' => array(
+				get_cat_ID( 'undefined' ),
+				get_cat_ID( 'uncategorized' )
+			  )
 			) );
 			echo '<div class="commas categories">';
 				if( sizeof( $categories ) ) {

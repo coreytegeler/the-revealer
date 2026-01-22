@@ -25,7 +25,7 @@ if( $column_param ) {
 	$tax_query[] = array(
 		'taxonomy' => 'columns',
 		'field' => 'slug',
-	  'terms' => $column_param,
+		'terms' => $column_param,
   );
 }
 if( $tag_param ) {
@@ -38,6 +38,7 @@ if( $tax_query ) {
 
 query_posts( $articles_args );
 echo '<div class="readable">';
+	echo '<h1 class="sr-only">' . $post->post_title . '</h1>';
 	echo '<div class="loop articles row">';
 		if ( $wp_query->have_posts() ) {
 			while ( $wp_query->have_posts() ) {

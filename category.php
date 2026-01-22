@@ -22,13 +22,13 @@ $articles_args = array(
 
 
 $tax_query = array();
-if( sizeof( $cat_param ) ) {
+if( $cat_param && sizeof( $cat_param ) ) {
 	$articles_args['category_name'] = $cat_param;
 }
-if( sizeof( $year_param ) ) {
+if( $year_param && sizeof( $year_param ) ) {
 	$articles_args['year'] = $year_param;
 }
-if( sizeof( $column_param ) ) {
+if( $column_param && sizeof( $column_param ) ) {
 	$tax_query[] = array(
 		'taxonomy' => 'columns',
 		'field' => 'slug',
@@ -36,7 +36,7 @@ if( sizeof( $column_param ) ) {
   );
 }
 
-if( sizeof( $tax_query ) ) {
+if( $tax_query && sizeof( $tax_query ) ) {
 	$articles_args['tax_query'] = $tax_query;
 }
 

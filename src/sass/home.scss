@@ -88,7 +88,7 @@ body.home {
 					// margin: auto;
 				}
 			}
-			@include medium {
+			@include small {
 				display: none !important;
 			}
 		}
@@ -115,6 +115,9 @@ body.home {
 			.lead {
 				color: $medium;
 				@include revealerText;
+				@include mediumText;
+				font-weight: normal;
+				margin: 0;
 			}
 		}
 		.columns {

@@ -1,0 +1,122 @@
+body.page-template-page-issues,
+body.page-template-page-special-issues {
+	#wrapper main .max {
+		max-width: 1400px;
+		display: table;
+		margin: auto;
+	}
+	.page-title-wrapper {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 2rem;
+		h1 {
+			margin-bottom: 0;
+		}
+	}
+}
+.body {
+	margin-top: 1rem;
+	margin-bottom: 4rem;
+	max-width: 950px;
+	display: table;
+	@include serifText;
+}
+.special-note {
+	@include revealerText;
+	a {
+		color: $medium;
+		transition: color 500ms $ease;
+		&:hover {
+			color: $dark;
+		}
+	}
+}
+.loop.issues, .loop.issue {
+	.issue {
+		color: $dark;
+		@include serifText;
+		position: relative;
+		margin-bottom: 3rem;
+		// min-height: 37vw;
+		aspect-ratio: 1 / 1.2;
+		.label {
+			@include revealerText;
+		}
+		.link_wrap {
+			width: 100%;
+			height: 100%;
+			padding: .5em 1em 1em 1em;
+			// position: absolute;
+			// left: 0;
+			// top: 0;
+			color: $dark;
+			background: $lighter;
+			transition: color 1500ms $ease, box-shadow 1500ms $ease;
+			display: flex;
+			flex-direction: column;
+			overflow: hidden;
+		}
+		a.link_wrap {
+			&:hover, &.hover, &:focus {
+				color: $dark;
+				box-shadow: 0 0 5em 0 $gold;
+			}
+		}
+		.text {
+			font-size: 3vw;
+			line-height: 1em;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			h2.title {
+				@include revealerText;
+				color: inherit !important;
+				word-break: break-word;
+				line-height: 1em;
+			}
+			.subtitle {
+				@include revealerText;
+				color: $medium;
+			}
+			.date {
+				color: inherit !important;
+				font-style: italic;	
+			}
+			@media (max-width: 991px) {
+				font-size: 4vw;
+			}
+			@media (max-width: 575px) {
+				font-size: 8vw;
+			}
+			// &:last-child {
+			// 	padding-bottom: 80%;
+			// }
+		}
+		.image {
+			box-shadow: none !important;
+			margin-top: 1rem;
+			img {
+				// filter: grayscale(1);
+				// mix-blend-mode: color-burn;
+			}
+		}
+		// @include medium {
+		// 	.text {
+		// 		font-size: 3vw;
+		// 	}
+		// }
+		// @include small {
+		// 	.text {
+		// 		font-size: 6vw;
+		// 	}
+		// }
+		// @include xSmall {
+		// 	.text {
+		// 		font-size: 10vw;
+		// 	}
+		// }
+	}
+}
