@@ -1,99 +1,126 @@
 .newsletter {
 	form {
 		width: 100%;
+
 		h1 {
 			@include revealerText;
 			@include xLargeText;
 		}
-		h1, h2 {
+
+		h1,
+		h2 {
 			font-style: normal;
 		}
+
 		.inputs {
-		  display: flex;
-		  flex-direction: row;
-		  input {
-		    margin: 0;
-		    text-align: center;
-		    border: 0;
-		    padding: .25em .25em .35em .25em;
-		    outline-color: $gold;
-		    line-height: 1.3em;
-		    @include xSmallShadow($gold);
-		    transition: box-shadow 500ms $ease, transform 500ms $ease;
-		    &[type="email"] {
-		      width: 100%;
-		      background: $lightest;
-		      border-radius: 1em 0 0 1em;
-		      @include serifText;
-		      @include mediumText;
-		      &.mce_inline_error {
-		      	background-color: rgba(red, .25);
-		      }
-		    }
-		    &[type="submit"] {
-		      max-width: 7em;
-		      height: 100%;
-		      background: $gold;
-		      color: $dark;
-		      font-weight: 600;
-		      border-radius: 0 1em 1em 0;
-		      transition: color 500ms $ease;
-		      &:hover, &:focus {
-		        color: $medium;
-		        cursor: pointer;
-		      }
-		    }
-				&:focus, &:hover {
-	      	outline: none;
-	      	
-	      }
-		  }
+			display: flex;
+			flex-direction: row;
+
+			input {
+				margin: 0;
+				text-align: center;
+				border: 0;
+				padding: .25em .25em .35em .25em;
+				outline-color: $gold;
+				line-height: 1.3em;
+				@include xSmallShadow($gold);
+				transition: box-shadow 500ms $ease, transform 500ms $ease;
+
+				&[type="email"] {
+					width: 100%;
+					background: $lightest;
+					border-radius: 1em 0 0 1em;
+					@include serifText;
+					@include mediumText;
+
+					&.mce_inline_error {
+						background-color: rgba(red, .25);
+					}
+				}
+
+				&[type="submit"] {
+					max-width: 7em;
+					height: 100%;
+					background: $gold;
+					color: $dark;
+					font-weight: 600;
+					border-radius: 0 1em 1em 0;
+					transition: color 500ms $ease;
+
+					&:hover,
+					&:focus {
+						color: $darker;
+						cursor: pointer;
+					}
+				}
+
+				&:focus,
+				&:hover {
+					outline: none;
+
+				}
+			}
 		}
-		.response, div.mce_inline_error, div.mce_inline_success {
+
+		.response,
+		div.mce_inline_error,
+		div.mce_inline_success {
 			display: none !important;
 		}
 	}
+
 	&#popup {
 		width: 100%;
 		z-index: 700;
-		background: rgba($lightest,.98);
+		background: rgba($lightest, .98);
 		transition: opacity 500ms $ease;
+
 		.close {
-	    position: absolute;
-	    right: 0;
-	    bottom: 2em;
-	    display: none;
-	    z-index: 800;
-	    &:hover {
-	    	cursor: pointer;
-	    	@include largeShadow($lightest);
-	    }
+			position: absolute;
+			right: 0;
+			bottom: 2em;
+			display: none;
+			z-index: 800;
+
+			&:hover {
+				cursor: pointer;
+				@include largeShadow($lightest);
+			}
 		}
+
 		.inner {
 			width: calc(100% - 4em);
 			margin: 0 2em;
 			position: relative;
+
 			.goldbar {
 				position: absolute;
 				top: 0;
 				bottom: auto;
 			}
+
 			form {
 				width: 100%;
 				padding: 1em 0;
 				display: table;
+
 				.inputs {
-			    justify-content: center;
-			    input {
-			    	@include smallText;
-			    	&[type="submit"] {
-			    		@include xSmallText;
-			    	}
-			    	&:hover, &:focus {
-			    		@include xSmallShadow($gold);
-			    	}
-			    }
+					justify-content: center;
+
+					input {
+						@include smallText;
+
+						&[type="submit"] {
+							@include xSmallText;
+						}
+
+						&:hover,
+						&:focus {
+							@include xSmallShadow($gold);
+						}
+					}
 				}
+
 				label {
 					width: 100%;
 					display: block;
@@ -105,17 +132,21 @@
 				}
 			}
 		}
+
 		&.show {
 			display: block;
 		}
+
 		&.fixed {
 			position: fixed;
 			left: 0;
 			top: 100%;
+
 			.close {
 				display: flex;
 			}
 		}
+
 		&.stuck {
 			transform: none !important;
 			transition: none !important;
@@ -125,12 +156,14 @@
 		}
 	}
 }
+
 @include small {
 	.newsletter#popup .inner {
 		width: calc(100% - 1em);
-    margin: 0 .5em;
-    .close {
-    	top: -1em;
-    }
+		margin: 0 .5em;
+
+		.close {
+			top: -1em;
+		}
 	}
 }

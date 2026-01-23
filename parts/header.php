@@ -1,5 +1,6 @@
 <?php
 global $post;
+$donate_url = get_field( 'donate_url', 'options' );
 echo '<header class="main" id="header">';
 	echo '<div class="inner">';
 		echo '<div id="logo">';
@@ -31,6 +32,11 @@ echo '<header class="main" id="header">';
 								echo '</a>';
 							echo '</div>';
 						}
+						echo '<div class="link">';
+							echo '<a href="' . $donate_url . '" data-title="Donate" class="donate">';
+								echo 'Donate';
+							echo '</a>';
+						echo '</div>';
 					echo '</nav>';
 
 					echo '<nav role="navigation" class="mobile_nav intra">';
@@ -43,6 +49,11 @@ echo '<header class="main" id="header">';
 								echo '</a>';
 							echo '</div>';
 						}
+						echo '<div class="link">';
+							echo '<a href="' . $donate_url . '" data-title="Donate">';
+								echo 'Donate';
+							echo '</a>';
+						echo '</div>';
 					echo '</nav>';
 					// get_template_part( 'parts/goldbar' );
 				}

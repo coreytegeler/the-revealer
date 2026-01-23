@@ -13,6 +13,7 @@ $tags = get_the_tags();
 $permalink = get_the_permalink();
 
 $articles_url = get_articles_page();
+$donate_url = get_field( 'donate_url', 'options' );
 
 $content = apply_filters( 'the_content', $post->post_content );
 $content = str_replace( ']]>', ']]&gt;', $content );
@@ -141,8 +142,9 @@ echo '<article class="post readable ' . $category_class . '">';
 
 				echo '<div class="donate share">';
 					echo '<p>';
-						echo 'Support The Revealer’s work with a <a href="https://www.givecampus.com/campaigns/25897/donations/new?designation=centerforreligionandmediafund&" target="_blank">tax-deductible gift</a> to the Center for Religion and Media at NYU';
+						echo 'Support The Revealer’s work with a tax-deductible gift to the Center for Religion and Media at NYU';
 					echo '</p>';
+					echo '<a href="' . $donate_url . '" target="_blank" class="donate">Donate</a>';
 				echo '</div>';
 
 

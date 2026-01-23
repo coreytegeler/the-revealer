@@ -547,6 +547,17 @@ input {
 	}
 }
 
+a.donate {
+	padding: 0.1em 0.25em;
+	background: $gold;
+	border-radius: 1em;
+	transition: color 500ms $ease, opacity 500ms $ease;
+}
+a.donate:hover {
+	color: $darker !important;
+	// box-shadow: 0 0 .25em .1em $gold;
+}
+
 #is_mobile {
 	display: none;
 	content: '0';

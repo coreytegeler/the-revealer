@@ -230,24 +230,21 @@ body.page-template-default {
 					}
 
 					.share.donate {
-						@include serifText;
-						@include largeText;
 						text-align: center;
 						max-width: 460px;
 						margin: 0 auto;
 						padding: 0;
-
 						p {
 							display: block;
+							margin-bottom: 0.5em;
+							@include serifText;
+							@include largeText;
 						}
-
-						a {
-							// text-decoration-color: $gold;
-							@include underline($gold, $lightest);
+						a.donate {
+							color: $dark;
+							@include largeText;
+							@include revealerText;
 						}
-
-						// margin: auto;
-						// display: table;
 					}
 				}
 			}
