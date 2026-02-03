@@ -33,7 +33,7 @@ echo '<header class="main" id="header">';
 							echo '</div>';
 						}
 						echo '<div class="link">';
-							echo '<a href="' . $donate_url . '" data-title="Donate" class="donate">';
+							echo '<a href="' . $donate_url . '" target="_blank" data-title="Donate" class="donate">';
 								echo 'Donate';
 							echo '</a>';
 						echo '</div>';
@@ -50,7 +50,7 @@ echo '<header class="main" id="header">';
 							echo '</div>';
 						}
 						echo '<div class="link">';
-							echo '<a href="' . $donate_url . '" data-title="Donate">';
+							echo '<a href="' . $donate_url . '" target="_blank" data-title="Donate">';
 								echo 'Donate';
 							echo '</a>';
 						echo '</div>';

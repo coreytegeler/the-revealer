@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: About
+Template Name: Default
 */
 global $post;
 get_header();

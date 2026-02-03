@@ -5,8 +5,8 @@ Template Name: About
 global $post;
 get_header();
 $content = apply_filters( 'the_content', $post->post_content );
-
 $people = get_field( 'people' );
+
 echo '<div class="readable">';
 	echo '<div class="max">';
 		echo '<div class="body">';

@@ -14,18 +14,19 @@ echo '<aside class="toggler" data-toggle="filters">';
 		$cat_param = get_category( $cat_id, false )->slug;
 	}
 	$page_url = '';
-	if( $cat_param ) {
-		$page_url = add_query_arg( 'category', $cat_param, $page_url );
-	}
-	if( $year_param ) {
-		$page_url = add_query_arg( 'y', $year_param, $page_url );
-	}
-	if( $col_param ) {
-		$page_url = add_query_arg( 'column', $col_param, $page_url );
-	}
-	if( $tag_param ) {
-		$page_url = add_query_arg( 'tag', $tag_param, $page_url );
-	}
+	// Commented out to remove multiselect filtering
+	// if( $cat_param ) {
+	// 	$page_url = add_query_arg( 'category', $cat_param, $page_url );
+	// }
+	// if( $year_param ) {
+	// 	$page_url = add_query_arg( 'y', $year_param, $page_url );
+	// }
+	// if( $col_param ) {
+	// 	$page_url = add_query_arg( 'column', $col_param, $page_url );
+	// }
+	// if( $tag_param ) {
+	// 	$page_url = add_query_arg( 'tag', $tag_param, $page_url );
+	// }
 	echo '<div id="filters" class="intra">';
 		echo '<div class="filter categories">';
 			echo '<div class="label">Categories</div>';

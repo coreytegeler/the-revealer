@@ -9,6 +9,9 @@ body.about {
 
 	#wrapper {
 		main {
+			.max {
+				max-width: #{$maxWidth * 2};
+			}
 			.body {
 				@include serifText;
 				@include mediumText;
