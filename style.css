@@ -3,7 +3,7 @@
 Theme Name: The Revealer
 Author: Corey Tegeler
 Author URI: http://coreytegeler.com
-Version: 2.2.0
+Version: 2.3.0
 */
 /**
  * @license
@@ -880,8 +880,19 @@ body.articles #wrapper main {
   width: 100%;
   padding: 0 2em 4em calc(18em + 2em);
 }
+body.articles #wrapper main .readable {
+  padding-top: 1rem;
+}
 body.articles #wrapper .filters.toggle {
   display: none;
+}
+body.articles #wrapper h2.page-title {
+  font-size: 1.2em;
+  line-height: 1.4em;
+  margin-bottom: 3rem;
+}
+body.articles #wrapper .page-title-spacer {
+  height: 1.5rem;
 }
 body.articles #wrapper aside {
   width: calc(18em - 2em);
@@ -953,6 +964,9 @@ body.articles #wrapper aside #filters .commas span.selected a {
   background-repeat: no-repeat, no-repeat, repeat-x;
   background-size: 0.05em 1px, 0.05em 1px, 1px 0.05em;
   text-decoration: none;
+}
+body.articles #wrapper aside #filters .commas span.selected a:hover {
+  color: #213e4b;
 }
 body.has_hover body.articles #wrapper aside #filters .commas span.selected a:hover {
   color: #fecf0c;

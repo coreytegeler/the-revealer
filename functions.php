@@ -2,7 +2,7 @@
 // show_admin_bar( false );
 
 function revealer_enqueue() {
-	$ver = '2.8.15';
+	$ver = '2.3.0';
 	wp_register_script( 'jquery', get_template_directory_uri() . '/assets/js/jquery-3.2.1.min.js' );
 	wp_register_script( 'imagesloaded', get_template_directory_uri() . '/assets/js/imagesloaded.js' );
 	wp_register_script( 'transit', get_template_directory_uri() . '/assets/js/transit.js' );

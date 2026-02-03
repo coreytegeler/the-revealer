@@ -2,10 +2,22 @@ body.articles #wrapper {
 	main {
 		width: 100%;
 		padding: 0 2em 4em calc(#{$sideWidth} + 2em);
+		.readable {
+			padding-top: 1rem;
+		}
 	}
 
 	.filters.toggle {
 		display: none;
+	}
+
+	h2.page-title {
+		@include mediumText;
+		margin-bottom: 3rem;
+	}
+
+	.page-title-spacer {
+		height: 1.5rem;
 	}
 
 	aside {
@@ -79,7 +91,9 @@ body.articles #wrapper {
 					&.selected {
 						a {
 							@include underline($gold);
-
+							&:hover {
+								color: $darker;
+							}
 							body.has_hover &:hover {
 								color: $gold;
 								@include noUnderline;

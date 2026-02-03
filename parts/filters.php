@@ -13,7 +13,7 @@ echo '<aside class="toggler" data-toggle="filters">';
 	if( $cat_id = get_query_var( 'cat' ) ) {
 		$cat_param = get_category( $cat_id, false )->slug;
 	}
-	$page_url = '';
+	$page_url = $articles_url;
 	// Commented out to remove multiselect filtering
 	// if( $cat_param ) {
 	// 	$page_url = add_query_arg( 'category', $cat_param, $page_url );
@@ -63,7 +63,7 @@ echo '<aside class="toggler" data-toggle="filters">';
 			echo '<div class="label">Years</div>';
 			echo '<div class="commas years">';
 				$year = date( 'Y' );
-				while(  $year >= 2003 ) {
+				while( $year >= 2003 ) {
 					$year_class = $year;
 					if( $year == $year_param ) {
 						$year_url = remove_query_arg( 'y', $page_url );
@@ -112,7 +112,9 @@ echo '<aside class="toggler" data-toggle="filters">';
 			$tags = get_recent_tags();
 			$tag_param_included = false;
 			echo '<div class="commas tags">';
+			
 				if( sizeof( $tags ) ) {
+
 					foreach( $tags as $tag) {
 						$tag_title = $tag->name;
 						$tag_slug = $tag->slug;
@@ -138,6 +140,7 @@ echo '<aside class="toggler" data-toggle="filters">';
 							echo '</span>';
 						}
 					}
+
 					$tag_page = get_page_by_path( 'tags' );
 					$tag_page_url = get_permalink( $tag_page->ID );
 					echo '<span class="more">';

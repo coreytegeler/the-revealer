@@ -17,9 +17,12 @@ $articles_args = array(
 $tax_query = array();
 if( $cat_param ) {
 	$articles_args['category_name'] = $cat_param;
+	$category = get_category_by_slug( $cat_param );
+	$filter_name = $category ? $category->name : $cat_param;
 }
 if( $year_param ) {
 	$articles_args['year'] = $year_param;
+	$filter_name = $year_param;
 }
 if( $column_param ) {
 	$tax_query[] = array(
@@ -27,9 +30,13 @@ if( $column_param ) {
 		'field' => 'slug',
 		'terms' => $column_param,
   );
+  $column = get_term_by( 'slug', $column_param, 'columns' );
+	$filter_name = $column ? $column->name : $column_param;
 }
 if( $tag_param ) {
 	$articles_args['tag'] = $tag_param;
+	$tag = get_term_by( 'slug', $tag_param, 'post_tag' );
+	$filter_name = $tag ? $tag->name : $tag_param;
 }
 
 if( $tax_query ) {
@@ -39,6 +46,11 @@ if( $tax_query ) {
 query_posts( $articles_args );
 echo '<div class="readable">';
 	echo '<h1 class="sr-only">' . $post->post_title . '</h1>';
+	if ( $cat_param || $year_param || $column_param || $tag_param ) {
+		echo '<h2 class="page-title">' . 'Showing articles in "' . $filter_name . '"' . '</h2>';
+	} else {
+		echo '<div class="page-title-spacer"></div>';
+	}
 	echo '<div class="loop articles row">';
 		if ( $wp_query->have_posts() ) {
 			while ( $wp_query->have_posts() ) {
